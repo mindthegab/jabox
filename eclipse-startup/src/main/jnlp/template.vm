@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp
+    spec="1.0+"
+    codebase="$$codebase"
+    href="launch.jnlp">
+  <information>
+    <title>eclipse-startup</title>
+    <vendor>$project.Organization.Name</vendor>
+    <homepage href="$$codebase"/>
+    <description>$project.Description</description>
+    <offline-allowed/>
+  </information>
+  <security>
+     <all-permissions/>
+  </security>
+  <resources>
+    <j2se version="1.5+"/>
+     
+<jar href="eclipse-startup-0.0.1-SNAPSHOT.jar" main="true"/>
+
+  </resources>
+  <application-desc main-class="org.jabox.eclipse_startup.App"/>
+</jnlp>
