@@ -1,0 +1,63 @@
+
+JaBox Features
+~~~~~~~~~~~~~~
+
+
+* Features
+~~~~~~~~~~
+
+  In this section the features of the JaBox application will be listed:
+
+
+** Abstraction Layer
+~~~~~~~~~~~~~~~~~~~~
+
+  An abstraction layer from all development tools will be provided in such a way
+  that it will be possible to change from one to another without any hassle on the
+  configuration of the project.
+  
+** Embedded Tools
+~~~~~~~~~~~~~~~~
+
+  An embedded tool will be provided for all layers so that a startup development
+  system can start simply by starting the JaBox.
+ 
+* Abstraction Layers
+~~~~~~~~~~~~~~~~~~~~
+
+ Here are the abstraction layers
+ 
+
+** Source Configuration Management (SCM)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+ Embedded: Subversion.
+
+ * Automatic repository creation.
+ 
+ * SCM directory structure (branches/tags/trunk)
+ 
+ * Support for external subversion repository connection. 
+
+** Issue Tracking System (ITS)
+~~~~~~~~~~~~~~~~~~~~~~~~
+ 
+ External: Bugzilla.
+ 
+ * Automatic Project creation for Bugzilla (requires appropriate credentials)
+ 
+ * Automatic Module creation for Bugzilla.
+ 
+ * Automatic Version creation for Bugzilla.
+ 
+ * Versioning starts from 0.0.1. 
+ 
+** Subversion - ITS integration
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+ Embedded: bugtraq
+
+** Maven archetype creation
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+ * usage of maven archetype for building the initial structure, and files. With the correct archetypes 
