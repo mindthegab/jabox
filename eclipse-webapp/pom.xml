@@ -1,13 +1,16 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.jabox</groupId>
+	<parent>
+		<groupId>org.jabox</groupId>
+		<artifactId>jabox</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+	</parent>
 	<artifactId>eclipse-webapp</artifactId>
 	<packaging>war</packaging>
-	<version>0.0.1-SNAPSHOT</version>
 	<!-- TODO project name  -->
-	<name>quickstart</name>
-	<description></description>
+	<name>Eclipse Webapp</name>
+	<description>Eclipse Webapp</description>
 	<!--
 		TODO <organization> <name>company name</name> <url>company url</url>
 		</organization>
@@ -145,7 +148,7 @@
 								<artifactItem>
 									<groupId>org.jabox</groupId>
 									<artifactId>eclipse-startup</artifactId>
-									<version>0.0.1-SNAPSHOT</version>
+									<version>1.0.0-SNAPSHOT</version>
 									<type>zip</type>
 								</artifactItem>
 							</artifactItems>

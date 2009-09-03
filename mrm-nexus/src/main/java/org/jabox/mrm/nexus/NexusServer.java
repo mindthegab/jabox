@@ -1,6 +1,7 @@
 package org.jabox.mrm.nexus;
 
 import org.jabox.apis.embedded.AbstractEmbeddedServer;
+import org.jabox.maven.helper.MavenDownloader;
 
 /**
  * 
@@ -16,6 +17,7 @@ public class NexusServer extends AbstractEmbeddedServer {
 	}
 
 	public String getWarPath() {
-		return "E:/Documents and Settings/Administrator/.m2/repository/org/sonatype/nexus/nexus-webapp/1.3.6/nexus-webapp-1.3.6.war";
+		return MavenDownloader.downloadArtifact("org.sonatype.nexus",
+				"nexus-webapp", "1.3.6", "war").getAbsolutePath();
 	}
 }

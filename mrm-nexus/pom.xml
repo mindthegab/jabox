@@ -6,10 +6,8 @@
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.jabox</groupId>
 	<artifactId>mrm-nexus</artifactId>
 	<name>mrm-nexus</name>
-	<version>1.0.0-SNAPSHOT</version>
 	<url>http://maven.apache.org</url>
 	<dependencies>
 		<dependency>
@@ -38,7 +36,12 @@
 		<dependency>
 			<groupId>org.jabox</groupId>
 			<artifactId>jabox-persistence</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
+			<version>${pom.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jabox</groupId>
+			<artifactId>maven-helper</artifactId>
+			<version>${pom.version}</version>
 		</dependency>
 	</dependencies>
 	<properties>

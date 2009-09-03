@@ -23,5 +23,10 @@
 			<artifactId>jabox-persistence</artifactId>
 			<version>1.0.0-SNAPSHOT</version>
 		</dependency>
+		<dependency>
+			<groupId>org.jabox</groupId>
+			<artifactId>maven-helper</artifactId>
+			<version>${pom.version}</version>
+		</dependency>
 	</dependencies>
 </project>

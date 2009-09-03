@@ -22,6 +22,8 @@
 		<module>cis-hudson</module>
 		<module>mrm-nexus</module>
 		<module>sas-sonar</module>
+		<module>eclipse-startup</module>
+		<module>eclipse-webapp</module>
 		<module>ide-eclipse</module>
 		<module>maven-helper</module>
 	</modules>
