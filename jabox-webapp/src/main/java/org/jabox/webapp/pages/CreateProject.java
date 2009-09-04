@@ -20,23 +20,25 @@ public class CreateProject extends WebPage {
 		final Project _project = new Project();
 		NavomaticBorder navomaticBorder = new NavomaticBorder("navomaticBorder");
 		add(navomaticBorder);
-		setModel(new CompoundPropertyModel(_project));
 
 		// Add a FeedbackPanel for displaying our messages
 		FeedbackPanel feedbackPanel = new FeedbackPanel("feedback");
 		navomaticBorder.add(feedbackPanel);
 
 		// Add a form with an onSumbit implementation that sets a message
-		Form form = new Form("form") {
+		Form<Project> form = new Form<Project>("form") {
+			private static final long serialVersionUID = -662744155604166387L;
+
 			protected void onSubmit() {
 				new CreateProjectUtil().createProject(_project);
 				info("input: " + _project);
 				generalDao.persist(_project);
 			}
 		};
+		form.setModel(new CompoundPropertyModel<Project>(_project));
 		navomaticBorder.add(form);
 
-		form.add(new RequiredTextField("name"));
-		form.add(new RequiredTextField("description"));
+		form.add(new RequiredTextField<Project>("name"));
+		form.add(new RequiredTextField<Project>("description"));
 	}
 }

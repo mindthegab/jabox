@@ -35,10 +35,10 @@ public class HomePage extends WebPage {
 	}
 
 	private void addAjaxCounter(Border border) {
-		Model model = new Model() {
+		Model<Integer> model = new Model<Integer>() {
 			private int counter = 0;
 
-			public Object getObject() {
+			public Integer getObject() {
 				return new Integer(counter++);
 			}
 		};
