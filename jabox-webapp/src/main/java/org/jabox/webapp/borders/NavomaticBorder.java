@@ -3,8 +3,10 @@ package org.jabox.webapp.borders;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.wicket.behavior.SimpleAttributeModifier;
 import org.apache.wicket.extensions.markup.html.tabs.AbstractTab;
 import org.apache.wicket.extensions.markup.html.tabs.TabbedPanel;
+import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.border.Border;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.Model;
@@ -16,7 +18,7 @@ public class NavomaticBorder extends Border {
 	public NavomaticBorder(final String componentName) {
 		super(componentName);
 		List tabs = new ArrayList();
-		tabs.add(new AbstractTab(new Model("C.I.S. (Hudson)")) {
+		tabs.add(new AbstractTab(new Model<String>("C.I.S. (Hudson)")) {
 			public Panel getPanel(String panelId) {
 				return new TabPanel1(panelId);
 			}
