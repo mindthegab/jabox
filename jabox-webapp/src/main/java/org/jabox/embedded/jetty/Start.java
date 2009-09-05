@@ -34,9 +34,9 @@ public class Start {
 				"org.jabox.mrm.nexus.NexusServer").newInstance();
 		es2.addWebAppContext(server);
 
-		EmbeddedServer es3 = (EmbeddedServer) Class.forName(
-				"org.jabox.ide.eclipse.EclipseJNLPServer").newInstance();
-		es3.addWebAppContext(server);
+//		EmbeddedServer es3 = (EmbeddedServer) Class.forName(
+//				"org.jabox.ide.eclipse.EclipseJNLPServer").newInstance();
+//		es3.addWebAppContext(server);
 
 		try {
 			System.out
