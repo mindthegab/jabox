@@ -45,6 +45,11 @@
 			<artifactId>maven-helper</artifactId>
 			<version>${pom.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>httpunit</groupId>
+			<artifactId>httpunit</artifactId>
+			<version>1.6.2</version>
+		</dependency>
 	</dependencies>
 	<properties>
 		<wicket.version>1.4.0</wicket.version>

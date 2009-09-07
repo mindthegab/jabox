@@ -18,17 +18,17 @@ public class NavomaticBorder extends Border {
 	public NavomaticBorder(final String componentName) {
 		super(componentName);
 		List tabs = new ArrayList();
-		tabs.add(new AbstractTab(new Model<String>("C.I.S. (Hudson)")) {
+		tabs.add(new AbstractTab(new Model<String>("A.L.M. (Jabox)")) {
 			public Panel getPanel(String panelId) {
 				return new TabPanel1(panelId);
 			}
 		});
-		tabs.add(new AbstractTab(new Model("I.D.E. (Eclipse)")) {
+		tabs.add(new AbstractTab(new Model("R.M.S. (Nexus)")) {
 			public Panel getPanel(String panelId) {
 				return new TabPanel2(panelId);
 			}
 		});
-		tabs.add(new AbstractTab(new Model("R.M.S. (Nexus)")) {
+		tabs.add(new AbstractTab(new Model("C.I.S. (Hudson)")) {
 			public Panel getPanel(String panelId) {
 				return new TabPanel3(panelId);
 			}

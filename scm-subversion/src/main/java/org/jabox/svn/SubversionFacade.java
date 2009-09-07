@@ -3,9 +3,12 @@ package org.jabox.svn;
 import java.io.File;
 
 import org.jabox.model.Project;
+import org.tmatesoft.svn.core.SVNDepth;
 import org.tmatesoft.svn.core.SVNException;
+import org.tmatesoft.svn.core.SVNPropertyValue;
 import org.tmatesoft.svn.core.SVNURL;
 import org.tmatesoft.svn.core.internal.io.fs.FSRepositoryFactory;
+import org.tmatesoft.svn.core.wc.ISVNPropertyHandler;
 import org.tmatesoft.svn.core.wc.SVNClientManager;
 import org.tmatesoft.svn.core.wc.SVNCommitClient;
 import org.tmatesoft.svn.core.wc.SVNRevision;
@@ -82,21 +85,25 @@ public class SubversionFacade {
 	 */
 	private void setModuleProperties(File dir) throws SVNException {
 		SVNWCClient wc = _clientManager.getWCClient();
-		wc.doSetProperty(dir, "bugtraq:url",
-				"http://localhost/cgi-bin/bugzilla/show_bug.cgi?id=%BUGID%",
-				false, false, null);
-
-		wc.doSetProperty(dir, "bugtraq:number", "true", false, false, null);
-		wc.doSetProperty(dir, "bugtraq:append", "false", false, false, null);
-
-		wc.doSetProperty(dir, "bugtraq:message", "[ %BUGID% ]", false, false,
-				null);
-		wc.doSetProperty(dir, "bugtraq:label", "Issue:", false, false, null);
-		wc.doSetProperty(dir, "bugtraq:url",
-				"http://localhost/cgi-bin/bugzilla/show_bug.cgi?id=%BUGID%",
-				false, false, null);
-		wc.doSetProperty(dir, "bugtraq:warnifnoissue", "true", false, false,
-				null);
-		wc.doSetProperty(dir, "svn:ignore", "target", false, false, null);
+		wc
+				.doSetProperty(
+						dir,
+						"bugtraq:url",
+						SVNPropertyValue
+								.create("http://localhost/cgi-bin/bugzilla/show_bug.cgi?id=%BUGID%"),
+						false, SVNDepth.EMPTY, ISVNPropertyHandler.NULL, null);
+//
+//		wc.doSetProperty(dir, "bugtraq:number", "true", false, false, null);
+//		wc.doSetProperty(dir, "bugtraq:append", "false", false, false, null);
+//
+//		wc.doSetProperty(dir, "bugtraq:message", "[ %BUGID% ]", false, false,
+//				null);
+//		wc.doSetProperty(dir, "bugtraq:label", "Issue:", false, false, null);
+//		wc.doSetProperty(dir, "bugtraq:url",
+//				"http://localhost/cgi-bin/bugzilla/show_bug.cgi?id=%BUGID%",
+//				false, false, null);
+//		wc.doSetProperty(dir, "bugtraq:warnifnoissue", "true", false, false,
+//				null);
+//		wc.doSetProperty(dir, "svn:ignore", "target", false, false, null);
 	}
 }

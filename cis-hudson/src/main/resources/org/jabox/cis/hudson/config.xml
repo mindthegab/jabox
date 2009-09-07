@@ -1,0 +1,37 @@
+<maven2-moduleset>
+  <actions/>
+  <description/>
+  <keepDependencies>false</keepDependencies>
+  <properties/>
+  <scm class="hudson.scm.SubversionSCM">
+    <locations>
+      <hudson.scm.SubversionSCM_-ModuleLocation>
+        <remote>file:///E:/Documents and Settings/Administrator/.jabox/svnRepo/testA/trunk/testA</remote>
+      </hudson.scm.SubversionSCM_-ModuleLocation>
+    </locations>
+    <useUpdate>true</useUpdate>
+    <excludedRegions/>
+    <excludedUsers/>
+    <excludedRevprop/>
+  </scm>
+  <canRoam>true</canRoam>
+
+  <disabled>false</disabled>
+  <triggers class="vector"/>
+  <concurrentBuild>false</concurrentBuild>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <rootModule>
+    <groupId>org.jabox</groupId>
+    <artifactId>testA</artifactId>
+
+  </rootModule>
+  <goals>clean install</goals>
+  <aggregatorStyleBuild>true</aggregatorStyleBuild>
+  <incrementalBuild>false</incrementalBuild>
+  <usePrivateRepository>false</usePrivateRepository>
+  <ignoreUpstremChanges>false</ignoreUpstremChanges>
+
+  <reporters/>
+  <publishers/>
+  <buildWrappers/>
+</maven2-moduleset>

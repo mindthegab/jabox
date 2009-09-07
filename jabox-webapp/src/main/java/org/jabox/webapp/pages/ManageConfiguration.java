@@ -73,7 +73,7 @@ public class ManageConfiguration extends WebPage {
 
 		addSCMs(configuration, form);
 //		addBTSs(configuration, form);
-//		addCISs(configuration, form);
+		addCISs(configuration, form);
 		navomaticBorder.add(form);
 	}
 

@@ -5,6 +5,7 @@ import java.io.File;
 import junit.framework.TestCase;
 
 import org.jabox.svn.SubversionRepository;
+import org.tmatesoft.svn.core.SVNDepth;
 import org.tmatesoft.svn.core.SVNException;
 import org.tmatesoft.svn.core.SVNURL;
 import org.tmatesoft.svn.core.internal.io.fs.FSRepositoryFactory;
@@ -30,13 +31,13 @@ public abstract class SubversionFacadeTest extends TestCase {
 				.parseURIEncoded("file:///home/dimitris/svn/repos/helloworld");
 		SVNURL[] svnurls = new SVNURL[] { svnurl };
 
-//		commitClient.doMkDir(svnurls, "[JABOX] Added Project Directory");
+		// commitClient.doMkDir(svnurls, "[JABOX] Added Project Directory");
 	}
 
 	public void test2() throws SVNException {
 
 		try {
-			String tgtPath = "/home/dimitris/svn/repos2";
+			String tgtPath = "c:///home/dimitris/svn/repos2";
 			SVNURL tgtURL = SVNRepositoryFactory.createLocalRepository(
 					new File(tgtPath), true, false);
 		} catch (SVNException e) {
@@ -48,14 +49,14 @@ public abstract class SubversionFacadeTest extends TestCase {
 		SVNCommitClient commitClient = _clientManager.getCommitClient();
 		SVNWCClient wcClient = _clientManager.getWCClient();
 
-		SVNURL svnTestingDir = SVNURL.parseURIDecoded("file://"
-				+ SubversionRepository.getSubversionBaseDir());
+		SVNURL svnTestingDir = SVNURL.fromFile(SubversionRepository
+				.getSubversionBaseDir());
+
 		_clientManager.createRepository(svnTestingDir, true);
-
-		_clientManager.getUpdateClient().doCheckout(svnTestingDir,
-				new File("/home/dimitris/tmp/foobar"), SVNRevision.HEAD,
-				SVNRevision.HEAD, false);
-
-	
+		svnTestingDir = svnTestingDir.appendPath("/foobar2/", true);
+		File dstPath = new File("c:/home/dimitris/tmp/foobar/");
+		dstPath.mkdirs();
+		_clientManager.getUpdateClient().doCheckout(svnTestingDir, dstPath,
+				SVNRevision.HEAD, SVNRevision.HEAD, SVNDepth.INFINITY, false);
 	}
 }

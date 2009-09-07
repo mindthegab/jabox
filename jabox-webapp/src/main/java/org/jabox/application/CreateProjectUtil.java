@@ -91,15 +91,15 @@ public class CreateProjectUtil {
 
 		// bts.setUrl("http://localhost/cgi-bin/bugzilla/index.cgi?GoAheadAndLogIn=1");
 		// bts.login("", "");
-		bts.setUrl("http://localhost/redmine/");
-		bts.login("myemail@gmail.com", "");
-		bts.addProject(project);
-		bts.addModule(project, project.getName(), "initial module",
-				"myemail@gmail.com");
-		bts.addVersion(project, "0.0.1");
+		// bts.setUrl("http://localhost/redmine/");
+		// bts.login("myemail@gmail.com", "");
+		// bts.addProject(project);
+		// bts.addModule(project, project.getName(), "initial module",
+		// "myemail@gmail.com");
+		// bts.addVersion(project, "0.0.1");
 
 		CISConnector cis = _cisManager.getCISConnectorInstance(configuration
-				.getDefaultBTSConnector());
+				.getDefaultCISConnector());
 		cis.addProject(project);
 	}
 

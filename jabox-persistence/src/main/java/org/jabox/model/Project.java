@@ -16,7 +16,7 @@ public class Project extends BaseEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private String _name;
 	private String _description;
-
+	private String _scmUrl;
 
 	public void setName(String name) {
 		_name = name;
@@ -30,12 +30,20 @@ public class Project extends BaseEntity implements Serializable {
 		return "Project: " + _name;
 	}
 
-	public void setDescription(String description) {
+	public void setDescription(final String description) {
 		_description = description;
 	}
 
 	public String getDescription() {
 		return _description;
+	}
+
+	public void setScmUrl(final String scmUrl) {
+		_scmUrl = scmUrl;
+	}
+
+	public String getScmUrl() {
+		return _scmUrl;
 	}
 
 }
