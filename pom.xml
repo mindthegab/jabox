@@ -50,4 +50,16 @@
 			<distribution>repo</distribution>
 		</license>
 	</licenses>
+	<distributionManagement>
+		<snapshotRepository>
+			<id>snapshots</id>
+			<name>Snapshots</name>
+			<url>http://localhost:9090/nexus/content/repositories/snapshots/</url>
+		</snapshotRepository>
+		<repository>
+			<id>releases</id>
+			<name>Releases</name>
+			<url>http://localhost:9090/nexus/content/repositories/releases/</url>
+		</repository>
+	</distributionManagement>
 </project>
