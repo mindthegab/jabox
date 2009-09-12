@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 
 import org.apache.maven.artifact.InvalidRepositoryException;
-import org.apache.maven.cli.MavenCli;
 import org.apache.maven.reactor.MavenExecutionException;
 import org.apache.wicket.injection.web.InjectorHolder;
 import org.apache.wicket.persistence.provider.GeneralDao;
@@ -88,19 +87,23 @@ public class CreateProjectUtil {
 		// Add Project in Issue Tracking System
 		BTSConnector bts = _btsManager.getBTSConnectorInstance(configuration
 				.getDefaultBTSConnector());
-
-		// bts.setUrl("http://localhost/cgi-bin/bugzilla/index.cgi?GoAheadAndLogIn=1");
-		// bts.login("", "");
-		// bts.setUrl("http://localhost/redmine/");
-		// bts.login("myemail@gmail.com", "");
-		// bts.addProject(project);
-		// bts.addModule(project, project.getName(), "initial module",
-		// "myemail@gmail.com");
-		// bts.addVersion(project, "0.0.1");
+		if (bts != null) {
+			// bts
+			// .setUrl("http://localhost/cgi-bin/bugzilla/index.cgi?GoAheadAndLogIn=1");
+			// bts.login("", "");
+			bts.setUrl("http://localhost/redmine/");
+			bts.login("", "");
+			bts.addProject(project);
+			bts.addModule(project, project.getName(), "initial module",
+					"myemail@gmail.com");
+			bts.addVersion(project, "0.0.1");
+		}
 
 		CISConnector cis = _cisManager.getCISConnectorInstance(configuration
 				.getDefaultCISConnector());
-		cis.addProject(project);
+		if (cis != null) {
+			cis.addProject(project);
+		}
 	}
 
 }

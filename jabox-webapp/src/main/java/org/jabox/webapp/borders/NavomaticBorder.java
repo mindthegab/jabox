@@ -23,14 +23,19 @@ public class NavomaticBorder extends Border {
 				return new TabPanel1(panelId);
 			}
 		});
-		tabs.add(new AbstractTab(new Model("R.M.S. (Nexus)")) {
+		tabs.add(new AbstractTab(new Model("B.T.S. (Redmine)")) {
 			public Panel getPanel(String panelId) {
-				return new TabPanel2(panelId);
+				return new TabPanel4(panelId);
 			}
 		});
 		tabs.add(new AbstractTab(new Model("C.I.S. (Hudson)")) {
 			public Panel getPanel(String panelId) {
 				return new TabPanel3(panelId);
+			}
+		});
+		tabs.add(new AbstractTab(new Model("R.M.S. (Nexus)")) {
+			public Panel getPanel(String panelId) {
+				return new TabPanel2(panelId);
 			}
 		});
 		add(new TabbedPanel("tabs", tabs));
@@ -96,4 +101,23 @@ public class NavomaticBorder extends Border {
 
 	};
 
+	/**
+	 * Panel representing the content panel for the third tab
+	 * 
+	 * @author Igor Vaynberg (ivaynberg)
+	 * 
+	 */
+	private static class TabPanel4 extends Panel {
+
+		/**
+		 * Constructor
+		 * 
+		 * @param id
+		 *            component id
+		 */
+		public TabPanel4(String id) {
+			super(id);
+		}
+
+	};
 }

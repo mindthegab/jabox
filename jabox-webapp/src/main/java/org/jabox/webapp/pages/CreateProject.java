@@ -30,6 +30,9 @@ public class CreateProject extends WebPage {
 			private static final long serialVersionUID = -662744155604166387L;
 
 			protected void onSubmit() {
+				// We need to persist twice because the id is necessary for the
+				// creation of the project.
+				generalDao.persist(_project);
 				new CreateProjectUtil().createProject(_project);
 				info("input: " + _project);
 				generalDao.persist(_project);

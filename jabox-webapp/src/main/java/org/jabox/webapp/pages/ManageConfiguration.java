@@ -60,9 +60,9 @@ public class ManageConfiguration extends WebPage {
 		CompoundPropertyModel model = new CompoundPropertyModel(configuration);
 		form.setModel(model);
 		form.add(new RequiredTextField("issueManagementUrl"));
-		DeployerPluginSelector child = new DeployerPluginSelector(
-				"configuration", model);
-		form.add(child);
+//		DeployerPluginSelector child = new DeployerPluginSelector(
+//				"configuration", model);
+//		form.add(child);
 
 //		DeployerPlugin plugin = registry.getEntry((String) pluginId);
 //		configuration.setDeployerConfig(plugin
@@ -72,7 +72,7 @@ public class ManageConfiguration extends WebPage {
 //				new PropertyModel(configuration, "deployerConfig")));
 
 		addSCMs(configuration, form);
-//		addBTSs(configuration, form);
+		addBTSs(configuration, form);
 		addCISs(configuration, form);
 		navomaticBorder.add(form);
 	}
