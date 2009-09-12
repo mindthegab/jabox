@@ -62,4 +62,9 @@
 			<url>http://localhost:9090/nexus/content/repositories/releases/</url>
 		</repository>
 	</distributionManagement>
+	<properties>
+		<wicket.version>1.4.0</wicket.version>
+		<jetty.version>6.1.4</jetty.version>
+		<spring.version>2.5.4</spring.version>
+	</properties>
 </project>

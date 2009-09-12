@@ -44,9 +44,4 @@
 			<version>${pom.version}</version>
 		</dependency>
 	</dependencies>
-	<properties>
-		<wicket.version>1.4.0</wicket.version>
-		<jetty.version>6.1.4</jetty.version>
-		<spring.version>2.5.4</spring.version>
-	</properties>
 </project>
