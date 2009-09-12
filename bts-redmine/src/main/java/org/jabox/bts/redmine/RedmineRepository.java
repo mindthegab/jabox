@@ -60,7 +60,7 @@ public class RedmineRepository implements BTSConnector, Serializable {
 			throws IOException, SAXException {
 
 		WebRequest req = new GetMethodWebRequest(_url
-				+ "/projects/add_version/" + project.getId());
+				+ "/projects/add_version/id-" + project.getId());
 
 		WebResponse resp = _wc.getResponse(req);
 		WebForm form = resp.getForms()[1];
