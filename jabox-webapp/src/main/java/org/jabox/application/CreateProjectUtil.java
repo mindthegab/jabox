@@ -78,6 +78,8 @@ public class CreateProjectUtil {
 
 		// Commit Project
 		scm.commitProject(project);
+		project.setScmUrl(scm.getScmUrl() + "/" + project.getName() + "/trunk/"
+				+ project.getName());
 
 		// Create a directory structure in subversion for the project
 		// svn.createProject(project);
