@@ -29,7 +29,7 @@ public class SVNConnector implements SCMConnector, Serializable {
 		try {
 			svnDir = SVNURL.fromFile(SubversionRepository
 					.getSubversionBaseDir());
-			return svnDir.getURIEncodedPath();
+			return svnDir.getPath();
 		} catch (SVNException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
