@@ -10,4 +10,6 @@ public interface SCMConnector {
 
 	void commitProject(Project project) throws SCMException;
 
+	String getScmUrl();
+
 }
