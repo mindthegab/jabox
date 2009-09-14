@@ -17,7 +17,11 @@
   <canRoam>true</canRoam>
 
   <disabled>false</disabled>
-  <triggers class="vector"/>
+  <triggers class="vector">
+    <hudson.triggers.SCMTrigger>
+    <spec>* * * * *</spec>
+    </hudson.triggers.SCMTrigger>
+  </triggers>
   <concurrentBuild>false</concurrentBuild>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <rootModule>
