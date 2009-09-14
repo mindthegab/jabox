@@ -6,7 +6,7 @@
   <scm class="hudson.scm.SubversionSCM">
     <locations>
       <hudson.scm.SubversionSCM_-ModuleLocation>
-        <remote>file:///E:/Documents and Settings/Administrator/.jabox/svnRepo/testA/trunk/testA</remote>
+        <remote>file://${project.scmURL}</remote>
       </hudson.scm.SubversionSCM_-ModuleLocation>
     </locations>
     <useUpdate>true</useUpdate>

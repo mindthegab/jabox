@@ -1,22 +1,18 @@
 package org.jabox.cis.hudson;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.StringWriter;
 import java.net.MalformedURLException;
 
 import org.apache.commons.httpclient.Header;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.methods.PostMethod;
+import org.apache.wicket.util.io.IOUtils;
 import org.jabox.apis.cis.CISConnector;
 import org.jabox.model.Project;
 import org.springframework.stereotype.Service;
 import org.xml.sax.SAXException;
-
-import com.meterware.httpunit.GetMethodWebRequest;
-import com.meterware.httpunit.WebConversation;
-import com.meterware.httpunit.WebRequest;
-import com.meterware.httpunit.WebResponse;
 
 @Service
 public class HudsonConnector implements CISConnector {
@@ -44,7 +40,8 @@ public class HudsonConnector implements CISConnector {
 		InputStream is = HudsonConnector.class
 				.getResourceAsStream("config.xml");
 
-		post.setRequestBody(is);
+		String body = parseInputStream(is, project);
+		post.setRequestBody(body);
 		try {
 			int result = client.executeMethod(post);
 			System.out.println("Return code: " + result);
@@ -55,12 +52,23 @@ public class HudsonConnector implements CISConnector {
 		} finally {
 			post.releaseConnection();
 		}
-		
+
 		// Trigger the Hudson build
 		PostMethod triggerBuild = new PostMethod(hudsonHost + "/job/"
 				+ project.getName() + "/build");
 		client.executeMethod(triggerBuild);
 		return true;
+	}
+
+	private String parseInputStream(InputStream is, Project project)
+			throws IOException {
+		StringWriter writer = new StringWriter();
+		IOUtils.copy(is, writer);
+		String theString = writer.toString();
+
+		String replace = theString.replace("${project.scmURL}", project
+				.getScmUrl());
+		return replace;
 	}
 
 	public boolean login(String username, String password)
