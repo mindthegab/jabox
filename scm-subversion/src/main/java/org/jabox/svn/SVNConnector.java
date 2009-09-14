@@ -10,6 +10,7 @@ import org.jabox.model.Project;
 import org.jabox.utils.TemporalDirectory;
 import org.springframework.stereotype.Service;
 import org.tmatesoft.svn.core.SVNException;
+import org.tmatesoft.svn.core.SVNURL;
 
 @Service
 public class SVNConnector implements SCMConnector, Serializable {
@@ -23,6 +24,18 @@ public class SVNConnector implements SCMConnector, Serializable {
 		return "Subversion Plugin";
 	}
 
+	public String getScmUrl()  {
+		SVNURL svnDir;
+		try {
+			svnDir = SVNURL.fromFile(SubversionRepository
+					.getSubversionBaseDir());
+			return svnDir.getURIEncodedPath();
+		} catch (SVNException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
 	public File createProjectDirectories(Project project) throws SCMException {
 		try {
 			SubversionFacade svn = new SubversionFacade();
