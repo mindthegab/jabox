@@ -21,17 +21,9 @@ public class Start {
 		connector.setPort(9090);
 		server.setConnectors(new Connector[] { connector });
 
-		EmbeddedServer es = (EmbeddedServer) Class.forName(
-				"org.jabox.cis.hudson.HudsonServer").newInstance();
-		es.addWebAppContext(server);
-
-		EmbeddedServer es2 = (EmbeddedServer) Class.forName(
-				"org.jabox.mrm.nexus.NexusServer").newInstance();
-		es2.addWebAppContext(server);
-
-		// EmbeddedServer es3 = (EmbeddedServer) Class.forName(
-		// "org.jabox.ide.eclipse.EclipseJNLPServer").newInstance();
-		// es3.addWebAppContext(server);
+		addEmbeddedServer(server, "org.jabox.cis.hudson.HudsonServer");
+		addEmbeddedServer(server, "org.jabox.mrm.nexus.NexusServer");
+		// addEmbeddedServer(server, "org.jabox.ide.eclipse.EclipseJNLPServer");
 
 		// Adding ROOT handler.
 		// NOTE: This should be added last on server.
@@ -55,5 +47,25 @@ public class Start {
 			e.printStackTrace();
 			System.exit(100);
 		}
+	}
+
+	/**
+	 * Helper function to add an embedded Server using the className to the
+	 * running Jetty Server.
+	 * 
+	 * @param server
+	 *            The Jetty server.
+	 * @param className
+	 *            The className of the EmbeddedServer.
+	 * @throws InstantiationException
+	 * @throws IllegalAccessException
+	 * @throws ClassNotFoundException
+	 */
+	private static void addEmbeddedServer(final Server server,
+			final String className) throws InstantiationException,
+			IllegalAccessException, ClassNotFoundException {
+		EmbeddedServer es = (EmbeddedServer) Class.forName(className)
+				.newInstance();
+		es.addWebAppContext(server);
 	}
 }
