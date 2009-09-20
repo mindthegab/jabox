@@ -24,11 +24,6 @@
 	</licenses>
 	<dependencies>
 		<!--  WICKET DEPENDENCIES -->
-		<dependency>
-			<groupId>org.apache.wicket</groupId>
-			<artifactId>wicket</artifactId>
-			<version>${wicket.version}</version>
-		</dependency>
 		<!--
 			OPTIONAL <dependency> <groupId>org.apache.wicket</groupId>
 			<artifactId>wicket-extensions</artifactId>
@@ -138,7 +133,7 @@
 				<executions>
 					<execution>
 						<id>unpack</id>
-						<phase>package</phase>
+						<phase>prepare-package</phase>
 						<goals>
 							<goal>unpack</goal>
 						</goals>

@@ -23,7 +23,7 @@ public class Start {
 
 		addEmbeddedServer(server, "org.jabox.cis.hudson.HudsonServer");
 		addEmbeddedServer(server, "org.jabox.mrm.nexus.NexusServer");
-		// addEmbeddedServer(server, "org.jabox.ide.eclipse.EclipseJNLPServer");
+		addEmbeddedServer(server, "org.jabox.ide.eclipse.EclipseJNLPServer");
 
 		// Adding ROOT handler.
 		// NOTE: This should be added last on server.
