@@ -8,7 +8,7 @@ import org.xml.sax.SAXException;
 
 import junit.framework.TestCase;
 
-public class DownloadEclipseTest extends TestCase {
+public abstract class DownloadEclipseTest extends TestCase {
 
 	public void testDownloadFile() throws MalformedURLException, FileNotFoundException, IOException, SAXException {
 		DownloadEclipse.downloadFile();
