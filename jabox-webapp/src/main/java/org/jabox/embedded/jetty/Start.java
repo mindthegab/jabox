@@ -21,11 +21,6 @@ public class Start {
 		connector.setPort(9090);
 		server.setConnectors(new Connector[] { connector });
 
-		WebAppContext bb = new WebAppContext();
-		bb.setServer(server);
-		bb.setContextPath("/jabox");
-		bb.setWar("src/main/webapp");
-		server.addHandler(bb);
 		EmbeddedServer es = (EmbeddedServer) Class.forName(
 				"org.jabox.cis.hudson.HudsonServer").newInstance();
 		es.addWebAppContext(server);
@@ -34,9 +29,17 @@ public class Start {
 				"org.jabox.mrm.nexus.NexusServer").newInstance();
 		es2.addWebAppContext(server);
 
-//		EmbeddedServer es3 = (EmbeddedServer) Class.forName(
-//				"org.jabox.ide.eclipse.EclipseJNLPServer").newInstance();
-//		es3.addWebAppContext(server);
+		// EmbeddedServer es3 = (EmbeddedServer) Class.forName(
+		// "org.jabox.ide.eclipse.EclipseJNLPServer").newInstance();
+		// es3.addWebAppContext(server);
+
+		// Adding ROOT handler.
+		// NOTE: This should be added last on server.
+		WebAppContext bb = new WebAppContext();
+		bb.setServer(server);
+		bb.setContextPath("/");
+		bb.setWar("src/main/webapp");
+		server.addHandler(bb);
 
 		try {
 			System.out
