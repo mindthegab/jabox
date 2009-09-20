@@ -18,6 +18,9 @@ public class DownloadHelper {
 		InputStream is = null;
 		BufferedInputStream bin = null;
 		BufferedOutputStream bout = null;
+
+		outputFile.getParentFile().mkdirs();
+
 		try {
 			URL url = new URL(urlPath);
 			is = url.openStream();

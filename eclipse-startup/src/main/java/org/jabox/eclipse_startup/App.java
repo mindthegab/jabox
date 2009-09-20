@@ -12,15 +12,26 @@ import org.xml.sax.SAXException;
 public class App {
 	public static void main(final String[] args) throws MalformedURLException,
 			IOException, SAXException {
-		// File f = DownloadEclipse.downloadFile();
-		// File f = new File("eclipse-jee-galileo-linux-gtk.tar.gz");
 		EclipseRunner er = EclipseRunner.getInstance();
-		File f = new File(er.getFileName());
-		File eclipseHome = new File(
-				"D:/Documents/My Developments/Jabox/workspace/eclipse-startup/eclipse");
-		eclipseHome.mkdirs();
-		// UntarEclipse.untar(new FileInputStream(f), dir.getAbsolutePath());
-		// UnzipEclipse.unzip(f, dir.getAbsolutePath());
+		String baseDir = Environment.getBaseDir();
+
+		// Download the eclipse.zip
+		File zipFile = new File(baseDir, "tmp/eclipse.zip");
+		if (!zipFile.exists()) {
+			// File f = new File("eclipse-jee-galileo-linux-gtk.tar.gz");
+			// File f = new File(er.getFileName());
+			DownloadEclipse.downloadFile(er, zipFile);
+		}
+
+		// Unpack the Eclipse
+		File eclipseHome = new File(baseDir, "eclipse");
+		if (!er.getEclipseExecutable(eclipseHome).exists()) {
+			UnzipEclipse.unzip(zipFile, eclipseHome);
+			// UntarEclipse.untar(new FileInputStream(f),
+			// dir.getAbsolutePath());
+		}
+
+		// Execute Eclipse
 		er.executeEclipse(eclipseHome);
 	}
 }

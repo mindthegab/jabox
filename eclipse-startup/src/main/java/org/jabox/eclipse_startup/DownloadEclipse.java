@@ -11,19 +11,18 @@ import org.xml.sax.SAXException;
 public class DownloadEclipse {
 
 	/**
+	 * @param er2
 	 * @throws MalformedURLException
 	 * @throws IOException
 	 * @throws SAXException
 	 * @throws FileNotFoundException
 	 */
-	public static File downloadFile() throws MalformedURLException,
-			IOException, SAXException, FileNotFoundException {
-		EclipseRunner er = new EclipseRunnerWindows();
-
-		File outputFile = new File("eclipse.zip");
-		DownloadHelper.downloadFile(er.getDownloadURL(), outputFile);
+	public static File downloadFile(EclipseRunner er, File zipFile)
+			throws MalformedURLException, IOException, SAXException,
+			FileNotFoundException {
+		DownloadHelper.downloadFile(er.getDownloadURL(), zipFile);
 		System.out.println("\nFile is created........................");
-		return outputFile;
+		return zipFile;
 	}
 
 }

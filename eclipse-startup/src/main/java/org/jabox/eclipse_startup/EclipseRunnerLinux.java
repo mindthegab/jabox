@@ -12,7 +12,7 @@ public class EclipseRunnerLinux extends EclipseRunner {
 		return "eclipse-jee-galileo-linux-gtk.tar.gz";
 	}
 
-	String getEclipseExecutable(File eclipseHome) {
+	File getEclipseExecutable(File eclipseHome) {
 		return null;
 	}
 

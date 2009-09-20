@@ -16,10 +16,11 @@ public abstract class EclipseRunner {
 
 	abstract String getDownloadURL();
 
-	abstract String getEclipseExecutable(final File eclipseHome);
+	abstract File getEclipseExecutable(final File eclipseHome);
 
 	public void executeEclipse(File eclipseHome) throws IOException {
 		Runtime.getRuntime().exec(
-				new String[] { getEclipseExecutable(eclipseHome) });
+				new String[] { getEclipseExecutable(eclipseHome)
+						.getAbsolutePath() });
 	}
 }

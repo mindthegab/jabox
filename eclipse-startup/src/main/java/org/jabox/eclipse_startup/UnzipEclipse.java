@@ -12,8 +12,10 @@ import java.util.zip.ZipException;
 import java.util.zip.ZipFile;
 
 public class UnzipEclipse {
-	public static void unzip(File file, String absolutePath)
-			throws ZipException, IOException {
+	public static void unzip(File file, File eclipseHome) throws ZipException,
+			IOException {
+		eclipseHome.mkdirs();
+
 		try {
 			ZipFile zipFile = new ZipFile(file);
 
@@ -30,14 +32,14 @@ public class UnzipEclipse {
 					System.err.println("Extracting directory: "
 							+ entry.getName());
 					// This is not robust, just for demonstration purposes.
-					(new File(entry.getName())).mkdir();
+					(new File(eclipseHome, entry.getName())).mkdir();
 					continue;
 				}
 
 				System.err.println("Extracting file: " + entry.getName());
 				copyInputStream(zipFile.getInputStream(entry),
-						new BufferedOutputStream(new FileOutputStream(entry
-								.getName())));
+						new BufferedOutputStream(new FileOutputStream(new File(
+								eclipseHome, entry.getName()))));
 			}
 
 			zipFile.close();

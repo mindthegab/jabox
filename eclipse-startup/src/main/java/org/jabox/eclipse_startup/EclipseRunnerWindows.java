@@ -12,9 +12,9 @@ public class EclipseRunnerWindows extends EclipseRunner {
 		return "eclipse-jee-galileo-win32.zip";
 	}
 
-	public String getEclipseExecutable(final File eclipseHome) {
+	public File getEclipseExecutable(final File eclipseHome) {
 		String absolutePath = eclipseHome.getAbsolutePath();
-		return absolutePath + File.separator + "eclipse.exe";
+		File eclipseDir = new File(absolutePath, "eclipse");
+		return new File(eclipseDir, "eclipse.exe");
 	}
-
 }
