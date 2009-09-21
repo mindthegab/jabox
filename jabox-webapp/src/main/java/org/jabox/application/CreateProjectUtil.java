@@ -18,7 +18,6 @@ import org.jabox.apis.scm.SCMException;
 import org.jabox.apis.scm.SCMManager;
 import org.jabox.model.Configuration;
 import org.jabox.model.Project;
-import org.tmatesoft.svn.core.SVNException;
 import org.xml.sax.SAXException;
 
 public class CreateProjectUtil {
