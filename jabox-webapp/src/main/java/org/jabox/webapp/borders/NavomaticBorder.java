@@ -54,6 +54,7 @@ public class NavomaticBorder extends Border {
 	 * 
 	 */
 	private static class TabPanel1 extends Panel {
+		private static final long serialVersionUID = -2139796431114958720L;
 
 		/**
 		 * Constructor
@@ -74,6 +75,7 @@ public class NavomaticBorder extends Border {
 	 * 
 	 */
 	private static class TabPanel2 extends Panel {
+		private static final long serialVersionUID = -4644495598258865618L;
 
 		/**
 		 * Constructor
@@ -94,6 +96,7 @@ public class NavomaticBorder extends Border {
 	 * 
 	 */
 	private static class TabPanel3 extends Panel {
+		private static final long serialVersionUID = -117473298219614032L;
 
 		/**
 		 * Constructor
@@ -114,6 +117,7 @@ public class NavomaticBorder extends Border {
 	 * 
 	 */
 	private static class TabPanel4 extends Panel {
+		private static final long serialVersionUID = 2733190513603447531L;
 
 		/**
 		 * Constructor
