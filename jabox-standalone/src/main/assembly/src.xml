@@ -1,0 +1,32 @@
+<assembly>
+	<id>jar-with-dependencies</id>
+	<formats>
+		<format>jar</format>
+	</formats>
+	<includeBaseDirectory>false</includeBaseDirectory>
+	<dependencySets>
+		<dependencySet>
+			<includes>
+				<include>*:*:*:jar</include>
+			</includes>
+			<unpack>true</unpack>
+			<scope>runtime</scope>
+			<outputDirectory></outputDirectory>
+		</dependencySet>
+		<dependencySet>
+			<includes>
+				<include>*:*:*:war</include>
+			</includes>
+			<unpack>true</unpack>
+			<scope>runtime</scope>
+			<outputDirectory>jabox-webapp</outputDirectory>
+		</dependencySet>
+	</dependencySets>
+	<fileSets>
+		<fileSet>
+			<directory>${project.build.outputDirectory}/target/classes/
+			</directory>
+		</fileSet>
+	</fileSets>
+</assembly>
+
