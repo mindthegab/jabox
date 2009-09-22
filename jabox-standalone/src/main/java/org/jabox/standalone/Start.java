@@ -1,7 +1,5 @@
 package org.jabox.standalone;
 
-import java.net.URL;
-
 import org.jabox.apis.embedded.EmbeddedServer;
 import org.mortbay.jetty.Connector;
 import org.mortbay.jetty.Server;
