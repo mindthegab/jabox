@@ -7,6 +7,7 @@ import java.net.MalformedURLException;
 
 import junit.framework.TestCase;
 
+import org.jabox.utils.DownloadHelper;
 import org.xml.sax.SAXException;
 
 public abstract class DownloadEclipseTest extends TestCase {
@@ -14,6 +15,7 @@ public abstract class DownloadEclipseTest extends TestCase {
 	public void testDownloadFile() throws MalformedURLException,
 			FileNotFoundException, IOException, SAXException {
 		EclipseRunner er = EclipseRunner.getInstance();
-		DownloadEclipse.downloadFile(er, new File("target/eclipse"));
+		DownloadHelper.downloadFile(er.getDownloadURL(), new File(
+				"target/eclipse"));
 	}
 }

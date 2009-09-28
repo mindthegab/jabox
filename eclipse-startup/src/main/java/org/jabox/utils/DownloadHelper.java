@@ -14,7 +14,7 @@ public class DownloadHelper {
 	 * @param urlPath
 	 * @return
 	 */
-	public static void downloadFile(String urlPath, File outputFile) {
+	public static File downloadFile(String urlPath, File outputFile) {
 		InputStream is = null;
 		BufferedInputStream bin = null;
 		BufferedOutputStream bout = null;
@@ -44,6 +44,7 @@ public class DownloadHelper {
 				// nothing to see here
 			}
 		}
+		return outputFile;
 	}
 
 }

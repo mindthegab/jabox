@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 
+import org.jabox.utils.DownloadHelper;
 import org.xml.sax.SAXException;
 
 /**
@@ -20,7 +21,7 @@ public class App {
 		if (!zipFile.exists()) {
 			// File f = new File("eclipse-jee-galileo-linux-gtk.tar.gz");
 			// File f = new File(er.getFileName());
-			DownloadEclipse.downloadFile(er, zipFile);
+			DownloadHelper.downloadFile(er.getDownloadURL(), zipFile);
 		}
 
 		// Unpack the Eclipse
