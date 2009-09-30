@@ -14,25 +14,23 @@ public class DownloadHelper {
 	 * @param urlPath
 	 * @return
 	 */
-	public static File downloadFile(String urlPath, String prefix, String suffix) {
+	public static File downloadFile(String urlPath, File outputFile) {
 		InputStream is = null;
 		BufferedInputStream bin = null;
 		BufferedOutputStream bout = null;
+
+		outputFile.getParentFile().mkdirs();
+
 		try {
 			URL url = new URL(urlPath);
 			is = url.openStream();
 			bin = new BufferedInputStream(is);
-			File jtracZip = File.createTempFile(prefix, suffix);
-			jtracZip.deleteOnExit();
-			bout = new BufferedOutputStream(new FileOutputStream(jtracZip));
-			while (true) {
-				int datum = bin.read();
-				if (datum == -1)
-					break;
-				bout.write(datum);
+			bout = new BufferedOutputStream(new FileOutputStream(outputFile));
+			byte[] buf = new byte[1024];
+			while (bin.read(buf) > 0) {
+				bout.write(buf);
 			}
 			bout.flush();
-			return jtracZip;
 		} catch (IOException ioe) {
 			ioe.printStackTrace();
 		} finally {
@@ -44,7 +42,7 @@ public class DownloadHelper {
 				// nothing to see here
 			}
 		}
-		return null;
+		return outputFile;
 	}
 
 }

@@ -42,18 +42,24 @@ public class MavenConfigureDistributionManager {
 	private static DistributionManagement getDistributionManagement() {
 		DistributionManagement distManagement = new DistributionManagement();
 
-		DeploymentRepository snapshotRepo = new DeploymentRepository();
-		snapshotRepo.setId("snapshots");
-		snapshotRepo.setName("Snapshots");
-		snapshotRepo
-				.setUrl("http://localhost:9090/nexus/content/repositories/snapshots/");
-		distManagement.setSnapshotRepository(snapshotRepo);
+		DeploymentRepository snap = new DeploymentRepository();
+		snap.setId("snapshots");
+		snap.setName("Snapshots");
+
+		// snapshotRepo
+		// .setUrl("http://localhost:9090/nexus/content/repositories/snapshots/");
+		snap.setUrl("http://localhost:9090/artifactory/libs-snapshots-local");
+
+		distManagement.setSnapshotRepository(snap);
 
 		DeploymentRepository repo = new DeploymentRepository();
 		repo.setId("releases");
 		repo.setName("Releases");
-		repo
-				.setUrl("http://localhost:9090/nexus/content/repositories/releases/");
+
+		// repo
+		// .setUrl("http://localhost:9090/nexus/content/repositories/releases/");
+		repo.setUrl("http://localhost:9090/artifactory/libs-releases-local");
+
 		distManagement.setRepository(repo);
 
 		return distManagement;

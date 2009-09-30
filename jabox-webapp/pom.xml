@@ -281,6 +281,11 @@
 		</dependency>
 		<dependency>
 			<groupId>org.jabox</groupId>
+			<artifactId>mrm-artifactory</artifactId>
+			<version>${pom.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jabox</groupId>
 			<artifactId>ide-eclipse</artifactId>
 			<version>${pom.version}</version>
 		</dependency>

@@ -11,6 +11,7 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipException;
 import java.util.zip.ZipFile;
 
+import org.jabox.environment.Environment;
 import org.jabox.utils.DownloadHelper;
 import org.mortbay.jetty.Connector;
 import org.mortbay.jetty.Server;
@@ -21,8 +22,13 @@ public class JtracServer {
 	private static final String URL = "http://sourceforge.net/projects/j-trac/files/jtrac/2.0/jtrac-2.0.zip/download";
 
 	public static void main(String[] args) {
-		File jtracZip = DownloadHelper.downloadFile(URL, "jtrac", ".zip");
-		File jtracWar = retrieveJtracWar(jtracZip);
+		String baseDir = Environment.getBaseDir();
+
+		File zipFile = new File(baseDir, "tmp/jtrac.zip");
+		if (!zipFile.exists()) {
+			DownloadHelper.downloadFile(URL, zipFile);
+		}
+		File jtracWar = retrieveJtracWar(zipFile);
 		// File jtracWar = new File("jtrac.war");
 		// installJtracWar(jtracWar);
 		startJtracWar(jtracWar);
