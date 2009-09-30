@@ -39,8 +39,8 @@ public class JtracRepository implements BTSConnector, Serializable {
 		WebRequest req = new GetMethodWebRequest(_url);
 		WebResponse resp = _wc.getResponse(req);
 		WebForm form = resp.getForms()[0]; // select the first form in the page
-		form.setParameter("Bugzilla_login", username);
-		form.setParameter("Bugzilla_password", password);
+		form.setParameter("j_username", username);
+		form.setParameter("j_password", password);
 		resp = form.submit();
 
 		// TODO check if not logged in.
@@ -49,8 +49,8 @@ public class JtracRepository implements BTSConnector, Serializable {
 
 	public boolean addProject(final Project project) throws IOException,
 			SAXException {
-		WebRequest req = new GetMethodWebRequest(
-				"http://localhost/cgi-bin/bugzilla/editproducts.cgi?action=add");
+		WebRequest req = new GetMethodWebRequest(_url
+				+ "/editproducts.cgi?action=add");
 		WebResponse resp = _wc.getResponse(req);
 		WebForm form = resp.getForms()[0];
 

@@ -11,6 +11,7 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipException;
 import java.util.zip.ZipFile;
 
+import org.jabox.apis.embedded.AbstractEmbeddedServer;
 import org.jabox.environment.Environment;
 import org.jabox.utils.DownloadHelper;
 import org.mortbay.jetty.Connector;
@@ -18,20 +19,17 @@ import org.mortbay.jetty.Server;
 import org.mortbay.jetty.bio.SocketConnector;
 import org.mortbay.jetty.webapp.WebAppContext;
 
-public class JtracServer {
+public class JtracServer extends AbstractEmbeddedServer {
 	private static final String URL = "http://sourceforge.net/projects/j-trac/files/jtrac/2.0/jtrac-2.0.zip/download";
 
 	public static void main(String[] args) {
-		String baseDir = Environment.getBaseDir();
+		JtracServer jtracServer = new JtracServer();
+		startJtracWar(new File(jtracServer.getWarPath()));
+	}
 
-		File zipFile = new File(baseDir, "tmp/jtrac.zip");
-		if (!zipFile.exists()) {
-			DownloadHelper.downloadFile(URL, zipFile);
-		}
-		File jtracWar = retrieveJtracWar(zipFile);
-		// File jtracWar = new File("jtrac.war");
-		// installJtracWar(jtracWar);
-		startJtracWar(jtracWar);
+	@Override
+	protected boolean getParentLoaderPriority() {
+		return true;
 	}
 
 	private static void startJtracWar(File jtracWar) {
@@ -48,7 +46,7 @@ public class JtracServer {
 		bb.setContextPath("/");
 		String absolutePath = jtracWar.getAbsolutePath();
 		bb.setWar(absolutePath);
-
+		bb.setParentLoaderPriority(true);
 		// START JMX SERVER
 		// MBeanServer mBeanServer = ManagementFactory.getPlatformMBeanServer();
 		// MBeanContainer mBeanContainer = new MBeanContainer(mBeanServer);
@@ -118,5 +116,23 @@ public class JtracServer {
 			bout.write(datum);
 		}
 		bout.flush();
+	}
+
+	@Override
+	public String getServerName() {
+		return "jtrac";
+	}
+
+	@Override
+	public String getWarPath() {
+		String baseDir = Environment.getBaseDir();
+
+		File zipFile = new File(baseDir, "tmp/jtrac.zip");
+		if (!zipFile.exists()) {
+			DownloadHelper.downloadFile(URL, zipFile);
+		}
+		File jtracWar = retrieveJtracWar(zipFile);
+		// installJtracWar(jtracWar);
+		return jtracWar.getAbsolutePath();
 	}
 }
