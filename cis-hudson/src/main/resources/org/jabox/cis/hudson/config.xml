@@ -38,13 +38,37 @@
 		<artifactId>testA</artifactId>
 
 	</rootModule>
-	<goals>clean deploy</goals>
+	<goals>${goals}</goals>
 	<aggregatorStyleBuild>true</aggregatorStyleBuild>
 	<incrementalBuild>false</incrementalBuild>
 	<usePrivateRepository>false</usePrivateRepository>
 	<ignoreUpstremChanges>false</ignoreUpstremChanges>
 
-	<reporters />
-	<publishers />
+	<reporters>
+		<hudson.plugins.checkstyle.CheckStyleReporter>
+			<threshold />
+			<failureThreshold />
+			<newFailureThreshold />
+			<newThreshold />
+			<healthy />
+			<unHealthy />
+			<pluginName>[CHECKSTYLE] </pluginName>
+			<thresholdLimit>low</thresholdLimit>
+		</hudson.plugins.checkstyle.CheckStyleReporter>
+		<hudson.plugins.dry.DryReporter>
+			<threshold />
+			<failureThreshold />
+			<newFailureThreshold />
+			<newThreshold />
+			<healthy />
+			<unHealthy />
+			<pluginName>[DRY] </pluginName>
+			<thresholdLimit>low</thresholdLimit>
+		</hudson.plugins.dry.DryReporter>
+	</reporters>
+	<publishers>
+		<hudson.plugins.cigame.GamePublisher />
+		<hudson.plugins.claim.ClaimPublisher />
+	</publishers>
 	<buildWrappers />
 </maven2-moduleset>
