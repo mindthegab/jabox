@@ -15,6 +15,8 @@ public class Configuration extends BaseEntity implements Serializable {
 	private String _issueManagementUrl;
 	private String _defaultSCMConnector;
 	private String _defaultBTSConnector;
+	private String _defaultRMSConnector;
+
 	private String _defaultCISConnector;
 	@OneToOne(mappedBy = "configuration", cascade = CascadeType.ALL)
 	public DeployerConfig deployerConfig;
@@ -55,9 +57,17 @@ public class Configuration extends BaseEntity implements Serializable {
 		return _defaultCISConnector;
 	}
 
-	public void setDeployerConfig(DeployerConfig newConfig) {
+	public void setDeployerConfig(final DeployerConfig newConfig) {
 		deployerConfig = newConfig;
 		newConfig.configuration = this;
 	}
-	
+
+	public String getDefaultRMSConnector() {
+		return _defaultRMSConnector;
+	}
+
+	public void setDefaultRMSConnector(final String _defaultRMSConnector) {
+		this._defaultRMSConnector = _defaultRMSConnector;
+	}
+
 }

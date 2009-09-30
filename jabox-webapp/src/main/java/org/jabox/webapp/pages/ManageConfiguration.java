@@ -17,10 +17,11 @@ import org.jabox.apis.bts.BTSConnector;
 import org.jabox.apis.bts.BTSManager;
 import org.jabox.apis.cis.CISConnector;
 import org.jabox.apis.cis.CISManager;
+import org.jabox.apis.rms.RMSConnector;
+import org.jabox.apis.rms.RMSManager;
 import org.jabox.apis.scm.SCMConnector;
 import org.jabox.apis.scm.SCMManager;
 import org.jabox.model.Configuration;
-import org.jabox.model.DeployerPlugin;
 import org.jabox.webapp.borders.NavomaticBorder;
 
 /**
@@ -42,6 +43,9 @@ public class ManageConfiguration extends WebPage {
 	@SpringBean
 	protected CISManager _cisManager;
 
+	@SpringBean
+	protected RMSManager _rmsManager;
+
 	public ManageConfiguration() {
 		final Configuration configuration = _generalDao.getConfiguration();
 		NavomaticBorder navomaticBorder = new NavomaticBorder("navomaticBorder");
@@ -60,20 +64,22 @@ public class ManageConfiguration extends WebPage {
 		CompoundPropertyModel model = new CompoundPropertyModel(configuration);
 		form.setModel(model);
 		form.add(new RequiredTextField("issueManagementUrl"));
-//		DeployerPluginSelector child = new DeployerPluginSelector(
-//				"configuration", model);
-//		form.add(child);
+		// DeployerPluginSelector child = new DeployerPluginSelector(
+		// "configuration", model);
+		// form.add(child);
 
-//		DeployerPlugin plugin = registry.getEntry((String) pluginId);
-//		configuration.setDeployerConfig(plugin
-//				.newConfig());
-//
-//		child.replace(plugin.newEditor("editor",
-//				new PropertyModel(configuration, "deployerConfig")));
+		// DeployerPlugin plugin = registry.getEntry((String) pluginId);
+		// configuration.setDeployerConfig(plugin
+		// .newConfig());
+		//
+		// child.replace(plugin.newEditor("editor",
+		// new PropertyModel(configuration, "deployerConfig")));
 
 		addSCMs(configuration, form);
 		addBTSs(configuration, form);
 		addCISs(configuration, form);
+		addRMSs(configuration, form);
+
 		navomaticBorder.add(form);
 	}
 
@@ -112,6 +118,17 @@ public class ManageConfiguration extends WebPage {
 		DropDownChoice ddc = new DropDownChoice("defaultCisConnector",
 				new PropertyModel(configuration, "defaultCISConnector"),
 				cisConnectors, new ChoiceRenderer("toString", "toString"));
+		form.add(ddc);
+	}
+
+	private void addRMSs(final Configuration configuration, final Form form) {
+		RMSConnector[] rmsConnectors2 = _rmsManager.getRmsConnectors();
+		List<RMSConnector> rmsConnectors = Arrays.asList(rmsConnectors2);
+		System.out.println("rmsConnectors: " + rmsConnectors);
+
+		DropDownChoice ddc = new DropDownChoice("defaultRmsConnector",
+				new PropertyModel(configuration, "defaultRMSConnector"),
+				rmsConnectors, new ChoiceRenderer("toString", "toString"));
 		form.add(ddc);
 	}
 }

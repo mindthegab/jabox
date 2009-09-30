@@ -18,7 +18,8 @@ public class MavenConfigureDistributionManagerTest extends TestCase {
 				.getResource("testPom.xml");
 		File pomFile = new File(resource.toURI());
 		Assert.assertTrue(pomFile.exists());
-		MavenConfigureDistributionManager.injectDistributionManager(pomFile);
+		// MavenConfigureDistributionManager.injectDistributionManager(pomFile,
+		// null);
 	}
 
 }

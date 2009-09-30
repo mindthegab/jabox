@@ -11,6 +11,7 @@ import org.apache.maven.model.Model;
 import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
 import org.apache.maven.model.io.xpp3.MavenXpp3Writer;
 import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
+import org.jabox.apis.rms.RMSConnector;
 
 /**
  * Helper class that injects the &lt;distributionManager&gt; configuration to a
@@ -26,39 +27,38 @@ public class MavenConfigureDistributionManager {
 	 * @param pomFile
 	 *            the pom file that will be injected with the
 	 *            distributionManager configuration.
+	 * @param rms
 	 * @throws IOException
 	 * @throws XmlPullParserException
 	 */
-	public static void injectDistributionManager(final File pomFile)
-			throws IOException, XmlPullParserException {
+	public static void injectDistributionManager(final File pomFile,
+			RMSConnector rms) throws IOException, XmlPullParserException {
 		FileReader fileReader = new FileReader(pomFile);
 		Model model = new MavenXpp3Reader().read(fileReader);
 
-		model.setDistributionManagement(getDistributionManagement());
+		DistributionManagement dm = getDistributionManagement(rms
+				.getReleaseRepositoryURL(), rms.getSnapshotsRepositoryURL());
+		model.setDistributionManagement(dm);
+
 		FileWriter fileWriter = new FileWriter(pomFile);
 		new MavenXpp3Writer().write(fileWriter, model);
 	}
 
-	private static DistributionManagement getDistributionManagement() {
+	private static DistributionManagement getDistributionManagement(
+			String releasesRepo, String snapshotsRepo) {
 		DistributionManagement distManagement = new DistributionManagement();
 
 		DeploymentRepository snap = new DeploymentRepository();
 		snap.setId("snapshots");
 		snap.setName("Snapshots");
-
-		// snapshotRepo
-		// .setUrl("http://localhost:9090/nexus/content/repositories/snapshots/");
-		snap.setUrl("http://localhost:9090/artifactory/libs-snapshots-local");
+		snap.setUrl(snapshotsRepo);
 
 		distManagement.setSnapshotRepository(snap);
 
 		DeploymentRepository repo = new DeploymentRepository();
 		repo.setId("releases");
 		repo.setName("Releases");
-
-		// repo
-		// .setUrl("http://localhost:9090/nexus/content/repositories/releases/");
-		repo.setUrl("http://localhost:9090/artifactory/libs-releases-local");
+		repo.setUrl(releasesRepo);
 
 		distManagement.setRepository(repo);
 

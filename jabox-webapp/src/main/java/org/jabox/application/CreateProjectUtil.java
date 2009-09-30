@@ -13,11 +13,14 @@ import org.jabox.apis.bts.BTSConnector;
 import org.jabox.apis.bts.BTSManager;
 import org.jabox.apis.cis.CISConnector;
 import org.jabox.apis.cis.CISManager;
+import org.jabox.apis.rms.RMSConnector;
+import org.jabox.apis.rms.RMSManager;
 import org.jabox.apis.scm.SCMConnector;
 import org.jabox.apis.scm.SCMException;
 import org.jabox.apis.scm.SCMManager;
 import org.jabox.model.Configuration;
 import org.jabox.model.Project;
+import org.tmatesoft.svn.core.SVNException;
 import org.xml.sax.SAXException;
 
 public class CreateProjectUtil {
@@ -29,6 +32,9 @@ public class CreateProjectUtil {
 	protected BTSManager _btsManager;
 	@SpringBean
 	protected CISManager _cisManager;
+
+	@SpringBean
+	protected RMSManager _rmsManager;
 
 	public CreateProjectUtil() {
 		InjectorHolder.getInjector().inject(this);
@@ -76,14 +82,19 @@ public class CreateProjectUtil {
 		MavenCreateProject.createProjectWithMavenCore(project, trunkDir
 				.getAbsolutePath());
 
-		try {
-			MavenConfigureDistributionManager
-					.injectDistributionManager(new File(trunkDir, project
-							.getName()
-							+ "/pom.xml"));
-		} catch (XmlPullParserException e) {
-			e.printStackTrace();
+		RMSConnector rms = _rmsManager.getRMSConnectorInstance(configuration
+				.getDefaultRMSConnector());
+
+		if (rms != null) {
+			try {
+				File pomXml = new File(trunkDir, project.getName() + "/pom.xml");
+				MavenConfigureDistributionManager.injectDistributionManager(
+						pomXml, rms);
+			} catch (XmlPullParserException e) {
+				e.printStackTrace();
+			}
 		}
+
 		// Commit Project
 		scm.commitProject(project);
 		project.setScmUrl(scm.getScmUrl() + "/" + project.getName() + "/trunk/"
