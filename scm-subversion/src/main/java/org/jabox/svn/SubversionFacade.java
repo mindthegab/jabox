@@ -90,7 +90,7 @@ public class SubversionFacade {
 		setSVNProperty(wc, dir, "bugtraq:message", "[ %BUGID% ]");
 		setSVNProperty(wc, dir, "bugtraq:label", "Issue:");
 		setSVNProperty(wc, dir, "bugtraq:url",
-				"http://localhost/cgi-bin/bugzilla/show_bug.cgi?id=%BUGID%");
+				"http://localhost/redmine/issues/show/%BUGID%");
 		setSVNProperty(wc, dir, "bugtraq:warnifnoissue", "true");
 		setSVNProperty(wc, dir, "svn:ignore", "target");
 	}
