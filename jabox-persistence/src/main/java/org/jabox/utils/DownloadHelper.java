@@ -26,9 +26,11 @@ public class DownloadHelper {
 			is = url.openStream();
 			bin = new BufferedInputStream(is);
 			bout = new BufferedOutputStream(new FileOutputStream(outputFile));
-			byte[] buf = new byte[1024];
-			while (bin.read(buf) > 0) {
-				bout.write(buf);
+			while (true) {
+				int datum = bin.read();
+				if (datum == -1)
+					break;
+				bout.write(datum);
 			}
 			bout.flush();
 		} catch (IOException ioe) {
