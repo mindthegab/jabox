@@ -9,26 +9,26 @@ import org.springframework.stereotype.Component;
 @Component
 public class BTSManager {
 	@Autowired
-	public BTSConnector[] _btsConnectors;
+	public BTSConnector[] _connectors;
 
 	public BTSConnector[] getBtsConnectors() {
-		return _btsConnectors;
+		return _connectors;
 	}
 
-	public void setBtsConnectors(BTSConnector[] btsConnectors) {
-		_btsConnectors = btsConnectors;
+	public void setConnectors(BTSConnector[] btsConnectors) {
+		_connectors = btsConnectors;
 	}
 	
-	public BTSConnector getBTSConnectorInstance(String btsConnector) {
-		List<BTSConnector> btsConnectors = Arrays.asList(_btsConnectors);
+	public BTSConnector getConnectorInstance(String connector) {
+		List<BTSConnector> connectors = Arrays.asList(_connectors);
 
-		if (btsConnector == null) {
+		if (connector == null) {
 			return null;
 		}
 
-		for (BTSConnector btsConnectorInstance : btsConnectors) {
-			if (btsConnector.equals(btsConnectorInstance.toString())) {
-				return btsConnectorInstance;
+		for (BTSConnector connectorInstance : connectors) {
+			if (connector.equals(connectorInstance.toString())) {
+				return connectorInstance;
 			}
 		}
 		return null;

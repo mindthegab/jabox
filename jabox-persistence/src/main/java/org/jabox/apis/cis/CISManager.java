@@ -3,33 +3,32 @@ package org.jabox.apis.cis;
 import java.util.Arrays;
 import java.util.List;
 
-import org.jabox.apis.bts.BTSConnector;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class CISManager {
 	@Autowired
-	public CISConnector[] _cisConnectors;
+	public CISConnector[] _connectors;
 
 	public CISConnector[] getCisConnectors() {
-		return _cisConnectors;
+		return _connectors;
 	}
 
-	public void setCisConnectors(CISConnector[] cisConnectors) {
-		_cisConnectors = cisConnectors;
+	public void setConnectors(CISConnector[] connectors) {
+		_connectors = connectors;
 	}
 
-	public CISConnector getCISConnectorInstance(String cisConnector) {
-		List<CISConnector> cisConnectors = Arrays.asList(_cisConnectors);
+	public CISConnector getConnectorInstance(String connector) {
+		List<CISConnector> connectors = Arrays.asList(_connectors);
 
-		if (cisConnector == null) {
+		if (connector == null) {
 			return null;
 		}
 
-		for (CISConnector cisConnectorInstance : cisConnectors) {
-			if (cisConnector.equals(cisConnectorInstance.toString())) {
-				return cisConnectorInstance;
+		for (CISConnector connectorInstance : connectors) {
+			if (connector.equals(connectorInstance.toString())) {
+				return connectorInstance;
 			}
 		}
 		return null;

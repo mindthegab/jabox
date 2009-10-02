@@ -9,26 +9,26 @@ import org.springframework.stereotype.Component;
 @Component
 public class SCMManager {
 	@Autowired
-	public SCMConnector[] _scmConnectors;
+	public SCMConnector[] _connectors;
 
-	public SCMConnector[] getScmConnectors() {
-		return _scmConnectors;
+	public SCMConnector[] getConnectors() {
+		return _connectors;
 	}
 
-	public void setScmConnectors(SCMConnector[] scmConnectors) {
-		_scmConnectors = scmConnectors;
+	public void setConnectors(SCMConnector[] connectors) {
+		_connectors = connectors;
 	}
 	
-	public SCMConnector getSCMConnectorInstance(String scmConnector) {
-		List<SCMConnector> scmConnectors = Arrays.asList(_scmConnectors);
+	public SCMConnector getConnectorInstance(String connector) {
+		List<SCMConnector> connectors = Arrays.asList(_connectors);
 
-		if (scmConnector == null) {
+		if (connector == null) {
 			return null;
 		}
 
-		for (SCMConnector scmConnectorInstance : scmConnectors) {
-			if (scmConnector.equals(scmConnectorInstance.toString())) {
-				return scmConnectorInstance;
+		for (SCMConnector connectorInstance : connectors) {
+			if (connector.equals(connectorInstance.toString())) {
+				return connectorInstance;
 			}
 		}
 		return null;

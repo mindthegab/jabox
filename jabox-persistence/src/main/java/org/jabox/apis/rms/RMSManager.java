@@ -3,33 +3,32 @@ package org.jabox.apis.rms;
 import java.util.Arrays;
 import java.util.List;
 
-import org.jabox.apis.bts.BTSConnector;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class RMSManager {
 	@Autowired
-	public RMSConnector[] _rmsConnectors;
+	public RMSConnector[] _connectors;
 
-	public RMSConnector[] getRmsConnectors() {
-		return _rmsConnectors;
+	public RMSConnector[] getConnectors() {
+		return _connectors;
 	}
 
-	public void setRmsConnectors(RMSConnector[] rmsConnectors) {
-		_rmsConnectors = rmsConnectors;
+	public void setConnectors(RMSConnector[] connectors) {
+		_connectors = connectors;
 	}
 
-	public RMSConnector getRMSConnectorInstance(String rmsConnector) {
-		List<RMSConnector> rmsConnectors = Arrays.asList(_rmsConnectors);
+	public RMSConnector getConnectorInstance(String connector) {
+		List<RMSConnector> connectors = Arrays.asList(_connectors);
 
-		if (rmsConnector == null) {
+		if (connector == null) {
 			return null;
 		}
 
-		for (RMSConnector rmsConnectorInstance : rmsConnectors) {
-			if (rmsConnector.equals(rmsConnectorInstance.toString())) {
-				return rmsConnectorInstance;
+		for (RMSConnector connectorInstance : connectors) {
+			if (connector.equals(connectorInstance.toString())) {
+				return connectorInstance;
 			}
 		}
 		return null;
