@@ -1,6 +1,5 @@
 package org.jabox.webapp.pages;
 
-import java.util.Arrays;
 import java.util.List;
 
 import org.apache.wicket.markup.html.WebPage;
@@ -63,12 +62,11 @@ public class ManageConfiguration extends WebPage {
 		//
 		// child.replace(plugin.newEditor("editor",
 		// new PropertyModel(configuration, "deployerConfig")));
-
-		addSCMs(configuration, form);
-		addBTSs(configuration, form);
-		addCISs(configuration, form);
-		addRMSs(configuration, form);
-
+		SCMConnector.class.getSimpleName();
+		add(configuration, form, SCMConnector.class);
+		add(configuration, form, BTSConnector.class);
+		add(configuration, form, CISConnector.class);
+		add(configuration, form, RMSConnector.class);
 		navomaticBorder.add(form);
 	}
 
@@ -77,47 +75,15 @@ public class ManageConfiguration extends WebPage {
 		super.onBeforeRender();
 	}
 
-	private void addSCMs(final Configuration configuration, final Form form) {
-		List<Connector> scmConnectors = _manager
-				.getConnectors(SCMConnector.class);
-		System.out.println("scmConnectors: " + scmConnectors);
+	private void add(final Configuration configuration, final Form form,
+			Class<? extends Connector> connector) {
+		List<Connector> connectors = _manager.getConnectors(connector);
+		System.out.println("connectors: " + connector.getName() + ":"
+				+ connectors);
 
-		DropDownChoice ddc = new DropDownChoice("defaultScmConnector",
-				new PropertyModel(configuration, "defaultSCMConnector"),
-				scmConnectors, new ChoiceRenderer("toString", "toString"));
-		form.add(ddc);
-	}
-
-	private void addBTSs(final Configuration configuration, final Form form) {
-		List<Connector> btsConnectors = _manager
-				.getConnectors(BTSConnector.class);
-		System.out.println("btsConnectors: " + btsConnectors);
-
-		DropDownChoice ddc = new DropDownChoice("defaultBtsConnector",
-				new PropertyModel(configuration, "defaultBTSConnector"),
-				btsConnectors, new ChoiceRenderer("toString", "toString"));
-		form.add(ddc);
-	}
-
-	private void addCISs(final Configuration configuration, final Form form) {
-		List<Connector> cisConnectors = _manager
-				.getConnectors(CISConnector.class);
-		System.out.println("cisConnectors: " + cisConnectors);
-
-		DropDownChoice ddc = new DropDownChoice("defaultCisConnector",
-				new PropertyModel(configuration, "defaultCISConnector"),
-				cisConnectors, new ChoiceRenderer("toString", "toString"));
-		form.add(ddc);
-	}
-
-	private void addRMSs(final Configuration configuration, final Form form) {
-		List<Connector> rmsConnectors = _manager
-				.getConnectors(RMSConnector.class);
-		System.out.println("rmsConnectors: " + rmsConnectors);
-
-		DropDownChoice ddc = new DropDownChoice("defaultRmsConnector",
-				new PropertyModel(configuration, "defaultRMSConnector"),
-				rmsConnectors, new ChoiceRenderer("toString", "toString"));
+		DropDownChoice ddc = new DropDownChoice(connector.getSimpleName(),
+				new PropertyModel(configuration, connector.getSimpleName()), connectors,
+				new ChoiceRenderer("toString", "toString"));
 		form.add(ddc);
 	}
 }

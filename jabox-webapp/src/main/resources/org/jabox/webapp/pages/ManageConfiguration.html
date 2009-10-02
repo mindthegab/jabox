@@ -1,39 +1,35 @@
 <html>
-<body> 
-    <span wicket:id = "navomaticBorder">
-        Configuration:
-		<p/>
-		
-		<form wicket:id="form">
-    	<table cellspacing="0" cellpadding="2" style="width:500px;">
-    	<tr>
-    		<td>Issue Management URL:</td>
-    		<td><input type="text" wicket:id="issueManagementUrl" /></td>
-    	</tr>
-    	<tr>
-    		<td>SCM Connector:</td>
-    		<td><select name="defaultScmConnector" wicket:id="defaultScmConnector"></select></td>
-    	</tr>
-    	<tr>
-    		<td>BTS Connector:</td>
-    		<td><select name="defaultBtsConnector" wicket:id="defaultBtsConnector"></select></td>
-    	</tr>
-    	<tr>
-    		<td>CIS Connector:</td>
-    		<td><select name="defaultCisConnector" wicket:id="defaultCisConnector"></select></td>
-    	</tr>
-    	<tr>
-    		<td>RMS Connector:</td>
-    		<td><select name="defaultRmsConnector" wicket:id="defaultRmsConnector"></select></td>
-    	</tr>
-    		<!--<wicket:container wicket:id="configuration"></wicket:container>
-    	--></table>
-    	<p/>
-        <input type="submit" value="submit" />
-	    
-  		</form>
-  		<span wicket:id="feedback">feedbackmessages will be put here</span>
-   	</span>
+<body>
+<span wicket:id="navomaticBorder"> Configuration:
+<p />
+<form wicket:id="form">
+<table cellspacing="0" cellpadding="2" style="width: 500px;">
+	<tr>
+		<td>Issue Management URL:</td>
+		<td><input type="text" wicket:id="issueManagementUrl" /></td>
+	</tr>
+	<tr>
+		<td>SCM Connector:</td>
+		<td><select name="SCMConnector" wicket:id="SCMConnector"></select></td>
+	</tr>
+	<tr>
+		<td>BTS Connector:</td>
+		<td><select name="BTSConnector" wicket:id="BTSConnector"></select></td>
+	</tr>
+	<tr>
+		<td>CIS Connector:</td>
+		<td><select name="CISConnector" wicket:id="CISConnector"></select></td>
+	</tr>
+	<tr>
+		<td>RMS Connector:</td>
+		<td><select name="RMSConnector" wicket:id="RMSConnector"></select></td>
+	</tr>
+	<!--<wicket:container wicket:id="configuration"></wicket:container>
+    	-->
+</table>
+<p /><input type="submit" value="submit" />
+</form>
+<span wicket:id="feedback">feedbackmessages will be put here</span> </span>
 </body>
 </html>
 

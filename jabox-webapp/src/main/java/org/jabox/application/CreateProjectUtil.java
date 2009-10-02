@@ -64,7 +64,7 @@ public class CreateProjectUtil {
 			SAXException, SCMException, IOException {
 		final Configuration configuration = generalDao.getConfiguration();
 		SCMConnector scm = (SCMConnector) _manager
-				.getConnectorInstance(configuration.getDefaultSCMConnector());
+				.getConnectorInstance(configuration.getSCMConnector());
 
 		System.out.println("Using SCM: " + scm.toString());
 		File trunkDir = scm.createProjectDirectories(project);
@@ -74,7 +74,7 @@ public class CreateProjectUtil {
 				.getAbsolutePath());
 
 		RMSConnector rms = (RMSConnector) _manager
-				.getConnectorInstance(configuration.getDefaultRMSConnector());
+				.getConnectorInstance(configuration.getRMSConnector());
 
 		if (rms != null) {
 			try {
@@ -98,7 +98,7 @@ public class CreateProjectUtil {
 
 		// Add Project in Issue Tracking System
 		BTSConnector bts = _manager.getConnectorInstance(configuration
-				.getDefaultBTSConnector());
+				.getBTSConnector());
 		if (bts != null) {
 			// bts
 			// .setUrl("http://localhost/cgi-bin/bugzilla/index.cgi?GoAheadAndLogIn=1");
@@ -112,7 +112,7 @@ public class CreateProjectUtil {
 		}
 
 		CISConnector cis = (CISConnector) _manager
-				.getConnectorInstance(configuration.getDefaultCISConnector());
+				.getConnectorInstance(configuration.getCISConnector());
 		if (cis != null) {
 			cis.addProject(project);
 		}
