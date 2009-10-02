@@ -9,15 +9,12 @@ import org.apache.wicket.injection.web.InjectorHolder;
 import org.apache.wicket.persistence.provider.GeneralDao;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
+import org.jabox.apis.Manager;
 import org.jabox.apis.bts.BTSConnector;
-import org.jabox.apis.bts.BTSManager;
 import org.jabox.apis.cis.CISConnector;
-import org.jabox.apis.cis.CISManager;
 import org.jabox.apis.rms.RMSConnector;
-import org.jabox.apis.rms.RMSManager;
 import org.jabox.apis.scm.SCMConnector;
 import org.jabox.apis.scm.SCMException;
-import org.jabox.apis.scm.SCMManager;
 import org.jabox.model.Configuration;
 import org.jabox.model.Project;
 import org.tmatesoft.svn.core.SVNException;
@@ -26,15 +23,9 @@ import org.xml.sax.SAXException;
 public class CreateProjectUtil {
 	@SpringBean
 	protected GeneralDao generalDao;
-	@SpringBean
-	protected SCMManager _scmManager;
-	@SpringBean
-	protected BTSManager _btsManager;
-	@SpringBean
-	protected CISManager _cisManager;
 
 	@SpringBean
-	protected RMSManager _rmsManager;
+	protected Manager<BTSConnector> _manager;
 
 	public CreateProjectUtil() {
 		InjectorHolder.getInjector().inject(this);
@@ -72,8 +63,8 @@ public class CreateProjectUtil {
 			throws InvalidRepositoryException, MavenExecutionException,
 			SAXException, SCMException, IOException {
 		final Configuration configuration = generalDao.getConfiguration();
-		SCMConnector scm = _scmManager.getSCMConnectorInstance(configuration
-				.getDefaultSCMConnector());
+		SCMConnector scm = (SCMConnector) _manager
+				.getConnectorInstance(configuration.getDefaultSCMConnector());
 
 		System.out.println("Using SCM: " + scm.toString());
 		File trunkDir = scm.createProjectDirectories(project);
@@ -82,8 +73,8 @@ public class CreateProjectUtil {
 		MavenCreateProject.createProjectWithMavenCore(project, trunkDir
 				.getAbsolutePath());
 
-		RMSConnector rms = _rmsManager.getRMSConnectorInstance(configuration
-				.getDefaultRMSConnector());
+		RMSConnector rms = (RMSConnector) _manager
+				.getConnectorInstance(configuration.getDefaultRMSConnector());
 
 		if (rms != null) {
 			try {
@@ -106,7 +97,7 @@ public class CreateProjectUtil {
 		// Add files in the trunk.
 
 		// Add Project in Issue Tracking System
-		BTSConnector bts = _btsManager.getBTSConnectorInstance(configuration
+		BTSConnector bts = _manager.getConnectorInstance(configuration
 				.getDefaultBTSConnector());
 		if (bts != null) {
 			// bts
@@ -120,8 +111,8 @@ public class CreateProjectUtil {
 			bts.addVersion(project, "0.0.1");
 		}
 
-		CISConnector cis = _cisManager.getCISConnectorInstance(configuration
-				.getDefaultCISConnector());
+		CISConnector cis = (CISConnector) _manager
+				.getConnectorInstance(configuration.getDefaultCISConnector());
 		if (cis != null) {
 			cis.addProject(project);
 		}

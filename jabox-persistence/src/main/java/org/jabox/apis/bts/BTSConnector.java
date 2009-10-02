@@ -3,10 +3,11 @@ package org.jabox.apis.bts;
 import java.io.IOException;
 import java.net.MalformedURLException;
 
+import org.jabox.apis.Connector;
 import org.jabox.model.Project;
 import org.xml.sax.SAXException;
 
-public interface BTSConnector {
+public interface BTSConnector extends Connector {
 
 	public boolean login(String username, String password)
 			throws MalformedURLException, IOException, SAXException;
