@@ -36,6 +36,7 @@ public class GeneralDaoImpl implements GeneralDao, InitializingBean {
 		this.entityManager = entityManager;
 	}
 
+	@SuppressWarnings("unchecked")
 	public <T extends BaseEntity> T findEntity(Long id, Class<T> clazz) {
 		Query query = entityManager.createQuery("SELECT e FROM "
 				+ clazz.getName() + " e WHERE e.id=" + id);
@@ -47,11 +48,11 @@ public class GeneralDaoImpl implements GeneralDao, InitializingBean {
 	}
 
 	public <T extends BaseEntity> void persist(T object) {
-//		if (object.getId() == null)
-			entityManager.persist(object);
-//		else {
-//			entityManager.merge(object);
-//		}
+		// if (object.getId() == null)
+		entityManager.persist(object);
+		// else {
+		// entityManager.merge(object);
+		// }
 
 	}
 
@@ -74,6 +75,7 @@ public class GeneralDaoImpl implements GeneralDao, InitializingBean {
 		return config;
 	}
 
+	@SuppressWarnings("unchecked")
 	public <T extends BaseEntity> List<T> getEntities(Class<T> clazz) {
 		Criteria criteria = getHibernateSession().createCriteria(clazz);
 		List<T> entities = (List<T>) criteria.list();
