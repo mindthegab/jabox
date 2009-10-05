@@ -7,17 +7,17 @@ import org.apache.wicket.persistence.domain.BaseEntity;
 import org.apache.wicket.persistence.provider.GeneralDao;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 
-public final class DeleteEntityButton extends ImageButton {
+public final class DeleteEntityButton<T extends BaseEntity> extends ImageButton {
 	private static final ResourceReference DELETE_IMG = new ResourceReference(
 			DeleteEntityButton.class, "delete.jpg");
-	private final ListItem<BaseEntity> _listItem;
+	private final ListItem<T> _listItem;
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
 	public DeleteEntityButton(final String id,
-			final ListItem<BaseEntity> listItem) {
+			final ListItem<T> listItem) {
 		super(id, DELETE_IMG);
 		_listItem = listItem;
 	}
