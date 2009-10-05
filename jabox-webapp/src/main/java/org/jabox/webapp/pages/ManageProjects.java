@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.form.Form;
+import org.apache.wicket.persistence.domain.BaseEntity;
 import org.apache.wicket.persistence.provider.GeneralDao;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.jabox.model.Project;
@@ -24,9 +25,8 @@ public class ManageProjects extends WebPage {
 		final List<Project> projects = generalDao.getEntities(Project.class);
 		NavomaticBorder navomaticBorder = new NavomaticBorder("navomaticBorder");
 		add(navomaticBorder);
-		Form form = new Form("deleteForm");
+		Form<BaseEntity> form = new Form<BaseEntity>("deleteForm");
 		form.add(new ProjectList("projects", projects));
 		navomaticBorder.add(form);
 	}
-
 }

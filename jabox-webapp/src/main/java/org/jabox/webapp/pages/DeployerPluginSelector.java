@@ -18,30 +18,32 @@ import org.jabox.model.DeployerPlugin;
 import org.jabox.model.DeployersRegistry;
 
 public class DeployerPluginSelector extends Panel {
+	private static final long serialVersionUID = -222526477140616108L;
 	@SpringBean
 	private DeployersRegistry registry;
 
-	public DeployerPluginSelector(String id, final IModel article) {
+	public DeployerPluginSelector(String id, final IModel<Configuration> article) {
 		super(id);
 		add(new WebMarkupContainer("editor"));
-		 String pluginId = ((Configuration) article.getObject()).deployerConfig != null ? ((Configuration) article
-				.getObject()).deployerConfig.pluginId : "-1";
-		if (((Configuration) article.getObject()).deployerConfig != null) {
+		String pluginId = article.getObject().deployerConfig != null ? ((Configuration) article
+				.getObject()).deployerConfig.pluginId
+				: "-1";
+		if (article.getObject().deployerConfig != null) {
 			DeployerPlugin plugin = registry.getEntry(pluginId);
-			DeployerPluginSelector.this.replace(plugin.newEditor("editor",
-					new PropertyModel(article,
-							"deployerConfig")));
+			DeployerPluginSelector.this.replace(plugin
+					.newEditor("editor", new PropertyModel<Configuration>(
+							article, "deployerConfig")));
 
 		}
-		
-		
-		add(new PluginPicker("picker", new CompoundPropertyModel(
-				pluginId)) {
+
+		add(new PluginPicker("picker",
+				new CompoundPropertyModel<Configuration>(pluginId)) {
+			private static final long serialVersionUID = -5528219523437017579L;
+
 			@Override
 			protected void onSelectionChanged(Object pluginId) {
 				DeployerPlugin plugin = registry.getEntry((String) pluginId);
-				Configuration configuration = (Configuration) article
-						.getObject();
+				Configuration configuration = article.getObject();
 				DeployerConfig newConfig = plugin.newConfig();
 				configuration.setDeployerConfig(newConfig);
 
@@ -49,27 +51,30 @@ public class DeployerPluginSelector extends Panel {
 						new PropertyModel(article, "deployerConfig")));
 			}
 		});
-		
-//		DeployerPlugin plugin = registry.getEntry("plugin.deployer.ftp");
-//		Configuration configuration = (Configuration) article
-//				.getObject();
-//		DeployerConfig newConfig = plugin.newConfig();
-//		configuration.setDeployerConfig(newConfig);
 
-//		DeployerPluginSelector.this.replace(plugin.newEditor("editor",
-//				new PropertyModel(article, "deployerConfig")));
+		// DeployerPlugin plugin = registry.getEntry("plugin.deployer.ftp");
+		// Configuration configuration = (Configuration) article
+		// .getObject();
+		// DeployerConfig newConfig = plugin.newConfig();
+		// configuration.setDeployerConfig(newConfig);
+
+		// DeployerPluginSelector.this.replace(plugin.newEditor("editor",
+		// new PropertyModel(article, "deployerConfig")));
 
 	}
 
-	private static abstract class PluginPicker extends DropDownChoice {
+	private static abstract class PluginPicker<T> extends DropDownChoice<T> {
+		private static final long serialVersionUID = 1346317031364661388L;
 		@SpringBean
 		private DeployersRegistry registry;
 
-		public PluginPicker(String id, IModel model) {
+		public PluginPicker(String id, IModel<T> model) {
 			super(id);
 			setRequired(true);
 			setModel(model);
 			setChoices(new LoadableDetachableModel() {
+				private static final long serialVersionUID = 6694323103247193118L;
+
 				@Override
 				protected List<? extends String> load() {
 					return registry.getIds();

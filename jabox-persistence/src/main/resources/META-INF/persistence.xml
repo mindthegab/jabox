@@ -9,17 +9,17 @@
 	<!-- persistence.xml -->
 
 	<persistence-unit name="WicketPersistence">
-		<!-- The provider only needs to be set if you use several JPA providers, but good todo anyway!
--->
+		<!--
+			The provider only needs to be set if you use several JPA providers,
+			but good todo anyway!
+		-->
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		<!-- Add your class's here -->
-		<class>org.apache.wicket.persistence.domain.Message</class>
 		<class>org.jabox.model.Project</class>
-		
+
 		<properties>
 			<!-- Scan for annotated classes  -->
-			<property name="hibernate.archive.autodetection"
-				value="class" />
+			<property name="hibernate.archive.autodetection" value="class" />
 
 			<!-- SQL stdout logging -->
 			<property name="hibernate.show_sql" value="true" />
@@ -28,59 +28,50 @@
 
 
 			<!--	Connecting to mySQL -->
-			<!-- 
+			<!--
 				<property name="hibernate.dialect"
-				value="org.hibernate.dialect.MySQLDialect" />
-				<property name="hibernate.connection.driver_class"
-				value="com.mysql.jdbc.Driver" />
-				<property name="hibernate.connection.url"
-				value="jdbc:mysql://localhost:3306/dbname" />
-				<property name="hibernate.hbm2ddl.auto" value="validate" />
-				
-				
-				<property name="hibernate.connection.username" value="blarb" />
-				<property name="hibernate.connection.password" value="blarb" />
+				value="org.hibernate.dialect.MySQLDialect" /> <property
+				name="hibernate.connection.driver_class"
+				value="com.mysql.jdbc.Driver" /> <property
+				name="hibernate.connection.url"
+				value="jdbc:mysql://localhost:3306/dbname" /> <property
+				name="hibernate.hbm2ddl.auto" value="validate" /> <property
+				name="hibernate.connection.username" value="blarb" /> <property
+				name="hibernate.connection.password" value="blarb" />
 			-->
 
 
 
-			<!-- Connecting to HSQL - ->
-				<property name="hibernate.dialect"
-				value="org.hibernate.dialect.HSQLDialect" />
-				
-				<property name="hibernate.connection.driver_class"
-				value="org.hsqldb.jdbcDriver" />
-				<property name="hibernate.connection.url"
-				value="jdbc:hsqldb:mem:test" />
+			<!--
+				Connecting to HSQL - -> <property name="hibernate.dialect"
+				value="org.hibernate.dialect.HSQLDialect" /> <property
+				name="hibernate.connection.driver_class"
+				value="org.hsqldb.jdbcDriver" /> <property
+				name="hibernate.connection.url" value="jdbc:hsqldb:mem:test" />
 				<property name="hibernate.connection.username" value="sa" />
 				<property name="hibernate.hbm2ddl.auto" value="create-drop" />
-				
+
 				<property name="hibernate.c3p0.acquire_increment" value="1" />
-				<property name="hibernate.c3p0.idle_test_period"
-				value="14400" />
-				<property name="hibernate.c3p0.timeout" value="25200" />
-				<property name="hibernate.c3p0.max_size" value="8" />
-				<property name="hibernate.c3p0.min_size" value="3" />
-				<property name="hibernate.c3p0.max_statements" value="1" />
+				<property name="hibernate.c3p0.idle_test_period" value="14400" />
+				<property name="hibernate.c3p0.timeout" value="25200" /> <property
+				name="hibernate.c3p0.max_size" value="8" /> <property
+				name="hibernate.c3p0.min_size" value="3" /> <property
+				name="hibernate.c3p0.max_statements" value="1" />
 			-->
 
 
 
 			<!-- Connecting to H2 -->
-			<property name="hibernate.dialect"
-				value="org.hibernate.dialect.H2Dialect" />
+			<property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect" />
 
-			<property name="hibernate.connection.driver_class"
-				value="org.hsqldb.jdbcDriver" />
-			<property name="hibernate.connection.url"
-				value="jdbc:h2:~/.jabox/database/db" />
+			<property name="hibernate.connection.driver_class" value="org.hsqldb.jdbcDriver" />
+			<property name="hibernate.connection.url" value="jdbc:h2:~/.jabox/database/db" />
 			<property name="hibernate.connection.username" value="sa" />
 			<property name="hibernate.hbm2ddl.auto" value="update" />
 			<property name="hibernate.connection.password" value="" />
 
 			<property name="hibernate.c3p0.acquire_increment" value="1" />
-			<property name="hibernate.c3p0.idle_test_period"
-				value="14400" />
+			<property name="hibernate.c3p0.idle_test_period" value="14400" />
 			<property name="hibernate.c3p0.timeout" value="25200" />
 			<property name="hibernate.c3p0.max_size" value="8" />
 			<property name="hibernate.c3p0.min_size" value="3" />
