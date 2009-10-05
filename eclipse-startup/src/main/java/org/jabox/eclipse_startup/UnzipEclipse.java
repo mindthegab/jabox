@@ -19,12 +19,12 @@ public class UnzipEclipse {
 		try {
 			ZipFile zipFile = new ZipFile(file);
 
-			Enumeration entries = zipFile.entries();
+			Enumeration<? extends ZipEntry> entries = zipFile.entries();
 
 			entries = zipFile.entries();
 
 			while (entries.hasMoreElements()) {
-				ZipEntry entry = (ZipEntry) entries.nextElement();
+				ZipEntry entry = entries.nextElement();
 
 				if (entry.isDirectory()) {
 					// Assume directories are stored parents first then
