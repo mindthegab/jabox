@@ -6,14 +6,14 @@ import org.apache.wicket.persistence.provider.GeneralDao;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 
 public class BaseEntityDetachableModel<E extends BaseEntity> extends
-		LoadableDetachableModel {
+		LoadableDetachableModel<E> {
+	private static final long serialVersionUID = 501303796886245828L;
 
 	@SpringBean(name = "GeneralDao")
 	protected GeneralDao generalDao;
 
 	private Long id;
 	private Class<E> clazz;
-	 
 
 	public BaseEntityDetachableModel() {
 		InjectorHolder.getInjector().inject(this);

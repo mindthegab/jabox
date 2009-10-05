@@ -10,13 +10,14 @@ import org.apache.wicket.spring.injection.annot.SpringBean;
 public final class DeleteEntityButton extends ImageButton {
 	private static final ResourceReference DELETE_IMG = new ResourceReference(
 			DeleteEntityButton.class, "delete.jpg");
-	private final ListItem _listItem;
+	private final ListItem<BaseEntity> _listItem;
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public DeleteEntityButton(final String id, final ListItem listItem) {
+	public DeleteEntityButton(final String id,
+			final ListItem<BaseEntity> listItem) {
 		super(id, DELETE_IMG);
 		_listItem = listItem;
 	}
@@ -28,8 +29,7 @@ public final class DeleteEntityButton extends ImageButton {
 	 * Delete from persistent storage, commit transaction.
 	 */
 	public void onSubmit() {
-		final BaseEntity obj = (BaseEntity) _listItem.getModelObject();
-		generalDao.deleteEntity(obj);
+		generalDao.deleteEntity(_listItem.getModelObject());
 		setResponsePage(ManageProjects.class);
 	}
 }

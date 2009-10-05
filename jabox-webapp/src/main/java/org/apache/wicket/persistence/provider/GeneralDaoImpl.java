@@ -9,11 +9,9 @@ import javax.persistence.PersistenceContextType;
 import javax.persistence.Query;
 
 import org.apache.wicket.persistence.domain.BaseEntity;
-import org.apache.wicket.persistence.domain.Message;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.jabox.model.Configuration;
-import org.jabox.model.Project;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.transaction.annotation.Transactional;
 

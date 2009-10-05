@@ -40,7 +40,7 @@ public class ManageConfiguration extends WebPage {
 		add(navomaticBorder);
 		FeedbackPanel feedbackPanel = new FeedbackPanel("feedback");
 		navomaticBorder.add(feedbackPanel);
-		Form form = new Form("form") {
+		Form<Configuration> form = new Form<Configuration>("form") {
 			private static final long serialVersionUID = 1L;
 
 			@Override
@@ -49,9 +49,10 @@ public class ManageConfiguration extends WebPage {
 				_generalDao.persist(configuration);
 			}
 		};
-		CompoundPropertyModel model = new CompoundPropertyModel(configuration);
+		CompoundPropertyModel<Configuration> model = new CompoundPropertyModel<Configuration>(
+				configuration);
 		form.setModel(model);
-		form.add(new RequiredTextField("issueManagementUrl"));
+		form.add(new RequiredTextField<Configuration>("issueManagementUrl"));
 		// DeployerPluginSelector child = new DeployerPluginSelector(
 		// "configuration", model);
 		// form.add(child);
@@ -75,15 +76,16 @@ public class ManageConfiguration extends WebPage {
 		super.onBeforeRender();
 	}
 
-	private void add(final Configuration configuration, final Form form,
-			Class<? extends Connector> connector) {
+	private void add(final Configuration configuration,
+			final Form<Configuration> form, Class<? extends Connector> connector) {
 		List<Connector> connectors = _manager.getConnectors(connector);
 		System.out.println("connectors: " + connector.getName() + ":"
 				+ connectors);
 
-		DropDownChoice ddc = new DropDownChoice(connector.getSimpleName(),
-				new PropertyModel(configuration, connector.getSimpleName()), connectors,
-				new ChoiceRenderer("toString", "toString"));
+		DropDownChoice<Connector> ddc = new DropDownChoice<Connector>(connector
+				.getSimpleName(), new PropertyModel<Connector>(configuration,
+				connector.getSimpleName()), connectors,
+				new ChoiceRenderer<Connector>("toString", "toString"));
 		form.add(ddc);
 	}
 }

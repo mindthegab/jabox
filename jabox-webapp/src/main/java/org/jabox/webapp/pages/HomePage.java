@@ -29,13 +29,15 @@ public class HomePage extends WebPage {
 		add(navomaticBorder);
 
 		System.out.println("user.home: " + Environment.getBaseDir());
-		navomaticBorder.add(new BookmarkablePageLink("login", MainMenu.class, parameters));
+		navomaticBorder.add(new BookmarkablePageLink<WebPage>("login",
+				MainMenu.class, parameters));
 
 		addAjaxCounter(navomaticBorder);
 	}
 
 	private void addAjaxCounter(Border border) {
 		Model<Integer> model = new Model<Integer>() {
+			private static final long serialVersionUID = 3139813166096963861L;
 			private int counter = 0;
 
 			public Integer getObject() {
@@ -45,7 +47,9 @@ public class HomePage extends WebPage {
 		final Label label = new Label("counter", model);
 		label.setOutputMarkupId(true);
 
-		border.add(new AjaxFallbackLink("link") {
+		border.add(new AjaxFallbackLink<String>("link") {
+			private static final long serialVersionUID = 3023949268863872175L;
+
 			public void onClick(AjaxRequestTarget target) {
 				if (target != null) {
 					// target is only available in an ajax request
