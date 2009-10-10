@@ -29,6 +29,7 @@ public class ProjectList extends PropertyListView<Project> {
 	public void populateItem(final ListItem<Project> listItem) {
 		final Project project = (Project) listItem.getModelObject();
 		listItem.add(new Label("name", project.getName()));
+		listItem.add(new Label("mavenArchetype", project.getMavenArchetype().toString()));
 		listItem
 				.add(new MultiLineLabel("description", project.getDescription()));
 		final AttributeModifier attributeModifier = new AttributeModifier(
