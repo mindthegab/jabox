@@ -1,10 +1,10 @@
 package org.jabox.webapp.application;
 
 import org.apache.wicket.markup.html.WebPage;
-import org.apache.wicket.protocol.http.WebApplication;
 import org.apache.wicket.spring.injection.annot.SpringComponentInjector;
 import org.apache.wicket.util.lang.PackageName;
 import org.jabox.webapp.pages.HomePage;
+import org.jabox.webapp.pages.JaboxAuthenticatedWebApplication;
 import org.springframework.stereotype.Component;
 
 /**
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
  * @see wicket.myproject.Start#main(String[])
  */
 @Component
-public class WicketApplication extends WebApplication {
+public class WicketApplication extends JaboxAuthenticatedWebApplication {
 	/**
 	 * Constructor
 	 */

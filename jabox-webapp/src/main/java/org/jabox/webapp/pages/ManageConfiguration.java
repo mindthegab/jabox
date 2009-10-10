@@ -2,6 +2,7 @@ package org.jabox.webapp.pages;
 
 import java.util.List;
 
+import org.apache.wicket.authorization.strategies.role.annotations.AuthorizeInstantiation;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.form.ChoiceRenderer;
 import org.apache.wicket.markup.html.form.DropDownChoice;
@@ -24,6 +25,7 @@ import org.jabox.webapp.borders.NavomaticBorder;
 /**
  * Homepage
  */
+@AuthorizeInstantiation("ADMIN")
 public class ManageConfiguration extends WebPage {
 
 	private static final long serialVersionUID = 1L;
