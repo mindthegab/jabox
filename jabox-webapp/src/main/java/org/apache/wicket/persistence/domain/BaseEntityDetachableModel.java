@@ -12,30 +12,32 @@ public class BaseEntityDetachableModel<E extends BaseEntity> extends
 	@SpringBean(name = "GeneralDao")
 	protected GeneralDao generalDao;
 
-	private Long id;
-	private Class<E> clazz;
+	private Long _id;
+	private Class<E> _clazz;
 
 	public BaseEntityDetachableModel() {
 		InjectorHolder.getInjector().inject(this);
 	}
 
-	public BaseEntityDetachableModel(E baseEntity) {
+	@SuppressWarnings("unchecked")
+	public BaseEntityDetachableModel(final E baseEntity) {
 		this();
-		this.id = baseEntity.getId();
-		this.clazz = (Class<E>) baseEntity.getClass();
+		_id = baseEntity.getId();
+		_clazz = (Class<E>) baseEntity.getClass();
 
 	}
 
+	@SuppressWarnings("unchecked")
 	public void setBaseEntityDetachableModel(BaseEntity baseEntity) {
-		this.id = baseEntity.getId();
-		this.clazz = (Class<E>) baseEntity.getClass();
+		_id = baseEntity.getId();
+		_clazz = (Class<E>) baseEntity.getClass();
 	}
 
 	@Override
 	protected E load() {
-		if (clazz != null) {
+		if (_clazz != null) {
 
-			return generalDao.findEntity(id, clazz);
+			return generalDao.findEntity(_id, _clazz);
 		} else {
 			return null;
 		}
