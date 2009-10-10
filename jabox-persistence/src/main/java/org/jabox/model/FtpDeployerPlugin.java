@@ -17,7 +17,7 @@ public class FtpDeployerPlugin implements DeployerPlugin {
 		return ID;
 	}
 
-	public Component newEditor(String id, IModel model) {
+	public Component newEditor(String id, IModel<Configuration> model) {
 		return new FtpDeployerEditor(id, model);
 	}
 

@@ -8,7 +8,7 @@ public interface DeployerPlugin extends Identifiable<String> {
 
 	String deploy(Configuration article);
 
-	Component newEditor(String id, IModel model);
+	Component newEditor(String id, IModel<Configuration> model);
 
 	DeployerConfig newConfig();
 }

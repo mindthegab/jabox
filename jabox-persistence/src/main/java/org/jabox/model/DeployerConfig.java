@@ -17,6 +17,7 @@ import org.apache.wicket.persistence.domain.BaseEntity;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(discriminatorType = DiscriminatorType.STRING)
 public abstract class DeployerConfig extends BaseEntity implements Serializable {
+	private static final long serialVersionUID = -1502838460606670036L;
 
 	@Column(nullable = false, length = 64)
 	public String pluginId;

@@ -9,7 +9,9 @@ import javax.persistence.Entity;
 @DiscriminatorValue(FtpDeployerPlugin.ID)
 public class FtpDeployerConfig extends DeployerConfig
 {
-    public FtpDeployerConfig()
+	private static final long serialVersionUID = -5318749273535543344L;
+
+	public FtpDeployerConfig()
     {
         pluginId = FtpDeployerPlugin.ID;
     }

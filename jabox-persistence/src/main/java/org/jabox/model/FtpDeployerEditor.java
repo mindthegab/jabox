@@ -7,11 +7,13 @@ import org.apache.wicket.model.IModel;
 
 public class FtpDeployerEditor extends Panel
 {
-    public FtpDeployerEditor(String id, IModel model)
+	private static final long serialVersionUID = -2526046655726538823L;
+
+	public FtpDeployerEditor(String id, IModel<Configuration> model)
     {
-        super(id, new CompoundPropertyModel(model));
-        add(new TextField("host").setRequired(true));
-        add(new TextField("port").setRequired(true));
+        super(id, new CompoundPropertyModel<String>(model));
+        add(new TextField<String>("host").setRequired(true));
+        add(new TextField<String>("port").setRequired(true));
     }
 
 }

@@ -8,7 +8,9 @@ import javax.persistence.Entity;
 @DiscriminatorValue(HttpPostDeployerPlugin.ID)
 public class HttpPostDeployerConfig extends DeployerConfig
 {
-    public HttpPostDeployerConfig()
+	private static final long serialVersionUID = -5664879438162615460L;
+
+	public HttpPostDeployerConfig()
     {
         pluginId = HttpPostDeployerPlugin.ID;
     }
