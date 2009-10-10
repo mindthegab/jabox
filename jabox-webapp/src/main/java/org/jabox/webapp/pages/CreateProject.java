@@ -56,8 +56,7 @@ public class CreateProject extends WebPage {
 
 		List<MavenArchetype> connectors = new ArrayList<MavenArchetype>();
 		connectors.add(ma);
-		connectors.add(new MavenArchetype("org.apache.wicket",
-				"wicket-archetype-quickstart", "1.4.1"));
+		fillArchetypes(connectors);
 		System.out.println("connectors: " + ":" + connectors);
 
 		DropDownChoice<MavenArchetype> ddc = new DropDownChoice<MavenArchetype>(
@@ -66,5 +65,18 @@ public class CreateProject extends WebPage {
 				new ChoiceRenderer<MavenArchetype>("toString", "toString"));
 		form.add(ddc);
 
+	}
+
+	private void fillArchetypes(List<MavenArchetype> connectors) {
+		connectors.add(new MavenArchetype("org.apache.wicket",
+				"wicket-archetype-quickstart", "1.4.1"));
+		connectors.add(new MavenArchetype("org.apache.maven.archetypes",
+				"maven-archetype-quickstart", "1.0"));
+		connectors.add(new MavenArchetype("org.apache.maven.archetypes",
+				"maven-archetype-site", "1.0"));
+		connectors.add(new MavenArchetype("org.apache.maven.archetypes",
+				"maven-archetype-site-simple", "1.0"));
+		connectors.add(new MavenArchetype("org.apache.maven.archetypes",
+				"maven-archetype-site-webapp", "1.0"));
 	}
 }
