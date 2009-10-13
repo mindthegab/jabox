@@ -30,7 +30,7 @@ public class HomePage extends WebPage {
 
 		System.out.println("user.home: " + Environment.getBaseDir());
 		navomaticBorder.add(new BookmarkablePageLink<WebPage>("login",
-				MainMenu.class, parameters));
+				ManageConfiguration.class, parameters));
 
 		addAjaxCounter(navomaticBorder);
 	}
