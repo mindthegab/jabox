@@ -3,6 +3,7 @@ package org.jabox.webapp.pages;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.wicket.authorization.strategies.role.annotations.AuthorizeInstantiation;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.form.ChoiceRenderer;
 import org.apache.wicket.markup.html.form.DropDownChoice;
@@ -18,6 +19,7 @@ import org.jabox.model.MavenArchetype;
 import org.jabox.model.Project;
 import org.jabox.webapp.borders.NavomaticBorder;
 
+@AuthorizeInstantiation("ADMIN")
 public class CreateProject extends WebPage {
 
 	@SpringBean(name = "GeneralDao")

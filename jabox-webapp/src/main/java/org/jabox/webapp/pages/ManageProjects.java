@@ -2,6 +2,7 @@ package org.jabox.webapp.pages;
 
 import java.util.List;
 
+import org.apache.wicket.authorization.strategies.role.annotations.AuthorizeInstantiation;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.persistence.domain.BaseEntity;
@@ -14,6 +15,7 @@ import org.jabox.webapp.utils.ProjectList;
 /**
  * Homepage
  */
+@AuthorizeInstantiation("ADMIN")
 public class ManageProjects extends WebPage {
 
 	private static final long serialVersionUID = 1L;
