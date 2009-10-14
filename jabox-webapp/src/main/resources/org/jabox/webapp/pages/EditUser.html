@@ -1,30 +1,28 @@
 <html>
 <body>
 <wicket:extend>
-
-<span wicket:id="navomaticBorder"> Configuration:
+<span wicket:id="navomaticBorder"> Edit User:
 <p />
 <form wicket:id="form">
+<input type="text" wicket:id="login" />
+      <span wicket:id="firstName">[user id]</span>
+     
+
 <table cellspacing="0" cellpadding="2" style="width: 500px;">
 	<tr>
 		<td>Issue Management URL:</td>
-		<td><input type="text" wicket:id="issueManagementUrl" /></td>
 	</tr>
 	<tr>
 		<td>SCM Connector:</td>
-		<td><select name="SCMConnector" wicket:id="SCMConnector"></select></td>
 	</tr>
 	<tr>
 		<td>BTS Connector:</td>
-		<td><select name="BTSConnector" wicket:id="BTSConnector"></select></td>
 	</tr>
 	<tr>
 		<td>CIS Connector:</td>
-		<td><select name="CISConnector" wicket:id="CISConnector"></select></td>
 	</tr>
 	<tr>
 		<td>RMS Connector:</td>
-		<td><select name="RMSConnector" wicket:id="RMSConnector"></select></td>
 	</tr>
 	<!--<wicket:container wicket:id="configuration"></wicket:container>
     	-->

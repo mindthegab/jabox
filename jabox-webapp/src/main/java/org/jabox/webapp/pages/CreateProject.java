@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.wicket.authorization.strategies.role.annotations.AuthorizeInstantiation;
-import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.form.ChoiceRenderer;
 import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.Form;
@@ -20,7 +19,7 @@ import org.jabox.model.Project;
 import org.jabox.webapp.borders.NavomaticBorder;
 
 @AuthorizeInstantiation("ADMIN")
-public class CreateProject extends WebPage {
+public class CreateProject extends BasePage {
 
 	@SpringBean(name = "GeneralDao")
 	protected GeneralDao generalDao;
@@ -79,6 +78,6 @@ public class CreateProject extends WebPage {
 		connectors.add(new MavenArchetype("org.apache.maven.archetypes",
 				"maven-archetype-site-simple", "1.0"));
 		connectors.add(new MavenArchetype("org.apache.maven.archetypes",
-				"maven-archetype-site-webapp", "1.0"));
+				"maven-archetype-webapp", "1.0"));
 	}
 }

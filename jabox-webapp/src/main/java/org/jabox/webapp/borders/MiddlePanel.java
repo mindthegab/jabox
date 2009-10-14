@@ -7,7 +7,7 @@ import org.apache.wicket.markup.html.panel.Panel;
  * @author Igor Vaynberg (ivaynberg)
  * 
  */
-public class TabPanel1  extends Panel {
+public class MiddlePanel  extends Panel {
 	private static final long serialVersionUID = -2139796431114958720L;
 
 	/**
@@ -16,8 +16,9 @@ public class TabPanel1  extends Panel {
 	 * @param id
 	 *            component id
 	 */
-	public TabPanel1(String id) {
+	public MiddlePanel(String id) {
 		super(id);
 		NavomaticBorder navomaticBorder = new NavomaticBorder("navomaticBorder");
+		add(navomaticBorder);
 	}
 };

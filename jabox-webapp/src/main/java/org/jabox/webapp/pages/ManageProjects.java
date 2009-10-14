@@ -16,7 +16,7 @@ import org.jabox.webapp.utils.ProjectList;
  * Homepage
  */
 @AuthorizeInstantiation("ADMIN")
-public class ManageProjects extends WebPage {
+public class ManageProjects extends BasePage {
 
 	private static final long serialVersionUID = 1L;
 

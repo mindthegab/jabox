@@ -3,12 +3,15 @@ package org.jabox.webapp.pages;
 import org.apache.wicket.Request;
 import org.apache.wicket.authentication.AuthenticatedWebSession;
 import org.apache.wicket.authorization.strategies.role.Roles;
+import org.jabox.model.User;
 
 /**
  * Authenticated session subclass
  */
 public class JaboxAuthenticatedWebSession extends AuthenticatedWebSession {
 	private static final long serialVersionUID = 1L;
+
+	private User _user;
 
 	/**
 	 * Construct.
@@ -27,7 +30,13 @@ public class JaboxAuthenticatedWebSession extends AuthenticatedWebSession {
 	@Override
 	public boolean authenticate(final String username, final String password) {
 		// Check username and password
-		return username.equals("wicket") && password.equals("wicket");
+		boolean authenticated = username.equals("wicket")
+				&& password.equals("wicket");
+		if (authenticated) {
+			_user = new User();
+			_user.setLogin("wicket");
+		}
+		return authenticated;
 	}
 
 	/**
@@ -40,5 +49,13 @@ public class JaboxAuthenticatedWebSession extends AuthenticatedWebSession {
 			return new Roles(Roles.ADMIN);
 		}
 		return null;
+	}
+
+	public void setUser(User user) {
+		_user = user;
+	}
+
+	public User getUser() {
+		return _user;
 	}
 }

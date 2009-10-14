@@ -2,13 +2,12 @@ package org.jabox.webapp.pages;
 
 import org.apache.wicket.PageParameters;
 import org.apache.wicket.authentication.panel.SignInPanel;
-import org.apache.wicket.markup.html.WebPage;
 import org.jabox.webapp.borders.NavomaticBorder;
 
 /**
  * @author Administrator
  */
-public final class Login extends WebPage {
+public final class Login extends BasePage {
 
 	/**
 	 * Constructor
