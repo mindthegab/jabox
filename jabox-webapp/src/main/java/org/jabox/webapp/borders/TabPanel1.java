@@ -18,6 +18,5 @@ public class TabPanel1  extends Panel {
 	 */
 	public TabPanel1(String id) {
 		super(id);
-		NavomaticBorder navomaticBorder = new NavomaticBorder("navomaticBorder");
 	}
 };

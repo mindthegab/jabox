@@ -2,20 +2,18 @@ package org.jabox.webapp.pages;
 
 import org.apache.wicket.PageParameters;
 import org.apache.wicket.authentication.panel.SignInPanel;
-import org.jabox.webapp.borders.NavomaticBorder;
+import org.jabox.webapp.borders.MiddlePanel;
 
 /**
  * @author Administrator
  */
-public final class Login extends BasePage {
+public final class Login extends MiddlePanel {
 
 	/**
 	 * Constructor
 	 */
 	public Login() {
-		NavomaticBorder navomaticBorder = new NavomaticBorder("navomaticBorder");
-		add(navomaticBorder);
-		navomaticBorder.add(new SignInPanel("signInPanel"));
+		add(new SignInPanel("signInPanel"));
 	}
 
 	/**
@@ -25,8 +23,6 @@ public final class Login extends BasePage {
 	 *            Parameters to page
 	 */
 	public Login(final PageParameters parameters) {
-		NavomaticBorder navomaticBorder = new NavomaticBorder("navomaticBorder");
-		add(navomaticBorder);
-		navomaticBorder.add(new SignInPanel("signInPanel"));
+		add(new SignInPanel("signInPanel"));
 	}
 }

@@ -1,13 +1,13 @@
 package org.jabox.webapp.borders;
 
-import org.apache.wicket.markup.html.panel.Panel;
+import org.jabox.webapp.pages.BasePage;
 /**
  * Panel representing the content panel for the first tab
  * 
  * @author Igor Vaynberg (ivaynberg)
  * 
  */
-public class MiddlePanel  extends Panel {
+public class MiddlePanel  extends BasePage {
 	private static final long serialVersionUID = -2139796431114958720L;
 
 	/**
@@ -16,9 +16,6 @@ public class MiddlePanel  extends Panel {
 	 * @param id
 	 *            component id
 	 */
-	public MiddlePanel(String id) {
-		super(id);
-		NavomaticBorder navomaticBorder = new NavomaticBorder("navomaticBorder");
-		add(navomaticBorder);
+	public MiddlePanel() {
 	}
 };

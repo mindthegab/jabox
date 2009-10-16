@@ -1,41 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <wicket:panel>
+    <iframe src="http://localhost:9090/web/ManageConfiguration"
+      width="100%" height="100%" scrolling="auto" frameborder="0">
+      <p>Texto alternativo para navegadores que no aceptan iframes.</p>
+    </iframe>
 <br/>
-    
-<DIV id="container">
-	<DIV id="content">
-		<DIV id="header">
-		<A href="http://wicket.apache.org/"><H1 id="logo"><SPAN>Apache Wicket</SPAN></H1></A>
-		
-	</DIV>
-		<DIV id="navigation">
-        <p>
-                      <b>Navigation Links</b>
-                        <wicket:link>
-                          <a href="Logout.html">Logout</a><br/><br/>
-                          <a href="EditUser.html">Edit User</a><br/>
-                          <a href="ManageConfiguration.html">Configuration</a><br/>
-                          <a href="ManageProjects.html">Manage Projects</a><br/>
-                          <a href="CreateProject.html">Create Project</a><br/>
-                        </wicket:link>
-        </p>
-       
-       <!-- Eclipse logo -->
-       <a href="/eclipse/webstart/"><img border="0" src="/style/eclipse.png" alt="eclipse"></a><p/>
-        
-       <!-- Hudson logo -->
-       <a href="/hudson/"><img border="0" src="/hudson/static/3a805bbf/images/title.png" alt="hudson"></a><p/>
-        <!-- Nexus logo -->
-       <a href="/nexus/index.html#welcome"><img border="0" src="/style/nexus-logo.png" alt="nexus"></a><p/>
-       
-       </div>	<DIV id="contentbody">
-		                  <wicket:body/>
-		</DIV>
-		<DIV id="clearer"></DIV>
-		<DIV id="footer"><SPAN>&copy; JABOX Application</SPAN></DIV>
-    </DIV>
-
-</DIV>
 </wicket:panel>
 </html>

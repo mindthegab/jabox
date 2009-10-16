@@ -16,10 +16,11 @@ import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.jabox.application.CreateProjectUtil;
 import org.jabox.model.MavenArchetype;
 import org.jabox.model.Project;
+import org.jabox.webapp.borders.MiddlePanel;
 import org.jabox.webapp.borders.NavomaticBorder;
 
 @AuthorizeInstantiation("ADMIN")
-public class CreateProject extends BasePage {
+public class CreateProject extends MiddlePanel {
 
 	@SpringBean(name = "GeneralDao")
 	protected GeneralDao generalDao;
@@ -29,12 +30,10 @@ public class CreateProject extends BasePage {
 		MavenArchetype ma = new MavenArchetype("org.apache.wicket",
 				"wicket-archetype-quickstart", "1.3.3");
 		_project.setMavenArchetype(ma);
-		NavomaticBorder navomaticBorder = new NavomaticBorder("navomaticBorder");
-		add(navomaticBorder);
 
 		// Add a FeedbackPanel for displaying our messages
 		FeedbackPanel feedbackPanel = new FeedbackPanel("feedback");
-		navomaticBorder.add(feedbackPanel);
+		add(feedbackPanel);
 
 		// Add a form with an onSumbit implementation that sets a message
 		Form<Project> form = new Form<Project>("form") {
@@ -50,7 +49,7 @@ public class CreateProject extends BasePage {
 			}
 		};
 		form.setModel(new CompoundPropertyModel<Project>(_project));
-		navomaticBorder.add(form);
+		add(form);
 
 		form.add(new RequiredTextField<Project>("name"));
 		form.add(new RequiredTextField<Project>("description"));

@@ -4,6 +4,7 @@ import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.spring.injection.annot.SpringComponentInjector;
 import org.apache.wicket.util.lang.PackageName;
 import org.jabox.webapp.pages.HomePage;
+import org.jabox.webapp.pages.Index;
 import org.jabox.webapp.pages.JaboxAuthenticatedWebApplication;
 import org.springframework.stereotype.Component;
 
@@ -31,7 +32,7 @@ public class WicketApplication extends JaboxAuthenticatedWebApplication {
 	 * @see wicket.Application#getHomePage()
 	 */
 	public Class<? extends WebPage> getHomePage() {
-		return HomePage.class;
+		return Index.class;
 	}
 
 }

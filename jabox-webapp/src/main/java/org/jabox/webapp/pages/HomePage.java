@@ -4,12 +4,13 @@ import org.apache.wicket.PageParameters;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.link.BookmarkablePageLink;
 import org.jabox.environment.Environment;
+import org.jabox.webapp.borders.MiddlePanel;
 import org.jabox.webapp.borders.NavomaticBorder;
 
 /**
  * Homepage
  */
-public class HomePage extends BasePage {
+public class HomePage extends MiddlePanel {
 
 	private static final long serialVersionUID = 1L;
 
@@ -20,10 +21,8 @@ public class HomePage extends BasePage {
 	 *            Page parameters
 	 */
 	public HomePage(final PageParameters parameters) {
-		NavomaticBorder navomaticBorder = new NavomaticBorder("navomaticBorder");
-		add(navomaticBorder);
 		System.out.println("user.home: " + Environment.getBaseDir());
-		navomaticBorder.add(new BookmarkablePageLink<WebPage>("login",
+		add(new BookmarkablePageLink<WebPage>("login",
 				ManageConfiguration.class, parameters));
 	}
 }

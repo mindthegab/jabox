@@ -1,7 +1,6 @@
 package org.jabox.webapp.pages;
 
 import org.apache.wicket.authorization.strategies.role.annotations.AuthorizeInstantiation;
-import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.RequiredTextField;
@@ -13,10 +12,10 @@ import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.jabox.apis.Connector;
 import org.jabox.apis.Manager;
 import org.jabox.model.User;
-import org.jabox.webapp.borders.NavomaticBorder;
+import org.jabox.webapp.borders.MiddlePanel;
 
 @AuthorizeInstantiation("ADMIN")
-public class EditUser extends BasePage {
+public class EditUser extends MiddlePanel {
 
 	private final class EditUserForm extends Form<JaboxAuthenticatedWebSession> {
 		private static final long serialVersionUID = 1L;
@@ -41,13 +40,10 @@ public class EditUser extends BasePage {
 	protected Manager<Connector> _manager;
 
 	public EditUser() {
-		NavomaticBorder navomaticBorder = new NavomaticBorder("navomaticBorder");
-		add(navomaticBorder);
-
 		Form<JaboxAuthenticatedWebSession> form = new EditUserForm("form");
 		form.setModel(new CompoundPropertyModel<JaboxAuthenticatedWebSession>(
 				getSession()));
-		navomaticBorder.add(form);
+		add(form);
 
 		form.add(new RequiredTextField<User>("login", new PropertyModel<User>(
 				this, "session.user.login")));
@@ -56,7 +52,6 @@ public class EditUser extends BasePage {
 
 		// Add a FeedbackPanel for displaying our messages
 		FeedbackPanel feedbackPanel = new FeedbackPanel("feedback");
-		navomaticBorder.add(feedbackPanel);
-
+		add(feedbackPanel);
 	}
 }

@@ -19,13 +19,13 @@ import org.jabox.apis.cis.CISConnector;
 import org.jabox.apis.rms.RMSConnector;
 import org.jabox.apis.scm.SCMConnector;
 import org.jabox.model.Configuration;
-import org.jabox.webapp.borders.NavomaticBorder;
+import org.jabox.webapp.borders.MiddlePanel;
 
 /**
  * Homepage
  */
 @AuthorizeInstantiation("ADMIN")
-public class ManageConfiguration extends BasePage {
+public class ManageConfiguration extends MiddlePanel {
 
 	private static final long serialVersionUID = 1L;
 
@@ -37,10 +37,8 @@ public class ManageConfiguration extends BasePage {
 
 	public ManageConfiguration() {
 		final Configuration configuration = _generalDao.getConfiguration();
-		NavomaticBorder navomaticBorder = new NavomaticBorder("navomaticBorder");
-		add(navomaticBorder);
 		FeedbackPanel feedbackPanel = new FeedbackPanel("feedback");
-		navomaticBorder.add(feedbackPanel);
+		add(feedbackPanel);
 		Form<Configuration> form = new Form<Configuration>("form") {
 			private static final long serialVersionUID = 1L;
 
@@ -69,7 +67,7 @@ public class ManageConfiguration extends BasePage {
 		add(configuration, form, BTSConnector.class);
 		add(configuration, form, CISConnector.class);
 		add(configuration, form, RMSConnector.class);
-		navomaticBorder.add(form);
+		add(form);
 	}
 
 	@Override
