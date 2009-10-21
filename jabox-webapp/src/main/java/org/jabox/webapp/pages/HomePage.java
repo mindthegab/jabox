@@ -22,7 +22,6 @@ public class HomePage extends MiddlePanel {
 	 */
 	public HomePage(final PageParameters parameters) {
 		System.out.println("user.home: " + Environment.getBaseDir());
-		add(new BookmarkablePageLink<WebPage>("login",
-				ManageConfiguration.class, parameters));
+		add(new JaboxSignInPanel("signInPanel"));
 	}
 }

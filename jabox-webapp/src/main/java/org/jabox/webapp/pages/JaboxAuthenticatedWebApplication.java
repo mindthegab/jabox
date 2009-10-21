@@ -1,4 +1,3 @@
-
 /*
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
@@ -21,32 +20,28 @@ import org.apache.wicket.authentication.AuthenticatedWebApplication;
 import org.apache.wicket.authentication.AuthenticatedWebSession;
 import org.apache.wicket.markup.html.WebPage;
 
-
 /**
  * A role-authorized, authenticated web application in just a few lines of code.
  * 
  * @author Jonathan Locke
  */
-public class JaboxAuthenticatedWebApplication extends AuthenticatedWebApplication
-{
-    @Override
-    protected Class< ? extends AuthenticatedWebSession> getWebSessionClass()
-    {
-        return JaboxAuthenticatedWebSession.class;
-    }
+public class JaboxAuthenticatedWebApplication extends
+		AuthenticatedWebApplication {
+	@Override
+	protected Class<? extends AuthenticatedWebSession> getWebSessionClass() {
+		return JaboxAuthenticatedWebSession.class;
+	}
 
-    @Override
-    protected Class< ? extends WebPage> getSignInPageClass()
-    {
-        return Login.class;
-    }
+	@Override
+	protected Class<? extends WebPage> getSignInPageClass() {
+		return HomePage.class;
+	}
 
-    /**
-     * @see org.apache.wicket.Application#getHomePage()
-     */
-    @Override
-    public Class getHomePage()
-    {
-        return HomePage.class;
-    }
+	/**
+	 * @see org.apache.wicket.Application#getHomePage()
+	 */
+	@Override
+	public Class getHomePage() {
+		return HomePage.class;
+	}
 }

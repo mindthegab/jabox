@@ -1,0 +1,29 @@
+<html xmlns:wicket>
+<body>
+  <wicket:panel>
+    <span wicket:id="feedback"/>
+		<form wicket:id="signInForm">
+		<fieldset>
+		<table>
+		<tr>
+		<td><label for="mod_login_username">Username:</label></td>
+		<td><input name="username" id="mod_login_username" type="text" class="inputbox" alt="Username" wicket:id="username" value="foo@goo.moo" /></td>
+		</tr>
+		<tr>
+		<td><label for="mod_login_password">Password:</label></td>
+		<td><input id="mod_login_password" name="passwd" class="inputbox"  alt="Password" wicket:id="password" type="password" value="password" /></td>
+		</tr>
+		</table> 
+	</fieldset> 
+ 	<span wicket:id="rememberMeRow">
+	<input name="remember" id="mod_login_remember" class="checkbox" value="yes" alt="Remember Me" wicket:id="rememberMe" type="checkbox" />
+	</span> 
+	<label for="mod_login_remember" class="remember"> 
+		Remember Me	</label> 
+	
+	<p><input type="submit" name="Submit" class="button" value="Log in" /></p> 
+	<p> 
+		</form>
+  </wicket:panel>
+</body>
+</html>
