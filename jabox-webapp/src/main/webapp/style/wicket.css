@@ -273,6 +273,7 @@ body {
 	padding-left: 8px;
 	padding-top: 25px;
 	padding-right: 8px;
+	min-height: 560px;
 }
 
 #col-left {
@@ -368,9 +369,17 @@ p {
 }
 
 #footer {
-	padding: 15px 40%;
-	color: #5873ad;
+	border-spacing: 20px 0px;
+	border-color: gray;
+	border-collapse: separate;
+	display: table;
 	clear: both;
+	width: 100%;
+	margin: 0px;
+	padding: 0px;
+	text-align: left;
+	font-size: 8pt;
+	border-top: 1px solid #bbb;
 }
 
 ul.menu li a,ul.menu li em,ul#mainlevel li a {
