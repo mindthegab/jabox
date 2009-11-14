@@ -40,7 +40,6 @@ import org.jabox.application.CreateProjectUtil;
 import org.jabox.model.MavenArchetype;
 import org.jabox.model.Project;
 import org.jabox.webapp.borders.MiddlePanel;
-import org.jabox.webapp.borders.NavomaticBorder;
 
 @AuthorizeInstantiation("ADMIN")
 public class CreateProject extends MiddlePanel {

@@ -24,6 +24,9 @@
 package org.jabox.webapp.application;
 
 import org.apache.wicket.markup.html.WebPage;
+import org.apache.wicket.protocol.http.SecondLevelCacheSessionStore;
+import org.apache.wicket.protocol.http.pagestore.DiskPageStore;
+import org.apache.wicket.session.ISessionStore;
 import org.apache.wicket.spring.injection.annot.SpringComponentInjector;
 import org.apache.wicket.util.lang.PackageName;
 import org.jabox.webapp.pages.HomePage;
@@ -44,6 +47,19 @@ public class WicketApplication extends JaboxAuthenticatedWebApplication {
 	 */
 	public WicketApplication() {
 		mount("web", PackageName.forClass(HomePage.class));
+	}
+
+	@Override
+	protected ISessionStore newSessionStore() {
+		return new SecondLevelCacheSessionStore(this, new DiskPageStore()) {
+
+			@Override
+			protected void onUnbind(String sessionId) {
+				// this code is called when wicket call httpSession.invalidate()
+				System.out.println("Session unbinded");
+			}
+
+		};
 	}
 
 	public void init() {

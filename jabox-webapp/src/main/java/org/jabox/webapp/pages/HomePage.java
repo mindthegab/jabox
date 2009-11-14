@@ -24,11 +24,8 @@
 package org.jabox.webapp.pages;
 
 import org.apache.wicket.PageParameters;
-import org.apache.wicket.markup.html.WebPage;
-import org.apache.wicket.markup.html.link.BookmarkablePageLink;
 import org.jabox.environment.Environment;
 import org.jabox.webapp.borders.MiddlePanel;
-import org.jabox.webapp.borders.NavomaticBorder;
 
 /**
  * Homepage
