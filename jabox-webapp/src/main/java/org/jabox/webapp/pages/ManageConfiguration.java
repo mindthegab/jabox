@@ -74,7 +74,8 @@ public class ManageConfiguration extends MiddlePanel {
 		CompoundPropertyModel<Configuration> model = new CompoundPropertyModel<Configuration>(
 				configuration);
 		form.setModel(model);
-		form.add(new RequiredTextField<Configuration>("issueManagementUrl"));
+		// form.add(new RequiredTextField<Configuration>("issueManagementUrl"));
+
 		// DeployerPluginSelector child = new DeployerPluginSelector(
 		// "configuration", model);
 		// form.add(child);
