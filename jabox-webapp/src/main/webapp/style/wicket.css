@@ -350,6 +350,14 @@ input,select,label {
 	vertical-align: middle;
 }
 
+.formInput {
+	min-width: 300px;	
+}
+
+.formTD {
+	padding: 5px;
+}
+
 p {
 	padding: 5px 0px;
 }
