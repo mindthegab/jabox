@@ -24,9 +24,10 @@ THE SOFTWARE.
 <html xmlns:wicket>
 <body>
   <wicket:panel>
-    <span wicket:id="feedback"/>
+    <div class="feedback" wicket:id="feedback"/>
+        <i>Username and password are both "wicket"</i>
+    
 		<form wicket:id="signInForm">
-		<fieldset>
 		<table>
 		<tr>
 		<td><label for="mod_login_username">Username:</label></td>
@@ -37,7 +38,6 @@ THE SOFTWARE.
 		<td><input id="mod_login_password" name="passwd" class="inputbox"  alt="Password" wicket:id="password" type="password" value="password" /></td>
 		</tr>
 		</table> 
-	</fieldset> 
  	<span wicket:id="rememberMeRow">
 	<input name="remember" id="mod_login_remember" class="checkbox" value="yes" alt="Remember Me" wicket:id="rememberMe" type="checkbox" />
 	</span> 
