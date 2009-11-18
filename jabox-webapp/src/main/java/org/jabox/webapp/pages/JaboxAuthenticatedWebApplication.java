@@ -64,7 +64,7 @@ public class JaboxAuthenticatedWebApplication extends
 	 * @see org.apache.wicket.Application#getHomePage()
 	 */
 	@Override
-	public Class getHomePage() {
+	public Class<?extends WebPage> getHomePage() {
 		return HomePage.class;
 	}
 }
