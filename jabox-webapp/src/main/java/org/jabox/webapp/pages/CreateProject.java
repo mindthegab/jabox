@@ -66,8 +66,8 @@ public class CreateProject extends MiddlePanel {
 				// creation of the project.
 				generalDao.persist(_project);
 				new CreateProjectUtil().createProject(_project);
-				info("input: " + _project);
 				generalDao.persist(_project);
+				info("Project \"" + _project.getName() + "\" Created.");
 			}
 		};
 		form.setModel(new CompoundPropertyModel<Project>(_project));

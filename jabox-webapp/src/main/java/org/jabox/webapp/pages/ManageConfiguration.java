@@ -67,8 +67,8 @@ public class ManageConfiguration extends MiddlePanel {
 
 			@Override
 			protected void onSubmit() {
-				info("Saving Configuration: " + configuration);
 				_generalDao.persist(configuration);
+				info("Configuration Saved.");
 			}
 		};
 		CompoundPropertyModel<Configuration> model = new CompoundPropertyModel<Configuration>(
