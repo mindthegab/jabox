@@ -21,7 +21,7 @@ h2 {
 }
 	
 li.feedbackPanelINFO { 
-	margin: 2px 0px 3px; 
+	margin: 2px 0px 10px; 
 	padding: 3px 3em;
 	font-size: 14px;
 	font-weight: bold;
@@ -37,15 +37,16 @@ li.feedbackPanelINFO {
 }
 
 li.feedbackPanelERROR { 
-	background-color: #FFEBC1; 
+	background-color: #; 
 	margin: 2px 0px 10px; 
-	padding: 10px .7em; 
+	padding: 3px 3em; 
 	font-size: 14px;
-	font-weight: normal;
+	font-weight: bold;
 	font-family: baskerville, Times, Times New Roman, serif;
 	color: #A6750C;
 	border: 1px #FDBF3B solid;
-
+	background: url("/images/error.png") no-repeat 8px 50% #FFEBC1;
+	
 	-moz-border-radius-topleft: 3px; -webkit-border-top-left-radius: 3px;
 	-moz-border-radius-topright: 3px; -webkit-border-top-right-radius: 3px;
 	-moz-border-radius-bottomleft: 3px; -webkit-border-bottom-left-radius: 3px;
