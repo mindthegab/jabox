@@ -70,8 +70,11 @@ public class Start {
 		server.setConnectors(new Connector[] { connector });
 		try {
 			addEmbeddedServer(server, "org.jabox.cis.hudson.HudsonServer");
-			addEmbeddedServer(server, "org.jabox.mrm.nexus.NexusServer");
-			addEmbeddedServer(server, "org.jabox.ide.eclipse.EclipseJNLPServer");
+			// addEmbeddedServer(server, "org.jabox.mrm.nexus.NexusServer");
+			// addEmbeddedServer(server,
+			// "org.jabox.ide.eclipse.EclipseJNLPServer");
+			addEmbeddedServer(server,
+					"org.jabox.mrm.artifactory.ArtifactoryServer");
 
 			if (startJabox) {
 				// Adding ROOT handler.
