@@ -113,7 +113,7 @@ THE SOFTWARE.
 		</dependency>
 		<dependency>
 			<groupId>org.jabox</groupId>
-			<artifactId>mrm-nexus</artifactId>
+			<artifactId>mrm-artifactory</artifactId>
 			<version>${pom.version}</version>
 		</dependency>
 		<dependency>
