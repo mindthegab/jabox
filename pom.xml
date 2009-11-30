@@ -52,6 +52,10 @@
 		TODO <organization> <name>company name</name> <url>company url</url>
 		</organization>
 	-->
+	<scm>
+		<connection>svn://67.23.47.178/trunk</connection>
+		<developerConnection>svn://67.23.47.178/trunk</developerConnection>
+	</scm>
 	<build>
 		<plugins>
 			<plugin>
