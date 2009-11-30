@@ -53,6 +53,7 @@
 		</organization>
 	-->
 	<scm>
+		<url>http://www.jabox.org/</url>
 		<connection>svn://67.23.47.178/trunk</connection>
 		<developerConnection>svn://67.23.47.178/trunk</developerConnection>
 	</scm>
