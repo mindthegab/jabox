@@ -74,14 +74,14 @@
 	</licenses>
 	<distributionManagement>
 		<snapshotRepository>
-			<id>snapshots</id>
-			<name>Snapshots</name>
-			<url>http://localhost:9090/nexus/content/repositories/snapshots/</url>
+			<id>jabox-snapshots</id>
+			<name>Jabox Snapshots</name>
+			<url>file:///C:/Repository/</url>
 		</snapshotRepository>
 		<repository>
-			<id>releases</id>
-			<name>Releases</name>
-			<url>http://localhost:9090/nexus/content/repositories/releases/</url>
+			<id>jabox-releases</id>
+			<name>Jabox Releases</name>
+			<url>file:///C:/Repository/</url>
 		</repository>
 	</distributionManagement>
 	<properties>
