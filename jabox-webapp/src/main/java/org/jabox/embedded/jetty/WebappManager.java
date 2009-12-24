@@ -13,9 +13,10 @@ import org.jabox.environment.Environment;
 public class WebappManager {
 
 	public static List<String> getWebapps() throws IOException {
-		String baseDir = Environment.getBaseDir();
+		File baseDir = Environment.getBaseDirFile();
 		File file = new File(baseDir, "servers.csv");
 		if (!file.exists()) {
+			baseDir.mkdir();
 			createDefaultServersFile(file);
 		}
 		List<String> servers = readData(file);

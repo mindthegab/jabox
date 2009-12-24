@@ -28,7 +28,12 @@ import java.io.File;
 public class Environment {
 
 	public static String getBaseDir() {
-		return getHomeDir() + File.separatorChar + ".jabox" + File.separatorChar;
+		return getHomeDir() + File.separatorChar + ".jabox"
+				+ File.separatorChar;
+	}
+
+	public static File getBaseDirFile() {
+		return new File(getBaseDir());
 	}
 
 	private static String getHomeDir() {
