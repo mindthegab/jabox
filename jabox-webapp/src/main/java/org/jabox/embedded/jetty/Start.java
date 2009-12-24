@@ -23,6 +23,8 @@
  */
 package org.jabox.embedded.jetty;
 
+import java.util.List;
+
 import org.jabox.apis.embedded.EmbeddedServer;
 import org.mortbay.jetty.Connector;
 import org.mortbay.jetty.Server;
@@ -44,11 +46,10 @@ public class Start {
 		connector.setPort(9090);
 		server.setConnectors(new Connector[] { connector });
 
-		addEmbeddedServer(server, "org.jabox.cis.hudson.HudsonServer");
-//		addEmbeddedServer(server, "org.jabox.mrm.nexus.NexusServer");
-//		addEmbeddedServer(server, "org.jabox.ide.eclipse.EclipseJNLPServer");
-		 addEmbeddedServer(server,
-		 "org.jabox.mrm.artifactory.ArtifactoryServer");
+		List<String> webapps = WebappManager.getWebapps();
+		for (String webapp : webapps) {
+			addEmbeddedServer(server, webapp);
+		}
 
 		// Adding ROOT handler.
 		// NOTE: This should be added last on server.

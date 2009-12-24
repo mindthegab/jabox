@@ -140,7 +140,7 @@ THE SOFTWARE.
 								<artifactItem>
 									<groupId>org.jabox</groupId>
 									<artifactId>eclipse-startup</artifactId>
-									<version>1.0.0-SNAPSHOT</version>
+									<version>0.0.1</version>
 									<type>zip</type>
 								</artifactItem>
 							</artifactItems>
