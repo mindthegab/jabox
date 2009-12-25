@@ -16,7 +16,7 @@ public class WebappManager {
 		File baseDir = Environment.getBaseDirFile();
 		File file = new File(baseDir, "servers.csv");
 		if (!file.exists()) {
-			baseDir.mkdir();
+			baseDir.mkdirs();
 			createDefaultServersFile(file);
 		}
 		List<String> servers = readData(file);
