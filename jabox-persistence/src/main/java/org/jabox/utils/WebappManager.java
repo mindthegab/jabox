@@ -1,4 +1,4 @@
-package org.jabox.embedded.jetty;
+package org.jabox.utils;
 
 import java.io.File;
 import java.io.FileNotFoundException;

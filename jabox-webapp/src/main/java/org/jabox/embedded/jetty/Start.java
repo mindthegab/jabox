@@ -26,6 +26,7 @@ package org.jabox.embedded.jetty;
 import java.util.List;
 
 import org.jabox.apis.embedded.EmbeddedServer;
+import org.jabox.utils.WebappManager;
 import org.mortbay.jetty.Connector;
 import org.mortbay.jetty.Server;
 import org.mortbay.jetty.bio.SocketConnector;
