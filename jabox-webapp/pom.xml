@@ -21,14 +21,13 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<artifactId>jabox</artifactId>
 		<groupId>org.jabox</groupId>
-		<version>0.0.1</version>
+		<artifactId>jabox</artifactId>
+		<version>0.0.2-SNAPSHOT</version>
 	</parent>
 
 	<artifactId>jabox-webapp</artifactId>
 	<packaging>war</packaging>
-	<!-- TODO project name  -->
 	<name>Jabox Webapp</name>
 	<description />
 
@@ -37,20 +36,11 @@
 		</organization>
 	-->
 
-
-	<licenses>
-		<license>
-			<name>The Apache Software License, Version 2.0</name>
-			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-			<distribution>repo</distribution>
-		</license>
-	</licenses>
-
 	<dependencies>
 		<dependency>
 			<groupId>org.jabox</groupId>
 			<artifactId>jabox-persistence</artifactId>
-			<version>${pom.version}</version>
+			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>javax.persistence</groupId>
