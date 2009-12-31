@@ -27,7 +27,7 @@ THE SOFTWARE.
 	<parent>
 		<groupId>org.jabox</groupId>
 		<artifactId>jabox</artifactId>
-		<version>0.0.2-SNAPSHOT</version>
+		<version>0.0.2</version>
 	</parent>
 	<artifactId>bts-redmine</artifactId>
 	<name>bts-redmine</name>

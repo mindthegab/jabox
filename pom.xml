@@ -18,14 +18,13 @@
 		TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 		SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 	-->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.jabox</groupId>
 	<artifactId>jabox</artifactId>
 	<packaging>pom</packaging>
-	<version>0.0.2-SNAPSHOT</version>
+	<version>0.0.2</version>
 	<!-- TODO project name  -->
 	<name>Jabox</name>
 	<description />
@@ -53,9 +52,9 @@
 		</organization>
 	-->
 	<scm>
-		<url>http://www.jabox.org/trunk/</url>
-		<connection>scm:svn:svn://67.23.47.178/trunk/</connection>
-		<developerConnection>scm:svn:svn://67.23.47.178/trunk/</developerConnection>
+		<url>http://www.jabox.org/tags/jabox-0.0.2</url>
+		<connection>scm:svn:svn://67.23.47.178/tags/jabox-0.0.2</connection>
+		<developerConnection>scm:svn:svn://67.23.47.178/tags/jabox-0.0.2</developerConnection>
 	</scm>
 	<build>
 		<plugins>
