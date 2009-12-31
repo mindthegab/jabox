@@ -27,7 +27,7 @@ THE SOFTWARE.
 	<parent>
 		<artifactId>jabox</artifactId>
 		<groupId>org.jabox</groupId>
-		<version>0.0.2</version>
+		<version>0.0.3-SNAPSHOT</version>
 	</parent>
 	<artifactId>maven-helper</artifactId>
 	<name>maven-helper</name>

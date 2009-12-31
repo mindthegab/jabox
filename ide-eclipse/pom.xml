@@ -27,7 +27,7 @@ THE SOFTWARE.
 	<parent>
 		<groupId>org.jabox</groupId>
 		<artifactId>jabox</artifactId>
-		<version>0.0.2</version>
+		<version>0.0.3-SNAPSHOT</version>
 	</parent>
 	<artifactId>ide-eclipse</artifactId>
 	<name>ide-eclipse</name>
