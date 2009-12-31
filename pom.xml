@@ -79,14 +79,14 @@
 	</licenses>
 	<distributionManagement>
 		<snapshotRepository>
-			<id>jabox-snapshots</id>
-			<name>Jabox Snapshots</name>
-			<url>file:///C:/Repository/</url>
+			<id>snapshots</id>
+			<name>snapshots</name>
+			<url>http://localhost:9090/artifactory/libs-snapshots-local</url>
 		</snapshotRepository>
 		<repository>
-			<id>jabox-releases</id>
-			<name>Jabox Releases</name>
-			<url>file:///C:/Repository/</url>
+			<id>releases</id>
+			<name>releases</name>
+			<url>http://localhost:9090/artifactory/libs-releases-local</url>
 		</repository>
 	</distributionManagement>
 	<properties>
