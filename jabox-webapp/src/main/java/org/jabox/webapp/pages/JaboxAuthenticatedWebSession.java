@@ -53,11 +53,11 @@ public class JaboxAuthenticatedWebSession extends AuthenticatedWebSession {
 	@Override
 	public boolean authenticate(final String username, final String password) {
 		// Check username and password
-		boolean authenticated = username.equals("wicket")
-				&& password.equals("wicket");
+		boolean authenticated = username.equals("admin")
+				&& password.equals("admin");
 		if (authenticated) {
 			_user = new User();
-			_user.setLogin("wicket");
+			_user.setLogin("admin");
 		}
 		return authenticated;
 	}
