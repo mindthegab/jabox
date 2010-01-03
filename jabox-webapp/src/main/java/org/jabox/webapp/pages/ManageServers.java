@@ -21,30 +21,44 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.jabox.model;
+package org.jabox.webapp.pages;
 
-import java.io.Serializable;
+import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.DiscriminatorColumn;
-import javax.persistence.DiscriminatorType;
-import javax.persistence.Entity;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.OneToOne;
-
+import org.apache.wicket.authorization.strategies.role.annotations.AuthorizeInstantiation;
+import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.persistence.domain.BaseEntity;
+import org.apache.wicket.persistence.provider.GeneralDao;
+import org.apache.wicket.spring.injection.annot.SpringBean;
+import org.jabox.apis.Connector;
+import org.jabox.apis.Manager;
+import org.jabox.apis.scm.SCMConnector;
+import org.jabox.webapp.borders.MiddlePanel;
+import org.jabox.webapp.utils.SCMConnectorList;
 
-@Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(discriminatorType = DiscriminatorType.STRING)
-public abstract class DeployerConfig extends BaseEntity implements Serializable {
-	private static final long serialVersionUID = -1502838460606670036L;
+/**
+ * Homepage
+ */
+@AuthorizeInstantiation("ADMIN")
+public class ManageServers extends MiddlePanel {
 
-	@Column(nullable = false, length = 64)
-	public String pluginId;
+	private static final long serialVersionUID = 1L;
 
-	@OneToOne(optional = false, cascade = CascadeType.PERSIST)
-	public Server server;
+	@SpringBean
+	protected GeneralDao _generalDao;
+
+	@SpringBean
+	protected Manager<Connector> _manager;
+
+	public ManageServers() {
+		Class<? extends Connector> connector = SCMConnector.class;
+		List<Connector> connectors = _manager.getConnectors(connector);
+		System.out.println("connectors: " + connector.getName() + ":"
+				+ connectors);
+
+		Form<BaseEntity> form = new Form<BaseEntity>("deleteForm");
+		form.add(new SCMConnectorList("projects", connectors));
+		add(form);
+	}
+
 }

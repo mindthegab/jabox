@@ -39,7 +39,7 @@ public class HttpPostDeployerPlugin implements DeployerPlugin {
 		return ID;
 	}
 
-	public Component newEditor(String id, IModel<Configuration> model) {
+	public Component newEditor(String id, IModel<Server> model) {
 		return new HttpPostDeployerEditor(id, model);
 	}
 
@@ -47,9 +47,9 @@ public class HttpPostDeployerPlugin implements DeployerPlugin {
 		return new HttpPostDeployerConfig();
 	}
 
-	public String deploy(Configuration article) {
+	public String deploy(Server article) {
 		HttpPostDeployerConfig config = (HttpPostDeployerConfig) article.deployerConfig;
-		return "Deploying article: " + article.getIssueManagementUrl()
+		return "Deploying article: " + article.getName()
 				+ " to http://" + config.url;
 	}
 }

@@ -29,9 +29,9 @@ import org.apache.wicket.model.IModel;
 public interface DeployerPlugin extends Identifiable<String> {
 	String getName();
 
-	String deploy(Configuration article);
+	String deploy(Server article);
 
-	Component newEditor(String id, IModel<Configuration> model);
+	Component newEditor(String id, IModel<Server> model);
 
 	DeployerConfig newConfig();
 }

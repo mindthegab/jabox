@@ -21,22 +21,35 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.jabox.model;
+package org.jabox.webapp.utils;
 
-import org.apache.wicket.markup.html.form.TextField;
-import org.apache.wicket.markup.html.panel.Panel;
-import org.apache.wicket.model.CompoundPropertyModel;
-import org.apache.wicket.model.IModel;
+import java.util.List;
 
-public class FtpDeployerEditor extends Panel
-{
-	private static final long serialVersionUID = -2526046655726538823L;
+import org.apache.wicket.AttributeModifier;
+import org.apache.wicket.markup.html.basic.Label;
+import org.apache.wicket.markup.html.basic.MultiLineLabel;
+import org.apache.wicket.markup.html.list.ListItem;
+import org.apache.wicket.markup.html.list.PropertyListView;
+import org.apache.wicket.persistence.provider.GeneralDao;
+import org.apache.wicket.spring.injection.annot.SpringBean;
+import org.jabox.apis.Connector;
+import org.jabox.model.Project;
+import org.jabox.webapp.pages.DeleteEntityButton;
 
-	public FtpDeployerEditor(String id, IModel<Server> model)
-    {
-        super(id, new CompoundPropertyModel<String>(model));
-        add(new TextField<String>("host").setRequired(true));
-        add(new TextField<String>("port").setRequired(true));
-    }
+public class ConnectorList extends PropertyListView<Connector> {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2877438240039632971L;
+
+	public ConnectorList(String id, List<Connector> projects) {
+		super(id, projects);
+	}
+
+	@SpringBean(name = "GeneralDao")
+	protected GeneralDao generalDao;
+
+	public void populateItem(final ListItem<Connector> listItem) {
+	}
 }

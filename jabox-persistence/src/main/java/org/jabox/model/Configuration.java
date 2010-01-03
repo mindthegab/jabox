@@ -41,12 +41,6 @@ public class Configuration extends BaseEntity implements Serializable {
 	private String _rmsConnector;
 
 	private String _cisConnector;
-	@OneToOne(mappedBy = "configuration", cascade = CascadeType.ALL)
-	public DeployerConfig deployerConfig;
-
-	public DeployerConfig getDeployerConfig() {
-		return deployerConfig;
-	}
 
 	public void setIssueManagementUrl(final String issueManagementUrl) {
 		_issueManagementUrl = issueManagementUrl;
@@ -78,11 +72,6 @@ public class Configuration extends BaseEntity implements Serializable {
 
 	public String getCISConnector() {
 		return _cisConnector;
-	}
-
-	public void setDeployerConfig(final DeployerConfig newConfig) {
-		deployerConfig = newConfig;
-		newConfig.configuration = this;
 	}
 
 	public String getRMSConnector() {

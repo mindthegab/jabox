@@ -31,7 +31,7 @@ import org.apache.wicket.model.IModel;
 public class HttpPostDeployerEditor extends Panel {
 	private static final long serialVersionUID = 8894309704559729007L;
 
-	public HttpPostDeployerEditor(String id, IModel<Configuration> model) {
+	public HttpPostDeployerEditor(String id, IModel<Server> model) {
 		super(id, new CompoundPropertyModel<String>(model));
 		add(new TextField<String>("url").setRequired(true));
 	}

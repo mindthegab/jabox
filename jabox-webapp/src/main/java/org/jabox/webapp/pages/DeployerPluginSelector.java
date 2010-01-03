@@ -39,22 +39,23 @@ import org.jabox.model.Configuration;
 import org.jabox.model.DeployerConfig;
 import org.jabox.model.DeployerPlugin;
 import org.jabox.model.DeployersRegistry;
+import org.jabox.model.Server;
 
 public class DeployerPluginSelector extends Panel {
 	private static final long serialVersionUID = -222526477140616108L;
 	@SpringBean
 	private DeployersRegistry registry;
 
-	public DeployerPluginSelector(String id, final IModel<Configuration> article) {
+	public DeployerPluginSelector(String id, final IModel<Server> article) {
 		super(id);
 		add(new WebMarkupContainer("editor"));
-		String pluginId = article.getObject().deployerConfig != null ? ((Configuration) article
+		String pluginId = article.getObject().deployerConfig != null ? ((Server) article
 				.getObject()).deployerConfig.pluginId
 				: "-1";
 		if (article.getObject().deployerConfig != null) {
 			DeployerPlugin plugin = registry.getEntry(pluginId);
 			DeployerPluginSelector.this.replace(plugin
-					.newEditor("editor", new PropertyModel<Configuration>(
+					.newEditor("editor", new PropertyModel<Server>(
 							article, "deployerConfig")));
 
 		}
@@ -66,7 +67,7 @@ public class DeployerPluginSelector extends Panel {
 			@Override
 			protected void onSelectionChanged(Object pluginId) {
 				DeployerPlugin plugin = registry.getEntry((String) pluginId);
-				Configuration configuration = article.getObject();
+				Server configuration = article.getObject();
 				DeployerConfig newConfig = plugin.newConfig();
 				configuration.setDeployerConfig(newConfig);
 
