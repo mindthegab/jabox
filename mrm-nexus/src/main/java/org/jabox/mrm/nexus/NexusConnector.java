@@ -23,15 +23,28 @@
  */
 package org.jabox.mrm.nexus;
 
+import org.apache.wicket.Component;
+import org.apache.wicket.model.IModel;
 import org.jabox.apis.rms.RMSConnector;
+import org.jabox.model.DeployerConfig;
+import org.jabox.model.Server;
 import org.springframework.stereotype.Service;
 
 @Service
 public class NexusConnector implements RMSConnector {
+	public static final String ID = "plugin.rms.nexus";
+
+	public String getName() {
+		return "Nexus Plugin";
+	}
+
+	public String getId() {
+		return ID;
+	}
 
 	@Override
 	public String toString() {
-		return "Nexus Plugin";
+		return getName();
 	}
 
 	public String getReleaseRepositoryURL() {
@@ -40,5 +53,13 @@ public class NexusConnector implements RMSConnector {
 
 	public String getSnapshotsRepositoryURL() {
 		return "http://localhost:9090/nexus/content/repositories/snapshots/";
+	}
+
+	public DeployerConfig newConfig() {
+		return new NexusConnectorConfig();
+	}
+
+	public Component newEditor(String id, IModel<Server> model) {
+		return new NexusConnectorEditor(id, model);
 	}
 }

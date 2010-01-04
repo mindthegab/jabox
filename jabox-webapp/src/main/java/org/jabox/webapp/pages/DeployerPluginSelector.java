@@ -35,6 +35,7 @@ import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.LoadableDetachableModel;
 import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.spring.injection.annot.SpringBean;
+import org.jabox.apis.Connector;
 import org.jabox.model.Configuration;
 import org.jabox.model.DeployerConfig;
 import org.jabox.model.DeployerPlugin;
@@ -53,7 +54,7 @@ public class DeployerPluginSelector extends Panel {
 				.getObject()).deployerConfig.pluginId
 				: "-1";
 		if (article.getObject().deployerConfig != null) {
-			DeployerPlugin plugin = registry.getEntry(pluginId);
+			Connector plugin = registry.getEntry(pluginId);
 			DeployerPluginSelector.this.replace(plugin
 					.newEditor("editor", new PropertyModel<Server>(
 							article, "deployerConfig")));
@@ -66,7 +67,7 @@ public class DeployerPluginSelector extends Panel {
 
 			@Override
 			protected void onSelectionChanged(Object pluginId) {
-				DeployerPlugin plugin = registry.getEntry((String) pluginId);
+				Connector plugin = registry.getEntry((String) pluginId);
 				Server configuration = article.getObject();
 				DeployerConfig newConfig = plugin.newConfig();
 				configuration.setDeployerConfig(newConfig);

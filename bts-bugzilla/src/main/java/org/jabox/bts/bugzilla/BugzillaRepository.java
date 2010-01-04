@@ -27,8 +27,12 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.net.MalformedURLException;
 
+import org.apache.wicket.Component;
+import org.apache.wicket.model.IModel;
 import org.jabox.apis.bts.BTSConnector;
+import org.jabox.model.DeployerConfig;
 import org.jabox.model.Project;
+import org.jabox.model.Server;
 import org.springframework.stereotype.Service;
 import org.xml.sax.SAXException;
 
@@ -41,12 +45,22 @@ import com.meterware.httpunit.WebResponse;
 @Service
 public class BugzillaRepository implements BTSConnector, Serializable {
 	private static final long serialVersionUID = 8131183843391948936L;
+	public static final String ID = "plugin.its.bugzilla";
+
 	private String _url;
 	private final WebConversation _wc;
 
+	public String getName() {
+		return "Bugzilla Plugin";
+	}
+
+	public String getId() {
+		return ID;
+	}
+
 	@Override
 	public String toString() {
-		return "Bugzilla Plugin";
+		return getName();
 	}
 
 	public BugzillaRepository() {
@@ -112,5 +126,13 @@ public class BugzillaRepository implements BTSConnector, Serializable {
 		form.setParameter("version", version);
 		form.submit();
 		return true;
+	}
+
+	public DeployerConfig newConfig() {
+		return new BugzillaRepositoryConfig();
+	}
+
+	public Component newEditor(String id, IModel<Server> model) {
+		return new BugzillaRepositoryEditor(id, model);
 	}
 }

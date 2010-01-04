@@ -25,10 +25,11 @@ package org.jabox.model;
 
 import org.apache.wicket.Component;
 import org.apache.wicket.model.IModel;
+import org.jabox.apis.Connector;
 import org.springframework.stereotype.Service;
 
 @Service
-public class FtpDeployerPlugin implements DeployerPlugin {
+public class FtpDeployerPlugin implements Connector {
 
 	public static final String ID = "plugin.deployer.ftp";
 

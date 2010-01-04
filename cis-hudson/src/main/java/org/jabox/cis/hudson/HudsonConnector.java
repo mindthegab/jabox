@@ -31,18 +31,31 @@ import java.net.MalformedURLException;
 import org.apache.commons.httpclient.Header;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.methods.PostMethod;
+import org.apache.wicket.Component;
+import org.apache.wicket.model.IModel;
 import org.apache.wicket.util.io.IOUtils;
 import org.jabox.apis.cis.CISConnector;
+import org.jabox.model.DeployerConfig;
 import org.jabox.model.Project;
+import org.jabox.model.Server;
 import org.springframework.stereotype.Service;
 import org.xml.sax.SAXException;
 
 @Service
 public class HudsonConnector implements CISConnector {
+	public static final String ID = "plugin.cis.hudson";
+
+	public String getName() {
+		return "Hudson Plugin";
+	}
+
+	public String getId() {
+		return ID;
+	}
 
 	@Override
 	public String toString() {
-		return "Hudson Plugin";
+		return getName();
 	}
 
 	/**
@@ -91,8 +104,10 @@ public class HudsonConnector implements CISConnector {
 
 		String replace = theString.replace("${project.scmURL}", project
 				.getScmUrl());
-		replace = replace.replace("${project.issueURL}", "http://localhost/redmine/issues/show/$1");
-		replace = replace.replace("${goals}", "clean checkstyle:checkstyle findbugs:findbugs pmd:cpd deploy");
+		replace = replace.replace("${project.issueURL}",
+				"http://localhost/redmine/issues/show/$1");
+		replace = replace.replace("${goals}",
+				"clean checkstyle:checkstyle findbugs:findbugs pmd:cpd deploy");
 		return replace;
 	}
 
@@ -101,4 +116,11 @@ public class HudsonConnector implements CISConnector {
 		return true;
 	}
 
+	public DeployerConfig newConfig() {
+		return new HudsonConnectorConfig();
+	}
+
+	public Component newEditor(String id, IModel<Server> model) {
+		return new HudsonConnectorEditor(id, model);
+	}
 }

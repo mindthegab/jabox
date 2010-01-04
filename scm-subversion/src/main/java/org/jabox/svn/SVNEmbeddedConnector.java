@@ -27,9 +27,13 @@ import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
 
+import org.apache.wicket.Component;
+import org.apache.wicket.model.IModel;
 import org.jabox.apis.scm.SCMConnector;
 import org.jabox.apis.scm.SCMException;
+import org.jabox.model.DeployerConfig;
 import org.jabox.model.Project;
+import org.jabox.model.Server;
 import org.jabox.utils.TemporalDirectory;
 import org.springframework.stereotype.Service;
 import org.tmatesoft.svn.core.SVNException;
@@ -37,17 +41,26 @@ import org.tmatesoft.svn.core.SVNURL;
 
 @Service
 public class SVNEmbeddedConnector implements SCMConnector, Serializable {
+	public static final String ID = "plugin.scm.subversion.embedded";
 
 	private static final long serialVersionUID = -3875844507330633672L;
 
 	private File _tmpDir;
 
-	@Override
-	public String toString() {
+	public String getName() {
 		return "Subversion Embedded Plugin";
 	}
 
-	public String getScmUrl()  {
+	public String getId() {
+		return ID;
+	}
+
+	@Override
+	public String toString() {
+		return getName();
+	}
+
+	public String getScmUrl() {
 		SVNURL svnDir;
 		try {
 			svnDir = SVNURL.fromFile(SubversionRepository
@@ -59,6 +72,7 @@ public class SVNEmbeddedConnector implements SCMConnector, Serializable {
 		}
 		return null;
 	}
+
 	public File createProjectDirectories(Project project) throws SCMException {
 		try {
 			SubversionFacade svn = new SubversionFacade();
@@ -106,4 +120,14 @@ public class SVNEmbeddedConnector implements SCMConnector, Serializable {
 			throw new SCMException("Problem during the Subversion commit.", e);
 		}
 	}
+	
+
+	public DeployerConfig newConfig() {
+		return new SVNConnectorConfig();
+	}
+
+	public Component newEditor(String id, IModel<Server> model) {
+		return new SVNConnectorEditor(id, model);
+	}
+
 }

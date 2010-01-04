@@ -27,8 +27,12 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.net.MalformedURLException;
 
+import org.apache.wicket.Component;
+import org.apache.wicket.model.IModel;
 import org.jabox.apis.bts.BTSConnector;
+import org.jabox.model.DeployerConfig;
 import org.jabox.model.Project;
+import org.jabox.model.Server;
 import org.springframework.stereotype.Service;
 import org.xml.sax.SAXException;
 
@@ -41,12 +45,22 @@ import com.meterware.httpunit.WebResponse;
 @Service
 public class RedmineRepository implements BTSConnector, Serializable {
 	private static final long serialVersionUID = -692328636804684690L;
+	public static final String ID = "plugin.its.redmine";
+
 	private String _url;
 	private final WebConversation _wc;
 
+	public String getName() {
+		return "Redmine Plugin";
+	}
+
+	public String getId() {
+		return ID;
+	}
+
 	@Override
 	public String toString() {
-		return "Redmine Plugin";
+		return getName();
 	}
 
 	/**
@@ -107,6 +121,14 @@ public class RedmineRepository implements BTSConnector, Serializable {
 			return true;
 		}
 		return false;
+	}
+
+	public DeployerConfig newConfig() {
+		return new RedmineRepositoryConfig();
+	}
+
+	public Component newEditor(String id, IModel<Server> model) {
+		return new RedmineRepositoryEditor(id, model);
 	}
 
 }

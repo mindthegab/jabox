@@ -89,7 +89,7 @@ public class CreateServer extends MiddlePanel {
 				"configuration", model);
 		form.add(child);
 
-		DeployerPlugin plugin = registry.getEntries().get(0);
+		Connector plugin = registry.getEntries().get(0);
 		server.setDeployerConfig(plugin.newConfig());
 
 		child.replace(plugin.newEditor("editor", new PropertyModel(

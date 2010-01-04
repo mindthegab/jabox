@@ -23,16 +23,27 @@
  */
 package org.jabox.model;
 
-import org.jabox.apis.Connector;
-import org.springframework.stereotype.Service;
+import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
 
-@Service
-public class DeployersRegistry extends IdentifiableBeanRegistry<Connector,String>
+import org.jabox.model.DeployerConfig;
+import org.jabox.model.FtpDeployerPlugin;
+
+
+@Entity
+@DiscriminatorValue(FtpDeployerPlugin.ID)
+public class FtpDeployerConfig2 extends DeployerConfig
 {
+	private static final long serialVersionUID = -5318749273535543344L;
 
-    public DeployersRegistry()
+	public FtpDeployerConfig2()
     {
-        super(Connector.class);
+        pluginId = FtpDeployerPlugin.ID;
     }
 
+    @Column(nullable = false)
+    public String host;
+
+    public Integer port;
 }

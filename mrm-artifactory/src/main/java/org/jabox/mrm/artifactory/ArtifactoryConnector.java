@@ -23,15 +23,27 @@
  */
 package org.jabox.mrm.artifactory;
 
+import org.apache.wicket.Component;
+import org.apache.wicket.model.IModel;
 import org.jabox.apis.rms.RMSConnector;
+import org.jabox.model.DeployerConfig;
+import org.jabox.model.Server;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ArtifactoryConnector implements RMSConnector {
+	public static final String ID = "plugin.rms.artifactory";
+	public String getName() {
+		return "Artifactory Plugin";
+	}
+
+	public String getId() {
+		return ID;
+	}
 
 	@Override
 	public String toString() {
-		return "Artifactory Plugin";
+		return getName();
 	}
 
 	public String getReleaseRepositoryURL() {
@@ -41,4 +53,13 @@ public class ArtifactoryConnector implements RMSConnector {
 	public String getSnapshotsRepositoryURL() {
 		return "http://localhost:9090/artifactory/libs-snapshots-local";
 	}
+
+	public DeployerConfig newConfig() {
+		return new ArtifactoryConnectorConfig();
+	}
+
+	public Component newEditor(String id, IModel<Server> model) {
+		return new ArtifactoryConnectorEditor(id, model);
+	}
+
 }

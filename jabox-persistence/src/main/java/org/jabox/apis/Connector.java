@@ -23,6 +23,16 @@
  */
 package org.jabox.apis;
 
-public interface Connector {
+import org.apache.wicket.Component;
+import org.apache.wicket.model.IModel;
+import org.jabox.model.DeployerConfig;
+import org.jabox.model.Identifiable;
+import org.jabox.model.Server;
 
+public interface Connector extends Identifiable<String> {
+	String getName();
+
+	DeployerConfig newConfig();
+
+	Component newEditor(String id, IModel<Server> model);
 }
