@@ -92,8 +92,8 @@ public class CreateServer extends MiddlePanel {
 		Connector plugin = registry.getEntries().get(0);
 		server.setDeployerConfig(plugin.newConfig());
 
-		child.replace(plugin.newEditor("editor", new PropertyModel(
-				server, "deployerConfig")));
+//		child.replace(plugin.newEditor("editor", new PropertyModel(
+//				server, "deployerConfig")));
 
 //		DropDownChoice<Connector> ddc = new DropDownChoice<Connector>(
 //				"connectorType", new PropertyModel<Connector>(server,

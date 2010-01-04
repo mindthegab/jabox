@@ -37,7 +37,7 @@ import javax.persistence.OneToOne;
 import org.apache.wicket.persistence.domain.BaseEntity;
 
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(discriminatorType = DiscriminatorType.STRING)
 public abstract class DeployerConfig extends BaseEntity implements Serializable {
 	private static final long serialVersionUID = -1502838460606670036L;
