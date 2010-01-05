@@ -24,49 +24,51 @@ THE SOFTWARE.
 <html>
 <body>
 <wicket:extend>
-<h2>Manage Servers</h2>
-<p/>
-<h3>Source Configuration Management (S.C.M.)</h3>
-		<form wicket:id="deleteForm">
-        <table cellspacing="0" class="dataview">
-         <tr>
-    	    <th>Name</th>
-	        <th>Maven Archetype</th>
-	        <th>Description</th>
-	        <th>Delete</th>
-    	</tr>
-    	<tr wicket:id="projects"> 
-    	  	<td><span wicket:id = "clazz">Class name.</span></td>
-    	
-  	    	<td><span wicket:id = "scmUrl">SCM Url.</span></td>
-	    </tr>
-  		<wicket:remove>
-          <tr>
-    	    <td>anotherProject</td>
-  	    	<td>Description of anotherProject.</td>
-  	      </tr>
-  		</wicket:remove>
-  		</table>
-  		</form>
+	<h2>Manage Servers</h2>
+	<p />
+	<h3>Source Configuration Management (S.C.M.)</h3>
+	<a wicket:id="create">create new Server</a>
+	<br />
+	<form wicket:id="deleteForm">
+	<table cellspacing="0" class="dataview">
+		<tr>
+			<th>Name</th>
+			<th>Maven Archetype</th>
+			<th>Description</th>
+			<th>Delete</th>
+		</tr>
+		<tr wicket:id="projects">
+			<td><span wicket:id="clazz">Class name.</span></td>
 
-<hr/>
-<p/>
-<h3>Issue Tracking Systems (I.T.S.)</h3>
-<hr/>
-<p/>
-<h3>Continuous Integration Systems (C.I.S.)</h3>
-<hr/>
-<p/>
-<h3>Repository Management Systems (R.M.S.)</h3>
-<hr/>
-<p/>
-<h3>Source Management Systems (S.C.M.)</h3>
-<hr/>
-<p/>
-<h3>Integrated Development Environment (I.D.E.)</h3> 
-<hr/>
-<p/>
-		
+			<td><span wicket:id="scmUrl">SCM Url.</span></td>
+			<td><a wicket:id="edit">edit</a></td>
+		</tr>
+		<wicket:remove>
+			<tr>
+				<td>anotherProject</td>
+				<td>Description of anotherProject.</td>
+			</tr>
+		</wicket:remove>
+	</table>
+	</form>
+
+	<hr />
+	<p />
+	<h3>Issue Tracking Systems (I.T.S.)</h3>
+	<hr />
+	<p />
+	<h3>Continuous Integration Systems (C.I.S.)</h3>
+	<hr />
+	<p />
+	<h3>Repository Management Systems (R.M.S.)</h3>
+	<hr />
+	<p />
+	<h3>Source Management Systems (S.C.M.)</h3>
+	<hr />
+	<p />
+	<h3>Integrated Development Environment (I.D.E.)</h3>
+	<hr />
+	<p />
 </wicket:extend>
 </body>
 </html>

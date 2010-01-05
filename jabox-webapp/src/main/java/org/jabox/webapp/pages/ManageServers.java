@@ -62,5 +62,6 @@ public class ManageServers extends MiddlePanel {
 		Form<BaseEntity> form = new Form<BaseEntity>("deleteForm");
 		form.add(new SCMConnectorList("projects", entities));
 		add(form);
+		add(new CreateServerLink("create"));
 	}
 }
