@@ -21,29 +21,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.jabox.model;
+package org.jabox.apis.scm;
 
-import javax.persistence.Column;
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
+import org.jabox.apis.ConnectorConfig;
 
-import org.jabox.model.DeployerConfig;
-import org.jabox.model.FtpDeployerPlugin;
+public interface SCMConnectorConfig extends ConnectorConfig {
 
-
-@Entity
-@DiscriminatorValue(FtpDeployerPlugin.ID)
-public class FtpDeployerConfig2 extends DeployerConfig
-{
-	private static final long serialVersionUID = -5318749273535543344L;
-
-	public FtpDeployerConfig2()
-    {
-        pluginId = FtpDeployerPlugin.ID;
-    }
-
-    @Column(nullable = false)
-    public String host;
-
-    public Integer port;
 }

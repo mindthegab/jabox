@@ -23,16 +23,16 @@
  */
 package org.apache.wicket.persistence.domain;
 
-import java.io.Serializable;
-
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Version;
 
+import org.jabox.apis.IBaseEntity;
+
 @MappedSuperclass
-public abstract class BaseEntity implements Serializable {
+public abstract class BaseEntity implements IBaseEntity {
 	private static final long serialVersionUID = -102086082614997832L;
 
 	@Id

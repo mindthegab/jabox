@@ -32,7 +32,6 @@ import org.apache.wicket.model.IModel;
 import org.jabox.apis.scm.SCMConnector;
 import org.jabox.apis.scm.SCMException;
 import org.jabox.model.DeployerConfig;
-import org.jabox.model.FtpDeployerConfig2;
 import org.jabox.model.Project;
 import org.jabox.model.Server;
 import org.jabox.utils.TemporalDirectory;
@@ -123,7 +122,7 @@ public class SVNConnector implements SCMConnector, Serializable {
 	}
 
 	public DeployerConfig newConfig() {
-		return new FtpDeployerConfig2();
+		return new SVNConnectorConfig();
 	}
 
 	public Component newEditor(String id, IModel<Server> model) {

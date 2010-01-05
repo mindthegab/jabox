@@ -35,11 +35,13 @@ import javax.persistence.InheritanceType;
 import javax.persistence.OneToOne;
 
 import org.apache.wicket.persistence.domain.BaseEntity;
+import org.jabox.apis.ConnectorConfig;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(discriminatorType = DiscriminatorType.STRING)
-public abstract class DeployerConfig extends BaseEntity implements Serializable {
+public abstract class DeployerConfig extends BaseEntity implements
+		ConnectorConfig, Serializable {
 	private static final long serialVersionUID = -1502838460606670036L;
 
 	@Column(nullable = false, length = 64)
@@ -47,4 +49,12 @@ public abstract class DeployerConfig extends BaseEntity implements Serializable 
 
 	@OneToOne(optional = false, cascade = CascadeType.PERSIST)
 	public Server server;
+
+	public String getPluginId() {
+		return pluginId;
+	}
+	
+	public Server getServer() {
+		return server;
+	}
 }

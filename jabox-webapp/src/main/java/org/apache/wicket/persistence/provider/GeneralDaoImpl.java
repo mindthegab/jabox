@@ -31,9 +31,9 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceContextType;
 import javax.persistence.Query;
 
-import org.apache.wicket.persistence.domain.BaseEntity;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.jabox.apis.IBaseEntity;
 import org.jabox.model.Configuration;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.transaction.annotation.Transactional;
@@ -60,7 +60,7 @@ public class GeneralDaoImpl implements GeneralDao, InitializingBean {
 	}
 
 	@SuppressWarnings("unchecked")
-	public <T extends BaseEntity> T findEntity(Long id, Class<T> clazz) {
+	public <T extends IBaseEntity> T findEntity(Long id, Class<T> clazz) {
 		Query query = entityManager.createQuery("SELECT e FROM "
 				+ clazz.getName() + " e WHERE e.id=" + id);
 		return (T) query.getSingleResult();
@@ -70,7 +70,7 @@ public class GeneralDaoImpl implements GeneralDao, InitializingBean {
 		return entityManager;
 	}
 
-	public <T extends BaseEntity> void persist(T object) {
+	public <T extends IBaseEntity> void persist(T object) {
 		// if (object.getId() == null)
 		entityManager.persist(object);
 		// else {
@@ -79,7 +79,7 @@ public class GeneralDaoImpl implements GeneralDao, InitializingBean {
 
 	}
 
-	public void deleteEntity(BaseEntity entity) {
+	public void deleteEntity(IBaseEntity entity) {
 		getHibernateSession().delete(entity);
 	}
 
@@ -99,7 +99,7 @@ public class GeneralDaoImpl implements GeneralDao, InitializingBean {
 	}
 
 	@SuppressWarnings("unchecked")
-	public <T extends BaseEntity> List<T> getEntities(Class<T> clazz) {
+	public <T extends IBaseEntity> List<T> getEntities(Class<T> clazz) {
 		Criteria criteria = getHibernateSession().createCriteria(clazz);
 		List<T> entities = (List<T>) criteria.list();
 

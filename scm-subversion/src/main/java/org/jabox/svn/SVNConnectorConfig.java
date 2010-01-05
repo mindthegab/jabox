@@ -11,14 +11,15 @@ import org.jabox.model.DeployerConfig;
 public class SVNConnectorConfig extends DeployerConfig {
 	private static final long serialVersionUID = 6542402958304063770L;
 
-	public SVNConnectorConfig()
-    {
-        pluginId = SVNConnector.ID;
-    }
+	public SVNConnectorConfig() {
+		pluginId = SVNConnector.ID;
+	}
 
-    @Column(nullable = false)
-    public String host;
+	@Column(nullable = false)
+	public String repositoryURL;
 
-    public Integer port;
+	public String username;
+
+	public String password;
 
 }

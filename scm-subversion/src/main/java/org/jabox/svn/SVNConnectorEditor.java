@@ -1,5 +1,6 @@
 package org.jabox.svn;
 
+import org.apache.wicket.markup.html.form.PasswordTextField;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.CompoundPropertyModel;
@@ -11,9 +12,9 @@ public class SVNConnectorEditor extends Panel {
 
 	public SVNConnectorEditor(String id, IModel<Server> model) {
 		super(id, new CompoundPropertyModel<String>(model));
-		add(new TextField<String>("host").setRequired(true));
-		add(new TextField<String>("port").setRequired(true));
-
+		add(new TextField<String>("repositoryURL").setRequired(true));
+		add(new TextField<String>("username").setRequired(true));
+		add(new PasswordTextField("password").setRequired(true));
 	}
 
 }

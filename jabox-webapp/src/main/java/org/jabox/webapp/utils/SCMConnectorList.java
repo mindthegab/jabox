@@ -31,29 +31,24 @@ import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.PropertyListView;
 import org.apache.wicket.persistence.provider.GeneralDao;
 import org.apache.wicket.spring.injection.annot.SpringBean;
-import org.jabox.apis.Connector;
-import org.jabox.apis.scm.SCMConnector;
+import org.jabox.apis.ConnectorConfig;
 
-public class SCMConnectorList extends PropertyListView<Connector> {
-
-	/**
-	 * 
-	 */
+public class SCMConnectorList extends PropertyListView<ConnectorConfig> {
 	private static final long serialVersionUID = -2877438240039632971L;
 
-	public SCMConnectorList(String id, List<Connector> projects) {
+	public SCMConnectorList(String id, List<ConnectorConfig> projects) {
 		super(id, projects);
 	}
 
 	@SpringBean(name = "GeneralDao")
 	protected GeneralDao generalDao;
 
-	public void populateItem(final ListItem<Connector> listItem) {
-		final SCMConnector connector = (SCMConnector) listItem.getModelObject();
-		listItem.add(new Label("clazz", connector.toString()));
-		listItem.add(new Label("scmUrl", connector.getScmUrl()));
+	public void populateItem(final ListItem<ConnectorConfig> listItem) {
+		final ConnectorConfig connector = listItem.getModelObject();
+		listItem.add(new Label("clazz", connector.getServer().getName()));
+		listItem.add(new Label("scmUrl", connector.getPluginId()));
 		final AttributeModifier attributeModifier = new AttributeModifier(
-				"class", true, new EvenOddRow<Connector>(listItem));
+				"class", true, new EvenOddRow<ConnectorConfig>(listItem));
 		listItem.add(attributeModifier);
 	}
 }

@@ -25,18 +25,18 @@ package org.apache.wicket.persistence.provider;
 
 import java.util.List;
 
-import org.apache.wicket.persistence.domain.BaseEntity;
+import org.jabox.apis.IBaseEntity;
 import org.jabox.model.Configuration;
 
 public interface GeneralDao {
 
-	<T extends BaseEntity> T findEntity(Long id, Class<T> clazz);
+	<T extends IBaseEntity> T findEntity(Long id, Class<T> clazz);
 
-	<T extends BaseEntity> List<T> getEntities(Class<T> clazz);
+	<T extends IBaseEntity> List<T> getEntities(Class<T> clazz);
 
-	<T extends BaseEntity> void persist(T object);
+	<T extends IBaseEntity> void persist(T object);
 
-	void deleteEntity(BaseEntity entity);
+	void deleteEntity(IBaseEntity entity);
 
 	Configuration getConfiguration();
 }
