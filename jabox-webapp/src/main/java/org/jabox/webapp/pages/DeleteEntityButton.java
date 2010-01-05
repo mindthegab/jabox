@@ -23,6 +23,7 @@
  */
 package org.jabox.webapp.pages;
 
+import org.apache.wicket.Page;
 import org.apache.wicket.ResourceReference;
 import org.apache.wicket.markup.html.form.ImageButton;
 import org.apache.wicket.markup.html.list.ListItem;
@@ -33,16 +34,15 @@ import org.apache.wicket.spring.injection.annot.SpringBean;
 public final class DeleteEntityButton<T extends BaseEntity> extends ImageButton {
 	private static final ResourceReference DELETE_IMG = new ResourceReference(
 			DeleteEntityButton.class, "delete.jpg");
-	private final ListItem<T> _listItem;
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
+	private final ListItem<T> _listItem;
+	private Class<? extends Page> _responsePage;
 
-	public DeleteEntityButton(final String id,
-			final ListItem<T> listItem) {
+	public DeleteEntityButton(final String id, final ListItem<T> listItem,
+			Class<? extends Page> responsePage) {
 		super(id, DELETE_IMG);
 		_listItem = listItem;
+		_responsePage = responsePage;
 	}
 
 	@SpringBean(name = "GeneralDao")
@@ -53,6 +53,6 @@ public final class DeleteEntityButton<T extends BaseEntity> extends ImageButton 
 	 */
 	public void onSubmit() {
 		generalDao.deleteEntity(_listItem.getModelObject());
-		setResponsePage(ManageProjects.class);
+		setResponsePage(_responsePage);
 	}
 }

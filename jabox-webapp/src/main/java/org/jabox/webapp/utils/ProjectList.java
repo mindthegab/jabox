@@ -34,6 +34,7 @@ import org.apache.wicket.persistence.provider.GeneralDao;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.jabox.model.Project;
 import org.jabox.webapp.pages.DeleteEntityButton;
+import org.jabox.webapp.pages.ManageProjects;
 
 public class ProjectList extends PropertyListView<Project> {
 
@@ -52,12 +53,14 @@ public class ProjectList extends PropertyListView<Project> {
 	public void populateItem(final ListItem<Project> listItem) {
 		final Project project = (Project) listItem.getModelObject();
 		listItem.add(new Label("name", project.getName()));
-		listItem.add(new Label("mavenArchetype", project.getMavenArchetype().toString()));
+		listItem.add(new Label("mavenArchetype", project.getMavenArchetype()
+				.toString()));
 		listItem
 				.add(new MultiLineLabel("description", project.getDescription()));
 		final AttributeModifier attributeModifier = new AttributeModifier(
 				"class", true, new EvenOddRow<Project>(listItem));
 		listItem.add(attributeModifier);
-		listItem.add(new DeleteEntityButton<Project>("delete", listItem));
+		listItem.add(new DeleteEntityButton<Project>("delete", listItem,
+				ManageProjects.class));
 	}
 }

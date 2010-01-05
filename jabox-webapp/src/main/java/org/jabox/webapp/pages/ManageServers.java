@@ -34,6 +34,7 @@ import org.jabox.apis.Connector;
 import org.jabox.apis.ConnectorConfig;
 import org.jabox.apis.Manager;
 import org.jabox.apis.scm.SCMConnector;
+import org.jabox.model.Server;
 import org.jabox.webapp.borders.MiddlePanel;
 import org.jabox.webapp.utils.SCMConnectorList;
 
@@ -54,14 +55,13 @@ public class ManageServers extends MiddlePanel {
 	public ManageServers() {
 		Class<? extends Connector> connector = SCMConnector.class;
 		List<Connector> connectors = _manager.getConnectors(connector);
-		List<ConnectorConfig> entities = _generalDao
-				.getEntities(ConnectorConfig.class);
+		List<Server> entities = _generalDao.getEntities(Server.class);
 		System.out.println("connectors: " + connector.getName() + ":"
 				+ connectors);
 
 		Form<BaseEntity> form = new Form<BaseEntity>("deleteForm");
 		form.add(new SCMConnectorList("projects", entities));
+		form.add(new CreateServerLink("create"));
 		add(form);
-		add(new CreateServerLink("create"));
 	}
 }

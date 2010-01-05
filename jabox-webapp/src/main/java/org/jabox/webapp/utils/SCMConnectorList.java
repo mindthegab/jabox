@@ -33,28 +33,34 @@ import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.persistence.provider.GeneralDao;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.jabox.apis.ConnectorConfig;
+import org.jabox.model.Project;
 import org.jabox.model.Server;
+import org.jabox.webapp.pages.DeleteEntityButton;
 import org.jabox.webapp.pages.EditServerLink;
+import org.jabox.webapp.pages.ManageProjects;
+import org.jabox.webapp.pages.ManageServers;
 
-public class SCMConnectorList extends PropertyListView<ConnectorConfig> {
+public class SCMConnectorList extends PropertyListView<Server> {
 	private static final long serialVersionUID = -2877438240039632971L;
 
-	public SCMConnectorList(String id, List<ConnectorConfig> projects) {
+	public SCMConnectorList(String id, List<Server> projects) {
 		super(id, projects);
 	}
 
 	@SpringBean(name = "GeneralDao")
 	protected GeneralDao generalDao;
 
-	public void populateItem(final ListItem<ConnectorConfig> listItem) {
-		final ConnectorConfig connector = listItem.getModelObject();
-		listItem.add(new Label("clazz", connector.getServer().getName()));
-		listItem.add(new Label("scmUrl", connector.getPluginId()));
+	public void populateItem(final ListItem<Server> listItem) {
+		final Server connector = listItem.getModelObject();
+		listItem.add(new Label("clazz", connector.getName()));
+		listItem.add(new Label("scmUrl", connector.getDeployerConfig()
+				.getPluginId()));
 		final AttributeModifier attributeModifier = new AttributeModifier(
-				"class", true, new EvenOddRow<ConnectorConfig>(listItem));
+				"class", true, new EvenOddRow<Server>(listItem));
 		listItem.add(attributeModifier);
 		listItem.add(new EditServerLink("edit",
-				new CompoundPropertyModel<Server>(listItem.getModelObject()
-						.getServer())));
+				new CompoundPropertyModel<Server>(listItem.getModelObject())));
+		listItem.add(new DeleteEntityButton<Server>("delete", listItem,
+				ManageServers.class));
 	}
 }
