@@ -6,6 +6,7 @@ import org.apache.wicket.model.IModel;
 import org.apache.wicket.persistence.domain.BaseEntityDetachableModel;
 import org.apache.wicket.persistence.provider.GeneralDao;
 import org.apache.wicket.spring.injection.annot.SpringBean;
+import org.jabox.model.DeployerConfig;
 import org.jabox.model.Server;
 
 public class EditServerLink extends Link<Server> {

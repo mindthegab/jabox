@@ -27,22 +27,28 @@ import org.apache.wicket.Page;
 import org.apache.wicket.ResourceReference;
 import org.apache.wicket.markup.html.form.ImageButton;
 import org.apache.wicket.markup.html.list.ListItem;
-import org.apache.wicket.persistence.domain.BaseEntity;
 import org.apache.wicket.persistence.provider.GeneralDao;
 import org.apache.wicket.spring.injection.annot.SpringBean;
+import org.jabox.apis.IBaseEntity;
 
-public final class DeleteEntityButton<T extends BaseEntity> extends ImageButton {
+public final class DeleteEntityButton<T extends IBaseEntity> extends
+		ImageButton {
 	private static final ResourceReference DELETE_IMG = new ResourceReference(
 			DeleteEntityButton.class, "delete.jpg");
 	private static final long serialVersionUID = 1L;
-	private final ListItem<T> _listItem;
+	private final T _item;
 	private Class<? extends Page> _responsePage;
 
-	public DeleteEntityButton(final String id, final ListItem<T> listItem,
+	public DeleteEntityButton(final String id, final T item,
 			Class<? extends Page> responsePage) {
 		super(id, DELETE_IMG);
-		_listItem = listItem;
+		_item = item;
 		_responsePage = responsePage;
+	}
+
+	public DeleteEntityButton(final String id, final ListItem<T> item,
+			Class<? extends Page> responsePage) {
+		this(id, item.getModelObject(), responsePage);
 	}
 
 	@SpringBean(name = "GeneralDao")
@@ -52,7 +58,7 @@ public final class DeleteEntityButton<T extends BaseEntity> extends ImageButton 
 	 * Delete from persistent storage, commit transaction.
 	 */
 	public void onSubmit() {
-		generalDao.deleteEntity(_listItem.getModelObject());
+		generalDao.deleteEntity(_item);
 		setResponsePage(_responsePage);
 	}
 }

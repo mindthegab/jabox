@@ -33,8 +33,8 @@ import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.jabox.apis.Connector;
 import org.jabox.apis.ConnectorConfig;
 import org.jabox.apis.Manager;
-import org.jabox.apis.scm.SCMConnector;
-import org.jabox.model.Server;
+import org.jabox.apis.rms.RMSConnectorConfig;
+import org.jabox.apis.scm.SCMConnectorConfig;
 import org.jabox.webapp.borders.MiddlePanel;
 import org.jabox.webapp.utils.SCMConnectorList;
 
@@ -53,14 +53,16 @@ public class ManageServers extends MiddlePanel {
 	protected Manager<Connector> _manager;
 
 	public ManageServers() {
-		Class<? extends Connector> connector = SCMConnector.class;
-		List<Connector> connectors = _manager.getConnectors(connector);
-		List<Server> entities = _generalDao.getEntities(Server.class);
-		System.out.println("connectors: " + connector.getName() + ":"
-				+ connectors);
-
 		Form<BaseEntity> form = new Form<BaseEntity>("deleteForm");
-		form.add(new SCMConnectorList("projects", entities));
+
+		List<? extends ConnectorConfig> scms = _generalDao
+				.getEntities(SCMConnectorConfig.class);
+		form.add(new SCMConnectorList("SCMs", scms));
+
+		List<? extends ConnectorConfig> rmss = _generalDao
+				.getEntities(RMSConnectorConfig.class);
+		form.add(new SCMConnectorList("RMSs", rmss));
+
 		form.add(new CreateServerLink("create"));
 		add(form);
 	}

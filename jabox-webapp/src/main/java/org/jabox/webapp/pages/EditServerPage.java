@@ -13,6 +13,7 @@ import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.jabox.apis.Connector;
 import org.jabox.apis.Manager;
 import org.jabox.apis.scm.SCMConnector;
+import org.jabox.model.DeployerConfig;
 import org.jabox.model.DeployersRegistry;
 import org.jabox.model.Project;
 import org.jabox.model.Server;
@@ -32,8 +33,9 @@ public abstract class EditServerPage extends MiddlePanel {
 
 	public EditServerPage(IModel<Server> server) {
 		add(new FeedbackPanel("feedback"));
-		Form<Server> form = new TransactionalForm<Server>("form",
-				new CompoundPropertyModel<Server>(server.getObject())) {
+		Form<Server> form = new TransactionalForm<Server>(
+				"form", new CompoundPropertyModel<Server>(server
+						.getObject())) {
 			@Override
 			protected void onSubmit() {
 				onSave(getModelObject());
@@ -63,8 +65,8 @@ public abstract class EditServerPage extends MiddlePanel {
 				"configuration", model);
 		form.add(child);
 
-//		Connector plugin = registry.getEntries().get(0);
-//		server.getObject().setDeployerConfig(plugin.newConfig());
+		// Connector plugin = registry.getEntries().get(0);
+		// server.getObject().setDeployerConfig(plugin.newConfig());
 
 		// child.replace(plugin.newEditor("editor", new PropertyModel(
 		// server, "deployerConfig")));
