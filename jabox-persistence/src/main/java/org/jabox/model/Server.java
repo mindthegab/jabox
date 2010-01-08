@@ -3,12 +3,10 @@ package org.jabox.model;
 import java.io.Serializable;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 
 import org.apache.wicket.persistence.domain.BaseEntity;
-import org.jabox.apis.Connector;
 
 /**
  * 
