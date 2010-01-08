@@ -23,8 +23,6 @@
  */
 package org.jabox.webapp.pages;
 
-import java.util.List;
-
 import org.apache.wicket.authorization.strategies.role.annotations.AuthorizeInstantiation;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.persistence.domain.BaseEntity;
@@ -33,6 +31,8 @@ import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.jabox.apis.Connector;
 import org.jabox.apis.ConnectorConfig;
 import org.jabox.apis.Manager;
+import org.jabox.apis.bts.ITSConnectorConfig;
+import org.jabox.apis.cis.CISConnectorConfig;
 import org.jabox.apis.rms.RMSConnectorConfig;
 import org.jabox.apis.scm.SCMConnectorConfig;
 import org.jabox.webapp.borders.MiddlePanel;
@@ -55,15 +55,17 @@ public class ManageServers extends MiddlePanel {
 	public ManageServers() {
 		Form<BaseEntity> form = new Form<BaseEntity>("deleteForm");
 
-		List<? extends ConnectorConfig> scms = _generalDao
-				.getEntities(SCMConnectorConfig.class);
-		form.add(new SCMConnectorList("SCMs", scms));
-
-		List<? extends ConnectorConfig> rmss = _generalDao
-				.getEntities(RMSConnectorConfig.class);
-		form.add(new SCMConnectorList("RMSs", rmss));
+		form.add(createList("SCMs", SCMConnectorConfig.class));
+		form.add(createList("RMSs", RMSConnectorConfig.class));
+		form.add(createList("CISs", CISConnectorConfig.class));
+		form.add(createList("ITSs", ITSConnectorConfig.class));
 
 		form.add(new CreateServerLink("create"));
 		add(form);
+	}
+
+	private SCMConnectorList createList(String key,
+			Class<? extends ConnectorConfig> clas) {
+		return new SCMConnectorList(key, _generalDao.getEntities(clas));
 	}
 }
