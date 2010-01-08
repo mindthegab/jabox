@@ -521,3 +521,29 @@ div.moduletable fieldset {
 	padding: 0px 10px 0px 10px;
 	margin: 3px 0px;
 }
+
+th.dataviewTh, table.dataviewTable th.dataviewTh {
+    border-width: 1px;
+    border-style: solid;
+    border-color: #ccc;
+    padding: 5px;
+    background-color: #f0f0f0;
+    text-align: left;
+    vertical-align: top;
+}
+
+td.dataviewTd, table.dataviewTable td.dataviewTd {
+    border-width: 1px;
+    border-style: solid;
+    border-color: #ccc;
+    padding: 5px;
+    vertical-align: top;
+}
+.wiki-content td.dataviewTd {
+    padding-right: 10px;
+}
+.wiki-content td.dataviewTd,
+.wiki-content th.dataviewTh {
+    margin: 0;
+    padding: 0;
+}
