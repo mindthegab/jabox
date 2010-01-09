@@ -30,7 +30,11 @@ import org.tmatesoft.svn.core.SVNDepth;
 import org.tmatesoft.svn.core.SVNException;
 import org.tmatesoft.svn.core.SVNPropertyValue;
 import org.tmatesoft.svn.core.SVNURL;
+import org.tmatesoft.svn.core.auth.BasicAuthenticationManager;
+import org.tmatesoft.svn.core.auth.ISVNAuthenticationManager;
+import org.tmatesoft.svn.core.internal.io.dav.DAVRepositoryFactory;
 import org.tmatesoft.svn.core.internal.io.fs.FSRepositoryFactory;
+import org.tmatesoft.svn.core.internal.io.svn.SVNRepositoryFactoryImpl;
 import org.tmatesoft.svn.core.wc.ISVNPropertyHandler;
 import org.tmatesoft.svn.core.wc.SVNClientManager;
 import org.tmatesoft.svn.core.wc.SVNCommitClient;
@@ -48,6 +52,8 @@ public class SubversionFacade {
 		}
 
 		FSRepositoryFactory.setup();
+		SVNRepositoryFactoryImpl.setup();
+		DAVRepositoryFactory.setup();
 	}
 
 	/**
@@ -57,16 +63,17 @@ public class SubversionFacade {
 	 *            the path where to store the subversion base-dir.
 	 * @throws SVNException
 	 */
-	public void checkoutBaseDir(File storePath) throws SVNException {
+	public void checkoutBaseDir(File storePath, SVNURL svnDir)
+			throws SVNException {
 
-		SVNURL svnDir = SVNURL.fromFile(SubversionRepository
-				.getSubversionBaseDir());
 		_clientManager.createRepository(svnDir, true);
 		_clientManager.getUpdateClient().doCheckout(svnDir, storePath,
-				SVNRevision.UNDEFINED, SVNRevision.HEAD, false);
+				SVNRevision.UNDEFINED, SVNRevision.HEAD, SVNDepth.INFINITY,
+				false);
 	}
 
-	public void commitProject(Project project, File tmpDir) throws SVNException {
+	public void commitProject(Project project, File tmpDir,
+			SVNConnectorConfig svnc) throws SVNException {
 		// Add files (svn add)
 		SVNWCClient wcClient = _clientManager.getWCClient();
 		wcClient.doAdd(new File(tmpDir, project.getName()), false, false, true,
@@ -74,7 +81,9 @@ public class SubversionFacade {
 
 		// Commit files (svn commit)
 		SVNCommitClient commitClient = _clientManager.getCommitClient();
-
+		ISVNAuthenticationManager authManager = new BasicAuthenticationManager(
+				svnc.username, svnc.password);
+		_clientManager.setAuthenticationManager(authManager);
 		File[] paths = new File[1];
 		paths[0] = new File(tmpDir, project.getName());
 		// paths[1] = new File("tags");

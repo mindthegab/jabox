@@ -30,6 +30,7 @@ import java.io.Serializable;
 import org.apache.wicket.Component;
 import org.apache.wicket.model.IModel;
 import org.jabox.apis.scm.SCMConnector;
+import org.jabox.apis.scm.SCMConnectorConfig;
 import org.jabox.apis.scm.SCMException;
 import org.jabox.model.DeployerConfig;
 import org.jabox.model.Project;
@@ -73,13 +74,22 @@ public class SVNConnector implements SCMConnector, Serializable {
 		return null;
 	}
 
-	public File createProjectDirectories(Project project) throws SCMException {
+	public File createProjectDirectories(Project project,
+			SCMConnectorConfig config) throws SCMException {
+		SVNConnectorConfig svnc = (SVNConnectorConfig) config;
 		try {
 			SubversionFacade svn = new SubversionFacade();
 			_tmpDir = TemporalDirectory.createTempDir();
 
-			// Checkout basedir from subversion.
-			svn.checkoutBaseDir(_tmpDir);
+			SVNURL svnDir;
+			if (svnc.embedded) {
+				// Checkout basedir from subversion.
+				svnDir = SVNURL.fromFile(SubversionRepository
+						.getSubversionBaseDir());
+			} else {
+				svnDir = SVNURL.parseURIEncoded(svnc.repositoryURL);
+			}
+			svn.checkoutBaseDir(_tmpDir, svnDir);
 			// Create Project directory and its trunk/branches/tags
 			// subdirectories
 			File trunkDir = createProjectDirectories(project, _tmpDir);
@@ -110,12 +120,13 @@ public class SVNConnector implements SCMConnector, Serializable {
 		return trunkDir;
 	}
 
-	public void commitProject(Project project) throws SCMException {
+	public void commitProject(Project project, SCMConnectorConfig svnc)
+			throws SCMException {
 		assert (_tmpDir != null && _tmpDir.exists());
 
 		try {
 			SubversionFacade svn = new SubversionFacade();
-			svn.commitProject(project, _tmpDir);
+			svn.commitProject(project, _tmpDir, (SVNConnectorConfig) svnc);
 		} catch (SVNException e) {
 			throw new SCMException("Problem during the Subversion commit.", e);
 		}

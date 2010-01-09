@@ -37,8 +37,10 @@ import org.jabox.apis.bts.BTSConnector;
 import org.jabox.apis.cis.CISConnector;
 import org.jabox.apis.rms.RMSConnector;
 import org.jabox.apis.scm.SCMConnector;
+import org.jabox.apis.scm.SCMConnectorConfig;
 import org.jabox.apis.scm.SCMException;
 import org.jabox.model.Configuration;
+import org.jabox.model.DefaultConfiguration;
 import org.jabox.model.Project;
 import org.tmatesoft.svn.core.SVNException;
 import org.xml.sax.SAXException;
@@ -85,12 +87,17 @@ public class CreateProjectUtil {
 	private void createProjectMethod(Project project)
 			throws InvalidRepositoryException, MavenExecutionException,
 			SAXException, SCMException, IOException {
+		final DefaultConfiguration dc = generalDao.getDefaultConfiguration();
+
+		SCMConnectorConfig scmc = (SCMConnectorConfig) dc.getScm();
+
 		final Configuration configuration = generalDao.getConfiguration();
+
 		SCMConnector scm = (SCMConnector) _manager
 				.getConnectorInstance(configuration.getSCMConnector());
 
 		System.out.println("Using SCM: " + scm.toString());
-		File trunkDir = scm.createProjectDirectories(project);
+		File trunkDir = scm.createProjectDirectories(project, scmc);
 
 		// Create Project from template.
 		MavenCreateProject.createProjectWithMavenCore(project, trunkDir
@@ -110,7 +117,7 @@ public class CreateProjectUtil {
 		}
 
 		// Commit Project
-		scm.commitProject(project);
+		scm.commitProject(project, scmc);
 		project.setScmUrl(scm.getScmUrl() + "/" + project.getName() + "/trunk/"
 				+ project.getName());
 

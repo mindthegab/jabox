@@ -30,9 +30,11 @@ import org.jabox.model.Project;
 
 public interface SCMConnector extends Connector {
 
-	File createProjectDirectories(Project project) throws SCMException;
+	File createProjectDirectories(Project project, SCMConnectorConfig config)
+			throws SCMException;
 
-	void commitProject(Project project) throws SCMException;
+	void commitProject(Project project, SCMConnectorConfig config)
+			throws SCMException;
 
 	String getScmUrl();
 

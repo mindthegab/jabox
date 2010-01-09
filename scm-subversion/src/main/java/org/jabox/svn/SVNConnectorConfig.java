@@ -24,4 +24,6 @@ public class SVNConnectorConfig extends DeployerConfig implements
 
 	public String password;
 
+	public boolean embedded;
+
 }
