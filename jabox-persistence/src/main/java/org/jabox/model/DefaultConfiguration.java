@@ -16,6 +16,10 @@ import org.jabox.apis.scm.SCMConnectorConfig;
 
 @Entity
 public class DefaultConfiguration extends BaseEntity implements Serializable {
+	private static final String TRUE = "true";
+
+	private static final String FALSE = "false";
+
 	private static final long serialVersionUID = 970298449487373906L;
 
 	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
@@ -39,34 +43,35 @@ public class DefaultConfiguration extends BaseEntity implements Serializable {
 	}
 
 	public String isDefault(ListItem<ConnectorConfig> item) {
-		System.out.println("ITEM: " + item);
-		System.out.println("ITS: " + _its);
 		if (item == null || _its == null) {
-			return "false";
+			return FALSE;
 		}
 
-		if (!item.getModelObject().getId().equals(_its.getId())) {
-			System.out.println("IS DEFAULT: " + item.getId() + " :  "
-					+ _its.getId());
-			return "false";
+		Long modelObjId = item.getModelObject().getId();
+		if (modelObjId.equals(_its.getId())) {
+			return TRUE;
+		} else if (modelObjId.equals(_cis.getId())) {
+			return TRUE;
+		} else if (modelObjId.equals(_rms.getId())) {
+			return TRUE;
+		} else if (modelObjId.equals(_scm.getId())) {
+			return TRUE;
 		}
 
-		return "true";
+		return FALSE;
 	}
 
 	public void setDefault(ConnectorConfig config) {
-		System.out.println("-----> " + config.getId());
-
 		if (ITSConnectorConfig.class.isAssignableFrom(config.getClass())) {
 			DeployerConfig its = (DeployerConfig) config;
 			_its = its;
-		} else if (config instanceof CISConnectorConfig) {
+		} else if (CISConnectorConfig.class.isAssignableFrom(config.getClass())) {
 			DeployerConfig cis = (DeployerConfig) config;
 			_cis = cis;
-		} else if (config instanceof RMSConnectorConfig) {
+		} else if (RMSConnectorConfig.class.isAssignableFrom(config.getClass())) {
 			DeployerConfig rms = (DeployerConfig) config;
 			_rms = rms;
-		} else if (config instanceof SCMConnectorConfig) {
+		} else if (SCMConnectorConfig.class.isAssignableFrom(config.getClass())) {
 			DeployerConfig scm = (DeployerConfig) config;
 			_scm = scm;
 		}
