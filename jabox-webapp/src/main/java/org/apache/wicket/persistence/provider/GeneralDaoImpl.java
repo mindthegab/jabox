@@ -35,6 +35,7 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.jabox.apis.IBaseEntity;
 import org.jabox.model.Configuration;
+import org.jabox.model.DefaultConfiguration;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -90,6 +91,21 @@ public class GeneralDaoImpl implements GeneralDao, InitializingBean {
 		Configuration config = null;
 		if (configs == null || configs.size() < 1) {
 			config = new Configuration();
+			persist(config);
+		} else {
+			config = configs.get(0);
+		}
+
+		return config;
+	}
+
+	public DefaultConfiguration getDefaultConfiguration() {
+		List<DefaultConfiguration> configs = getEntities(DefaultConfiguration.class);
+
+		// If there is no configuration create one.
+		DefaultConfiguration config = null;
+		if (configs == null || configs.size() < 1) {
+			config = new DefaultConfiguration();
 			persist(config);
 		} else {
 			config = configs.get(0);

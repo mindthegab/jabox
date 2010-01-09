@@ -27,6 +27,8 @@ import java.util.List;
 
 import org.jabox.apis.IBaseEntity;
 import org.jabox.model.Configuration;
+import org.jabox.model.DefaultConfiguration;
+import org.jabox.model.DefaultConfiguration;
 
 public interface GeneralDao {
 
@@ -39,4 +41,7 @@ public interface GeneralDao {
 	void deleteEntity(IBaseEntity entity);
 
 	Configuration getConfiguration();
+
+	DefaultConfiguration getDefaultConfiguration();
+
 }

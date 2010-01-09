@@ -33,10 +33,12 @@ import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.persistence.provider.GeneralDao;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.jabox.apis.ConnectorConfig;
+import org.jabox.model.DefaultConfiguration;
 import org.jabox.model.Server;
 import org.jabox.webapp.pages.DeleteEntityButton;
 import org.jabox.webapp.pages.EditServerLink;
 import org.jabox.webapp.pages.ManageServers;
+import org.jabox.webapp.pages.SetDefaultServerLink;
 
 public class SCMConnectorList extends PropertyListView<ConnectorConfig> {
 	private static final long serialVersionUID = -2877438240039632971L;
@@ -48,17 +50,19 @@ public class SCMConnectorList extends PropertyListView<ConnectorConfig> {
 	@SpringBean(name = "GeneralDao")
 	protected GeneralDao generalDao;
 
-	public void populateItem(final ListItem<ConnectorConfig> listItem) {
-		final ConnectorConfig deployerConfig = listItem.getModelObject();
-		listItem.add(new Label("clazz", deployerConfig.getServer().getName()));
-		listItem.add(new Label("scmUrl", deployerConfig.getPluginId()));
+	public void populateItem(final ListItem<ConnectorConfig> item) {
+		DefaultConfiguration conf = generalDao.getDefaultConfiguration();
+		final ConnectorConfig deployerConfig = item.getModelObject();
+		item.add(new Label("clazz", deployerConfig.getServer().getName()));
+		item.add(new Label("isDefault", conf.isDefault(item)));
+		item.add(new SetDefaultServerLink("setDefault", item.getModel()));
+		item.add(new Label("scmUrl", deployerConfig.getPluginId()));
 		final AttributeModifier attributeModifier = new AttributeModifier(
-				"class", true, new EvenOddRow<ConnectorConfig>(listItem));
-		listItem.add(attributeModifier);
-		listItem.add(new EditServerLink("edit",
-				new CompoundPropertyModel<Server>(listItem.getModelObject()
-						.getServer())));
-		listItem.add(new DeleteEntityButton<Server>("delete", listItem
-				.getModelObject().getServer(), ManageServers.class));
+				"class", true, new EvenOddRow<ConnectorConfig>(item));
+		item.add(attributeModifier);
+		item.add(new EditServerLink("edit", new CompoundPropertyModel<Server>(
+				item.getModelObject().getServer())));
+		item.add(new DeleteEntityButton<Server>("delete", item.getModelObject()
+				.getServer(), ManageServers.class));
 	}
 }
