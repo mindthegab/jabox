@@ -21,53 +21,40 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.jabox.webapp.pages;
+package org.jabox.webapp.menubuttons;
 
-import org.apache.wicket.Page;
 import org.apache.wicket.ResourceReference;
 import org.apache.wicket.markup.html.form.ImageButton;
 import org.apache.wicket.markup.html.list.ListItem;
+import org.apache.wicket.model.CompoundPropertyModel;
+import org.apache.wicket.model.IModel;
+import org.apache.wicket.persistence.domain.BaseEntityDetachableModel;
 import org.apache.wicket.persistence.provider.GeneralDao;
 import org.apache.wicket.spring.injection.annot.SpringBean;
-import org.jabox.apis.ConnectorConfig;
-import org.jabox.model.DefaultConfiguration;
+import org.jabox.model.Server;
+import org.jabox.webapp.modifiers.TooltipModifier;
+import org.jabox.webapp.pages.EditServerPage;
+import org.jabox.webapp.pages.ManageServers;
 
-public final class DefaultEntityButton<T extends ConnectorConfig> extends
-		ImageButton {
-	private static final ResourceReference DEFAULT_IMG = new ResourceReference(
-			DefaultEntityButton.class, "default.png");
+public final class EditEntityButton<T extends Server> extends ImageButton {
 
-	private static final ResourceReference NO_DEFAULT_IMG = new ResourceReference(
-			DefaultEntityButton.class, "default-bw.png");
+	private static final TooltipModifier TOOLTIP_MODIFIER = new TooltipModifier(
+			"Edit Connector");
+
+	private static final ResourceReference EDIT_IMG = new ResourceReference(
+			EditEntityButton.class, "preferences-system.png");
 
 	private static final long serialVersionUID = 1L;
 	private final T _item;
-	private Class<? extends Page> _responsePage;
 
-	public DefaultEntityButton(final String id, final T item,
-			Class<? extends Page> responsePage) {
-		super(id);
+	public EditEntityButton(final String id, final T item) {
+		super(id, EDIT_IMG);
 		_item = item;
-		_responsePage = responsePage;
-
-		if (isDefault(item)) {
-			setImageResourceReference(DEFAULT_IMG);
-		} else {
-			setImageResourceReference(NO_DEFAULT_IMG);
-		}
+		add(TOOLTIP_MODIFIER);
 	}
 
-	private boolean isDefault(ConnectorConfig item) {
-		DefaultConfiguration dc = _generalDao.getDefaultConfiguration();
-		if (DefaultConfiguration.TRUE.equals(dc.isDefault(item))) {
-			return true;
-		}
-		return false;
-	}
-
-	public DefaultEntityButton(final String id, final ListItem<T> item,
-			Class<? extends Page> responsePage) {
-		this(id, item.getModelObject(), responsePage);
+	public EditEntityButton(final String id, final ListItem<T> item) {
+		this(id, item.getModelObject());
 	}
 
 	@SpringBean(name = "GeneralDao")
@@ -77,8 +64,20 @@ public final class DefaultEntityButton<T extends ConnectorConfig> extends
 	 * Delete from persistent storage, commit transaction.
 	 */
 	public void onSubmit() {
-		DefaultConfiguration dc = _generalDao.getDefaultConfiguration();
-		dc.setDefault(_item);
-		_generalDao.persist(dc);
+		IModel<Server> model = new BaseEntityDetachableModel<Server>(_item);
+		setResponsePage(new EditServerPage(new CompoundPropertyModel<Server>(
+				model)) {
+
+			@Override
+			protected void onCancel() {
+				setResponsePage(ManageServers.class);
+			}
+
+			@Override
+			protected void onSave(Server server) {
+				_generalDao.persist(server);
+				setResponsePage(ManageServers.class);
+			}
+		});
 	}
 }

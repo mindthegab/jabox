@@ -33,7 +33,7 @@ import org.apache.wicket.markup.html.list.PropertyListView;
 import org.apache.wicket.persistence.provider.GeneralDao;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.jabox.model.Project;
-import org.jabox.webapp.pages.DeleteEntityButton;
+import org.jabox.webapp.menubuttons.DeleteEntityButton;
 import org.jabox.webapp.pages.ManageProjects;
 
 public class ProjectList extends PropertyListView<Project> {

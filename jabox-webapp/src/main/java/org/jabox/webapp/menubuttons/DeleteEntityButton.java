@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.jabox.webapp.pages;
+package org.jabox.webapp.menubuttons;
 
 import org.apache.wicket.Page;
 import org.apache.wicket.ResourceReference;
@@ -34,7 +34,7 @@ import org.jabox.apis.IBaseEntity;
 public final class DeleteEntityButton<T extends IBaseEntity> extends
 		ImageButton {
 	private static final ResourceReference DELETE_IMG = new ResourceReference(
-			DeleteEntityButton.class, "delete.jpg");
+			DeleteEntityButton.class, "edit-delete.png");
 	private static final long serialVersionUID = 1L;
 	private final T _item;
 	private Class<? extends Page> _responsePage;

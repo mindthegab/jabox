@@ -29,17 +29,14 @@ import org.apache.wicket.AttributeModifier;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.PropertyListView;
-import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.persistence.provider.GeneralDao;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.jabox.apis.ConnectorConfig;
-import org.jabox.model.DefaultConfiguration;
 import org.jabox.model.Server;
-import org.jabox.webapp.pages.DefaultEntityButton;
-import org.jabox.webapp.pages.DeleteEntityButton;
-import org.jabox.webapp.pages.EditServerLink;
+import org.jabox.webapp.menubuttons.DefaultEntityButton;
+import org.jabox.webapp.menubuttons.DeleteEntityButton;
+import org.jabox.webapp.menubuttons.EditEntityButton;
 import org.jabox.webapp.pages.ManageServers;
-import org.jabox.webapp.pages.SetDefaultServerLink;
 
 public class SCMConnectorList extends PropertyListView<ConnectorConfig> {
 	private static final long serialVersionUID = -2877438240039632971L;
@@ -52,7 +49,6 @@ public class SCMConnectorList extends PropertyListView<ConnectorConfig> {
 	protected GeneralDao generalDao;
 
 	public void populateItem(final ListItem<ConnectorConfig> item) {
-		DefaultConfiguration conf = generalDao.getDefaultConfiguration();
 		final ConnectorConfig deployerConfig = item.getModelObject();
 		item.add(new Label("clazz", deployerConfig.getServer().getName()));
 		item.add(new DefaultEntityButton<ConnectorConfig>("default", item,
@@ -61,8 +57,8 @@ public class SCMConnectorList extends PropertyListView<ConnectorConfig> {
 		final AttributeModifier attributeModifier = new AttributeModifier(
 				"class", true, new EvenOddRow<ConnectorConfig>(item));
 		item.add(attributeModifier);
-		item.add(new EditServerLink("edit", new CompoundPropertyModel<Server>(
-				item.getModelObject().getServer())));
+		item.add(new EditEntityButton<Server>("edit", item.getModelObject()
+				.getServer()));
 		item.add(new DeleteEntityButton<Server>("delete", item.getModelObject()
 				.getServer(), ManageServers.class));
 	}
