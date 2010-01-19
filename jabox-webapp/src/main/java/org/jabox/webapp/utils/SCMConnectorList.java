@@ -35,6 +35,7 @@ import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.jabox.apis.ConnectorConfig;
 import org.jabox.model.DefaultConfiguration;
 import org.jabox.model.Server;
+import org.jabox.webapp.pages.DefaultEntityButton;
 import org.jabox.webapp.pages.DeleteEntityButton;
 import org.jabox.webapp.pages.EditServerLink;
 import org.jabox.webapp.pages.ManageServers;
@@ -54,8 +55,8 @@ public class SCMConnectorList extends PropertyListView<ConnectorConfig> {
 		DefaultConfiguration conf = generalDao.getDefaultConfiguration();
 		final ConnectorConfig deployerConfig = item.getModelObject();
 		item.add(new Label("clazz", deployerConfig.getServer().getName()));
-		item.add(new Label("isDefault", conf.isDefault(item)));
-		item.add(new SetDefaultServerLink("setDefault", item.getModel()));
+		item.add(new DefaultEntityButton<ConnectorConfig>("default", item,
+				ManageServers.class));
 		item.add(new Label("scmUrl", deployerConfig.getPluginId()));
 		final AttributeModifier attributeModifier = new AttributeModifier(
 				"class", true, new EvenOddRow<ConnectorConfig>(item));

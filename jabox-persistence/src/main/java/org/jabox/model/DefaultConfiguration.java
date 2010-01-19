@@ -16,9 +16,9 @@ import org.jabox.apis.scm.SCMConnectorConfig;
 
 @Entity
 public class DefaultConfiguration extends BaseEntity implements Serializable {
-	private static final String TRUE = "true";
+	public static final String TRUE = "true";
 
-	private static final String FALSE = "false";
+	public static final String FALSE = "false";
 
 	private static final long serialVersionUID = 970298449487373906L;
 
@@ -42,23 +42,30 @@ public class DefaultConfiguration extends BaseEntity implements Serializable {
 		return _its;
 	}
 
-	public String isDefault(ListItem<ConnectorConfig> item) {
-		if (item == null || _its == null) {
+	public String isDefault(ConnectorConfig item) {
+		if (item == null) {
 			return FALSE;
 		}
 
-		Long modelObjId = item.getModelObject().getId();
-		if (modelObjId.equals(_its.getId())) {
+		Long modelObjId = item.getId();
+		if (_its != null && modelObjId.equals(_its.getId())) {
 			return TRUE;
-		} else if (modelObjId.equals(_cis.getId())) {
+		} else if (_cis != null && modelObjId.equals(_cis.getId())) {
 			return TRUE;
-		} else if (modelObjId.equals(_rms.getId())) {
+		} else if (_rms != null && modelObjId.equals(_rms.getId())) {
 			return TRUE;
-		} else if (modelObjId.equals(_scm.getId())) {
+		} else if (_scm != null && modelObjId.equals(_scm.getId())) {
 			return TRUE;
 		}
 
 		return FALSE;
+	}
+
+	public String isDefault(ListItem<ConnectorConfig> listItem) {
+		if (listItem == null) {
+			return FALSE;
+		}
+		return isDefault(listItem.getModelObject());
 	}
 
 	public void setDefault(ConnectorConfig config) {
