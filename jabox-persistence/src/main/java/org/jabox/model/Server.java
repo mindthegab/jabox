@@ -16,7 +16,8 @@ import org.apache.wicket.persistence.domain.BaseEntity;
 public class Server extends BaseEntity implements Serializable {
 	private static final long serialVersionUID = 4845825512187976712L;
 	private String _name;
-	
+	private String _url;
+
 	@OneToOne(mappedBy = "server", cascade = CascadeType.ALL)
 	public DeployerConfig deployerConfig;
 
@@ -35,5 +36,13 @@ public class Server extends BaseEntity implements Serializable {
 
 	public String getName() {
 		return _name;
+	}
+
+	public void setUrl(String url) {
+		this._url = url;
+	}
+
+	public String getUrl() {
+		return _url;
 	}
 }
