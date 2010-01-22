@@ -87,7 +87,7 @@ public class SVNConnector implements SCMConnector, Serializable {
 				svnDir = SVNURL.fromFile(SubversionRepository
 						.getSubversionBaseDir());
 			} else {
-				svnDir = SVNURL.parseURIEncoded(svnc.repositoryURL);
+				svnDir = SVNURL.parseURIEncoded(svnc.getServer().getUrl());
 			}
 			svn.checkoutBaseDir(_tmpDir, svnDir);
 			// Create Project directory and its trunk/branches/tags

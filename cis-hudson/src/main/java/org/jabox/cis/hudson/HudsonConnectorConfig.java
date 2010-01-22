@@ -1,6 +1,5 @@
 package org.jabox.cis.hudson;
 
-import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
@@ -16,10 +15,4 @@ public class HudsonConnectorConfig extends DeployerConfig implements
 	public HudsonConnectorConfig() {
 		pluginId = HudsonConnector.ID;
 	}
-
-	@Column(nullable = false)
-	public String host;
-
-	public Integer port;
-
 }

@@ -1,6 +1,5 @@
 package org.jabox.bts.jtrac;
 
-import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
@@ -16,10 +15,4 @@ public class JtracRepositoryConfig extends DeployerConfig implements
 	public JtracRepositoryConfig() {
 		pluginId = JtracRepository.ID;
 	}
-
-	@Column(nullable = false)
-	public String host;
-
-	public Integer port;
-
 }

@@ -11,8 +11,7 @@ public class ArtifactoryConnectorEditor extends Panel {
 
 	public ArtifactoryConnectorEditor(String id, IModel<Server> model) {
 		super(id, new CompoundPropertyModel<String>(model));
-		add(new TextField<String>("host").setRequired(true));
-		add(new TextField<String>("port").setRequired(true));
+		add(new TextField<String>("server.url"));
 	}
 
 }

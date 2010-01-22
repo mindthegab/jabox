@@ -1,6 +1,5 @@
 package org.jabox.svn;
 
-import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
@@ -16,9 +15,6 @@ public class SVNConnectorConfig extends DeployerConfig implements
 	public SVNConnectorConfig() {
 		pluginId = SVNConnector.ID;
 	}
-
-	@Column(nullable = false)
-	public String repositoryURL;
 
 	public String username;
 

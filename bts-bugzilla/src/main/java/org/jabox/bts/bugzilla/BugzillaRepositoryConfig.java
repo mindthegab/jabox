@@ -1,6 +1,5 @@
 package org.jabox.bts.bugzilla;
 
-import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
@@ -16,10 +15,4 @@ public class BugzillaRepositoryConfig extends DeployerConfig implements
 	public BugzillaRepositoryConfig() {
 		pluginId = BugzillaRepository.ID;
 	}
-
-	@Column(nullable = false)
-	public String host;
-
-	public Integer port;
-
 }

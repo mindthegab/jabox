@@ -1,6 +1,5 @@
 package org.jabox.mrm.artifactory;
 
-import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
@@ -16,10 +15,4 @@ public class ArtifactoryConnectorConfig extends DeployerConfig implements
 	public ArtifactoryConnectorConfig() {
 		pluginId = ArtifactoryConnector.ID;
 	}
-
-	@Column(nullable = false)
-	public String host;
-
-	public Integer port;
-
 }

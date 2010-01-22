@@ -16,10 +16,4 @@ public class NexusConnectorConfig extends DeployerConfig implements
 	public NexusConnectorConfig() {
 		pluginId = NexusConnector.ID;
 	}
-
-	@Column(nullable = false)
-	public String host;
-
-	public Integer port;
-
 }

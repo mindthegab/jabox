@@ -1,6 +1,5 @@
 package org.jabox.bts.redmine;
 
-import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
@@ -16,10 +15,4 @@ public class RedmineRepositoryConfig extends DeployerConfig implements
 	public RedmineRepositoryConfig() {
 		pluginId = RedmineRepository.ID;
 	}
-
-	@Column(nullable = false)
-	public String host;
-
-	public Integer port;
-
 }
