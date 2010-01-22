@@ -27,6 +27,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.jabox.model.DeployerConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -51,15 +52,30 @@ public class Manager<T extends Connector> {
 		_connectors = connectors;
 	}
 
-	public T getConnectorInstance(String connector) {
+	public T getConnectorInstance(ConnectorConfig connectorConfig) {
 		List<T> connectors = Arrays.asList(_connectors);
 
-		if (connector == null) {
+		if (connectorConfig == null) {
 			return null;
 		}
 
 		for (T connectorInstance : connectors) {
-			if (connector.equals(connectorInstance.toString())) {
+			if (connectorConfig.getPluginId().equals(connectorInstance.getId())) {
+				return connectorInstance;
+			}
+		}
+		return null;
+	}
+
+	public T getConnectorInstance(String connectorName) {
+		List<T> connectors = Arrays.asList(_connectors);
+
+		if (connectorName == null) {
+			return null;
+		}
+
+		for (T connectorInstance : connectors) {
+			if (connectorName.equals(connectorInstance.getName())) {
 				return connectorInstance;
 			}
 		}

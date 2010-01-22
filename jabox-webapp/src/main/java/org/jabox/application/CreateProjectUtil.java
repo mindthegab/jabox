@@ -91,10 +91,7 @@ public class CreateProjectUtil {
 
 		SCMConnectorConfig scmc = (SCMConnectorConfig) dc.getScm();
 
-		final Configuration configuration = generalDao.getConfiguration();
-
-		SCMConnector scm = (SCMConnector) _manager
-				.getConnectorInstance(configuration.getSCMConnector());
+		SCMConnector scm = (SCMConnector) _manager.getConnectorInstance(scmc);
 
 		System.out.println("Using SCM: " + scm.toString());
 		File trunkDir = scm.createProjectDirectories(project, scmc);
@@ -102,6 +99,8 @@ public class CreateProjectUtil {
 		// Create Project from template.
 		MavenCreateProject.createProjectWithMavenCore(project, trunkDir
 				.getAbsolutePath());
+
+		final Configuration configuration = generalDao.getConfiguration();
 
 		RMSConnector rms = (RMSConnector) _manager
 				.getConnectorInstance(configuration.getRMSConnector());
