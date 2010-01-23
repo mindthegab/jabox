@@ -34,7 +34,6 @@ import javax.persistence.Query;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.jabox.apis.IBaseEntity;
-import org.jabox.model.Configuration;
 import org.jabox.model.DefaultConfiguration;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.transaction.annotation.Transactional;
@@ -42,7 +41,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class GeneralDaoImpl implements GeneralDao, InitializingBean {
 	public void afterPropertiesSet() throws Exception {
-
 	}
 
 	private EntityManager entityManager;
@@ -82,21 +80,6 @@ public class GeneralDaoImpl implements GeneralDao, InitializingBean {
 
 	public void deleteEntity(IBaseEntity entity) {
 		getHibernateSession().delete(entity);
-	}
-
-	public Configuration getConfiguration() {
-		List<Configuration> configs = getEntities(Configuration.class);
-
-		// If there is no configuration create one.
-		Configuration config = null;
-		if (configs == null || configs.size() < 1) {
-			config = new Configuration();
-			persist(config);
-		} else {
-			config = configs.get(0);
-		}
-
-		return config;
 	}
 
 	public DefaultConfiguration getDefaultConfiguration() {

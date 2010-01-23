@@ -36,9 +36,7 @@ import org.apache.wicket.model.LoadableDetachableModel;
 import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.jabox.apis.Connector;
-import org.jabox.model.Configuration;
 import org.jabox.model.DeployerConfig;
-import org.jabox.model.DeployerPlugin;
 import org.jabox.model.DeployersRegistry;
 import org.jabox.model.Server;
 
@@ -62,7 +60,7 @@ public class DeployerPluginSelector extends Panel {
 		}
 
 		add(new PluginPicker("picker",
-				new CompoundPropertyModel<Configuration>(pluginId)) {
+				new CompoundPropertyModel(pluginId)) {
 			private static final long serialVersionUID = -5528219523437017579L;
 
 			@Override
@@ -76,15 +74,6 @@ public class DeployerPluginSelector extends Panel {
 						new PropertyModel(article, "deployerConfig")));
 			}
 		});
-
-		// DeployerPlugin plugin = registry.getEntry("plugin.deployer.ftp");
-		// Configuration configuration = (Configuration) article
-		// .getObject();
-		// DeployerConfig newConfig = plugin.newConfig();
-		// configuration.setDeployerConfig(newConfig);
-
-		// DeployerPluginSelector.this.replace(plugin.newEditor("editor",
-		// new PropertyModel(article, "deployerConfig")));
 
 	}
 

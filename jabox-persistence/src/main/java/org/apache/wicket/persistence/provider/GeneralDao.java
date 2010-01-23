@@ -26,7 +26,6 @@ package org.apache.wicket.persistence.provider;
 import java.util.List;
 
 import org.jabox.apis.IBaseEntity;
-import org.jabox.model.Configuration;
 import org.jabox.model.DefaultConfiguration;
 
 public interface GeneralDao {
@@ -38,8 +37,6 @@ public interface GeneralDao {
 	<T extends IBaseEntity> void persist(T object);
 
 	void deleteEntity(IBaseEntity entity);
-
-	Configuration getConfiguration();
 
 	DefaultConfiguration getDefaultConfiguration();
 

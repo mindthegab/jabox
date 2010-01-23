@@ -39,7 +39,6 @@ import org.jabox.apis.rms.RMSConnector;
 import org.jabox.apis.scm.SCMConnector;
 import org.jabox.apis.scm.SCMConnectorConfig;
 import org.jabox.apis.scm.SCMException;
-import org.jabox.model.Configuration;
 import org.jabox.model.DefaultConfiguration;
 import org.jabox.model.Project;
 import org.tmatesoft.svn.core.SVNException;
@@ -100,10 +99,10 @@ public class CreateProjectUtil {
 		MavenCreateProject.createProjectWithMavenCore(project, trunkDir
 				.getAbsolutePath());
 
-		final Configuration configuration = generalDao.getConfiguration();
+		// final Configuration configuration = generalDao.getConfiguration();
 
-		RMSConnector rms = (RMSConnector) _manager
-				.getConnectorInstance(configuration.getRMSConnector());
+		RMSConnector rms = (RMSConnector) _manager.getConnectorInstance(dc
+				.getRms());
 
 		if (rms != null) {
 			try {
@@ -126,8 +125,7 @@ public class CreateProjectUtil {
 		// Add files in the trunk.
 
 		// Add Project in Issue Tracking System
-		BTSConnector bts = _manager.getConnectorInstance(configuration
-				.getBTSConnector());
+		BTSConnector bts = _manager.getConnectorInstance(dc.getIts());
 		if (bts != null) {
 			// bts
 			// .setUrl("http://localhost/cgi-bin/bugzilla/index.cgi?GoAheadAndLogIn=1");
@@ -140,8 +138,8 @@ public class CreateProjectUtil {
 			bts.addVersion(project, "0.0.1");
 		}
 
-		CISConnector cis = (CISConnector) _manager
-				.getConnectorInstance(configuration.getCISConnector());
+		CISConnector cis = (CISConnector) _manager.getConnectorInstance(dc
+				.getCis());
 		if (cis != null) {
 			cis.addProject(project);
 		}
