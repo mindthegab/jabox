@@ -34,7 +34,7 @@ import org.jabox.utils.DownloadHelper;
  */
 public class ArtifactoryServer extends AbstractEmbeddedServer {
 
-	private static final String URL = "http://sourceforge.net/projects/artifactory/files/artifactory/2.0/artifactory-2.0.8.war/download";
+	private static final String URL = "http://sourceforge.net/projects/artifactory/files/artifactory/2.1/artifactory-2.1.0.war/download";
 
 	public static void main(String[] args) throws Exception {
 		new ArtifactoryServer().startServerAndWait();

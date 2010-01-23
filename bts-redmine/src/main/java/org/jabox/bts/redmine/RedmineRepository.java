@@ -88,16 +88,23 @@ public class RedmineRepository implements BTSConnector, Serializable {
 		form.getParameterNames();
 		form.setParameter("project[name]", project.getName());
 		form.setParameter("project[description]", project.getDescription());
-		form.setParameter("project[identifier]", "id-" + project.getId());
-		form.submit();
-		return true;
+		form.setParameter("project[identifier]", getRedmineId(project));
+		resp = form.submit();
+		if (resp.getURL().getPath().endsWith("/admin/projects")) {
+			return true;
+		}
+		return false;
+	}
+
+	private String getRedmineId(Project project) {
+		return project.getName();
 	}
 
 	public boolean addVersion(Project project, String version)
 			throws IOException, SAXException {
 
 		WebRequest req = new GetMethodWebRequest(_url
-				+ "/projects/add_version/id-" + project.getId());
+				+ "/projects/add_version/" + getRedmineId(project));
 
 		WebResponse resp = _wc.getResponse(req);
 		WebForm form = resp.getForms()[1];

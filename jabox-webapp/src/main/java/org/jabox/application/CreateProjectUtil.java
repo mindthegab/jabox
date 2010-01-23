@@ -130,7 +130,7 @@ public class CreateProjectUtil {
 			// bts
 			// .setUrl("http://localhost/cgi-bin/bugzilla/index.cgi?GoAheadAndLogIn=1");
 			// bts.login("", "");
-			bts.setUrl("http://localhost/redmine/");
+			bts.setUrl("http://localhost/redmine");
 			bts.login("admin", "admin123");
 			bts.addProject(project);
 			bts.addModule(project, project.getName(), "initial module",
