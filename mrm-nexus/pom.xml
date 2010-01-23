@@ -27,7 +27,7 @@ THE SOFTWARE.
 	<parent>
 		<artifactId>jabox</artifactId>
 		<groupId>org.jabox</groupId>
-		<version>0.0.3</version>
+		<version>0.0.4-SNAPSHOT</version>
 	</parent>
 	<artifactId>mrm-nexus</artifactId>
 	<name>mrm-nexus</name>

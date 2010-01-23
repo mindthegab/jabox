@@ -26,7 +26,7 @@ THE SOFTWARE.
 	<parent>
 		<groupId>org.jabox</groupId>
 		<artifactId>jabox</artifactId>
-		<version>0.0.3</version>
+		<version>0.0.4-SNAPSHOT</version>
 	</parent>
 	<artifactId>eclipse-webapp</artifactId>
 	<packaging>war</packaging>

@@ -24,7 +24,7 @@
 	<groupId>org.jabox</groupId>
 	<artifactId>jabox</artifactId>
 	<packaging>pom</packaging>
-	<version>0.0.3</version>
+	<version>0.0.4-SNAPSHOT</version>
 	<!-- TODO project name  -->
 	<name>Jabox</name>
 	<description />
@@ -52,9 +52,9 @@
 		</organization>
 	-->
 	<scm>
-		<url>http://www.jabox.org/tags/jabox-0.0.3</url>
-		<connection>scm:svn:svn://67.23.47.178/tags/jabox-0.0.3</connection>
-		<developerConnection>scm:svn:svn://67.23.47.178/tags/jabox-0.0.3</developerConnection>
+		<url>http://www.jabox.org/trunk/</url>
+		<connection>scm:svn:svn://67.23.47.178/trunk/</connection>
+		<developerConnection>scm:svn:svn://67.23.47.178/trunk/</developerConnection>
 	</scm>
 	<build>
 		<plugins>
