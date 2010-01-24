@@ -27,7 +27,7 @@ import java.io.File;
 
 import junit.framework.TestCase;
 
-import org.jabox.svn.SubversionRepository;
+import org.jabox.scm.svn.SubversionRepository;
 import org.tmatesoft.svn.core.SVNDepth;
 import org.tmatesoft.svn.core.SVNException;
 import org.tmatesoft.svn.core.SVNURL;

@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.jabox.svn;
+package org.jabox.scm.svn;
 
 import java.io.File;
 import java.io.IOException;
@@ -42,14 +42,14 @@ import org.tmatesoft.svn.core.SVNURL;
 
 @Service
 public class SVNConnector implements SCMConnector, Serializable {
-	public static final String ID = "plugin.scm.subversion";
+	public static final String ID = "plugin.scm.svn";
 
 	private static final long serialVersionUID = -3875844507330633672L;
 
 	private File _tmpDir;
 
 	public String getName() {
-		return "Subversion Plugin";
+		return "Subversion";
 	}
 
 	public String getId() {
@@ -76,20 +76,12 @@ public class SVNConnector implements SCMConnector, Serializable {
 
 	public File createProjectDirectories(Project project,
 			SCMConnectorConfig config) throws SCMException {
-		SVNConnectorConfig svnc = (SVNConnectorConfig) config;
+		ISVNConnectorConfig svnc = (ISVNConnectorConfig) config;
 		try {
 			SubversionFacade svn = new SubversionFacade();
 			_tmpDir = TemporalDirectory.createTempDir();
 
-			SVNURL svnDir;
-			if (svnc.embedded) {
-				// Checkout basedir from subversion.
-				svnDir = SVNURL.fromFile(SubversionRepository
-						.getSubversionBaseDir());
-			} else {
-				svnDir = SVNURL.parseURIEncoded(svnc.getServer().getUrl());
-			}
-			svn.checkoutBaseDir(_tmpDir, svnDir);
+			svn.checkoutBaseDir(_tmpDir, svnc.getSvnDir());
 			// Create Project directory and its trunk/branches/tags
 			// subdirectories
 			File trunkDir = createProjectDirectories(project, _tmpDir);
@@ -126,7 +118,7 @@ public class SVNConnector implements SCMConnector, Serializable {
 
 		try {
 			SubversionFacade svn = new SubversionFacade();
-			svn.commitProject(project, _tmpDir, (SVNConnectorConfig) svnc);
+			svn.commitProject(project, _tmpDir, (ISVNConnectorConfig) svnc);
 		} catch (SVNException e) {
 			throw new SCMException("Problem during the Subversion commit.", e);
 		}

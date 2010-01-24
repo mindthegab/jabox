@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.jabox.svn;
+package org.jabox.scm.svn;
 
 import java.io.File;
 
@@ -73,7 +73,7 @@ public class SubversionFacade {
 	}
 
 	public void commitProject(Project project, File tmpDir,
-			SVNConnectorConfig svnc) throws SVNException {
+			ISVNConnectorConfig svnc) throws SVNException {
 		// Add files (svn add)
 		SVNWCClient wcClient = _clientManager.getWCClient();
 		wcClient.doAdd(new File(tmpDir, project.getName()), false, false, true,
@@ -82,7 +82,7 @@ public class SubversionFacade {
 		// Commit files (svn commit)
 		SVNCommitClient commitClient = _clientManager.getCommitClient();
 		ISVNAuthenticationManager authManager = new BasicAuthenticationManager(
-				svnc.username, svnc.password);
+				svnc.getUsername(), svnc.getPassword());
 		_clientManager.setAuthenticationManager(authManager);
 		File[] paths = new File[1];
 		paths[0] = new File(tmpDir, project.getName());

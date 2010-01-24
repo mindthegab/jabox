@@ -1,6 +1,5 @@
-package org.jabox.svn;
+package org.jabox.scm.svn;
 
-import org.apache.wicket.markup.html.form.CheckBox;
 import org.apache.wicket.markup.html.form.PasswordTextField;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.panel.Panel;
@@ -16,7 +15,6 @@ public class SVNConnectorEditor extends Panel {
 		add(new TextField<String>("server.url"));
 		add(new TextField<String>("username").setRequired(true));
 		add(new PasswordTextField("password").setRequired(true));
-		add(new CheckBox("embedded"));
 	}
 
 }
