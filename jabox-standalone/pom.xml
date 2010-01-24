@@ -112,6 +112,11 @@ THE SOFTWARE.
 		</dependency>
 		<dependency>
 			<groupId>org.jabox</groupId>
+			<artifactId>mrm-nexus</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jabox</groupId>
 			<artifactId>ide-eclipse</artifactId>
 			<version>${project.version}</version>
 		</dependency>
