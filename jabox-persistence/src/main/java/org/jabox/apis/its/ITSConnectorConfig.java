@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.jabox.apis.bts;
+package org.jabox.apis.its;
 
 import org.jabox.apis.ConnectorConfig;
 

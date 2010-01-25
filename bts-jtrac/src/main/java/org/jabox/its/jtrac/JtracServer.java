@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.jabox.bts.jtrac;
+package org.jabox.its.jtrac;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;

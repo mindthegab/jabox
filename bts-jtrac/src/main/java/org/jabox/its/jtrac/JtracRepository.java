@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.jabox.bts.bugzilla;
+package org.jabox.its.jtrac;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -29,7 +29,7 @@ import java.net.MalformedURLException;
 
 import org.apache.wicket.Component;
 import org.apache.wicket.model.IModel;
-import org.jabox.apis.bts.BTSConnector;
+import org.jabox.apis.its.ITSConnector;
 import org.jabox.model.DeployerConfig;
 import org.jabox.model.Project;
 import org.jabox.model.Server;
@@ -43,15 +43,15 @@ import com.meterware.httpunit.WebRequest;
 import com.meterware.httpunit.WebResponse;
 
 @Service
-public class BugzillaRepository implements BTSConnector, Serializable {
+public class JtracRepository implements ITSConnector, Serializable {
 	private static final long serialVersionUID = 8131183843391948936L;
-	public static final String ID = "plugin.its.bugzilla";
+	public static final String ID = "plugin.its.jtrac";
 
 	private String _url;
 	private final WebConversation _wc;
 
 	public String getName() {
-		return "Bugzilla Plugin";
+		return "Jtrac Plugin";
 	}
 
 	public String getId() {
@@ -63,7 +63,7 @@ public class BugzillaRepository implements BTSConnector, Serializable {
 		return getName();
 	}
 
-	public BugzillaRepository() {
+	public JtracRepository() {
 		_wc = new WebConversation();
 	}
 
@@ -76,8 +76,8 @@ public class BugzillaRepository implements BTSConnector, Serializable {
 		WebRequest req = new GetMethodWebRequest(_url);
 		WebResponse resp = _wc.getResponse(req);
 		WebForm form = resp.getForms()[0]; // select the first form in the page
-		form.setParameter("Bugzilla_login", username);
-		form.setParameter("Bugzilla_password", password);
+		form.setParameter("j_username", username);
+		form.setParameter("j_password", password);
 		resp = form.submit();
 
 		// TODO check if not logged in.
@@ -86,8 +86,8 @@ public class BugzillaRepository implements BTSConnector, Serializable {
 
 	public boolean addProject(final Project project) throws IOException,
 			SAXException {
-		WebRequest req = new GetMethodWebRequest(
-				"http://localhost/cgi-bin/bugzilla/editproducts.cgi?action=add");
+		WebRequest req = new GetMethodWebRequest(_url
+				+ "/editproducts.cgi?action=add");
 		WebResponse resp = _wc.getResponse(req);
 		WebForm form = resp.getForms()[0];
 
@@ -129,10 +129,10 @@ public class BugzillaRepository implements BTSConnector, Serializable {
 	}
 
 	public DeployerConfig newConfig() {
-		return new BugzillaRepositoryConfig();
+		return new JtracRepositoryConfig();
 	}
-
+ 
 	public Component newEditor(String id, IModel<Server> model) {
-		return new BugzillaRepositoryEditor(id, model);
+		return new JtracRepositoryEditor(id, model);
 	}
 }

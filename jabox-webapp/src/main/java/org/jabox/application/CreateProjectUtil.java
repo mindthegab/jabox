@@ -33,8 +33,8 @@ import org.apache.wicket.persistence.provider.GeneralDao;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
 import org.jabox.apis.Manager;
-import org.jabox.apis.bts.BTSConnector;
 import org.jabox.apis.cis.CISConnector;
+import org.jabox.apis.its.ITSConnector;
 import org.jabox.apis.rms.RMSConnector;
 import org.jabox.apis.scm.SCMConnector;
 import org.jabox.apis.scm.SCMConnectorConfig;
@@ -49,7 +49,7 @@ public class CreateProjectUtil {
 	protected GeneralDao generalDao;
 
 	@SpringBean
-	protected Manager<BTSConnector> _manager;
+	protected Manager<ITSConnector> _manager;
 
 	public CreateProjectUtil() {
 		InjectorHolder.getInjector().inject(this);
@@ -125,7 +125,7 @@ public class CreateProjectUtil {
 		// Add files in the trunk.
 
 		// Add Project in Issue Tracking System
-		BTSConnector bts = _manager.getConnectorInstance(dc.getIts());
+		ITSConnector bts = _manager.getConnectorInstance(dc.getIts());
 		if (bts != null) {
 			// bts
 			// .setUrl("http://localhost/cgi-bin/bugzilla/index.cgi?GoAheadAndLogIn=1");

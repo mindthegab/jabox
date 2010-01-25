@@ -1,9 +1,9 @@
-package org.jabox.bts.redmine;
+package org.jabox.its.redmine;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
-import org.jabox.apis.bts.ITSConnectorConfig;
+import org.jabox.apis.its.ITSConnectorConfig;
 import org.jabox.model.DeployerConfig;
 
 @Entity

@@ -9,8 +9,8 @@ import javax.persistence.ManyToOne;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.persistence.domain.BaseEntity;
 import org.jabox.apis.ConnectorConfig;
-import org.jabox.apis.bts.ITSConnectorConfig;
 import org.jabox.apis.cis.CISConnectorConfig;
+import org.jabox.apis.its.ITSConnectorConfig;
 import org.jabox.apis.rms.RMSConnectorConfig;
 import org.jabox.apis.scm.SCMConnectorConfig;
 

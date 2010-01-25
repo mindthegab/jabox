@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.jabox.bts.jtrac;
+package org.jabox.its.redmine;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -29,7 +29,7 @@ import java.net.MalformedURLException;
 
 import org.apache.wicket.Component;
 import org.apache.wicket.model.IModel;
-import org.jabox.apis.bts.BTSConnector;
+import org.jabox.apis.its.ITSConnector;
 import org.jabox.model.DeployerConfig;
 import org.jabox.model.Project;
 import org.jabox.model.Server;
@@ -43,15 +43,15 @@ import com.meterware.httpunit.WebRequest;
 import com.meterware.httpunit.WebResponse;
 
 @Service
-public class JtracRepository implements BTSConnector, Serializable {
-	private static final long serialVersionUID = 8131183843391948936L;
-	public static final String ID = "plugin.its.jtrac";
+public class RedmineRepository implements ITSConnector, Serializable {
+	private static final long serialVersionUID = -692328636804684690L;
+	public static final String ID = "plugin.its.redmine";
 
 	private String _url;
 	private final WebConversation _wc;
 
 	public String getName() {
-		return "Jtrac Plugin";
+		return "Redmine Plugin";
 	}
 
 	public String getId() {
@@ -63,76 +63,79 @@ public class JtracRepository implements BTSConnector, Serializable {
 		return getName();
 	}
 
-	public JtracRepository() {
+	/**
+	 * @param url
+	 *            Redmine URL.
+	 */
+	public RedmineRepository() {
 		_wc = new WebConversation();
 	}
 
-	public void setUrl(final String url) {
+	public void setUrl(String url) {
 		_url = url;
 	}
 
-	public boolean login(String username, String password)
-			throws MalformedURLException, IOException, SAXException {
-		WebRequest req = new GetMethodWebRequest(_url);
+	public boolean addModule(Project project, String module,
+			String description, String initialOwner) throws SAXException,
+			IOException {
+		return true;
+	}
+
+	public boolean addProject(Project project) throws IOException, SAXException {
+		WebRequest req = new GetMethodWebRequest(_url + "/projects/add");
 		WebResponse resp = _wc.getResponse(req);
-		WebForm form = resp.getForms()[0]; // select the first form in the page
-		form.setParameter("j_username", username);
-		form.setParameter("j_password", password);
+		WebForm form = resp.getForms()[1];
+		form.getParameterNames();
+		form.setParameter("project[name]", project.getName());
+		form.setParameter("project[description]", project.getDescription());
+		form.setParameter("project[identifier]", getRedmineId(project));
 		resp = form.submit();
-
-		// TODO check if not logged in.
-		return true;
+		if (resp.getURL().getPath().endsWith("/admin/projects")) {
+			return true;
+		}
+		return false;
 	}
 
-	public boolean addProject(final Project project) throws IOException,
-			SAXException {
-		WebRequest req = new GetMethodWebRequest(_url
-				+ "/editproducts.cgi?action=add");
-		WebResponse resp = _wc.getResponse(req);
-		WebForm form = resp.getForms()[0];
-
-		form.setParameter("product", project.getName());
-		form.setParameter("description", project.getDescription());
-		form.submit();
-		return true;
-	}
-
-	public boolean addModule(final Project project, final String module,
-			final String description, final String initialOwner)
-			throws SAXException, IOException {
-
-		WebRequest req = new GetMethodWebRequest(
-				"http://localhost/cgi-bin/bugzilla/editcomponents.cgi?action=add&product="
-						+ project.getName());
-		WebResponse resp = _wc.getResponse(req);
-		WebForm form = resp.getForms()[0];
-
-		form.setParameter("component", module);
-		form.setParameter("description", description);
-		form.setParameter("initialowner", initialOwner);
-		form.submit();
-		return true;
+	private String getRedmineId(Project project) {
+		return project.getName();
 	}
 
 	public boolean addVersion(Project project, String version)
 			throws IOException, SAXException {
 
-		WebRequest req = new GetMethodWebRequest(
-				"http://localhost/cgi-bin/bugzilla/editversions.cgi?action=add&product="
-						+ project.getName());
-		WebResponse resp = _wc.getResponse(req);
-		WebForm form = resp.getForms()[0];
+		WebRequest req = new GetMethodWebRequest(_url
+				+ "/projects/add_version/" + getRedmineId(project));
 
-		form.setParameter("version", version);
+		WebResponse resp = _wc.getResponse(req);
+		WebForm form = resp.getForms()[1];
+
+		form.setParameter("version[name]", version);
 		form.submit();
 		return true;
 	}
 
+	public boolean login(String username, String password)
+			throws MalformedURLException, IOException, SAXException {
+		WebRequest req = new GetMethodWebRequest(_url + "/login");
+		WebResponse resp = _wc.getResponse(req);
+		WebForm form = resp.getForms()[1]; // select the second form in the
+		// page
+		form.setParameter("username", username);
+		form.setParameter("password", password);
+		resp = form.submit();
+
+		if (resp.getURL().getPath().endsWith("/my/page")) {
+			return true;
+		}
+		return false;
+	}
+
 	public DeployerConfig newConfig() {
-		return new JtracRepositoryConfig();
+		return new RedmineRepositoryConfig();
 	}
- 
+
 	public Component newEditor(String id, IModel<Server> model) {
-		return new JtracRepositoryEditor(id, model);
+		return new RedmineRepositoryEditor(id, model);
 	}
+
 }

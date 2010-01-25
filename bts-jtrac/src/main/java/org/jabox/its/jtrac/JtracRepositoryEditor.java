@@ -1,4 +1,4 @@
-package org.jabox.bts.jtrac;
+package org.jabox.its.jtrac;
 
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.panel.Panel;
