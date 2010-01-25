@@ -127,9 +127,9 @@ public class CreateProjectUtil {
 		// Add Project in Issue Tracking System
 		ITSConnector its = _manager.getConnectorInstance(dc.getIts());
 		if (its != null) {
-			// bts
+			// its
 			// .setUrl("http://localhost/cgi-bin/bugzilla/index.cgi?GoAheadAndLogIn=1");
-			// bts.login("", "");
+			// its.login("", "");
 			its.setUrl("http://localhost/redmine");
 			its.login("admin", "admin123");
 			its.addProject(project);
