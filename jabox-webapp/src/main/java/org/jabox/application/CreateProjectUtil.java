@@ -125,17 +125,17 @@ public class CreateProjectUtil {
 		// Add files in the trunk.
 
 		// Add Project in Issue Tracking System
-		ITSConnector bts = _manager.getConnectorInstance(dc.getIts());
-		if (bts != null) {
+		ITSConnector its = _manager.getConnectorInstance(dc.getIts());
+		if (its != null) {
 			// bts
 			// .setUrl("http://localhost/cgi-bin/bugzilla/index.cgi?GoAheadAndLogIn=1");
 			// bts.login("", "");
-			bts.setUrl("http://localhost/redmine");
-			bts.login("admin", "admin123");
-			bts.addProject(project);
-			bts.addModule(project, project.getName(), "initial module",
+			its.setUrl("http://localhost/redmine");
+			its.login("admin", "admin123");
+			its.addProject(project);
+			its.addModule(project, project.getName(), "initial module",
 					"myemail@gmail.com");
-			bts.addVersion(project, "0.0.1");
+			its.addVersion(project, "0.0.1");
 		}
 
 		CISConnector cis = (CISConnector) _manager.getConnectorInstance(dc
