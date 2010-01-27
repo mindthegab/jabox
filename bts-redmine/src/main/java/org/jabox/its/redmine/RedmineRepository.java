@@ -30,6 +30,7 @@ import java.net.MalformedURLException;
 import org.apache.wicket.Component;
 import org.apache.wicket.model.IModel;
 import org.jabox.apis.its.ITSConnector;
+import org.jabox.apis.its.ITSConnectorConfig;
 import org.jabox.model.DeployerConfig;
 import org.jabox.model.Project;
 import org.jabox.model.Server;
@@ -47,7 +48,6 @@ public class RedmineRepository implements ITSConnector, Serializable {
 	private static final long serialVersionUID = -692328636804684690L;
 	public static final String ID = "plugin.its.redmine";
 
-	private String _url;
 	private final WebConversation _wc;
 
 	public String getName() {
@@ -71,18 +71,17 @@ public class RedmineRepository implements ITSConnector, Serializable {
 		_wc = new WebConversation();
 	}
 
-	public void setUrl(String url) {
-		_url = url;
-	}
-
-	public boolean addModule(Project project, String module,
+	public boolean addModule(Project project,
+			ITSConnectorConfig itsConnectorConfig, String module,
 			String description, String initialOwner) throws SAXException,
 			IOException {
 		return true;
 	}
 
-	public boolean addProject(Project project) throws IOException, SAXException {
-		WebRequest req = new GetMethodWebRequest(_url + "/projects/add");
+	public boolean addProject(Project project, ITSConnectorConfig config)
+			throws IOException, SAXException {
+		WebRequest req = new GetMethodWebRequest(config.getServer().getUrl()
+				+ "/projects/add");
 		WebResponse resp = _wc.getResponse(req);
 		WebForm form = resp.getForms()[1];
 		form.getParameterNames();
@@ -100,10 +99,10 @@ public class RedmineRepository implements ITSConnector, Serializable {
 		return project.getName();
 	}
 
-	public boolean addVersion(Project project, String version)
-			throws IOException, SAXException {
+	public boolean addVersion(Project project, ITSConnectorConfig config,
+			String version) throws IOException, SAXException {
 
-		WebRequest req = new GetMethodWebRequest(_url
+		WebRequest req = new GetMethodWebRequest(config.getServer().getUrl()
 				+ "/projects/add_version/" + getRedmineId(project));
 
 		WebResponse resp = _wc.getResponse(req);
@@ -114,9 +113,12 @@ public class RedmineRepository implements ITSConnector, Serializable {
 		return true;
 	}
 
-	public boolean login(String username, String password)
-			throws MalformedURLException, IOException, SAXException {
-		WebRequest req = new GetMethodWebRequest(_url + "/login");
+	public boolean login(String username, String password,
+			ITSConnectorConfig config) throws MalformedURLException,
+			IOException, SAXException {
+
+		WebRequest req = new GetMethodWebRequest(config.getServer().getUrl()
+				+ "/login");
 		WebResponse resp = _wc.getResponse(req);
 		WebForm form = resp.getForms()[1]; // select the second form in the
 		// page

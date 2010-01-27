@@ -35,6 +35,7 @@ import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
 import org.jabox.apis.Manager;
 import org.jabox.apis.cis.CISConnector;
 import org.jabox.apis.its.ITSConnector;
+import org.jabox.apis.its.ITSConnectorConfig;
 import org.jabox.apis.rms.RMSConnector;
 import org.jabox.apis.scm.SCMConnector;
 import org.jabox.apis.scm.SCMConnectorConfig;
@@ -125,17 +126,19 @@ public class CreateProjectUtil {
 		// Add files in the trunk.
 
 		// Add Project in Issue Tracking System
-		ITSConnector its = _manager.getConnectorInstance(dc.getIts());
+		ITSConnectorConfig config = (ITSConnectorConfig) dc.getIts();
+		ITSConnector its = _manager.getConnectorInstance(config);
 		if (its != null) {
 			// its
 			// .setUrl("http://localhost/cgi-bin/bugzilla/index.cgi?GoAheadAndLogIn=1");
 			// its.login("", "");
-			its.setUrl("http://localhost/redmine");
-			its.login("admin", "admin123");
-			its.addProject(project);
-			its.addModule(project, project.getName(), "initial module",
+
+			// its.setUrl("http://localhost/redmine");
+			its.login("admin", "admin123", config);
+			its.addProject(project, config);
+			its.addModule(project, config, project.getName(), "initial module",
 					"myemail@gmail.com");
-			its.addVersion(project, "0.0.1");
+			its.addVersion(project, config, "0.0.1");
 		}
 
 		CISConnector cis = (CISConnector) _manager.getConnectorInstance(dc

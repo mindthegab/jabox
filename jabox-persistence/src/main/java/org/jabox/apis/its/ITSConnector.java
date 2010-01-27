@@ -32,18 +32,20 @@ import org.xml.sax.SAXException;
 
 public interface ITSConnector extends Connector {
 
-	public boolean login(String username, String password)
-			throws MalformedURLException, IOException, SAXException;
+	public boolean login(String username, String password,
+			ITSConnectorConfig config) throws MalformedURLException,
+			IOException, SAXException;
 
-	public void setUrl(final String url);
-
-	public boolean addProject(final Project project) throws IOException,
+	public boolean addProject(final Project project,
+			ITSConnectorConfig itsConnectorConfig) throws IOException,
 			SAXException;
 
-	public boolean addModule(final Project project, final String module,
+	public boolean addModule(final Project project,
+			ITSConnectorConfig itsConnectorConfig, final String module,
 			final String description, final String initialOwner)
 			throws SAXException, IOException;
 
-	public boolean addVersion(Project project, String version)
+	public boolean addVersion(Project project,
+			ITSConnectorConfig itsConnectorConfig, String version)
 			throws IOException, SAXException;
 }

@@ -30,6 +30,7 @@ import java.net.MalformedURLException;
 import org.apache.wicket.Component;
 import org.apache.wicket.model.IModel;
 import org.jabox.apis.its.ITSConnector;
+import org.jabox.apis.its.ITSConnectorConfig;
 import org.jabox.model.DeployerConfig;
 import org.jabox.model.Project;
 import org.jabox.model.Server;
@@ -71,9 +72,10 @@ public class JtracRepository implements ITSConnector, Serializable {
 		_url = url;
 	}
 
-	public boolean login(String username, String password)
-			throws MalformedURLException, IOException, SAXException {
-		WebRequest req = new GetMethodWebRequest(_url);
+	public boolean login(String username, String password,
+			ITSConnectorConfig config) throws MalformedURLException,
+			IOException, SAXException {
+		WebRequest req = new GetMethodWebRequest(config.getServer().getUrl());
 		WebResponse resp = _wc.getResponse(req);
 		WebForm form = resp.getForms()[0]; // select the first form in the page
 		form.setParameter("j_username", username);
@@ -84,8 +86,8 @@ public class JtracRepository implements ITSConnector, Serializable {
 		return true;
 	}
 
-	public boolean addProject(final Project project) throws IOException,
-			SAXException {
+	public boolean addProject(final Project project, ITSConnectorConfig config)
+			throws IOException, SAXException {
 		WebRequest req = new GetMethodWebRequest(_url
 				+ "/editproducts.cgi?action=add");
 		WebResponse resp = _wc.getResponse(req);
@@ -97,13 +99,12 @@ public class JtracRepository implements ITSConnector, Serializable {
 		return true;
 	}
 
-	public boolean addModule(final Project project, final String module,
-			final String description, final String initialOwner)
-			throws SAXException, IOException {
-
-		WebRequest req = new GetMethodWebRequest(
-				"http://localhost/cgi-bin/bugzilla/editcomponents.cgi?action=add&product="
-						+ project.getName());
+	public boolean addModule(final Project project, ITSConnectorConfig config,
+			final String module, final String description,
+			final String initialOwner) throws SAXException, IOException {
+		String url = config.getServer().getUrl();
+		WebRequest req = new GetMethodWebRequest(url
+				+ "/editcomponents.cgi?action=add&product=" + project.getName());
 		WebResponse resp = _wc.getResponse(req);
 		WebForm form = resp.getForms()[0];
 
@@ -114,12 +115,11 @@ public class JtracRepository implements ITSConnector, Serializable {
 		return true;
 	}
 
-	public boolean addVersion(Project project, String version)
-			throws IOException, SAXException {
-
-		WebRequest req = new GetMethodWebRequest(
-				"http://localhost/cgi-bin/bugzilla/editversions.cgi?action=add&product="
-						+ project.getName());
+	public boolean addVersion(Project project, ITSConnectorConfig config,
+			String version) throws IOException, SAXException {
+		String url = config.getServer().getUrl();
+		WebRequest req = new GetMethodWebRequest(url
+				+ "/editversions.cgi?action=add&product=" + project.getName());
 		WebResponse resp = _wc.getResponse(req);
 		WebForm form = resp.getForms()[0];
 
@@ -131,7 +131,7 @@ public class JtracRepository implements ITSConnector, Serializable {
 	public DeployerConfig newConfig() {
 		return new JtracRepositoryConfig();
 	}
- 
+
 	public Component newEditor(String id, IModel<Server> model) {
 		return new JtracRepositoryEditor(id, model);
 	}
