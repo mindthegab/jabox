@@ -15,4 +15,12 @@ public class ArtifactoryConnectorConfig extends DeployerConfig implements
 	public ArtifactoryConnectorConfig() {
 		pluginId = ArtifactoryConnector.ID;
 	}
+
+	public String getReleaseRepositoryURL() {
+		return getServer().getUrl() + "libs-releases-local";
+	}
+
+	public String getSnapshotsRepositoryURL() {
+		return getServer().getUrl() + "libs-snapshots-local";
+	}
 }

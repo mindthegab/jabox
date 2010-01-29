@@ -27,4 +27,8 @@ import org.jabox.apis.ConnectorConfig;
 
 public interface RMSConnectorConfig extends ConnectorConfig {
 
+	String getReleaseRepositoryURL();
+
+	String getSnapshotsRepositoryURL();
+
 }

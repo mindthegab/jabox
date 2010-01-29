@@ -37,6 +37,7 @@ import org.jabox.apis.cis.CISConnector;
 import org.jabox.apis.its.ITSConnector;
 import org.jabox.apis.its.ITSConnectorConfig;
 import org.jabox.apis.rms.RMSConnector;
+import org.jabox.apis.rms.RMSConnectorConfig;
 import org.jabox.apis.scm.SCMConnector;
 import org.jabox.apis.scm.SCMConnectorConfig;
 import org.jabox.apis.scm.SCMException;
@@ -109,7 +110,7 @@ public class CreateProjectUtil {
 			try {
 				File pomXml = new File(trunkDir, project.getName() + "/pom.xml");
 				MavenConfigureDistributionManager.injectDistributionManager(
-						pomXml, rms);
+						pomXml, (RMSConnectorConfig) dc.getRms());
 			} catch (XmlPullParserException e) {
 				e.printStackTrace();
 			}

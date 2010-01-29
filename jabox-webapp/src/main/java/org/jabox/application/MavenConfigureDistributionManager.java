@@ -34,7 +34,7 @@ import org.apache.maven.model.Model;
 import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
 import org.apache.maven.model.io.xpp3.MavenXpp3Writer;
 import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
-import org.jabox.apis.rms.RMSConnector;
+import org.jabox.apis.rms.RMSConnectorConfig;
 
 /**
  * Helper class that injects the &lt;distributionManager&gt; configuration to a
@@ -55,7 +55,7 @@ public class MavenConfigureDistributionManager {
 	 * @throws XmlPullParserException
 	 */
 	public static void injectDistributionManager(final File pomFile,
-			RMSConnector rms) throws IOException, XmlPullParserException {
+			RMSConnectorConfig rms) throws IOException, XmlPullParserException {
 		FileReader fileReader = new FileReader(pomFile);
 		Model model = new MavenXpp3Reader().read(fileReader);
 

@@ -33,6 +33,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class ArtifactoryConnector implements RMSConnector {
 	public static final String ID = "plugin.rms.artifactory";
+
 	public String getName() {
 		return "Artifactory Plugin";
 	}
@@ -46,14 +47,6 @@ public class ArtifactoryConnector implements RMSConnector {
 		return getName();
 	}
 
-	public String getReleaseRepositoryURL() {
-		return "http://localhost:9090/artifactory/libs-releases-local";
-	}
-
-	public String getSnapshotsRepositoryURL() {
-		return "http://localhost:9090/artifactory/libs-snapshots-local";
-	}
-
 	public DeployerConfig newConfig() {
 		return new ArtifactoryConnectorConfig();
 	}
@@ -61,5 +54,4 @@ public class ArtifactoryConnector implements RMSConnector {
 	public Component newEditor(String id, IModel<Server> model) {
 		return new ArtifactoryConnectorEditor(id, model);
 	}
-
 }

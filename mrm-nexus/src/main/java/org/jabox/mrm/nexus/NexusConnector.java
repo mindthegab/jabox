@@ -47,14 +47,6 @@ public class NexusConnector implements RMSConnector {
 		return getName();
 	}
 
-	public String getReleaseRepositoryURL() {
-		return "http://localhost:9090/nexus/content/repositories/releases/";
-	}
-
-	public String getSnapshotsRepositoryURL() {
-		return "http://localhost:9090/nexus/content/repositories/snapshots/";
-	}
-
 	public DeployerConfig newConfig() {
 		return new NexusConnectorConfig();
 	}

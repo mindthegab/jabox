@@ -1,6 +1,5 @@
 package org.jabox.mrm.nexus;
 
-import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
@@ -15,5 +14,13 @@ public class NexusConnectorConfig extends DeployerConfig implements
 
 	public NexusConnectorConfig() {
 		pluginId = NexusConnector.ID;
+	}
+
+	public String getReleaseRepositoryURL() {
+		return getServer().getUrl() + "content/repositories/releases/";
+	}
+
+	public String getSnapshotsRepositoryURL() {
+		return getServer().getUrl() + "content/repositories/snapshots/";
 	}
 }
