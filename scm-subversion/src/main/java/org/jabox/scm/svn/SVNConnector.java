@@ -30,7 +30,6 @@ import java.io.Serializable;
 import org.apache.wicket.Component;
 import org.apache.wicket.model.IModel;
 import org.jabox.apis.scm.SCMConnector;
-import org.jabox.apis.scm.SCMConnectorConfig;
 import org.jabox.apis.scm.SCMException;
 import org.jabox.model.DeployerConfig;
 import org.jabox.model.Project;
@@ -41,7 +40,8 @@ import org.tmatesoft.svn.core.SVNException;
 import org.tmatesoft.svn.core.SVNURL;
 
 @Service
-public class SVNConnector implements SCMConnector, Serializable {
+public class SVNConnector implements SCMConnector<ISVNConnectorConfig>,
+		Serializable {
 	public static final String ID = "plugin.scm.svn";
 
 	private static final long serialVersionUID = -3875844507330633672L;
@@ -75,8 +75,8 @@ public class SVNConnector implements SCMConnector, Serializable {
 	}
 
 	public File createProjectDirectories(Project project,
-			SCMConnectorConfig config) throws SCMException {
-		ISVNConnectorConfig svnc = (ISVNConnectorConfig) config;
+			ISVNConnectorConfig config) throws SCMException {
+		ISVNConnectorConfig svnc = config;
 		try {
 			SubversionFacade svn = new SubversionFacade();
 			_tmpDir = TemporalDirectory.createTempDir();
@@ -112,13 +112,13 @@ public class SVNConnector implements SCMConnector, Serializable {
 		return trunkDir;
 	}
 
-	public void commitProject(Project project, SCMConnectorConfig svnc)
+	public void commitProject(Project project, ISVNConnectorConfig svnc)
 			throws SCMException {
 		assert (_tmpDir != null && _tmpDir.exists());
 
 		try {
 			SubversionFacade svn = new SubversionFacade();
-			svn.commitProject(project, _tmpDir, (ISVNConnectorConfig) svnc);
+			svn.commitProject(project, _tmpDir, svnc);
 		} catch (SVNException e) {
 			throw new SCMException("Problem during the Subversion commit.", e);
 		}

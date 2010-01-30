@@ -28,13 +28,12 @@ import java.io.File;
 import org.jabox.apis.Connector;
 import org.jabox.model.Project;
 
-public interface SCMConnector extends Connector {
+public interface SCMConnector<T extends SCMConnectorConfig> extends Connector {
 
-	File createProjectDirectories(Project project, SCMConnectorConfig config)
+	File createProjectDirectories(Project project, T config)
 			throws SCMException;
 
-	void commitProject(Project project, SCMConnectorConfig config)
-			throws SCMException;
+	void commitProject(Project project, T config) throws SCMException;
 
 	String getScmUrl();
 
