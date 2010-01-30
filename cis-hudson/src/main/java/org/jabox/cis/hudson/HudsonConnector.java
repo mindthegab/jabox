@@ -35,6 +35,7 @@ import org.apache.wicket.Component;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.util.io.IOUtils;
 import org.jabox.apis.cis.CISConnector;
+import org.jabox.apis.cis.CISConnectorConfig;
 import org.jabox.model.DeployerConfig;
 import org.jabox.model.Project;
 import org.jabox.model.Server;
@@ -63,12 +64,12 @@ public class HudsonConnector implements CISConnector {
 	 * http://wiki.hudson-ci.org/display/HUDSON/Authenticating+scripted+clients
 	 * 
 	 */
-	public boolean addProject(Project project) throws IOException, SAXException {
-		// XXX This needs to be configured.
-		String hudsonHost = "http://localhost:9090/hudson/";
+	public boolean addProject(Project project, CISConnectorConfig dc)
+			throws IOException, SAXException {
+		String url = dc.getServer().getUrl();
 
 		HttpClient client = new HttpClient();
-		String uri = hudsonHost + "createItem?name=" + project.getName();
+		String uri = url + "createItem?name=" + project.getName();
 		PostMethod post = new PostMethod(uri);
 		post.setRequestHeader("Content-type", "text/xml; charset=UTF-8");
 		post.setDoAuthentication(true);
@@ -90,7 +91,7 @@ public class HudsonConnector implements CISConnector {
 		}
 
 		// Trigger the Hudson build
-		PostMethod triggerBuild = new PostMethod(hudsonHost + "/job/"
+		PostMethod triggerBuild = new PostMethod(url + "/job/"
 				+ project.getName() + "/build");
 		client.executeMethod(triggerBuild);
 		return true;

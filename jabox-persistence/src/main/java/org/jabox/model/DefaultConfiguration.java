@@ -34,12 +34,12 @@ public class DefaultConfiguration extends BaseEntity implements Serializable {
 	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	private DeployerConfig _scm;
 
-	public void setIts(DeployerConfig its) {
-		_its = its;
+	public void setIts(ITSConnectorConfig its) {
+		_its = (DeployerConfig) its;
 	}
 
-	public DeployerConfig getIts() {
-		return _its;
+	public ITSConnectorConfig getIts() {
+		return (ITSConnectorConfig) _its;
 	}
 
 	public String isDefault(ConnectorConfig item) {
@@ -70,41 +70,37 @@ public class DefaultConfiguration extends BaseEntity implements Serializable {
 
 	public void setDefault(ConnectorConfig config) {
 		if (ITSConnectorConfig.class.isAssignableFrom(config.getClass())) {
-			DeployerConfig its = (DeployerConfig) config;
-			_its = its;
+			_its = (DeployerConfig) config;
 		} else if (CISConnectorConfig.class.isAssignableFrom(config.getClass())) {
-			DeployerConfig cis = (DeployerConfig) config;
-			_cis = cis;
+			_cis = (DeployerConfig) config;
 		} else if (RMSConnectorConfig.class.isAssignableFrom(config.getClass())) {
-			DeployerConfig rms = (DeployerConfig) config;
-			_rms = rms;
+			_rms = (DeployerConfig) config;
 		} else if (SCMConnectorConfig.class.isAssignableFrom(config.getClass())) {
-			DeployerConfig scm = (DeployerConfig) config;
-			_scm = scm;
+			_scm = (DeployerConfig) config;
 		}
 	}
 
-	public void setCis(DeployerConfig cis) {
-		_cis = cis;
+	public void setCis(CISConnectorConfig cis) {
+		_cis = (DeployerConfig) cis;
 	}
 
-	public DeployerConfig getCis() {
-		return _cis;
+	public CISConnectorConfig getCis() {
+		return (CISConnectorConfig) _cis;
 	}
 
-	public void setScm(DeployerConfig scm) {
-		_scm = scm;
+	public void setScm(SCMConnectorConfig scm) {
+		_scm = (DeployerConfig) scm;
 	}
 
-	public DeployerConfig getScm() {
-		return _scm;
+	public SCMConnectorConfig getScm() {
+		return (SCMConnectorConfig) _scm;
 	}
 
-	public void setRms(DeployerConfig rms) {
-		_rms = rms;
+	public void setRms(RMSConnectorConfig rms) {
+		_rms = (DeployerConfig) rms;
 	}
 
-	public DeployerConfig getRms() {
-		return _rms;
+	public RMSConnectorConfig getRms() {
+		return (RMSConnectorConfig) _rms;
 	}
 }

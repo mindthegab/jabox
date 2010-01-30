@@ -34,6 +34,7 @@ public interface CISConnector extends Connector {
 	public boolean login(String username, String password)
 			throws MalformedURLException, IOException, SAXException;
 
-	public boolean addProject(final Project project) throws IOException,
+	public boolean addProject(final Project project,
+			CISConnectorConfig cisConnectorConfig) throws IOException,
 			SAXException;
 }

@@ -37,7 +37,6 @@ import org.jabox.apis.cis.CISConnector;
 import org.jabox.apis.its.ITSConnector;
 import org.jabox.apis.its.ITSConnectorConfig;
 import org.jabox.apis.rms.RMSConnector;
-import org.jabox.apis.rms.RMSConnectorConfig;
 import org.jabox.apis.scm.SCMConnector;
 import org.jabox.apis.scm.SCMConnectorConfig;
 import org.jabox.apis.scm.SCMException;
@@ -51,7 +50,16 @@ public class CreateProjectUtil {
 	protected GeneralDao generalDao;
 
 	@SpringBean
-	protected Manager<ITSConnector> _manager;
+	protected Manager<ITSConnector> _itsManager;
+
+	@SpringBean
+	protected Manager<SCMConnector<SCMConnectorConfig>> _scmManager;
+
+	@SpringBean
+	protected Manager<CISConnector> _cisManager;
+
+	@SpringBean
+	protected Manager<RMSConnector> _rmsManager;
 
 	public CreateProjectUtil() {
 		InjectorHolder.getInjector().inject(this);
@@ -90,9 +98,10 @@ public class CreateProjectUtil {
 			SAXException, SCMException, IOException {
 		final DefaultConfiguration dc = generalDao.getDefaultConfiguration();
 
-		SCMConnectorConfig scmc = (SCMConnectorConfig) dc.getScm();
+		SCMConnectorConfig scmc = dc.getScm();
 
-		SCMConnector scm = (SCMConnector) _manager.getConnectorInstance(scmc);
+		SCMConnector<SCMConnectorConfig> scm = _scmManager
+				.getConnectorInstance(scmc);
 
 		System.out.println("Using SCM: " + scm.toString());
 		File trunkDir = scm.createProjectDirectories(project, scmc);
@@ -101,16 +110,13 @@ public class CreateProjectUtil {
 		MavenCreateProject.createProjectWithMavenCore(project, trunkDir
 				.getAbsolutePath());
 
-		// final Configuration configuration = generalDao.getConfiguration();
-
-		RMSConnector rms = (RMSConnector) _manager.getConnectorInstance(dc
-				.getRms());
+		RMSConnector rms = _rmsManager.getConnectorInstance(dc.getRms());
 
 		if (rms != null) {
 			try {
 				File pomXml = new File(trunkDir, project.getName() + "/pom.xml");
 				MavenConfigureDistributionManager.injectDistributionManager(
-						pomXml, (RMSConnectorConfig) dc.getRms());
+						pomXml, dc.getRms());
 			} catch (XmlPullParserException e) {
 				e.printStackTrace();
 			}
@@ -127,8 +133,8 @@ public class CreateProjectUtil {
 		// Add files in the trunk.
 
 		// Add Project in Issue Tracking System
-		ITSConnectorConfig config = (ITSConnectorConfig) dc.getIts();
-		ITSConnector its = _manager.getConnectorInstance(config);
+		ITSConnectorConfig config = dc.getIts();
+		ITSConnector its = _itsManager.getConnectorInstance(config);
 		if (its != null) {
 			// its
 			// .setUrl("http://localhost/cgi-bin/bugzilla/index.cgi?GoAheadAndLogIn=1");
@@ -142,10 +148,10 @@ public class CreateProjectUtil {
 			its.addVersion(project, config, "0.0.1");
 		}
 
-		CISConnector cis = (CISConnector) _manager.getConnectorInstance(dc
+		CISConnector cis = (CISConnector) _itsManager.getConnectorInstance(dc
 				.getCis());
 		if (cis != null) {
-			cis.addProject(project);
+			cis.addProject(project, dc.getCis());
 		}
 	}
 
