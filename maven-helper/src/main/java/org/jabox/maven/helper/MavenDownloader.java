@@ -24,23 +24,37 @@
 package org.jabox.maven.helper;
 
 import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
-import org.apache.maven.cli.MavenCli;
+import org.apache.maven.artifact.Artifact;
+import org.apache.maven.artifact.factory.ArtifactFactory;
+import org.apache.maven.artifact.repository.ArtifactRepository;
+import org.apache.maven.artifact.repository.ArtifactRepositoryPolicy;
+import org.apache.maven.artifact.repository.DefaultArtifactRepositoryFactory;
+import org.apache.maven.artifact.repository.layout.DefaultRepositoryLayout;
+import org.apache.maven.artifact.resolver.ArtifactNotFoundException;
+import org.apache.maven.artifact.resolver.ArtifactResolutionException;
+import org.apache.maven.artifact.resolver.ArtifactResolver;
 import org.codehaus.classworlds.ClassWorld;
+import org.codehaus.plexus.PlexusContainerException;
+import org.codehaus.plexus.component.repository.exception.ComponentLookupException;
+import org.codehaus.plexus.embed.Embedder;
 
 public class MavenDownloader {
 
-	private static String BEFORE_GROUP_ID = "<project><modelVersion>4.0.0</modelVersion><artifactId>x</artifactId><groupId>x</groupId><version>1.0.0-SNAPSHOT</version><dependencies><dependency><groupId>";
-	private static String BEFORE_ARTIFACT_ID = "</groupId><artifactId>";
-	private static String BEFORE_VERSION = "</artifactId><version>";
-	private static String BEFORE_TYPE = "</version><type>";
-	private static String END = "</type></dependency></dependencies></project>";
+	private static final String MAVEN_REPO = "http://repo1.maven.org/maven2/";
+
+	private static ArtifactRepositoryPolicy ARTIFACT_REPOSITORY_POLICY = new ArtifactRepositoryPolicy(
+			true, ArtifactRepositoryPolicy.UPDATE_POLICY_NEVER,
+			ArtifactRepositoryPolicy.CHECKSUM_POLICY_WARN);
+
+	private static ArtifactRepository ARTIFACT_REPOSITORY = new DefaultArtifactRepositoryFactory()
+			.createArtifactRepository("local", MAVEN_REPO,
+					new DefaultRepositoryLayout(), ARTIFACT_REPOSITORY_POLICY,
+					ARTIFACT_REPOSITORY_POLICY);;
 
 	/**
-	 * XXX Improve this without the pom.xml
-	 * 
 	 * @param groupId
 	 * @param artifactId
 	 * @param version
@@ -49,9 +63,17 @@ public class MavenDownloader {
 	public static File downloadArtifact(final String groupId,
 			final String artifactId, final String version, final String type) {
 
-		retrieveArtifact(groupId, artifactId, version, type);
+		try {
+			return retrieveArtifact(groupId, artifactId, version, type);
+		} catch (ArtifactResolutionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ArtifactNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
-		return getArtifactFile(groupId, artifactId, version, type);
+		return null;
 	}
 
 	public static File getArtifactFile(String groupId, String artifactId,
@@ -80,33 +102,36 @@ public class MavenDownloader {
 		return file;
 	}
 
-	private static void retrieveArtifact(final String groupId,
-			final String artifactId, final String version, final String type) {
+	private static File retrieveArtifact(final String groupId,
+			final String artifactId, final String version,
+			final String packaging) throws ArtifactResolutionException,
+			ArtifactNotFoundException {
 		try {
-			// Create a temporal pom.xml"
-			File tempDir = File.createTempFile("tempDir", null);
-			tempDir.createNewFile();
-			File pomXml = tempDir;
-			pomXml.createNewFile();
-
-			FileWriter fileWriter = new FileWriter(pomXml);
-			fileWriter.write(BEFORE_GROUP_ID);
-			fileWriter.append(groupId);
-			fileWriter.append(BEFORE_ARTIFACT_ID);
-			fileWriter.append(artifactId);
-			fileWriter.append(BEFORE_VERSION);
-			fileWriter.append(version);
-			fileWriter.append(BEFORE_TYPE);
-			fileWriter.append(type);
-			fileWriter.append(END);
-			fileWriter.close();
-
-			String[] args = new String[] { "test", "-f",
-					pomXml.getAbsolutePath() };
+			Embedder embedder = new Embedder();
 			ClassWorld classWorld = new ClassWorld();
-			MavenCli.main(args, classWorld);
-		} catch (IOException e) {
+
+			try {
+				embedder.start(classWorld);
+			} catch (PlexusContainerException e) {
+				throw new RuntimeException(
+						"Unable to start the embedded plexus container", e);
+			}
+
+			Artifact artifact = ((ArtifactFactory) embedder
+					.lookup(ArtifactFactory.ROLE)).createBuildArtifact(groupId,
+					artifactId, version, packaging);
+
+			ArtifactResolver artifactResolver = (ArtifactResolver) embedder
+					.lookup(ArtifactResolver.ROLE);
+			List<ArtifactRepository> remoteRepositories = new ArrayList<ArtifactRepository>();
+			remoteRepositories.add(ARTIFACT_REPOSITORY);
+			artifactResolver.resolve(artifact, remoteRepositories,
+					ARTIFACT_REPOSITORY);
+			return artifact.getFile();
+		} catch (ComponentLookupException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return null;
 	}
 }
