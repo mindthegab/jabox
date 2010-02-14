@@ -27,9 +27,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.wicket.authorization.strategies.role.annotations.AuthorizeInstantiation;
+import org.apache.wicket.feedback.ComponentFeedbackMessageFilter;
 import org.apache.wicket.markup.html.form.ChoiceRenderer;
 import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.Form;
+import org.apache.wicket.markup.html.form.FormComponent;
 import org.apache.wicket.markup.html.form.RequiredTextField;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.CompoundPropertyModel;
@@ -53,14 +55,11 @@ public class CreateProject extends MiddlePanel {
 				"wicket-archetype-quickstart", "1.3.3");
 		_project.setMavenArchetype(ma);
 
-		// Add a FeedbackPanel for displaying our messages
-		FeedbackPanel feedbackPanel = new FeedbackPanel("feedback");
-		add(feedbackPanel);
-
 		// Add a form with an onSumbit implementation that sets a message
 		Form<Project> form = new Form<Project>("form") {
 			private static final long serialVersionUID = -662744155604166387L;
 
+			@Override
 			protected void onSubmit() {
 				// We need to persist twice because the id is necessary for the
 				// creation of the project.
@@ -70,11 +69,26 @@ public class CreateProject extends MiddlePanel {
 				info("Project \"" + _project.getName() + "\" Created.");
 			}
 		};
+
+		// Add a FeedbackPanel for displaying form messages
+		add(new FeedbackPanel("feedback", new ComponentFeedbackMessageFilter(
+				form)));
+
 		form.setModel(new CompoundPropertyModel<Project>(_project));
 		add(form);
 
-		form.add(new RequiredTextField<Project>("name"));
-		form.add(new RequiredTextField<Project>("description"));
+		// Name
+		FormComponent<Project> name = new RequiredTextField<Project>("name");
+		form.add(new FeedbackPanel("nameFeedback",
+				new ComponentFeedbackMessageFilter(name)));
+		form.add(name);
+
+		// Description
+		RequiredTextField<Project> description = new RequiredTextField<Project>(
+				"description");
+		form.add(new FeedbackPanel("descriptionFeedback",
+				new ComponentFeedbackMessageFilter(description)));
+		form.add(description);
 
 		List<MavenArchetype> connectors = new ArrayList<MavenArchetype>();
 		connectors.add(ma);
@@ -86,7 +100,6 @@ public class CreateProject extends MiddlePanel {
 						"mavenArchetype"), connectors,
 				new ChoiceRenderer<MavenArchetype>("toString", "toString"));
 		form.add(ddc);
-
 	}
 
 	private void fillArchetypes(List<MavenArchetype> connectors) {
