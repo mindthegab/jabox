@@ -40,10 +40,10 @@ public final class DefaultEntityButton<T extends ConnectorConfig> extends
 			"Set as Default");
 
 	private static final ResourceReference DEFAULT_IMG = new ResourceReference(
-			DefaultEntityButton.class, "dialog-information-light.png");
+			DefaultEntityButton.class, "favorite.png");
 
 	private static final ResourceReference NO_DEFAULT_IMG = new ResourceReference(
-			DefaultEntityButton.class, "dialog-information.png");
+			DefaultEntityButton.class, "favorite-bw.png");
 
 	private static final long serialVersionUID = 1L;
 	private final T _item;
@@ -79,6 +79,7 @@ public final class DefaultEntityButton<T extends ConnectorConfig> extends
 	/**
 	 * Delete from persistent storage, commit transaction.
 	 */
+	@Override
 	public void onSubmit() {
 		DefaultConfiguration dc = _generalDao.getDefaultConfiguration();
 		dc.setDefault(_item);

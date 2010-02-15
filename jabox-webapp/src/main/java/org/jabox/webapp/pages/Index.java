@@ -26,9 +26,9 @@ package org.jabox.webapp.pages;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.wicket.extensions.ajax.markup.html.tabs.AjaxTabbedPanel;
 import org.apache.wicket.extensions.markup.html.tabs.AbstractTab;
 import org.apache.wicket.extensions.markup.html.tabs.ITab;
-import org.apache.wicket.extensions.markup.html.tabs.TabbedPanel;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
@@ -48,6 +48,7 @@ public class Index extends BasePage {
 			super(title);
 		}
 
+		@Override
 		public Panel getPanel(String panelId) {
 			return new TabPanel1(panelId);
 		}
@@ -62,6 +63,7 @@ public class Index extends BasePage {
 		tabs.add(new AbstractTab(new Model<String>("B.T.S. (Redmine)")) {
 			private static final long serialVersionUID = 1L;
 
+			@Override
 			public Panel getPanel(String panelId) {
 				return new TabPanel4(panelId);
 			}
@@ -70,6 +72,7 @@ public class Index extends BasePage {
 		tabs.add(new AbstractTab(new Model<String>("C.I.S. (Hudson)")) {
 			private static final long serialVersionUID = 1L;
 
+			@Override
 			public Panel getPanel(String panelId) {
 				return new TabPanel3(panelId);
 			}
@@ -78,10 +81,11 @@ public class Index extends BasePage {
 		tabs.add(new AbstractTab(new Model<String>("R.M.S. (Artifactory)")) {
 			private static final long serialVersionUID = 1L;
 
+			@Override
 			public Panel getPanel(String panelId) {
 				return new TabPanel2(panelId);
 			}
 		});
-		add(new TabbedPanel("tabs", tabs));
+		add(new AjaxTabbedPanel("tabs", tabs));
 	}
 }
