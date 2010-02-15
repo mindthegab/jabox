@@ -24,25 +24,27 @@ THE SOFTWARE.
 <html>
 <body>
 <wicket:extend>
-<h2>Create Project</h2>
-     <div class="feedback" wicket:id="feedback">feedbackmessages will be put here</div>
+<h2><wicket:message key="page.header">Create Project</wicket:message></h2>
+     <div class="feedback" wicket:id="feedback">Feedback Messages</div>
 
      <form wicket:id="form">
-
         <table>
          <tr>
-          <td>Project Name:</td>
-          <td class="formTD"><input class="formInput" type="text" wicket:id="name" /></td>
-          <td><div class="feedback" wicket:id="nameFeedback">feedbackmessages will be put here</div></td>
+          <td><wicket:message key="project.name">Project Name</wicket:message>:</td>
+          <td class="formTD" wicket:message="title:project.name.tooltip">
+          		<input class="formInput" type="text" wicket:id="name" /></td>
+          <td><div class="feedback" wicket:id="nameFeedback">Feedback Messages</div></td>
          </tr>
          <tr>
-	      <td>Project Description:</td>
-    	  <td class="formTD"><input class="formInput" type="text" wicket:id="description" /></td>
-    	  <td><div class="feedback" wicket:id="descriptionFeedback">feedbackmessages will be put here</div></td>
+	      <td><wicket:message key="project.description">Project Description</wicket:message>:</td>
+    	  <td class="formTD" wicket:message="title:project.description.tooltip">
+    	  		<input class="formInput" type="text" wicket:id="description" /></td>
+    	  <td><div class="feedback" wicket:id="descriptionFeedback">Feedback Messages</div></td>
          </tr>
          <tr>
-	      <td>Maven Archetype:</td>
-		  <td class="formTD"><select class="formInput" name="archetype" wicket:id="archetype"></select></td>
+          <td><wicket:message key="project.mavenArchetype">Maven Archetype</wicket:message>:</td>
+          <td class="formTD" wicket:message="title:project.mavenArchetype.tooltip">
+		  		<select class="formInput" name="archetype" wicket:id="archetype"></select></td>
          </tr>
          <tr>
           <td colspan="2" align="left">
@@ -50,9 +52,7 @@ THE SOFTWARE.
           </td>
          </tr>
         </table>
-
      </form>
-     <p/>
 </wicket:extend>
 </body>
 </html>

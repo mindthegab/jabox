@@ -21,31 +21,27 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.jabox.webapp.utils;
+package org.jabox.webapp.menubuttons;
 
-import java.util.List;
+import org.apache.wicket.ResourceReference;
+import org.apache.wicket.markup.html.form.ImageButton;
+import org.jabox.webapp.modifiers.TooltipModifier;
 
-import org.apache.wicket.markup.html.list.ListItem;
-import org.apache.wicket.markup.html.list.PropertyListView;
-import org.apache.wicket.persistence.provider.GeneralDao;
-import org.apache.wicket.spring.injection.annot.SpringBean;
-import org.jabox.apis.Connector;
+/**
+ * Info icon that shows a tooltip when mouse is hovered from above.
+ * 
+ * @author Dimitris Kapanidis
+ */
+public final class InfoIcon extends ImageButton {
 
-public class ConnectorList extends PropertyListView<Connector> {
+	private static final ResourceReference DEFAULT_IMG = new ResourceReference(
+			InfoIcon.class, "info.png");
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -2877438240039632971L;
+	private static final long serialVersionUID = 1L;
 
-	public ConnectorList(String id, List<Connector> projects) {
-		super(id, projects);
-	}
-
-	@SpringBean(name = "GeneralDao")
-	protected GeneralDao generalDao;
-
-	@Override
-	public void populateItem(final ListItem<Connector> listItem) {
+	public InfoIcon(final String id, final String tooltip) {
+		super(id);
+		add(new TooltipModifier(tooltip));
+		setImageResourceReference(DEFAULT_IMG);
 	}
 }
