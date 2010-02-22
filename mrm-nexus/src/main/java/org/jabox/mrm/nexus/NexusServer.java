@@ -23,24 +23,39 @@
  */
 package org.jabox.mrm.nexus;
 
+import java.io.File;
+
 import org.jabox.apis.embedded.AbstractEmbeddedServer;
-import org.jabox.maven.helper.MavenDownloader;
+import org.jabox.environment.Environment;
+import org.jabox.utils.DownloadHelper;
 
 /**
  * 
  */
 public class NexusServer extends AbstractEmbeddedServer {
+	final String URL = "http://nexus.sonatype.org/downloads/nexus-webapp-1.5.0.war";
 
 	public static void main(String[] args) throws Exception {
 		new NexusServer().startServerAndWait();
 	}
 
+	@Override
 	public String getServerName() {
 		return "nexus";
 	}
 
+	@Override
 	public String getWarPath() {
-		return MavenDownloader.downloadArtifact("org.sonatype.nexus",
-				"nexus-webapp", "1.3.6", "war").getAbsolutePath();
+		String baseDir = Environment.getBaseDir();
+
+		// Download the artifactory.war
+		File zipFile = new File(baseDir, "tmp/nexus.war");
+		if (!zipFile.exists()) {
+			DownloadHelper.downloadFile(URL, zipFile);
+		}
+		return zipFile.getAbsolutePath();
+
+		// return MavenDownloader.downloadArtifact("org.sonatype.nexus",
+		// "nexus-webapp", "1.3.6", "war").getAbsolutePath();
 	}
 }

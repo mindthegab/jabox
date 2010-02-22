@@ -30,8 +30,8 @@ import org.apache.wicket.session.ISessionStore;
 import org.apache.wicket.spring.injection.annot.SpringComponentInjector;
 import org.apache.wicket.util.lang.PackageName;
 import org.jabox.webapp.pages.HomePage;
-import org.jabox.webapp.pages.Index;
 import org.jabox.webapp.pages.JaboxAuthenticatedWebApplication;
+import org.jabox.webapp.pages.ManageServers;
 import org.springframework.stereotype.Component;
 
 /**
@@ -62,16 +62,22 @@ public class WicketApplication extends JaboxAuthenticatedWebApplication {
 		};
 	}
 
+	@Override
 	public void init() {
 		super.init();
+		springInjection();
+	}
+
+	protected void springInjection() {
 		addComponentInstantiationListener(new SpringComponentInjector(this));
 	}
 
 	/**
 	 * @see wicket.Application#getHomePage()
 	 */
+	@Override
 	public Class<? extends WebPage> getHomePage() {
-		return Index.class;
+		return ManageServers.class;
 	}
 
 }

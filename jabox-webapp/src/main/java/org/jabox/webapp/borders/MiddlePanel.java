@@ -24,13 +24,12 @@
 package org.jabox.webapp.borders;
 
 import org.jabox.webapp.pages.BasePage;
+import org.jabox.webapp.panels.HeaderLinksPanel;
+
 /**
  * Panel representing the content panel for the first tab
- * 
- * @author Igor Vaynberg (ivaynberg)
- * 
  */
-public class MiddlePanel  extends BasePage {
+public class MiddlePanel extends BasePage {
 	private static final long serialVersionUID = -2139796431114958720L;
 
 	/**
@@ -40,5 +39,6 @@ public class MiddlePanel  extends BasePage {
 	 *            component id
 	 */
 	public MiddlePanel() {
+		add(new HeaderLinksPanel("headerLinks", 0));
 	}
 };
