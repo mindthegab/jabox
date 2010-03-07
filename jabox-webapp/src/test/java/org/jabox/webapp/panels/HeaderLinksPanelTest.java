@@ -3,6 +3,8 @@ package org.jabox.webapp.panels;
 import junit.framework.TestCase;
 
 import org.apache.wicket.util.tester.WicketTester;
+import org.jabox.application.TestWicketApplication;
+import org.jabox.webapp.pages.CisPage;
 
 public class HeaderLinksPanelTest extends TestCase {
 

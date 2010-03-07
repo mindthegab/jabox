@@ -90,9 +90,9 @@
 		</repository>
 	</distributionManagement>
 	<properties>
-		<wicket.version>1.4.0</wicket.version>
-		<jetty.version>6.1.4</jetty.version>
-		<spring.version>2.5.4</spring.version>
+		<wicket.version>1.4.7</wicket.version>
+		<jetty.version>6.1.15</jetty.version>
+		<spring.version>2.5.6</spring.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 	<dependencies>

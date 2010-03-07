@@ -63,11 +63,6 @@ THE SOFTWARE.
 			<version>${jetty.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>org.mortbay.jetty</groupId>
-			<artifactId>jsp-2.1</artifactId>
-			<version>${jetty.version}</version>
-		</dependency>
-		<dependency>
 			<groupId>org.jabox</groupId>
 			<artifactId>jabox-persistence</artifactId>
 			<version>${project.version}</version>

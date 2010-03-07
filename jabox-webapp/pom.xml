@@ -43,11 +43,6 @@
 			<artifactId>jabox-persistence</artifactId>
 			<version>${project.version}</version>
 		</dependency>
-		<dependency>
-			<groupId>javax.persistence</groupId>
-			<artifactId>persistence-api</artifactId>
-			<version>1.0</version>
-		</dependency>
 		<!--  WICKET DEPENDENCIES -->
 
 		<dependency>
@@ -138,12 +133,6 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring</artifactId>
-			<version>${spring.version}</version>
-		</dependency>
-
-		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
 			<version>3.3.2.GA</version>
@@ -172,14 +161,19 @@
 			<version>1.3.4</version>
 		</dependency>
 		<dependency>
-			<groupId>hsqldb</groupId>
-			<artifactId>hsqldb</artifactId>
-			<version>1.8.0.7</version>
-			<scope>compile</scope>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+			<version>${spring.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>commons-logging</groupId>
+					<artifactId>commons-logging</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
-			<artifactId>spring-orm</artifactId>
+			<artifactId>spring-web</artifactId>
 			<version>${spring.version}</version>
 			<exclusions>
 				<exclusion>
@@ -240,11 +234,6 @@
 			<artifactId>spring-test</artifactId>
 		</dependency>
 
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>ejb3-persistence</artifactId>
-			<version>1.0.2.GA</version>
-		</dependency>
 		<dependency>
 			<groupId>org.apache.wicket</groupId>
 			<artifactId>wicket-guice</artifactId>
