@@ -13,6 +13,14 @@ import org.jabox.model.DefaultConfiguration;
 
 public class HeaderLinksPanel extends Panel {
 
+	protected static final int ALM = 0;
+
+	protected static final int ITS = 1;
+
+	protected static final int CIS = 2;
+
+	protected static final int RMS = 3;
+
 	@SpringBean
 	protected GeneralDao _generalDao;
 
@@ -24,23 +32,22 @@ public class HeaderLinksPanel extends Panel {
 		final DefaultConfiguration dc = _generalDao.getDefaultConfiguration();
 
 		List<Tab> tabs = new ArrayList<Tab>();
-		tabs
-				.add(new Tab("A.L.M. (Jabox)", "/web/ManageServers",
-						selected == 0));
+		tabs.add(new Tab("A.L.M. (Jabox)", "/web/ManageServers",
+				selected == ALM));
 
 		if (dc.getIts() != null) {
 			tabs.add(new Tab(getTabName("I.T.S.", dc.getIts()), "/web/ItsPage",
-					dc.getIts().getServer().getUrl(), selected == 1));
+					dc.getIts().getServer().getUrl(), selected == ITS));
 		}
-		
+
 		if (dc.getCis() != null) {
 			tabs.add(new Tab(getTabName("C.I.S.", dc.getCis()), "/web/CisPage",
-					dc.getCis().getServer().getUrl(), selected == 2));
+					dc.getCis().getServer().getUrl(), selected == CIS));
 		}
-		
+
 		if (dc.getRms() != null) {
 			tabs.add(new Tab(getTabName("R.M.S.", dc.getRms()), "/web/RmsPage",
-					dc.getRms().getServer().getUrl(), selected == 3));
+					dc.getRms().getServer().getUrl(), selected == RMS));
 		}
 
 		add(new TabsList("tabs", tabs));
