@@ -23,7 +23,7 @@ public class TabsList extends PropertyListView<Tab> {
 		super(id, projects);
 	}
 
-	@SpringBean(name = "GeneralDao")
+	@SpringBean
 	protected GeneralDao generalDao;
 
 	@Override
