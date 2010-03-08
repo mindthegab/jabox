@@ -29,7 +29,6 @@ import org.jabox.model.Project;
 import org.tmatesoft.svn.core.SVNDepth;
 import org.tmatesoft.svn.core.SVNException;
 import org.tmatesoft.svn.core.SVNPropertyValue;
-import org.tmatesoft.svn.core.SVNURL;
 import org.tmatesoft.svn.core.auth.BasicAuthenticationManager;
 import org.tmatesoft.svn.core.auth.ISVNAuthenticationManager;
 import org.tmatesoft.svn.core.internal.io.dav.DAVRepositoryFactory;
@@ -63,13 +62,19 @@ public class SubversionFacade {
 	 *            the path where to store the subversion base-dir.
 	 * @throws SVNException
 	 */
-	public void checkoutBaseDir(File storePath, SVNURL svnDir)
+	public void checkoutBaseDir(File storePath, ISVNConnectorConfig svnc)
 			throws SVNException {
 
-		_clientManager.createRepository(svnDir, true);
-		_clientManager.getUpdateClient().doCheckout(svnDir, storePath,
-				SVNRevision.UNDEFINED, SVNRevision.HEAD, SVNDepth.INFINITY,
-				false);
+		_clientManager.createRepository(svnc.getSvnDir(), true);
+
+		// Authenticate
+		ISVNAuthenticationManager authManager = new BasicAuthenticationManager(
+				svnc.getUsername(), svnc.getPassword());
+		_clientManager.setAuthenticationManager(authManager);
+
+		_clientManager.getUpdateClient().doCheckout(svnc.getSvnDir(),
+				storePath, SVNRevision.UNDEFINED, SVNRevision.HEAD,
+				SVNDepth.INFINITY, false);
 	}
 
 	public void commitProject(Project project, File tmpDir,

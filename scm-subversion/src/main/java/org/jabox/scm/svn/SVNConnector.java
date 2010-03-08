@@ -81,7 +81,7 @@ public class SVNConnector implements SCMConnector<ISVNConnectorConfig>,
 			SubversionFacade svn = new SubversionFacade();
 			_tmpDir = TemporalDirectory.createTempDir();
 
-			svn.checkoutBaseDir(_tmpDir, svnc.getSvnDir());
+			svn.checkoutBaseDir(_tmpDir, svnc);
 			// Create Project directory and its trunk/branches/tags
 			// subdirectories
 			File trunkDir = createProjectDirectories(project, _tmpDir);
