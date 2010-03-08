@@ -81,8 +81,8 @@ public class SubversionFacade {
 			ISVNConnectorConfig svnc) throws SVNException {
 		// Add files (svn add)
 		SVNWCClient wcClient = _clientManager.getWCClient();
-		wcClient.doAdd(new File(tmpDir, project.getName()), false, false, true,
-				true);
+		wcClient.doAdd(new File(tmpDir, project.getName()), false, false,
+				false, SVNDepth.INFINITY, false, true);
 
 		// Commit files (svn commit)
 		SVNCommitClient commitClient = _clientManager.getCommitClient();
