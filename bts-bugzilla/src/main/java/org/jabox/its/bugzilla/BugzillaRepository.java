@@ -51,7 +51,7 @@ public class BugzillaRepository implements ITSConnector, Serializable {
 	private final WebConversation _wc;
 
 	public String getName() {
-		return "Bugzilla Plugin";
+		return "Bugzilla";
 	}
 
 	public String getId() {

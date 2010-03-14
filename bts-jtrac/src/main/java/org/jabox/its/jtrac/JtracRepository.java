@@ -52,7 +52,7 @@ public class JtracRepository implements ITSConnector, Serializable {
 	private final WebConversation _wc;
 
 	public String getName() {
-		return "Jtrac Plugin";
+		return "Jtrac";
 	}
 
 	public String getId() {

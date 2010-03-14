@@ -35,7 +35,7 @@ public class NexusConnector implements RMSConnector {
 	public static final String ID = "plugin.rms.nexus";
 
 	public String getName() {
-		return "Nexus Plugin";
+		return "Nexus";
 	}
 
 	public String getId() {

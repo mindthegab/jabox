@@ -51,7 +51,7 @@ public class RedmineRepository implements ITSConnector, Serializable {
 	private final WebConversation _wc;
 
 	public String getName() {
-		return "Redmine Plugin";
+		return "Redmine";
 	}
 
 	public String getId() {

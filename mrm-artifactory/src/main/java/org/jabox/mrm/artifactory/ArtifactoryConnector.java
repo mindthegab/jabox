@@ -35,7 +35,7 @@ public class ArtifactoryConnector implements RMSConnector {
 	public static final String ID = "plugin.rms.artifactory";
 
 	public String getName() {
-		return "Artifactory Plugin";
+		return "Artifactory";
 	}
 
 	public String getId() {

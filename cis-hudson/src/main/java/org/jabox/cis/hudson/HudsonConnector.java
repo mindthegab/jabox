@@ -47,7 +47,7 @@ public class HudsonConnector implements CISConnector {
 	public static final String ID = "plugin.cis.hudson";
 
 	public String getName() {
-		return "Hudson Plugin";
+		return "Hudson";
 	}
 
 	public String getId() {
