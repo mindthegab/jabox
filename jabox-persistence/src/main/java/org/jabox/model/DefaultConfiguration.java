@@ -34,14 +34,6 @@ public class DefaultConfiguration extends BaseEntity implements Serializable {
 	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	private DeployerConfig _scm;
 
-	public void setIts(ITSConnectorConfig its) {
-		_its = (DeployerConfig) its;
-	}
-
-	public ITSConnectorConfig getIts() {
-		return (ITSConnectorConfig) _its;
-	}
-
 	public String isDefault(ConnectorConfig item) {
 		if (item == null) {
 			return FALSE;
@@ -80,24 +72,16 @@ public class DefaultConfiguration extends BaseEntity implements Serializable {
 		}
 	}
 
-	public void setCis(CISConnectorConfig cis) {
-		_cis = (DeployerConfig) cis;
+	public ITSConnectorConfig getIts() {
+		return (ITSConnectorConfig) _its;
 	}
 
 	public CISConnectorConfig getCis() {
 		return (CISConnectorConfig) _cis;
 	}
 
-	public void setScm(SCMConnectorConfig scm) {
-		_scm = (DeployerConfig) scm;
-	}
-
 	public SCMConnectorConfig getScm() {
 		return (SCMConnectorConfig) _scm;
-	}
-
-	public void setRms(RMSConnectorConfig rms) {
-		_rms = (DeployerConfig) rms;
 	}
 
 	public RMSConnectorConfig getRms() {
