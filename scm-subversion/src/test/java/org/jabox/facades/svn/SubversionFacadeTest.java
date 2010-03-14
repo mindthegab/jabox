@@ -41,18 +41,19 @@ import org.tmatesoft.svn.core.wc.SVNWCClient;
 public abstract class SubversionFacadeTest extends TestCase {
 	private SVNClientManager _clientManager;
 
+	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
 		_clientManager = SVNClientManager.newInstance();
 	}
 
 	public void test1() throws SVNException {
-		SVNCommitClient commitClient = _clientManager.getCommitClient();
+		// SVNCommitClient commitClient = _clientManager.getCommitClient();
 		FSRepositoryFactory.setup();
 
-		SVNURL svnurl = SVNURL
-				.parseURIEncoded("file:///home/dimitris/svn/repos/helloworld");
-		SVNURL[] svnurls = new SVNURL[] { svnurl };
+		// SVNURL svnurl = SVNURL
+		// .parseURIEncoded("file:///home/dimitris/svn/repos/helloworld");
+		// SVNURL[] svnurls = new SVNURL[] { svnurl };
 
 		// commitClient.doMkDir(svnurls, "[JABOX] Added Project Directory");
 	}
