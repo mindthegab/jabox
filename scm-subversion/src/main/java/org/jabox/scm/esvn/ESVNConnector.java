@@ -5,7 +5,6 @@ import org.apache.wicket.model.IModel;
 import org.jabox.model.DeployerConfig;
 import org.jabox.model.Server;
 import org.jabox.scm.svn.SVNConnector;
-import org.jabox.scm.svn.SVNConnectorEditor;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -30,6 +29,7 @@ public class ESVNConnector extends SVNConnector {
 	 * <p/>
 	 * TODO: This can be replaced by i18n text in plugin.property.
 	 */
+	@Override
 	public String getName() {
 		return "Embedded Subversion";
 	}
@@ -39,6 +39,7 @@ public class ESVNConnector extends SVNConnector {
 	 * <p/>
 	 * TODO: This can be replaced by the unique package name.
 	 */
+	@Override
 	public String getId() {
 		return "plugin.scm.esvn";
 	}
@@ -48,6 +49,7 @@ public class ESVNConnector extends SVNConnector {
 	 * <p/>
 	 * TODO: To be decoupled.
 	 */
+	@Override
 	public DeployerConfig newConfig() {
 		return new ESVNConnectorConfig();
 	}
@@ -57,6 +59,7 @@ public class ESVNConnector extends SVNConnector {
 	 * <p/>
 	 * TODO: To be decoupled.
 	 */
+	@Override
 	public Component newEditor(String id, IModel<Server> model) {
 		return new ESVNConnectorEditor(id, model);
 	}
