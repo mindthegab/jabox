@@ -34,9 +34,7 @@ import org.tmatesoft.svn.core.SVNURL;
 import org.tmatesoft.svn.core.internal.io.fs.FSRepositoryFactory;
 import org.tmatesoft.svn.core.io.SVNRepositoryFactory;
 import org.tmatesoft.svn.core.wc.SVNClientManager;
-import org.tmatesoft.svn.core.wc.SVNCommitClient;
 import org.tmatesoft.svn.core.wc.SVNRevision;
-import org.tmatesoft.svn.core.wc.SVNWCClient;
 
 public abstract class SubversionFacadeTest extends TestCase {
 	private SVNClientManager _clientManager;
@@ -62,16 +60,16 @@ public abstract class SubversionFacadeTest extends TestCase {
 
 		try {
 			String tgtPath = "c:///home/dimitris/svn/repos2";
-			SVNURL tgtURL = SVNRepositoryFactory.createLocalRepository(
-					new File(tgtPath), true, false);
+			SVNRepositoryFactory.createLocalRepository(new File(tgtPath), true,
+					false);
 		} catch (SVNException e) {
 			// handle exception
 		}
 	}
 
 	public void testAddFiles() throws SVNException {
-		SVNCommitClient commitClient = _clientManager.getCommitClient();
-		SVNWCClient wcClient = _clientManager.getWCClient();
+		// SVNCommitClient commitClient = _clientManager.getCommitClient();
+		// SVNWCClient wcClient = _clientManager.getWCClient();
 
 		SVNURL svnTestingDir = SVNURL.fromFile(SubversionRepository
 				.getSubversionBaseDir());
