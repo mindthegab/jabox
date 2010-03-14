@@ -8,7 +8,7 @@ import org.jabox.cis.hudson.HudsonConnector;
 import org.jabox.facades.GeneralDaoMock;
 import org.jabox.webapp.application.WicketApplication;
 
-public class TestWicketApplication extends WicketApplication {
+public abstract class TestWicketApplication extends WicketApplication {
 	private AnnotApplicationContextMock mockContext;
 
 	@Override
