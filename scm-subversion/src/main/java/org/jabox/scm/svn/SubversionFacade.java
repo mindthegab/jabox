@@ -96,8 +96,8 @@ public class SubversionFacade {
 
 		setProjectProperties(project, tmpDir);
 
-		commitClient.doCommit(paths, false, "[JABOX] Initial Commit", false,
-				true);
+		commitClient.doCommit(paths, false, "[JABOX] Initial Commit", null,
+				null, false, true, SVNDepth.INFINITY);
 	}
 
 	/**
