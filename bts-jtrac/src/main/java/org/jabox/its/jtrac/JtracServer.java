@@ -94,9 +94,6 @@ public class JtracServer extends AbstractEmbeddedServer {
 		}
 	}
 
-	private static void installJtracWar(File jtracWar) {
-	}
-
 	public static File retrieveJtracWar(final File jtracZip) {
 		try {
 			ZipFile zip = new ZipFile(jtracZip);
@@ -155,7 +152,6 @@ public class JtracServer extends AbstractEmbeddedServer {
 			DownloadHelper.downloadFile(URL, zipFile);
 		}
 		File jtracWar = retrieveJtracWar(zipFile);
-		// installJtracWar(jtracWar);
 		return jtracWar.getAbsolutePath();
 	}
 }
