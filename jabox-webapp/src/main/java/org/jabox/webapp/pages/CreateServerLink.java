@@ -5,6 +5,7 @@ import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.persistence.provider.GeneralDao;
 import org.apache.wicket.spring.injection.annot.SpringBean;
+import org.jabox.apis.Connector;
 import org.jabox.model.Server;
 
 public class CreateServerLink extends Link<Void> {
@@ -13,14 +14,22 @@ public class CreateServerLink extends Link<Void> {
 	@SpringBean
 	protected GeneralDao _generalDao;
 
+	private Class<? extends Connector> _class1;
+
 	public CreateServerLink(String id) {
 		super(id);
+		_class1 = Connector.class;
+	}
+
+	public CreateServerLink(String id, Class<? extends Connector> class1) {
+		this(id);
+		_class1 = class1;
 	}
 
 	@Override
 	public void onClick() {
 		IModel<Server> model = new Model<Server>(new Server());
-		setResponsePage(new EditServerPage(model) {
+		setResponsePage(new EditServerPage(model, _class1) {
 
 			@Override
 			protected void onCancel() {

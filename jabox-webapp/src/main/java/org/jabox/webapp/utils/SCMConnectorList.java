@@ -40,6 +40,7 @@ import org.jabox.webapp.menubuttons.DefaultEntityButton;
 import org.jabox.webapp.menubuttons.DeleteEntityButton;
 import org.jabox.webapp.menubuttons.EditEntityButton;
 import org.jabox.webapp.menubuttons.IconButton;
+import org.jabox.webapp.pages.CreateServerLink;
 import org.jabox.webapp.pages.ManageServers;
 
 public class SCMConnectorList extends PropertyListView<ConnectorConfig> {
@@ -47,6 +48,7 @@ public class SCMConnectorList extends PropertyListView<ConnectorConfig> {
 
 	public SCMConnectorList(String id, List<? extends ConnectorConfig> projects) {
 		super(id, projects);
+		add(new CreateServerLink("create" + id));
 	}
 
 	@SpringBean(name = "GeneralDao")
@@ -55,6 +57,7 @@ public class SCMConnectorList extends PropertyListView<ConnectorConfig> {
 	@SpringBean
 	protected Manager<Connector> _manager;
 
+	@Override
 	public void populateItem(final ListItem<ConnectorConfig> item) {
 		final ConnectorConfig deployerConfig = item.getModelObject();
 		item.add(new Label("clazz", deployerConfig.getServer().getName()));

@@ -29,7 +29,9 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
+import org.jabox.apis.Connector;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactoryUtils;
 import org.springframework.beans.factory.InitializingBean;
@@ -37,66 +39,72 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 
 public class IdentifiableBeanRegistry<T extends Identifiable<ID>, ID extends Serializable>
-        implements
-            ApplicationContextAware,
-            InitializingBean
-{
-    private final Class<T> beanType;
+		implements ApplicationContextAware, InitializingBean {
+	private final Class<T> beanType;
 
-    private ApplicationContext context;
-    private Map<ID, T> entries;
-    private List<T> beans;
-    private List<ID> uuids;
+	private ApplicationContext context;
+	private Map<ID, T> entries;
+	private List<T> beans;
+	private List<ID> uuids;
 
-    public IdentifiableBeanRegistry(Class<T> beanType)
-    {
-        this.beanType = beanType;
-    }
+	public IdentifiableBeanRegistry(Class<T> beanType) {
+		this.beanType = beanType;
+	}
 
-    public void setApplicationContext(ApplicationContext context) throws BeansException
-    {
-        this.context = context;
-    }
+	public void setApplicationContext(ApplicationContext context)
+			throws BeansException {
+		this.context = context;
+	}
 
-    public T getEntry(Serializable id)
-    {
-        T entry = entries.get(id);
-        if (entry == null)
-        {
-            throw new IllegalStateException();
-        }
-        return entry;
-    }
+	public T getEntry(ID id) {
+		T entry = entries.get(id);
+		if (entry == null) {
+			throw new IllegalStateException();
+		}
+		return entry;
+	}
 
-    public List<T> getEntries()
-    {
-        return beans;
-    }
+	public List<T> getEntries() {
+		return beans;
+	}
 
-    public List<ID> getIds()
-    {
-        return uuids;
-    }
+	public List<ID> getIds() {
+		return uuids;
+	}
 
-    @SuppressWarnings("unchecked")
-    public void afterPropertiesSet() throws Exception
-    {
-        // initialize the registry
-        entries = new HashMap<ID, T>();
+	/**
+	 * Return the IDs that implement the specific interface.
+	 * 
+	 * @param interfaceClass
+	 * @return a list of IDs of the implementations of this interface.
+	 */
+	public List<ID> getIds(Class<? extends Connector> interfaceClass) {
+		List<ID> list = new ArrayList<ID>();
+		for (Entry<ID, T> entry : entries.entrySet()) {
+			if (interfaceClass.isAssignableFrom(entry.getValue().getClass())) {
+				list.add(entry.getKey());
+			}
+		}
+		return Collections.unmodifiableList(list);
+	}
 
-        final Map<String, ? extends T> matches = BeanFactoryUtils.beansOfTypeIncludingAncestors(
-            context, beanType);
-        for (T entry : matches.values())
-        {
-            entries.put(entry.getId(), entry);
-        }
+	@SuppressWarnings("unchecked")
+	public void afterPropertiesSet() throws Exception {
+		// initialize the registry
+		entries = new HashMap<ID, T>();
 
-        entries = Collections.unmodifiableMap(entries);
+		final Map<String, ? extends T> matches = BeanFactoryUtils
+				.beansOfTypeIncludingAncestors(context, beanType);
+		for (T entry : matches.values()) {
+			entries.put(entry.getId(), entry);
+		}
 
-        // intialize indexes
-        beans = new ArrayList<T>(entries.values());
-        beans = Collections.unmodifiableList(beans);
-        uuids = new ArrayList<ID>(entries.keySet());
-        uuids = Collections.unmodifiableList(uuids);
-    }
+		entries = Collections.unmodifiableMap(entries);
+
+		// intialize indexes
+		beans = new ArrayList<T>(entries.values());
+		beans = Collections.unmodifiableList(beans);
+		uuids = new ArrayList<ID>(entries.keySet());
+		uuids = Collections.unmodifiableList(uuids);
+	}
 }

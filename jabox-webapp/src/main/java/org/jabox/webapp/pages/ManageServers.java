@@ -31,9 +31,13 @@ import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.jabox.apis.Connector;
 import org.jabox.apis.ConnectorConfig;
 import org.jabox.apis.Manager;
+import org.jabox.apis.cis.CISConnector;
 import org.jabox.apis.cis.CISConnectorConfig;
+import org.jabox.apis.its.ITSConnector;
 import org.jabox.apis.its.ITSConnectorConfig;
+import org.jabox.apis.rms.RMSConnector;
 import org.jabox.apis.rms.RMSConnectorConfig;
+import org.jabox.apis.scm.SCMConnector;
 import org.jabox.apis.scm.SCMConnectorConfig;
 import org.jabox.webapp.borders.MiddlePanel;
 import org.jabox.webapp.utils.SCMConnectorList;
@@ -56,11 +60,17 @@ public class ManageServers extends MiddlePanel {
 		Form<BaseEntity> form = new Form<BaseEntity>("deleteForm");
 
 		form.add(createList("SCMs", SCMConnectorConfig.class));
-		form.add(createList("RMSs", RMSConnectorConfig.class));
-		form.add(createList("CISs", CISConnectorConfig.class));
-		form.add(createList("ITSs", ITSConnectorConfig.class));
+		form.add(new CreateServerLink("createSCMs", SCMConnector.class));
 
-		form.add(new CreateServerLink("create"));
+		form.add(createList("RMSs", RMSConnectorConfig.class));
+		form.add(new CreateServerLink("createRMSs", RMSConnector.class));
+
+		form.add(createList("CISs", CISConnectorConfig.class));
+		form.add(new CreateServerLink("createCISs", CISConnector.class));
+
+		form.add(createList("ITSs", ITSConnectorConfig.class));
+		form.add(new CreateServerLink("createITSs", ITSConnector.class));
+
 		add(form);
 	}
 

@@ -6,7 +6,7 @@ import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.spring.injection.annot.test.AnnotApplicationContextMock;
 import org.apache.wicket.util.tester.TestPanelSource;
 import org.apache.wicket.util.tester.WicketTester;
-import org.jabox.application.TestWicketApplication;
+import org.jabox.application.DummyWicketApplication;
 
 public class HeaderLinksPanelTest extends TestCase {
 
@@ -15,8 +15,8 @@ public class HeaderLinksPanelTest extends TestCase {
 
 	@Override
 	public void setUp() {
-		tester = new WicketTester(new TestWicketApplication());
-		mockContext = ((TestWicketApplication) tester.getApplication())
+		tester = new WicketTester(new DummyWicketApplication());
+		mockContext = ((DummyWicketApplication) tester.getApplication())
 				.getMockContext();
 	}
 

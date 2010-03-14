@@ -31,6 +31,8 @@ import org.apache.wicket.model.IModel;
 import org.apache.wicket.persistence.domain.BaseEntityDetachableModel;
 import org.apache.wicket.persistence.provider.GeneralDao;
 import org.apache.wicket.spring.injection.annot.SpringBean;
+import org.jabox.apis.Connector;
+import org.jabox.model.DeployersRegistry;
 import org.jabox.model.Server;
 import org.jabox.webapp.modifiers.TooltipModifier;
 import org.jabox.webapp.pages.EditServerPage;
@@ -60,13 +62,20 @@ public final class EditEntityButton<T extends Server> extends ImageButton {
 	@SpringBean(name = "GeneralDao")
 	protected GeneralDao _generalDao;
 
+	@SpringBean
+	private DeployersRegistry registry;
+
 	/**
 	 * Delete from persistent storage, commit transaction.
 	 */
+	@Override
 	public void onSubmit() {
 		IModel<Server> model = new BaseEntityDetachableModel<Server>(_item);
+
+		Connector connector = registry.getEntry(model.getObject()
+				.getDeployerConfig().pluginId);
 		setResponsePage(new EditServerPage(new CompoundPropertyModel<Server>(
-				model)) {
+				model), connector.getClass()) {
 
 			@Override
 			protected void onCancel() {

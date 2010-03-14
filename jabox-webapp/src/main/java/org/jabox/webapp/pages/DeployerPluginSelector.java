@@ -23,7 +23,6 @@
  */
 package org.jabox.webapp.pages;
 
-import java.io.Serializable;
 import java.util.List;
 
 import org.apache.wicket.markup.html.WebMarkupContainer;
@@ -45,22 +44,21 @@ public class DeployerPluginSelector extends Panel {
 	@SpringBean
 	private DeployersRegistry registry;
 
-	public DeployerPluginSelector(String id, final IModel<Server> article) {
+	public DeployerPluginSelector(String id, final IModel<Server> article,
+			Class connectorClass) {
 		super(id);
 		add(new WebMarkupContainer("editor"));
-		String pluginId = article.getObject().deployerConfig != null ? ((Server) article
-				.getObject()).deployerConfig.pluginId
-				: "-1";
+		String pluginId = article.getObject().deployerConfig != null ? (article
+				.getObject()).deployerConfig.pluginId : "-1";
 		if (article.getObject().deployerConfig != null) {
 			Connector plugin = registry.getEntry(pluginId);
-			DeployerPluginSelector.this.replace(plugin
-					.newEditor("editor", new PropertyModel<Server>(
-							article, "deployerConfig")));
+			DeployerPluginSelector.this.replace(plugin.newEditor("editor",
+					new PropertyModel<Server>(article, "deployerConfig")));
 
 		}
 
-		add(new PluginPicker("picker",
-				new CompoundPropertyModel(pluginId)) {
+		add(new PluginPicker("picker", new CompoundPropertyModel(pluginId),
+				connectorClass) {
 			private static final long serialVersionUID = -5528219523437017579L;
 
 			@Override
@@ -82,7 +80,8 @@ public class DeployerPluginSelector extends Panel {
 		@SpringBean
 		private DeployersRegistry registry;
 
-		public PluginPicker(String id, IModel<T> model) {
+		public PluginPicker(String id, IModel<T> model,
+				final Class<? extends Connector> connectorClass) {
 			super(id);
 			setRequired(true);
 			setModel(model);
@@ -91,13 +90,14 @@ public class DeployerPluginSelector extends Panel {
 
 				@Override
 				protected List<? extends String> load() {
-					return registry.getIds();
+					// XXX TESTING
+					return registry.getIds(connectorClass);
 				}
 			});
 
 			setChoiceRenderer(new IChoiceRenderer() {
 				public Object getDisplayValue(Object object) {
-					return registry.getEntry((Serializable) object).getName();
+					return registry.getEntry((String) object).getName();
 				}
 
 				public String getIdValue(Object object, int index) {
