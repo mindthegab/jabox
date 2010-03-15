@@ -10,21 +10,21 @@ import org.jabox.application.DummyWicketApplication;
 
 public class HeaderLinksPanelTest extends TestCase {
 
-	private WicketTester tester;
-	private AnnotApplicationContextMock mockContext;
+	private WicketTester _tester;
+	private AnnotApplicationContextMock _mockContext;
 
 	@Override
 	public void setUp() {
-		tester = new WicketTester(new DummyWicketApplication());
-		mockContext = ((DummyWicketApplication) tester.getApplication())
+		_tester = new WicketTester(new DummyWicketApplication());
+		_mockContext = ((DummyWicketApplication) _tester.getApplication())
 				.getMockContext();
 	}
 
 	public void testMyPageBasicRender0() {
-		tester.startPanel(new TestPanelSource() {
+		_tester.startPanel(new TestPanelSource() {
 			private static final long serialVersionUID = 1L;
 
-			public Panel getTestPanel(String panelId) {
+			public Panel getTestPanel(final String panelId) {
 				// Mock Data
 				int selected = HeaderLinksPanel.ALM;
 
@@ -34,16 +34,20 @@ public class HeaderLinksPanelTest extends TestCase {
 	}
 
 	public void testMyPageBasicRender1() {
-		tester.startPanel(new TestPanelSource() {
+		_tester.startPanel(new TestPanelSource() {
 			private static final long serialVersionUID = 1L;
 
-			public Panel getTestPanel(String panelId) {
+			public Panel getTestPanel(final String panelId) {
 				// Mock Data
 				int selected = HeaderLinksPanel.ITS;
 
 				return new HeaderLinksPanel(panelId, selected);
 			}
 		});
+	}
+
+	public AnnotApplicationContextMock getMockContext() {
+		return _mockContext;
 	}
 
 }

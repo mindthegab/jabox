@@ -8,19 +8,23 @@ import org.jabox.application.DummyWicketApplication;
 
 public class CisPageTest extends TestCase {
 
-	private WicketTester tester;
-	private AnnotApplicationContextMock mockContext;
+	private WicketTester _tester;
+	private AnnotApplicationContextMock _mockContext;
 
 	@Override
 	public void setUp() {
-		tester = new WicketTester(new DummyWicketApplication());
-		mockContext = ((DummyWicketApplication) tester.getApplication())
+		_tester = new WicketTester(new DummyWicketApplication());
+		_mockContext = ((DummyWicketApplication) _tester.getApplication())
 				.getMockContext();
 	}
 
 	public void testMyPageBasicRender0() {
-		tester.startPage(CisPage.class);
-		tester.assertRenderedPage(CisPage.class);
+		_tester.startPage(CisPage.class);
+		_tester.assertRenderedPage(CisPage.class);
+	}
+
+	public AnnotApplicationContextMock getMockContext() {
+		return _mockContext;
 	}
 
 }

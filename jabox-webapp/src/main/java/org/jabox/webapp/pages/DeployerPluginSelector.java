@@ -44,8 +44,10 @@ public class DeployerPluginSelector extends Panel {
 	@SpringBean
 	private DeployersRegistry registry;
 
-	public DeployerPluginSelector(String id, final IModel<Server> article,
-			Class connectorClass) {
+	@SuppressWarnings("unchecked")
+	public DeployerPluginSelector(final String id,
+			final IModel<Server> article,
+			final Class<? extends Connector> connectorClass) {
 		super(id);
 		add(new WebMarkupContainer("editor"));
 		String pluginId = article.getObject().deployerConfig != null ? (article
@@ -62,7 +64,7 @@ public class DeployerPluginSelector extends Panel {
 			private static final long serialVersionUID = -5528219523437017579L;
 
 			@Override
-			protected void onSelectionChanged(Object pluginId) {
+			protected void onSelectionChanged(final Object pluginId) {
 				Connector plugin = registry.getEntry((String) pluginId);
 				Server configuration = article.getObject();
 				DeployerConfig newConfig = plugin.newConfig();
@@ -80,7 +82,8 @@ public class DeployerPluginSelector extends Panel {
 		@SpringBean
 		private DeployersRegistry registry;
 
-		public PluginPicker(String id, IModel<T> model,
+		@SuppressWarnings("unchecked")
+		public PluginPicker(final String id, final IModel<T> model,
 				final Class<? extends Connector> connectorClass) {
 			super(id);
 			setRequired(true);
@@ -96,11 +99,13 @@ public class DeployerPluginSelector extends Panel {
 			});
 
 			setChoiceRenderer(new IChoiceRenderer() {
-				public Object getDisplayValue(Object object) {
+				private static final long serialVersionUID = 7954936699435378919L;
+
+				public Object getDisplayValue(final Object object) {
 					return registry.getEntry((String) object).getName();
 				}
 
-				public String getIdValue(Object object, int index) {
+				public String getIdValue(final Object object, final int index) {
 					return (String) object;
 				}
 			});

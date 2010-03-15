@@ -13,7 +13,6 @@ import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.jabox.apis.Connector;
 import org.jabox.apis.Manager;
 import org.jabox.apis.scm.SCMConnector;
-import org.jabox.model.DeployersRegistry;
 import org.jabox.model.Project;
 import org.jabox.model.Server;
 import org.jabox.webapp.borders.MiddlePanel;
@@ -27,14 +26,13 @@ public abstract class EditServerPage extends MiddlePanel {
 	@SpringBean
 	protected Manager<Connector> _manager;
 
-	@SpringBean
-	private DeployersRegistry registry;
-
-	public EditServerPage(IModel<Server> server,
-			Class<? extends Connector> connectorClass) {
+	public EditServerPage(final IModel<Server> server,
+			final Class<? extends Connector> connectorClass) {
 		add(new FeedbackPanel("feedback"));
 		Form<Server> form = new TransactionalForm<Server>("form",
 				new CompoundPropertyModel<Server>(server.getObject())) {
+			private static final long serialVersionUID = -8262391690705860769L;
+
 			@Override
 			protected void onSubmit() {
 				onSave(getModelObject());
@@ -77,6 +75,8 @@ public abstract class EditServerPage extends MiddlePanel {
 		// form.add(ddc);
 
 		form.add(new Link<Void>("cancel") {
+			private static final long serialVersionUID = -6975617962156076540L;
+
 			@Override
 			public void onClick() {
 				onCancel();
