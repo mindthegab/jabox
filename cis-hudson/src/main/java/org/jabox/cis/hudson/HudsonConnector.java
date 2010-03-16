@@ -30,6 +30,7 @@ import java.net.MalformedURLException;
 
 import org.apache.commons.httpclient.Header;
 import org.apache.commons.httpclient.HttpClient;
+import org.apache.commons.httpclient.UsernamePasswordCredentials;
 import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.wicket.Component;
 import org.apache.wicket.model.IModel;
@@ -64,15 +65,28 @@ public class HudsonConnector implements CISConnector {
 	 * http://wiki.hudson-ci.org/display/HUDSON/Authenticating+scripted+clients
 	 * 
 	 */
-	public boolean addProject(Project project, CISConnectorConfig dc)
+	public boolean addProject(final Project project, final CISConnectorConfig dc)
 			throws IOException, SAXException {
+		HudsonConnectorConfig hcc = (HudsonConnectorConfig) dc;
 		String url = dc.getServer().getUrl();
 
 		HttpClient client = new HttpClient();
+		client.getState().setCredentials(
+				null,
+				null,
+				new UsernamePasswordCredentials(hcc.getUsername(), hcc
+						.getPassword()));
+
+		// Hudson does not do any authentication negotiation,
+		// ie. it does not return a 401 (Unauthorized)
+		// but immediately a 403 (Forbidden)
+		client.getState().setAuthenticationPreemptive(true);
+
 		String uri = url + "createItem?name=" + project.getName();
 		PostMethod post = new PostMethod(uri);
-		post.setRequestHeader("Content-type", "text/xml; charset=UTF-8");
 		post.setDoAuthentication(true);
+
+		post.setRequestHeader("Content-type", "text/xml; charset=UTF-8");
 
 		InputStream is = HudsonConnector.class
 				.getResourceAsStream("config.xml");
@@ -97,7 +111,7 @@ public class HudsonConnector implements CISConnector {
 		return true;
 	}
 
-	private String parseInputStream(InputStream is, Project project)
+	private String parseInputStream(final InputStream is, final Project project)
 			throws IOException {
 		StringWriter writer = new StringWriter();
 		IOUtils.copy(is, writer);
@@ -112,7 +126,7 @@ public class HudsonConnector implements CISConnector {
 		return replace;
 	}
 
-	public boolean login(String username, String password)
+	public boolean login(final String username, final String password)
 			throws MalformedURLException, IOException, SAXException {
 		return true;
 	}
@@ -121,7 +135,7 @@ public class HudsonConnector implements CISConnector {
 		return new HudsonConnectorConfig();
 	}
 
-	public Component newEditor(String id, IModel<Server> model) {
+	public Component newEditor(final String id, final IModel<Server> model) {
 		return new HudsonConnectorEditor(id, model);
 	}
 }
