@@ -242,42 +242,42 @@
 		<dependency>
 			<groupId>org.jabox</groupId>
 			<artifactId>scm-subversion</artifactId>
-			<version>${pom.version}</version>
+			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.jabox</groupId>
 			<artifactId>bts-redmine</artifactId>
-			<version>${pom.version}</version>
+			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.jabox</groupId>
 			<artifactId>bts-bugzilla</artifactId>
-			<version>${pom.version}</version>
+			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.jabox</groupId>
 			<artifactId>bts-jtrac</artifactId>
-			<version>${pom.version}</version>
+			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.jabox</groupId>
 			<artifactId>cis-hudson</artifactId>
-			<version>${pom.version}</version>
+			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.jabox</groupId>
 			<artifactId>mrm-nexus</artifactId>
-			<version>${pom.version}</version>
+			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.jabox</groupId>
 			<artifactId>mrm-artifactory</artifactId>
-			<version>${pom.version}</version>
+			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.jabox</groupId>
 			<artifactId>ide-eclipse</artifactId>
-			<version>${pom.version}</version>
+			<version>${project.version}</version>
 		</dependency>
 	</dependencies>
 

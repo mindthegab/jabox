@@ -45,12 +45,12 @@ THE SOFTWARE.
 		<dependency>
 			<groupId>org.jabox</groupId>
 			<artifactId>jabox-persistence</artifactId>
-			<version>${pom.version}</version>
+			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.jabox</groupId>
 			<artifactId>maven-helper</artifactId>
-			<version>${pom.version}</version>
+			<version>${project.version}</version>
 		</dependency>
 	</dependencies>
 </project>
