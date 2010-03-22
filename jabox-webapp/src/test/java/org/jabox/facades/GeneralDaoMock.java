@@ -22,11 +22,12 @@ public class GeneralDaoMock implements GeneralDao {
 		_dc.setDefault(cis);
 	}
 
-	public void deleteEntity(IBaseEntity entity) {
+	public void deleteEntity(final IBaseEntity entity) {
 
 	}
 
-	public <T extends IBaseEntity> T findEntity(Long id, Class<T> clazz) {
+	public <T extends IBaseEntity> T findEntity(final Long id,
+			final Class<T> clazz) {
 		return null;
 	}
 
@@ -34,10 +35,10 @@ public class GeneralDaoMock implements GeneralDao {
 		return _dc;
 	}
 
-	public <T extends IBaseEntity> List<T> getEntities(Class<T> clazz) {
+	public <T extends IBaseEntity> List<T> getEntities(final Class<T> clazz) {
 		return null;
 	}
 
-	public <T extends IBaseEntity> void persist(T object) {
+	public <T extends IBaseEntity> void persist(final T object) {
 	}
 }
