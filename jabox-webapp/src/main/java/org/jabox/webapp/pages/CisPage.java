@@ -24,6 +24,6 @@ public class CisPage extends BasePage {
 		wmc.add(new AttributeModifier("src", new Model<String>(url)));
 		add(wmc);
 
-		add(new HeaderLinksPanel("headerLinks", 2));
+		add(new HeaderLinksPanel("headerLinks", HeaderLinksPanel.CIS));
 	}
 }

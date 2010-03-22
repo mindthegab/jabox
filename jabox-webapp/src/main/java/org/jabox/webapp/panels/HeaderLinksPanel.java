@@ -13,13 +13,11 @@ import org.jabox.model.DefaultConfiguration;
 
 public class HeaderLinksPanel extends Panel {
 
-	protected static final int ALM = 0;
-
-	protected static final int ITS = 1;
-
-	protected static final int CIS = 2;
-
-	protected static final int RMS = 3;
+	public static final int ALM = 0;
+	public static final int SCM = 1;
+	public static final int ITS = 2;
+	public static final int CIS = 3;
+	public static final int RMS = 4;
 
 	@SpringBean
 	protected GeneralDao _generalDao;
@@ -27,13 +25,18 @@ public class HeaderLinksPanel extends Panel {
 	@SpringBean
 	protected Manager<Connector> _manager;
 
-	public HeaderLinksPanel(String id, int selected) {
+	public HeaderLinksPanel(final String id, final int selected) {
 		super(id);
 		final DefaultConfiguration dc = _generalDao.getDefaultConfiguration();
 
 		List<Tab> tabs = new ArrayList<Tab>();
 		tabs.add(new Tab("A.L.M. (Jabox)", "/web/ManageServers",
 				selected == ALM));
+
+		if (dc.getScm() != null) {
+			tabs.add(new Tab(getTabName("S.C.M.", dc.getScm()), "/web/ScmPage",
+					dc.getScm().getServer().getUrl(), selected == SCM));
+		}
 
 		if (dc.getIts() != null) {
 			tabs.add(new Tab(getTabName("I.T.S.", dc.getIts()), "/web/ItsPage",
@@ -61,7 +64,7 @@ public class HeaderLinksPanel extends Panel {
 	 *            The ConnectorConfig
 	 * @return
 	 */
-	private String getTabName(String prefix, ConnectorConfig cc) {
+	private String getTabName(final String prefix, final ConnectorConfig cc) {
 		Connector ci = _manager.getConnectorInstance(cc);
 		return prefix + "(" + ci.getName() + ")";
 	}

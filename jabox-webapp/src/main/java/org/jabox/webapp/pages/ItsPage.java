@@ -24,6 +24,6 @@ public class ItsPage extends BasePage {
 		wmc.add(new AttributeModifier("src", new Model<String>(url)));
 		add(wmc);
 
-		add(new HeaderLinksPanel("headerLinks", 1));
+		add(new HeaderLinksPanel("headerLinks", HeaderLinksPanel.ITS));
 	}
 }
