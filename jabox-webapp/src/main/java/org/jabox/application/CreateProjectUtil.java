@@ -65,7 +65,7 @@ public class CreateProjectUtil {
 		InjectorHolder.getInjector().inject(this);
 	}
 
-	public void createProject(Project project) {
+	public void createProject(final Project project) {
 		try {
 			createProjectMethod(project);
 		} catch (IOException e) {
@@ -93,7 +93,7 @@ public class CreateProjectUtil {
 	 * @throws SCMException
 	 * @throws IOException
 	 */
-	private void createProjectMethod(Project project)
+	private void createProjectMethod(final Project project)
 			throws InvalidRepositoryException, MavenExecutionException,
 			SAXException, SCMException, IOException {
 		final DefaultConfiguration dc = generalDao.getDefaultConfiguration();
@@ -124,8 +124,8 @@ public class CreateProjectUtil {
 
 		// Commit Project
 		scm.commitProject(project, scmc);
-		project.setScmUrl(scm.getScmUrl() + "/" + project.getName() + "/trunk/"
-				+ project.getName());
+		project.setScmUrl(scmc.getScmUrl() + "/" + project.getName()
+				+ "/trunk/" + project.getName());
 
 		// Create a directory structure in subversion for the project
 		// svn.createProject(project);

@@ -35,6 +35,4 @@ public interface SCMConnector<T extends SCMConnectorConfig> extends Connector {
 
 	void commitProject(Project project, T config) throws SCMException;
 
-	String getScmUrl();
-
 }

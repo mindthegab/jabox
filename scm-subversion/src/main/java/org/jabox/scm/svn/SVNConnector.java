@@ -37,7 +37,6 @@ import org.jabox.model.Server;
 import org.jabox.utils.TemporalDirectory;
 import org.springframework.stereotype.Service;
 import org.tmatesoft.svn.core.SVNException;
-import org.tmatesoft.svn.core.SVNURL;
 
 @Service
 public class SVNConnector implements SCMConnector<ISVNConnectorConfig>,
@@ -61,21 +60,8 @@ public class SVNConnector implements SCMConnector<ISVNConnectorConfig>,
 		return getName();
 	}
 
-	public String getScmUrl() {
-		SVNURL svnDir;
-		try {
-			svnDir = SVNURL.fromFile(SubversionRepository
-					.getSubversionBaseDir());
-			return svnDir.getPath();
-		} catch (SVNException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
-	}
-
-	public File createProjectDirectories(Project project,
-			ISVNConnectorConfig config) throws SCMException {
+	public File createProjectDirectories(final Project project,
+			final ISVNConnectorConfig config) throws SCMException {
 		ISVNConnectorConfig svnc = config;
 		try {
 			SubversionFacade svn = new SubversionFacade();
@@ -100,8 +86,9 @@ public class SVNConnector implements SCMConnector<ISVNConnectorConfig>,
 	 * @param tmpDir
 	 * @return the trunk directory.
 	 */
-	private static File createProjectDirectories(Project project, File tmpDir) {
-		assert (tmpDir.exists());
+	private static File createProjectDirectories(final Project project,
+			final File tmpDir) {
+		assert tmpDir.exists();
 
 		File projectDir = new File(tmpDir, project.getName());
 		projectDir.mkdir();
@@ -112,9 +99,9 @@ public class SVNConnector implements SCMConnector<ISVNConnectorConfig>,
 		return trunkDir;
 	}
 
-	public void commitProject(Project project, ISVNConnectorConfig svnc)
-			throws SCMException {
-		assert (_tmpDir != null && _tmpDir.exists());
+	public void commitProject(final Project project,
+			final ISVNConnectorConfig svnc) throws SCMException {
+		assert _tmpDir != null && _tmpDir.exists();
 
 		try {
 			SubversionFacade svn = new SubversionFacade();
@@ -128,7 +115,7 @@ public class SVNConnector implements SCMConnector<ISVNConnectorConfig>,
 		return new SVNConnectorConfig();
 	}
 
-	public Component newEditor(String id, IModel<Server> model) {
+	public Component newEditor(final String id, final IModel<Server> model) {
 		return new SVNConnectorEditor(id, model);
 	}
 }

@@ -37,4 +37,15 @@ public class ESVNConnectorConfig extends DeployerConfig implements
 		return "";
 	}
 
+	public String getScmUrl() {
+
+		try {
+			return getSvnDir().toDecodedString();
+		} catch (SVNException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 }

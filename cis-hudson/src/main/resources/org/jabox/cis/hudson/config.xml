@@ -38,7 +38,7 @@ THE SOFTWARE.
 	<scm class="hudson.scm.SubversionSCM">
 		<locations>
 			<hudson.scm.SubversionSCM_-ModuleLocation>
-				<remote>file://${project.scmURL}</remote>
+				<remote>${project.scmURL}</remote>
 			</hudson.scm.SubversionSCM_-ModuleLocation>
 		</locations>
 		<useUpdate>true</useUpdate>

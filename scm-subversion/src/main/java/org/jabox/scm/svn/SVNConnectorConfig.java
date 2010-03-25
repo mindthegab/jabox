@@ -32,4 +32,8 @@ public class SVNConnectorConfig extends DeployerConfig implements
 	public String getPassword() {
 		return password;
 	}
+
+	public String getScmUrl() {
+		return getServer().getUrl();
+	}
 }
