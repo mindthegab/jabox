@@ -43,6 +43,14 @@ import org.jabox.model.Server;
 import org.springframework.stereotype.Service;
 import org.xml.sax.SAXException;
 
+/**
+ * TODO: Find a way to pass credentials to Hudson: by doing a post here:
+ * http://localhost
+ * :9090/hudson/scm/SubversionSCM/enterCredential?_httpUrlOfSubversion_
+ * 
+ * @author Administrator
+ * 
+ */
 @Service
 public class HudsonConnector implements CISConnector {
 	public static final String ID = "plugin.cis.hudson";

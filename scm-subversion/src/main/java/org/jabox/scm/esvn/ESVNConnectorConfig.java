@@ -4,6 +4,7 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
 import org.jabox.model.DeployerConfig;
+import org.jabox.model.Server;
 import org.jabox.scm.svn.ISVNConnectorConfig;
 import org.jabox.scm.svn.SubversionRepository;
 import org.tmatesoft.svn.core.SVNException;
@@ -37,8 +38,15 @@ public class ESVNConnectorConfig extends DeployerConfig implements
 		return "";
 	}
 
-	public String getScmUrl() {
+	@Override
+	public void setServer(final Server server) {
+		super.setServer(server);
+		if (server != null) {
+			server.setUrl(getScmUrl());
+		}
+	}
 
+	public String getScmUrl() {
 		try {
 			return getSvnDir().toDecodedString();
 		} catch (SVNException e) {

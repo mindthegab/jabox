@@ -17,8 +17,8 @@ public class GeneralDaoMock implements GeneralDao {
 
 		// Mock CIS
 		HudsonConnectorConfig cis = new HudsonConnectorConfig();
-		cis.server = new Server();
-		cis.server.setName("HudsonMock");
+		cis.setServer(new Server());
+		cis.getServer().setName("HudsonMock");
 		_dc.setDefault(cis);
 	}
 

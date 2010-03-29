@@ -53,8 +53,12 @@ public abstract class DeployerConfig extends BaseEntity implements
 	public String getPluginId() {
 		return pluginId;
 	}
-	
+
 	public Server getServer() {
 		return server;
+	}
+
+	public void setServer(final Server server) {
+		this.server = server;
 	}
 }

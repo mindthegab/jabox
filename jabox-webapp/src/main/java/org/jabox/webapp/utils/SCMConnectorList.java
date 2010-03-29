@@ -46,7 +46,8 @@ import org.jabox.webapp.pages.ManageServers;
 public class SCMConnectorList extends PropertyListView<ConnectorConfig> {
 	private static final long serialVersionUID = -2877438240039632971L;
 
-	public SCMConnectorList(String id, List<? extends ConnectorConfig> projects) {
+	public SCMConnectorList(final String id,
+			final List<? extends ConnectorConfig> projects) {
 		super(id, projects);
 		add(new CreateServerLink("create" + id));
 	}
@@ -68,7 +69,7 @@ public class SCMConnectorList extends PropertyListView<ConnectorConfig> {
 		item.add(new IconButton("connectorImage", deployerConfig));
 
 		Connector ci = _manager.getConnectorInstance(deployerConfig);
-		item.add(new Label("scmUrl", ci.getName()));
+		// item.add(new Label("scmUrl", ci.getName()));
 		final AttributeModifier attributeModifier = new AttributeModifier(
 				"class", true, new EvenOddRow<ConnectorConfig>(item));
 		item.add(attributeModifier);

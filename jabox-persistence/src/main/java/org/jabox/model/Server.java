@@ -27,7 +27,7 @@ public class Server extends BaseEntity implements Serializable {
 
 	public void setDeployerConfig(final DeployerConfig newConfig) {
 		deployerConfig = newConfig;
-		newConfig.server = this;
+		newConfig.setServer(this);
 	}
 
 	public void setName(String name) {
