@@ -44,7 +44,7 @@ public class Start {
 	 * @param args
 	 * @throws Exception
 	 */
-	public static void main(String[] args) throws Exception {
+	public static void main(final String[] args) throws Exception {
 		System.out.println(getJaboxWebapp());
 		startEmbeddedJetty(true);
 	}
@@ -92,6 +92,7 @@ public class Start {
 			System.out
 					.println(">>> STARTING EMBEDDED JETTY SERVER, PRESS ANY KEY TO STOP");
 			server.start();
+			BrowserStarter.openBrowser("http://localhost:9090/");
 			if (startJabox) {
 				while (System.in.available() == 0) {
 					Thread.sleep(5000);
