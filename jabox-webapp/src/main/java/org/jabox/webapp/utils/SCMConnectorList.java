@@ -68,7 +68,7 @@ public class SCMConnectorList extends PropertyListView<ConnectorConfig> {
 				ManageServers.class));
 		item.add(new IconButton("connectorImage", deployerConfig));
 
-		Connector ci = _manager.getConnectorInstance(deployerConfig);
+		// Connector ci = _manager.getConnectorInstance(deployerConfig);
 		// item.add(new Label("scmUrl", ci.getName()));
 		final AttributeModifier attributeModifier = new AttributeModifier(
 				"class", true, new EvenOddRow<ConnectorConfig>(item));
