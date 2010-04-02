@@ -12,14 +12,15 @@ public class SetDefaultServerLink extends Link<ConnectorConfig> {
 	@SpringBean
 	protected GeneralDao _generalDao;
 
-	public SetDefaultServerLink(String id, IModel<ConnectorConfig> model) {
+	public SetDefaultServerLink(final String id,
+			final IModel<ConnectorConfig> model) {
 		super(id, model);
 	}
 
 	@Override
 	public void onClick() {
 		DefaultConfiguration dc = _generalDao.getDefaultConfiguration();
-		dc.setDefault(getModelObject());
+		dc.switchDefault(getModelObject());
 		_generalDao.persist(dc);
 	}
 

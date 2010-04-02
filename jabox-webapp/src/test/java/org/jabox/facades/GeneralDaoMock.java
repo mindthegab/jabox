@@ -19,7 +19,7 @@ public class GeneralDaoMock implements GeneralDao {
 		HudsonConnectorConfig cis = new HudsonConnectorConfig();
 		cis.setServer(new Server());
 		cis.getServer().setName("HudsonMock");
-		_dc.setDefault(cis);
+		_dc.switchDefault(cis);
 	}
 
 	public void deleteEntity(final IBaseEntity entity) {

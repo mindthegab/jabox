@@ -49,7 +49,7 @@ public final class DefaultEntityButton<T extends ConnectorConfig> extends
 	private final T _item;
 
 	public DefaultEntityButton(final String id, final T item,
-			Class<? extends Page> responsePage) {
+			final Class<? extends Page> responsePage) {
 		super(id);
 		_item = item;
 		add(TOOLTIP_MODIFIER);
@@ -60,7 +60,7 @@ public final class DefaultEntityButton<T extends ConnectorConfig> extends
 		}
 	}
 
-	private boolean isDefault(ConnectorConfig item) {
+	private boolean isDefault(final ConnectorConfig item) {
 		DefaultConfiguration dc = _generalDao.getDefaultConfiguration();
 		if (DefaultConfiguration.TRUE.equals(dc.isDefault(item))) {
 			return true;
@@ -69,7 +69,7 @@ public final class DefaultEntityButton<T extends ConnectorConfig> extends
 	}
 
 	public DefaultEntityButton(final String id, final ListItem<T> item,
-			Class<? extends Page> responsePage) {
+			final Class<? extends Page> responsePage) {
 		this(id, item.getModelObject(), responsePage);
 	}
 
@@ -82,7 +82,7 @@ public final class DefaultEntityButton<T extends ConnectorConfig> extends
 	@Override
 	public void onSubmit() {
 		DefaultConfiguration dc = _generalDao.getDefaultConfiguration();
-		dc.setDefault(_item);
+		dc.switchDefault(_item);
 		_generalDao.persist(dc);
 	}
 }

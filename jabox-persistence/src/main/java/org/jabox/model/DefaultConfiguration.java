@@ -34,7 +34,7 @@ public class DefaultConfiguration extends BaseEntity implements Serializable {
 	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	private DeployerConfig _scm;
 
-	public String isDefault(ConnectorConfig item) {
+	public String isDefault(final ConnectorConfig item) {
 		if (item == null) {
 			return FALSE;
 		}
@@ -53,22 +53,43 @@ public class DefaultConfiguration extends BaseEntity implements Serializable {
 		return FALSE;
 	}
 
-	public String isDefault(ListItem<ConnectorConfig> listItem) {
+	public String isDefault(final ListItem<ConnectorConfig> listItem) {
 		if (listItem == null) {
 			return FALSE;
 		}
 		return isDefault(listItem.getModelObject());
 	}
 
-	public void setDefault(ConnectorConfig config) {
+	/**
+	 * If given parameter is already default disable, else set it as default.
+	 * 
+	 * @param config
+	 */
+	public void switchDefault(final ConnectorConfig config) {
 		if (ITSConnectorConfig.class.isAssignableFrom(config.getClass())) {
-			_its = (DeployerConfig) config;
+			if (TRUE.equals(isDefault(config))) {
+				_its = null;
+			} else {
+				_its = (DeployerConfig) config;
+			}
 		} else if (CISConnectorConfig.class.isAssignableFrom(config.getClass())) {
-			_cis = (DeployerConfig) config;
+			if (TRUE.equals(isDefault(config))) {
+				_cis = null;
+			} else {
+				_cis = (DeployerConfig) config;
+			}
 		} else if (RMSConnectorConfig.class.isAssignableFrom(config.getClass())) {
-			_rms = (DeployerConfig) config;
+			if (TRUE.equals(isDefault(config))) {
+				_rms = null;
+			} else {
+				_rms = (DeployerConfig) config;
+			}
 		} else if (SCMConnectorConfig.class.isAssignableFrom(config.getClass())) {
-			_scm = (DeployerConfig) config;
+			if (TRUE.equals(isDefault(config))) {
+				_scm = null;
+			} else {
+				_scm = (DeployerConfig) config;
+			}
 		}
 	}
 
