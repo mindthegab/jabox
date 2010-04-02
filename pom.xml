@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-	<!--
+<!--
 		The MIT License Copyright (c) 2009 Dimitris Kapanidis Permission is
 		hereby granted, free of charge, to any person obtaining a copy of this
 		software and associated documentation files (the "Software"), to deal
@@ -17,9 +17,7 @@
 		CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 		TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 		SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-	-->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	--><project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.jabox</groupId>
@@ -28,7 +26,7 @@
 	<version>0.0.4-SNAPSHOT</version>
 	<!-- TODO project name  -->
 	<name>Jabox</name>
-	<description />
+	<description/>
 
 	<modules>
 		<module>jabox-webapp</module>
@@ -47,7 +45,8 @@
 		<module>maven-helper</module>
 		<module>jabox-standalone</module>
 		<module>mrm-artifactory</module>
-	</modules>
+    <module>scm-beanstalk</module>
+  </modules>
 	<!--
 		TODO <organization> <name>company name</name> <url>company url</url>
 		</organization>

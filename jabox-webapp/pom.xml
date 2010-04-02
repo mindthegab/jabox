@@ -246,6 +246,11 @@
 		</dependency>
 		<dependency>
 			<groupId>org.jabox</groupId>
+			<artifactId>scm-beanstalk</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jabox</groupId>
 			<artifactId>bts-redmine</artifactId>
 			<version>${project.version}</version>
 		</dependency>

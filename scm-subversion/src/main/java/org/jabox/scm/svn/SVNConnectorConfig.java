@@ -22,7 +22,7 @@ public class SVNConnectorConfig extends DeployerConfig implements
 	public String password;
 
 	public SVNURL getSvnDir() throws SVNException {
-		return SVNURL.parseURIEncoded(getServer().getUrl());
+		return SVNURL.parseURIEncoded(getScmUrl());
 	}
 
 	public String getUsername() {
