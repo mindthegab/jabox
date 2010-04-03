@@ -27,7 +27,7 @@ THE SOFTWARE.
   <parent>
     <groupId>org.jabox</groupId>
     <artifactId>jabox</artifactId>
-    <version>0.0.4-SNAPSHOT</version>
+    <version>0.0.4</version>
   </parent>
   <artifactId>jabox-site</artifactId>
   <name>Jabox Site</name>
