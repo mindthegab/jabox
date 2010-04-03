@@ -4,11 +4,11 @@
 	<parent>
 		<artifactId>jabox</artifactId>
 		<groupId>org.jabox</groupId>
-		<version>0.0.4</version>
+		<version>0.0.5-SNAPSHOT</version>
 	</parent>
 	<groupId>org.jabox</groupId>
 	<artifactId>scm-beanstalk</artifactId>
-	<version>0.0.4</version>
+	<version>0.0.5-SNAPSHOT</version>
 	<name>scm-beanstalk</name>
 	<url>http://maven.apache.org</url>
 	<dependencies>
