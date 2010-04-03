@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description></description>
+  <keepDependencies>false</keepDependencies>
+  <properties/>
+  <scm class="hudson.scm.SubversionSCM">
+    <locations>
+      <hudson.scm.SubversionSCM_-ModuleLocation>
+        <remote>svn://67.23.47.178/trunk</remote>
+        <local>.</local>
+      </hudson.scm.SubversionSCM_-ModuleLocation>
+    </locations>
+    <useUpdate>true</useUpdate>
+    <doRevert>false</doRevert>
+    <excludedRegions></excludedRegions>
+    <excludedUsers></excludedUsers>
+    <excludedRevprop></excludedRevprop>
+    <excludedCommitMessages></excludedCommitMessages>
+  </scm>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers class="vector">
+    <hudson.triggers.SCMTrigger>
+      <spec>* * * * *</spec>
+    </hudson.triggers.SCMTrigger>
+  </triggers>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <hudson.tasks.Maven>
+      <targets>clean install -Dmaven.test.failure.ignore</targets>
+      <mavenName>Maven 2.2.1</mavenName>
+      <jvmOptions>-Xmx512m</jvmOptions>
+      <usePrivateRepository>false</usePrivateRepository>
+    </hudson.tasks.Maven>
+  </builders>
+  <publishers>
+    <hudson.tasks.junit.JUnitResultArchiver>
+      <testResults>**/target/surefire-reports/*.xml</testResults>
+      <testDataPublishers/>
+    </hudson.tasks.junit.JUnitResultArchiver>
+  </publishers>
+  <buildWrappers>
+    <hudson.plugins.release.ReleaseWrapper>
+      <releaseVersionTemplate></releaseVersionTemplate>
+      <parameterDefinitions/>
+      <preBuildSteps>
+        <hudson.tasks.Maven>
+          <targets>clean release:prepare release:perform -Dresume=false</targets>
+          <mavenName>Maven 2.2.1</mavenName>
+          <jvmOptions>-Xmx512m</jvmOptions>
+          <usePrivateRepository>false</usePrivateRepository>
+        </hudson.tasks.Maven>
+      </preBuildSteps>
+      <postBuildSteps/>
+    </hudson.plugins.release.ReleaseWrapper>
+  </buildWrappers>
+</project>
