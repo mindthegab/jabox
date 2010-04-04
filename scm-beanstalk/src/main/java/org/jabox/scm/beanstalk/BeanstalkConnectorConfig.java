@@ -27,6 +27,8 @@ public class BeanstalkConnectorConfig extends DeployerConfig implements
 
 	public String password;
 
+	public String projectName;
+
 	public SVNURL getSvnDir() throws SVNException {
 		return SVNURL.parseURIEncoded(getScmUrl());
 	}
@@ -46,9 +48,12 @@ public class BeanstalkConnectorConfig extends DeployerConfig implements
 	}
 
 	public String getScmUrl() {
-		// XXX fixme
-		String projectName = "jabox";
-		String scmURL = HTTP + getAccountURL() + SVN_BEANSTALKAPP_COM + projectName;
+		String scmURL = HTTP + getAccountURL() + SVN_BEANSTALKAPP_COM
+				+ getProjectName();
 		return scmURL;
+	}
+
+	public String getProjectName() {
+		return projectName;
 	}
 }

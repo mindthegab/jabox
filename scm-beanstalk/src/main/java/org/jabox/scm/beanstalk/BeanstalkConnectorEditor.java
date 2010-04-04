@@ -16,7 +16,7 @@ public class BeanstalkConnectorEditor extends Panel {
 		add(new TextField<String>("server.url", new BeanstalkAccountURLModel(
 				new PropertyModel<String>(model, "server.url"))));
 		add(new TextField<String>("username").setRequired(true));
+		add(new TextField<String>("projectName").setRequired(true));
 		add(new PasswordTextField("password").setRequired(true));
 	}
-
 }
