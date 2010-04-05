@@ -17,17 +17,41 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see http://www.gnu.org/licenses/.
  */
-package org.jabox.apis.cis;
+package org.jabox.mrm.eartifactory;
 
-import java.io.IOException;
+import org.apache.wicket.Component;
+import org.apache.wicket.model.IModel;
+import org.jabox.model.DeployerConfig;
+import org.jabox.model.Server;
+import org.jabox.mrm.artifactory.ArtifactoryConnector;
+import org.springframework.stereotype.Service;
 
-import org.jabox.apis.Connector;
-import org.jabox.model.Project;
-import org.xml.sax.SAXException;
+@Service
+public class EArtifactoryConnector extends ArtifactoryConnector {
+	public static final String ID = "plugin.rms.eartifactory";
 
-public interface CISConnector extends Connector {
+	@Override
+	public String getName() {
+		return "Embedded Artifactory";
+	}
 
-	public boolean addProject(final Project project,
-			CISConnectorConfig cisConnectorConfig) throws IOException,
-			SAXException;
+	@Override
+	public String getId() {
+		return ID;
+	}
+
+	@Override
+	public String toString() {
+		return getName();
+	}
+
+	@Override
+	public DeployerConfig newConfig() {
+		return new EArtifactoryConnectorConfig();
+	}
+
+	@Override
+	public Component newEditor(final String id, final IModel<Server> model) {
+		return new EArtifactoryConnectorEditor(id, model);
+	}
 }

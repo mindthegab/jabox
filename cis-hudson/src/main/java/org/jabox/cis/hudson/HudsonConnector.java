@@ -22,7 +22,6 @@ package org.jabox.cis.hudson;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringWriter;
-import java.net.MalformedURLException;
 
 import org.apache.commons.httpclient.Header;
 import org.apache.commons.httpclient.HttpClient;
@@ -128,11 +127,6 @@ public class HudsonConnector implements CISConnector {
 		replace = replace.replace("${goals}",
 				"clean checkstyle:checkstyle findbugs:findbugs pmd:cpd deploy");
 		return replace;
-	}
-
-	public boolean login(final String username, final String password)
-			throws MalformedURLException, IOException, SAXException {
-		return true;
 	}
 
 	public DeployerConfig newConfig() {

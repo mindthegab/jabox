@@ -17,17 +17,22 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see http://www.gnu.org/licenses/.
  */
-package org.jabox.apis.cis;
+package org.jabox.cis.ehudson;
 
-import java.io.IOException;
+import org.apache.wicket.markup.html.form.PasswordTextField;
+import org.apache.wicket.markup.html.form.TextField;
+import org.apache.wicket.markup.html.panel.Panel;
+import org.apache.wicket.model.CompoundPropertyModel;
+import org.apache.wicket.model.IModel;
+import org.jabox.model.Server;
 
-import org.jabox.apis.Connector;
-import org.jabox.model.Project;
-import org.xml.sax.SAXException;
+public class EHudsonConnectorEditor extends Panel {
+	private static final long serialVersionUID = -4821476804096973897L;
 
-public interface CISConnector extends Connector {
+	public EHudsonConnectorEditor(final String id, final IModel<Server> model) {
+		super(id, new CompoundPropertyModel<String>(model));
+		add(new TextField<String>("username").setRequired(true));
+		add(new PasswordTextField("password").setRequired(true));
+	}
 
-	public boolean addProject(final Project project,
-			CISConnectorConfig cisConnectorConfig) throws IOException,
-			SAXException;
 }
