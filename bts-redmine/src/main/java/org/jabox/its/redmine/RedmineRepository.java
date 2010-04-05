@@ -1,25 +1,21 @@
 /*
- * The MIT License
- *
- * Copyright (c) 2009 Dimitris Kapanidis
+ * Jabox Open Source Version
+ * Copyright (C) 2009-2010 Dimitris Kapanidis                                                                                                                          
  * 
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
+ * This file is part of Jabox
  * 
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  * 
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see http://www.gnu.org/licenses/.
  */
 package org.jabox.its.redmine;
 
@@ -71,15 +67,15 @@ public class RedmineRepository implements ITSConnector, Serializable {
 		_wc = new WebConversation();
 	}
 
-	public boolean addModule(Project project,
-			ITSConnectorConfig itsConnectorConfig, String module,
-			String description, String initialOwner) throws SAXException,
-			IOException {
+	public boolean addModule(final Project project,
+			final ITSConnectorConfig itsConnectorConfig, final String module,
+			final String description, final String initialOwner)
+			throws SAXException, IOException {
 		return true;
 	}
 
-	public boolean addProject(Project project, ITSConnectorConfig config)
-			throws IOException, SAXException {
+	public boolean addProject(final Project project,
+			final ITSConnectorConfig config) throws IOException, SAXException {
 		WebRequest req = new GetMethodWebRequest(config.getServer().getUrl()
 				+ "/projects/add");
 		WebResponse resp = _wc.getResponse(req);
@@ -95,12 +91,13 @@ public class RedmineRepository implements ITSConnector, Serializable {
 		return false;
 	}
 
-	private String getRedmineId(Project project) {
+	private String getRedmineId(final Project project) {
 		return project.getName();
 	}
 
-	public boolean addVersion(Project project, ITSConnectorConfig config,
-			String version) throws IOException, SAXException {
+	public boolean addVersion(final Project project,
+			final ITSConnectorConfig config, final String version)
+			throws IOException, SAXException {
 
 		WebRequest req = new GetMethodWebRequest(config.getServer().getUrl()
 				+ "/projects/add_version/" + getRedmineId(project));
@@ -113,8 +110,8 @@ public class RedmineRepository implements ITSConnector, Serializable {
 		return true;
 	}
 
-	public boolean login(String username, String password,
-			ITSConnectorConfig config) throws MalformedURLException,
+	public boolean login(final String username, final String password,
+			final ITSConnectorConfig config) throws MalformedURLException,
 			IOException, SAXException {
 
 		WebRequest req = new GetMethodWebRequest(config.getServer().getUrl()
@@ -136,7 +133,7 @@ public class RedmineRepository implements ITSConnector, Serializable {
 		return new RedmineRepositoryConfig();
 	}
 
-	public Component newEditor(String id, IModel<Server> model) {
+	public Component newEditor(final String id, final IModel<Server> model) {
 		return new RedmineRepositoryEditor(id, model);
 	}
 

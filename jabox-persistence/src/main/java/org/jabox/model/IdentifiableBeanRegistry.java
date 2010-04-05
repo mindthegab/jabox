@@ -1,25 +1,21 @@
 /*
- * The MIT License
- *
- * Copyright (c) 2009 Dimitris Kapanidis
+ * Jabox Open Source Version
+ * Copyright (C) 2009-2010 Dimitris Kapanidis                                                                                                                          
  * 
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
+ * This file is part of Jabox
  * 
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  * 
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see http://www.gnu.org/licenses/.
  */
 package org.jabox.model;
 
@@ -47,16 +43,16 @@ public class IdentifiableBeanRegistry<T extends Identifiable<ID>, ID extends Ser
 	private List<T> beans;
 	private List<ID> uuids;
 
-	public IdentifiableBeanRegistry(Class<T> beanType) {
+	public IdentifiableBeanRegistry(final Class<T> beanType) {
 		this.beanType = beanType;
 	}
 
-	public void setApplicationContext(ApplicationContext context)
+	public void setApplicationContext(final ApplicationContext context)
 			throws BeansException {
 		this.context = context;
 	}
 
-	public T getEntry(ID id) {
+	public T getEntry(final ID id) {
 		T entry = entries.get(id);
 		if (entry == null) {
 			throw new IllegalStateException();
@@ -78,7 +74,7 @@ public class IdentifiableBeanRegistry<T extends Identifiable<ID>, ID extends Ser
 	 * @param interfaceClass
 	 * @return a list of IDs of the implementations of this interface.
 	 */
-	public List<ID> getIds(Class<? extends Connector> interfaceClass) {
+	public List<ID> getIds(final Class<? extends Connector> interfaceClass) {
 		List<ID> list = new ArrayList<ID>();
 		for (Entry<ID, T> entry : entries.entrySet()) {
 			if (interfaceClass.isAssignableFrom(entry.getValue().getClass())) {

@@ -1,3 +1,22 @@
+/*
+ * Jabox Open Source Version
+ * Copyright (C) 2009-2010 Dimitris Kapanidis                                                                                                                          
+ * 
+ * This file is part of Jabox
+ * 
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see http://www.gnu.org/licenses/.
+ */
 package org.jabox.webapp.panels;
 
 import java.io.Serializable;
@@ -11,25 +30,26 @@ public class Tab implements Serializable {
 
 	private boolean _selected;
 
-	public Tab(String title, String url) {
+	public Tab(final String title, final String url) {
 		_title = title;
 		_url = url;
 	}
 
-	public Tab(String title, String url, boolean selected) {
+	public Tab(final String title, final String url, final boolean selected) {
 		_title = title;
 		_url = url;
 		setSelected(selected);
 	}
 
-	public Tab(String title, String url, String tooltip, boolean selected) {
+	public Tab(final String title, final String url, final String tooltip,
+			final boolean selected) {
 		_title = title;
 		_url = url;
 		_tooltip = tooltip;
 		setSelected(selected);
 	}
 
-	public void setUrl(String url) {
+	public void setUrl(final String url) {
 		_url = url;
 	}
 
@@ -37,7 +57,7 @@ public class Tab implements Serializable {
 		return _url;
 	}
 
-	public void setTitle(String title) {
+	public void setTitle(final String title) {
 		_title = title;
 	}
 
@@ -45,7 +65,7 @@ public class Tab implements Serializable {
 		return _title;
 	}
 
-	public void setSelected(boolean selected) {
+	public void setSelected(final boolean selected) {
 		_selected = selected;
 	}
 
@@ -53,7 +73,7 @@ public class Tab implements Serializable {
 		return _selected;
 	}
 
-	public void setTooltip(String tooltip) {
+	public void setTooltip(final String tooltip) {
 		_tooltip = tooltip;
 	}
 

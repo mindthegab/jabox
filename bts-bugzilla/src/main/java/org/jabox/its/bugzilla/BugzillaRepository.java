@@ -1,25 +1,21 @@
 /*
- * The MIT License
- *
- * Copyright (c) 2009 Dimitris Kapanidis
+ * Jabox Open Source Version
+ * Copyright (C) 2009-2010 Dimitris Kapanidis                                                                                                                          
  * 
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
+ * This file is part of Jabox
  * 
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  * 
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see http://www.gnu.org/licenses/.
  */
 package org.jabox.its.bugzilla;
 
@@ -67,8 +63,8 @@ public class BugzillaRepository implements ITSConnector, Serializable {
 		_wc = new WebConversation();
 	}
 
-	public boolean login(String username, String password,
-			ITSConnectorConfig config) throws MalformedURLException,
+	public boolean login(final String username, final String password,
+			final ITSConnectorConfig config) throws MalformedURLException,
 			IOException, SAXException {
 		WebRequest req = new GetMethodWebRequest(config.getServer().getUrl());
 		WebResponse resp = _wc.getResponse(req);
@@ -81,8 +77,8 @@ public class BugzillaRepository implements ITSConnector, Serializable {
 		return true;
 	}
 
-	public boolean addProject(final Project project, ITSConnectorConfig config)
-			throws IOException, SAXException {
+	public boolean addProject(final Project project,
+			final ITSConnectorConfig config) throws IOException, SAXException {
 		String url = config.getServer().getUrl();
 		WebRequest req = new GetMethodWebRequest(url
 				+ "/editproducts.cgi?action=add");
@@ -95,9 +91,10 @@ public class BugzillaRepository implements ITSConnector, Serializable {
 		return true;
 	}
 
-	public boolean addModule(final Project project, ITSConnectorConfig config,
-			final String module, final String description,
-			final String initialOwner) throws SAXException, IOException {
+	public boolean addModule(final Project project,
+			final ITSConnectorConfig config, final String module,
+			final String description, final String initialOwner)
+			throws SAXException, IOException {
 		String url = config.getServer().getUrl();
 		WebRequest req = new GetMethodWebRequest(url
 				+ "/editcomponents.cgi?action=add&product=" + project.getName());
@@ -111,8 +108,9 @@ public class BugzillaRepository implements ITSConnector, Serializable {
 		return true;
 	}
 
-	public boolean addVersion(Project project, ITSConnectorConfig config,
-			String version) throws IOException, SAXException {
+	public boolean addVersion(final Project project,
+			final ITSConnectorConfig config, final String version)
+			throws IOException, SAXException {
 		String url = config.getServer().getUrl();
 		WebRequest req = new GetMethodWebRequest(url
 				+ "/editversions.cgi?action=add&product=" + project.getName());
@@ -128,7 +126,7 @@ public class BugzillaRepository implements ITSConnector, Serializable {
 		return new BugzillaRepositoryConfig();
 	}
 
-	public Component newEditor(String id, IModel<Server> model) {
+	public Component newEditor(final String id, final IModel<Server> model) {
 		return new BugzillaRepositoryEditor(id, model);
 	}
 }

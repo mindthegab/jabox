@@ -1,3 +1,22 @@
+/*
+ * Jabox Open Source Version
+ * Copyright (C) 2009-2010 Dimitris Kapanidis                                                                                                                          
+ * 
+ * This file is part of Jabox
+ * 
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see http://www.gnu.org/licenses/.
+ */
 package org.jabox.utils;
 
 import java.io.File;
@@ -30,7 +49,7 @@ public class WebappManager {
 	 * @return a List of the data of the file.
 	 * @throws FileNotFoundException
 	 */
-	private static List<String> readData(File file)
+	private static List<String> readData(final File file)
 			throws FileNotFoundException {
 		List<String> list = new ArrayList<String>();
 		Scanner scanner = new Scanner(file);
@@ -47,7 +66,7 @@ public class WebappManager {
 	 * @param list
 	 * @throws IOException
 	 */
-	private static void writeData(List<String> list, File file)
+	private static void writeData(final List<String> list, final File file)
 			throws IOException {
 		FileWriter fileWriter = new FileWriter(file);
 		for (String str : list) {
@@ -57,7 +76,8 @@ public class WebappManager {
 		fileWriter.close();
 	}
 
-	private static void createDefaultServersFile(File file) throws IOException {
+	private static void createDefaultServersFile(final File file)
+			throws IOException {
 		List<String> list = new ArrayList<String>();
 		list.add("org.jabox.cis.hudson.HudsonServer");
 		// list.add("org.jabox.mrm.nexus.NexusServer");
