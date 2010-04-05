@@ -127,4 +127,29 @@ public class DefaultConfiguration extends BaseEntity implements Serializable {
 	public RMSConnectorConfig getRms() {
 		return (RMSConnectorConfig) _rms;
 	}
+
+	/**
+	 * Returns the Default ConnectorConfig for the type of the passed
+	 * ConnectorConfig instance.
+	 * 
+	 * @param config
+	 *            the ConnectorConfig instance to retrieve the type from.
+	 */
+	public ConnectorConfig getDefault(final ConnectorConfig config) {
+		if (config == null) {
+			return null;
+		}
+
+		if (ITSConnectorConfig.class.isAssignableFrom(config.getClass())) {
+			return _its;
+		} else if (CISConnectorConfig.class.isAssignableFrom(config.getClass())) {
+			return _cis;
+		} else if (RMSConnectorConfig.class.isAssignableFrom(config.getClass())) {
+			return _rms;
+		} else if (SCMConnectorConfig.class.isAssignableFrom(config.getClass())) {
+			return _scm;
+		}
+
+		return null;
+	}
 }

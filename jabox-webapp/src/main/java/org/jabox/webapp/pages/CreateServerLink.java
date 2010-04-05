@@ -25,6 +25,8 @@ import org.apache.wicket.model.Model;
 import org.apache.wicket.persistence.provider.GeneralDao;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.jabox.apis.Connector;
+import org.jabox.model.DefaultConfiguration;
+import org.jabox.model.DeployerConfig;
 import org.jabox.model.Server;
 
 public class CreateServerLink extends Link<Void> {
@@ -59,6 +61,15 @@ public class CreateServerLink extends Link<Void> {
 			@Override
 			protected void onSave(final Server article) {
 				_generalDao.persist(article);
+
+				// If this is the first Service of the kind, set it as default
+				DefaultConfiguration dc = _generalDao.getDefaultConfiguration();
+				DeployerConfig config = article.getDeployerConfig();
+				if (dc.getDefault(config) == null) {
+					dc.switchDefault(config);
+				}
+				_generalDao.persist(dc);
+
 				setResponsePage(ManageServers.class);
 			}
 		});
