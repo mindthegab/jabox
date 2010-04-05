@@ -27,8 +27,7 @@ import org.apache.wicket.persistence.provider.GeneralDao;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.jabox.apis.IBaseEntity;
 
-public final class DeleteEntityButton<T extends IBaseEntity> extends
-		ImageButton {
+public class DeleteEntityButton<T extends IBaseEntity> extends ImageButton {
 	private static final ResourceReference DELETE_IMG = new ResourceReference(
 			DeleteEntityButton.class, "edit-delete.png");
 	private static final long serialVersionUID = 1L;

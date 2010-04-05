@@ -31,6 +31,7 @@ import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.jabox.apis.Connector;
 import org.jabox.apis.ConnectorConfig;
 import org.jabox.apis.Manager;
+import org.jabox.model.DefaultConfiguration;
 import org.jabox.model.Server;
 import org.jabox.webapp.menubuttons.DefaultEntityButton;
 import org.jabox.webapp.menubuttons.DeleteEntityButton;
@@ -72,6 +73,20 @@ public class SCMConnectorList extends PropertyListView<ConnectorConfig> {
 		item.add(new EditEntityButton<Server>("edit", item.getModelObject()
 				.getServer()));
 		item.add(new DeleteEntityButton<Server>("delete", item.getModelObject()
-				.getServer(), ManageServers.class));
+				.getServer(), ManageServers.class) {
+			private static final long serialVersionUID = -8085737767377869654L;
+
+			@Override
+			public void onSubmit() {
+				// If item is default, disable it first.
+				DefaultConfiguration dc = generalDao.getDefaultConfiguration();
+				if (DefaultConfiguration.TRUE.equals(dc.isDefault(item
+						.getModelObject()))) {
+					dc.switchDefault(item.getModelObject());
+					generalDao.persist(dc);
+				}
+				super.onSubmit();
+			}
+		});
 	}
 }
