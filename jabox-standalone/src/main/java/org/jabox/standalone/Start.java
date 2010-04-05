@@ -47,8 +47,9 @@ public class Start {
 
 	private static String getJaboxWebapp() {
 		Resource res = Resource.newClassPathResource(PACKAGE);
-		// String res =
-		// "D:\\Documents\\My Developments\\Jabox\\workspace-jabox\\jabox\\jabox-webapp\\target\\jabox-webapp-0.0.4-SNAPSHOT\\";
+		if (res == null) {
+			return "D:\\Documents\\My Developments\\Jabox\\workspace-jabox\\jabox\\jabox-webapp\\target\\jabox-webapp-0.0.6-SNAPSHOT\\";
+		}
 		return res.toString();
 	}
 
