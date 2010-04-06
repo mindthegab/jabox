@@ -75,4 +75,8 @@ public class BeanstalkConnectorConfig extends DeployerConfig implements
 	public String getProjectName() {
 		return projectName;
 	}
+
+	public String getScmMavenUrl() {
+		return "scm:svn:" + getScmUrl();
+	}
 }

@@ -108,9 +108,18 @@ public class CreateProjectUtil {
 
 		RMSConnector rms = _rmsManager.getConnectorInstance(dc.getRms());
 
+		File pomXml = new File(trunkDir, project.getName() + "/pom.xml");
+
+		// Inject SCM configuration
+		try {
+			MavenConfigureSCM.injectScm(pomXml, dc.getScm());
+		} catch (XmlPullParserException e) {
+			e.printStackTrace();
+		}
+
+		// Inject DistributionManagement configuration
 		if (rms != null) {
 			try {
-				File pomXml = new File(trunkDir, project.getName() + "/pom.xml");
 				MavenConfigureDistributionManager.injectDistributionManager(
 						pomXml, dc.getRms());
 			} catch (XmlPullParserException e) {
