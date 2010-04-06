@@ -22,14 +22,12 @@ package org.jabox.cis.ehudson;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
-import org.jabox.apis.cis.CISConnectorConfig;
-import org.jabox.model.DeployerConfig;
+import org.jabox.cis.hudson.HudsonConnectorConfig;
 import org.jabox.model.Server;
 
 @Entity
 @DiscriminatorValue(EHudsonConnector.ID)
-public class EHudsonConnectorConfig extends DeployerConfig implements
-		CISConnectorConfig {
+public class EHudsonConnectorConfig extends HudsonConnectorConfig {
 	private static final long serialVersionUID = -6696934779273872749L;
 
 	public String username;
@@ -40,6 +38,7 @@ public class EHudsonConnectorConfig extends DeployerConfig implements
 		pluginId = EHudsonConnector.ID;
 	}
 
+	@Override
 	public String getUsername() {
 		return username;
 	}
@@ -53,6 +52,7 @@ public class EHudsonConnectorConfig extends DeployerConfig implements
 		}
 	}
 
+	@Override
 	public String getPassword() {
 		return password;
 	}
