@@ -30,6 +30,7 @@ import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
 import org.apache.maven.model.io.xpp3.MavenXpp3Writer;
 import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
 import org.jabox.apis.scm.SCMConnectorConfig;
+import org.jabox.model.Project;
 
 /**
  * Helper class that injects the &lt;scm&gt; configuration to a pom file.
@@ -45,17 +46,18 @@ public class MavenConfigureSCM {
 	 *            the pom file that will be injected with the
 	 *            distributionManager configuration.
 	 * @param scm
+	 * @param project
 	 * @throws IOException
 	 * @throws XmlPullParserException
 	 */
 	public static void injectScm(final File pomFile,
-			final SCMConnectorConfig scm) throws IOException,
-			XmlPullParserException {
+			final SCMConnectorConfig scm, final Project project)
+			throws IOException, XmlPullParserException {
 		FileReader fileReader = new FileReader(pomFile);
 		Model model = new MavenXpp3Reader().read(fileReader);
 
-		Scm sc = getScm(scm.getScmMavenUrl(), scm.getScmMavenUrl(), scm
-				.getServer().getUrl());
+		String scmMavenUrl = project.getScmMavenUrl();
+		Scm sc = getScm(scmMavenUrl, scmMavenUrl, scm.getServer().getUrl());
 		model.setScm(sc);
 
 		FileWriter fileWriter = new FileWriter(pomFile);

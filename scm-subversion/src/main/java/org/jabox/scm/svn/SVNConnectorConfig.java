@@ -55,8 +55,4 @@ public class SVNConnectorConfig extends DeployerConfig implements
 	public String getScmUrl() {
 		return getServer().getUrl();
 	}
-
-	public String getScmMavenUrl() {
-		return "scm:svn:" + getScmUrl();
-	}
 }

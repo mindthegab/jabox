@@ -74,9 +74,4 @@ public class ESVNConnectorConfig extends DeployerConfig implements
 		}
 		return null;
 	}
-
-	public String getScmMavenUrl() {
-		return "scm:svn:" + getScmUrl();
-	}
-
 }

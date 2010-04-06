@@ -78,4 +78,23 @@ public class Project extends BaseEntity implements Serializable {
 		return _scmUrl;
 	}
 
+	/**
+	 * Returns an encoded url for use in maven's pom.xml. Examples of these
+	 * formats:
+	 * <p>
+	 * scm:svn:file:///svn/root/module
+	 * scm:svn:file://localhost/path_to_repository
+	 * scm:svn:file://my_server/path_to_repository
+	 * scm:svn:http://svn.apache.org/svn/root/module
+	 * scm:svn:https://username@svn.apache.org/svn/root/module
+	 * scm:svn:https://username:password@svn.apache.org/svn/root/module
+	 * <p>
+	 * More information can be found here:
+	 * http://maven.apache.org/scm/scms-overview.html
+	 * 
+	 * @return SCM url encoded for maven's pom.xml
+	 */
+	public String getScmMavenUrl() {
+		return "scm:svn:" + getScmUrl();
+	}
 }

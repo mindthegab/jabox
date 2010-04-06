@@ -110,9 +110,13 @@ public class CreateProjectUtil {
 
 		File pomXml = new File(trunkDir, project.getName() + "/pom.xml");
 
+		// Set ScmUrl
+		project.setScmUrl(scmc.getScmUrl() + "/" + project.getName()
+				+ "/trunk/" + project.getName());
+
 		// Inject SCM configuration
 		try {
-			MavenConfigureSCM.injectScm(pomXml, dc.getScm());
+			MavenConfigureSCM.injectScm(pomXml, dc.getScm(), project);
 		} catch (XmlPullParserException e) {
 			e.printStackTrace();
 		}
@@ -129,8 +133,6 @@ public class CreateProjectUtil {
 
 		// Commit Project
 		scm.commitProject(project, scmc);
-		project.setScmUrl(scmc.getScmUrl() + "/" + project.getName()
-				+ "/trunk/" + project.getName());
 
 		// Create a directory structure in subversion for the project
 		// svn.createProject(project);
