@@ -123,9 +123,10 @@ public class HudsonConnector implements CISConnector {
 		String replace = theString.replace("${project.scmURL}", project
 				.getScmUrl());
 		replace = replace.replace("${project.issueURL}",
-				"http://localhost/redmine/issues/show/$1");
+				"http://localhost/redmine/");
 		replace = replace.replace("${goals}",
 				"clean checkstyle:checkstyle findbugs:findbugs pmd:cpd deploy");
+		replace = replace.replace("${project.name}", project.getName());
 		return replace;
 	}
 

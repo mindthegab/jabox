@@ -3,25 +3,26 @@
 	<description />
 	<keepDependencies>false</keepDependencies>
 	<properties>
-		<hudson.plugins.hgca.HGCAProjectProperty>
-			<annoPats>
-				<entry>
-					<string>(\d+)</string>
-					<string>${project.issueURL}</string>
-				</entry>
-			</annoPats>
-		</hudson.plugins.hgca.HGCAProjectProperty>
+		<hudson.plugins.redmine.RedmineProjectProperty>
+			<redmineWebsite>${project.issueURL}</redmineWebsite>
+			<projectName>${project.name}</projectName>
+			<redmineVersion>true</redmineVersion>
+		</hudson.plugins.redmine.RedmineProjectProperty>
 	</properties>
 	<scm class="hudson.scm.SubversionSCM">
 		<locations>
 			<hudson.scm.SubversionSCM_-ModuleLocation>
 				<remote>${project.scmURL}</remote>
+				<local>.</local>
 			</hudson.scm.SubversionSCM_-ModuleLocation>
 		</locations>
 		<useUpdate>true</useUpdate>
-		<excludedRegions />
-		<excludedUsers />
-		<excludedRevprop />
+		<doRevert>false</doRevert>
+		<browser class="hudson.plugins.redmine.RedmineRepositoryBrowser" />
+		<excludedRegions></excludedRegions>
+		<excludedUsers></excludedUsers>
+		<excludedRevprop></excludedRevprop>
+		<excludedCommitMessages></excludedCommitMessages>
 	</scm>
 	<canRoam>true</canRoam>
 
@@ -34,9 +35,8 @@
 	<concurrentBuild>false</concurrentBuild>
 	<blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
 	<rootModule>
-		<groupId>org.jabox</groupId>
-		<artifactId>testA</artifactId>
-
+		<groupId>FILLED_BY_HUDSON</groupId>
+		<artifactId>FILLED_BY_HUDSON</artifactId>
 	</rootModule>
 	<goals>${goals}</goals>
 	<aggregatorStyleBuild>true</aggregatorStyleBuild>

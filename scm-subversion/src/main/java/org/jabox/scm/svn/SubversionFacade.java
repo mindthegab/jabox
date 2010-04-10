@@ -118,13 +118,13 @@ public class SubversionFacade {
 	 */
 	private void setModuleProperties(final File dir) throws SVNException {
 		SVNWCClient wc = _clientManager.getWCClient();
-		setSVNProperty(wc, dir, "bugtraq:number", "true");
-		setSVNProperty(wc, dir, "bugtraq:append", "false");
-		setSVNProperty(wc, dir, "bugtraq:message", "[ %BUGID% ]");
-		setSVNProperty(wc, dir, "bugtraq:label", "Issue:");
-		setSVNProperty(wc, dir, "bugtraq:url",
-				"http://localhost/redmine/issues/show/%BUGID%");
-		setSVNProperty(wc, dir, "bugtraq:warnifnoissue", "true");
+		// setSVNProperty(wc, dir, "bugtraq:number", "true");
+		// setSVNProperty(wc, dir, "bugtraq:append", "false");
+		// setSVNProperty(wc, dir, "bugtraq:message", "refs %BUGID%");
+		// setSVNProperty(wc, dir, "bugtraq:label", "Issue:");
+		// setSVNProperty(wc, dir, "bugtraq:url",
+		// "http://localhost/redmine/issues/show/%BUGID%");
+		// setSVNProperty(wc, dir, "bugtraq:warnifnoissue", "true");
 		setSVNProperty(wc, dir, "svn:ignore", "target");
 	}
 
