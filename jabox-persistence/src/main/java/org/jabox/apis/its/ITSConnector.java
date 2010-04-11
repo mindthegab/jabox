@@ -23,25 +23,26 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 
 import org.jabox.apis.Connector;
+import org.jabox.apis.scm.SCMConnectorConfig;
 import org.jabox.model.Project;
 import org.xml.sax.SAXException;
 
-public interface ITSConnector extends Connector {
+public interface ITSConnector<T extends ITSConnectorConfig> extends Connector {
 
-	public boolean login(String username, String password,
-			ITSConnectorConfig config) throws MalformedURLException,
-			IOException, SAXException;
+	public boolean login(String username, String password, T config)
+			throws MalformedURLException, IOException, SAXException;
 
-	public boolean addProject(final Project project,
-			ITSConnectorConfig itsConnectorConfig) throws IOException,
-			SAXException;
-
-	public boolean addModule(final Project project,
-			ITSConnectorConfig itsConnectorConfig, final String module,
-			final String description, final String initialOwner)
-			throws SAXException, IOException;
-
-	public boolean addVersion(Project project,
-			ITSConnectorConfig itsConnectorConfig, String version)
+	public boolean addProject(final Project project, T itsConnectorConfig)
 			throws IOException, SAXException;
+
+	public boolean addModule(final Project project, T itsConnectorConfig,
+			final String module, final String description,
+			final String initialOwner) throws SAXException, IOException;
+
+	public boolean addVersion(Project project, T itsConnectorConfig,
+			String version) throws IOException, SAXException;
+
+	public void addRepository(Project project, T config,
+			SCMConnectorConfig scmConfig, String username, String password)
+			throws MalformedURLException, IOException, SAXException;
 }

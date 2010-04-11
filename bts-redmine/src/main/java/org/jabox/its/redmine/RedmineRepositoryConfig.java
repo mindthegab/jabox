@@ -31,7 +31,13 @@ public class RedmineRepositoryConfig extends DeployerConfig implements
 		ITSConnectorConfig {
 	private static final long serialVersionUID = -7682753903184815514L;
 
+	private boolean addRepositoryConfiguration;
+
 	public RedmineRepositoryConfig() {
 		pluginId = RedmineRepository.ID;
+	}
+
+	public boolean isAddRepositoryConfiguration() {
+		return addRepositoryConfiguration;
 	}
 }

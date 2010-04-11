@@ -24,4 +24,8 @@ import org.jabox.apis.ConnectorConfig;
 public interface SCMConnectorConfig extends ConnectorConfig {
 
 	String getScmUrl();
+
+	String getUsername();
+
+	String getPassword();
 }

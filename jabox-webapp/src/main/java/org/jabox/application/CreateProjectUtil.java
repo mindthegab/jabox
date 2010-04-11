@@ -46,7 +46,7 @@ public class CreateProjectUtil {
 	protected GeneralDao generalDao;
 
 	@SpringBean
-	protected Manager<ITSConnector> _itsManager;
+	protected Manager<ITSConnector<ITSConnectorConfig>> _itsManager;
 
 	@SpringBean
 	protected Manager<SCMConnector<SCMConnectorConfig>> _scmManager;
@@ -141,7 +141,8 @@ public class CreateProjectUtil {
 
 		// Add Project in Issue Tracking System
 		ITSConnectorConfig config = dc.getIts();
-		ITSConnector its = _itsManager.getConnectorInstance(config);
+		ITSConnector<ITSConnectorConfig> its = _itsManager
+				.getConnectorInstance(config);
 		if (its != null) {
 			// its
 			// .setUrl("http://localhost/cgi-bin/bugzilla/index.cgi?GoAheadAndLogIn=1");
@@ -153,6 +154,9 @@ public class CreateProjectUtil {
 			its.addModule(project, config, project.getName(), "initial module",
 					"myemail@gmail.com");
 			its.addVersion(project, config, "0.0.1");
+
+			its.addRepository(project, config, scmc, scmc.getUsername(), scmc
+					.getPassword());
 		}
 
 		CISConnector cis = (CISConnector) _itsManager.getConnectorInstance(dc

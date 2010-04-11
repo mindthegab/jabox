@@ -26,7 +26,7 @@ import java.net.MalformedURLException;
 import org.apache.wicket.Component;
 import org.apache.wicket.model.IModel;
 import org.jabox.apis.its.ITSConnector;
-import org.jabox.apis.its.ITSConnectorConfig;
+import org.jabox.apis.scm.SCMConnectorConfig;
 import org.jabox.model.DeployerConfig;
 import org.jabox.model.Project;
 import org.jabox.model.Server;
@@ -40,7 +40,8 @@ import com.meterware.httpunit.WebRequest;
 import com.meterware.httpunit.WebResponse;
 
 @Service
-public class BugzillaRepository implements ITSConnector, Serializable {
+public class BugzillaRepository implements
+		ITSConnector<BugzillaRepositoryConfig>, Serializable {
 	private static final long serialVersionUID = 8131183843391948936L;
 	public static final String ID = "plugin.its.bugzilla";
 
@@ -64,8 +65,8 @@ public class BugzillaRepository implements ITSConnector, Serializable {
 	}
 
 	public boolean login(final String username, final String password,
-			final ITSConnectorConfig config) throws MalformedURLException,
-			IOException, SAXException {
+			final BugzillaRepositoryConfig config)
+			throws MalformedURLException, IOException, SAXException {
 		WebRequest req = new GetMethodWebRequest(config.getServer().getUrl());
 		WebResponse resp = _wc.getResponse(req);
 		WebForm form = resp.getForms()[0]; // select the first form in the page
@@ -78,7 +79,8 @@ public class BugzillaRepository implements ITSConnector, Serializable {
 	}
 
 	public boolean addProject(final Project project,
-			final ITSConnectorConfig config) throws IOException, SAXException {
+			final BugzillaRepositoryConfig config) throws IOException,
+			SAXException {
 		String url = config.getServer().getUrl();
 		WebRequest req = new GetMethodWebRequest(url
 				+ "/editproducts.cgi?action=add");
@@ -92,7 +94,7 @@ public class BugzillaRepository implements ITSConnector, Serializable {
 	}
 
 	public boolean addModule(final Project project,
-			final ITSConnectorConfig config, final String module,
+			final BugzillaRepositoryConfig config, final String module,
 			final String description, final String initialOwner)
 			throws SAXException, IOException {
 		String url = config.getServer().getUrl();
@@ -109,7 +111,7 @@ public class BugzillaRepository implements ITSConnector, Serializable {
 	}
 
 	public boolean addVersion(final Project project,
-			final ITSConnectorConfig config, final String version)
+			final BugzillaRepositoryConfig config, final String version)
 			throws IOException, SAXException {
 		String url = config.getServer().getUrl();
 		WebRequest req = new GetMethodWebRequest(url
@@ -128,5 +130,10 @@ public class BugzillaRepository implements ITSConnector, Serializable {
 
 	public Component newEditor(final String id, final IModel<Server> model) {
 		return new BugzillaRepositoryEditor(id, model);
+	}
+
+	public void addRepository(Project project, BugzillaRepositoryConfig config,
+			SCMConnectorConfig scmConfig, String username, String password)
+			throws MalformedURLException, IOException, SAXException {
 	}
 }
