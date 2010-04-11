@@ -70,5 +70,10 @@
 		<hudson.plugins.cigame.GamePublisher />
 		<hudson.plugins.claim.ClaimPublisher />
 	</publishers>
-	<buildWrappers />
+	<buildWrappers>
+		<org.jvnet.hudson.plugins.m2release.M2ReleaseBuildWrapper>
+			<releaseGoals>-Dresume=false release:prepare release:perform
+			</releaseGoals>
+		</org.jvnet.hudson.plugins.m2release.M2ReleaseBuildWrapper>
+	</buildWrappers>
 </maven2-moduleset>
