@@ -24,11 +24,14 @@ import javax.persistence.Entity;
 
 import org.jabox.apis.cis.CISConnectorConfig;
 import org.jabox.model.DeployerConfig;
+import org.jabox.model.Project;
 
 @Entity
 @DiscriminatorValue(HudsonConnector.ID)
 public class HudsonConnectorConfig extends DeployerConfig implements
 		CISConnectorConfig {
+	private static final String SLASH = "/";
+
 	private static final long serialVersionUID = -6696934779273872749L;
 
 	public String username;
@@ -47,4 +50,19 @@ public class HudsonConnectorConfig extends DeployerConfig implements
 		return password;
 	}
 
+	public String getSystem() {
+		return "hudson";
+	}
+
+	public String getJobUrl(Project project) {
+		StringBuffer sb = new StringBuffer();
+		sb.append(getServer().getUrl());
+		if (!getServer().getUrl().endsWith(SLASH)) {
+			sb.append(SLASH);
+		}
+		sb.append("job/");
+		sb.append(project.getName());
+		sb.append(SLASH);
+		return sb.toString();
+	}
 }

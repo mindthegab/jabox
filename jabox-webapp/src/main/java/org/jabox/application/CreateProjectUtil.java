@@ -121,10 +121,17 @@ public class CreateProjectUtil {
 			e.printStackTrace();
 		}
 
+		// Inject CIS configuration
+		try {
+			MavenConfigureCiManagement.injectCIS(pomXml, dc.getCis(), project);
+		} catch (XmlPullParserException e) {
+			e.printStackTrace();
+		}
+
 		// Inject DistributionManagement configuration
 		if (rms != null) {
 			try {
-				MavenConfigureDistributionManager.injectDistributionManager(
+				MavenConfigureDistributionManagement.injectDistributionManager(
 						pomXml, dc.getRms());
 			} catch (XmlPullParserException e) {
 				e.printStackTrace();

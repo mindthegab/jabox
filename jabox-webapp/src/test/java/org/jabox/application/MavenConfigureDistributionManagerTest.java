@@ -33,7 +33,7 @@ public class MavenConfigureDistributionManagerTest extends TestCase {
 
 	public void testMe() throws URISyntaxException, IOException,
 			XmlPullParserException {
-		URL resource = MavenConfigureDistributionManager.class
+		URL resource = MavenConfigureDistributionManagement.class
 				.getResource("testPom.xml");
 		File pomFile = new File(resource.toURI());
 		Assert.assertTrue(pomFile.exists());

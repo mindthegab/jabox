@@ -36,8 +36,8 @@ import org.jabox.apis.rms.RMSConnectorConfig;
  * Helper class that injects the &lt;distributionManager&gt; configuration to a
  * pom file.
  */
-public class MavenConfigureDistributionManager {
-	public MavenConfigureDistributionManager() {
+public class MavenConfigureDistributionManagement {
+	public MavenConfigureDistributionManagement() {
 	}
 
 	/**
