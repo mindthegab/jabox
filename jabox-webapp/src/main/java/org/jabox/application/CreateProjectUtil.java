@@ -114,28 +114,18 @@ public class CreateProjectUtil {
 		project.setScmUrl(scmc.getScmUrl() + "/" + project.getName()
 				+ "/trunk/" + project.getName());
 
-		// Inject SCM configuration
+		// Inject SCM, CIS, ITS & RMS configuration
 		try {
 			MavenConfigureSCM.injectScm(pomXml, dc.getScm(), project);
-		} catch (XmlPullParserException e) {
-			e.printStackTrace();
-		}
-
-		// Inject CIS configuration
-		try {
 			MavenConfigureCiManagement.injectCIS(pomXml, dc.getCis(), project);
-		} catch (XmlPullParserException e) {
-			e.printStackTrace();
-		}
-
-		// Inject DistributionManagement configuration
-		if (rms != null) {
-			try {
+			MavenConfigureIssueManagement.injectIssueManagement(pomXml, dc
+					.getIts(), project);
+			if (rms != null) {
 				MavenConfigureDistributionManagement.injectDistributionManager(
 						pomXml, dc.getRms());
-			} catch (XmlPullParserException e) {
-				e.printStackTrace();
 			}
+		} catch (XmlPullParserException e) {
+			e.printStackTrace();
 		}
 
 		// Commit Project

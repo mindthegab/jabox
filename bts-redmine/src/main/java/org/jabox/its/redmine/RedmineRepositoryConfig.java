@@ -24,12 +24,15 @@ import javax.persistence.Entity;
 
 import org.jabox.apis.its.ITSConnectorConfig;
 import org.jabox.model.DeployerConfig;
+import org.jabox.model.Project;
 
 @Entity
 @DiscriminatorValue(RedmineRepository.ID)
 public class RedmineRepositoryConfig extends DeployerConfig implements
 		ITSConnectorConfig {
 	private static final long serialVersionUID = -7682753903184815514L;
+
+	private static final String SLASH = "/";
 
 	private boolean addRepositoryConfiguration;
 
@@ -39,5 +42,21 @@ public class RedmineRepositoryConfig extends DeployerConfig implements
 
 	public boolean isAddRepositoryConfiguration() {
 		return addRepositoryConfiguration;
+	}
+
+	public String getProjectUrl(Project project) {
+		StringBuffer sb = new StringBuffer();
+		sb.append(getServer().getUrl());
+		if (!getServer().getUrl().endsWith(SLASH)) {
+			sb.append(SLASH);
+		}
+		sb.append("projects/show/");
+		sb.append(project.getName());
+		sb.append(SLASH);
+		return sb.toString();
+	}
+
+	public String getSystem() {
+		return "Redmine";
 	}
 }

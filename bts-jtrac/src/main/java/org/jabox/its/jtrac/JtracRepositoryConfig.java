@@ -24,6 +24,7 @@ import javax.persistence.Entity;
 
 import org.jabox.apis.its.ITSConnectorConfig;
 import org.jabox.model.DeployerConfig;
+import org.jabox.model.Project;
 
 @Entity
 @DiscriminatorValue(JtracRepository.ID)
@@ -33,5 +34,13 @@ public class JtracRepositoryConfig extends DeployerConfig implements
 
 	public JtracRepositoryConfig() {
 		pluginId = JtracRepository.ID;
+	}
+
+	public String getProjectUrl(Project project) {
+		return getServer().getUrl();
+	}
+
+	public String getSystem() {
+		return "Jtrac";
 	}
 }
