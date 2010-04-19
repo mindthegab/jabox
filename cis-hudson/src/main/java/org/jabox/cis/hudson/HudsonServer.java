@@ -47,19 +47,20 @@ public class HudsonServer extends AbstractEmbeddedServer {
 	}
 
 	public static void injectPlugins() {
-		File plugin = MavenDownloader.downloadArtifact(
-				"org.jvnet.hudson.plugins.m2release", "m2release", "0.3.4",
-				"hpi");
+		injectPlugin("org.jvnet.hudson.plugins.m2release", "m2release", "0.3.4");
+		injectPlugin("org.jvnet.hudson.plugins", "redmine", "0.8");
+	}
+
+	private static void injectPlugin(String groupId, String artifactId,
+			String version) {
+		File plugin = MavenDownloader.downloadArtifact(groupId, artifactId,
+				version, "hpi");
 		try {
 			FileUtils.copyFile(plugin, new File(getHudsonPluginDir(),
 					stripVersion(plugin)));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
-		MavenDownloader.downloadArtifact("org.jvnet.hudson.plugins.m2release",
-				"m2release", "0.3.4", "hpi").getAbsolutePath();
-
 	}
 
 	private static String stripVersion(final File plugin) {
