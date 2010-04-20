@@ -41,8 +41,8 @@ public class MavenConfigureSourceEncoding {
 	}
 
 	/**
-	 * Injects the &lt;project.build.sourceEncoding&gt; property to the pom file
-	 * with the value UTF-8.
+	 * Injects the &lt;project.build.sourceEncoding&gt; property to the pom
+	 * file.
 	 * <p>
 	 * If the SourceEncoding is empty then nothing is injected.
 	 * 
@@ -50,7 +50,7 @@ public class MavenConfigureSourceEncoding {
 	 *            The pom file that will be injected with the encoding
 	 *            configuration.
 	 * @param project
-	 *            The project.
+	 *            The project. It reads the sourceEncoding from this entity.
 	 * @throws IOException
 	 * @throws XmlPullParserException
 	 */
