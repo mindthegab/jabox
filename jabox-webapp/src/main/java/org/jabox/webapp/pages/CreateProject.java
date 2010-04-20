@@ -29,6 +29,7 @@ import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.FormComponent;
 import org.apache.wicket.markup.html.form.RequiredTextField;
+import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.PropertyModel;
@@ -95,6 +96,7 @@ public class CreateProject extends MiddlePanel {
 				"archetype", new PropertyModel<MavenArchetype>(_project,
 						"mavenArchetype"), connectors,
 				new ChoiceRenderer<MavenArchetype>("toString", "toString"));
+		form.add(new TextField<Project>("sourceEncoding"));
 		form.add(ddc);
 	}
 

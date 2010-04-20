@@ -37,6 +37,7 @@ public class Project extends BaseEntity implements Serializable {
 	private String _name;
 	private String _description;
 	private String _scmUrl;
+	private String _sourceEncoding = "UTF-8";
 
 	@Column(nullable = false, length = 1024)
 	private MavenArchetype _mavenArchetype;
@@ -96,5 +97,13 @@ public class Project extends BaseEntity implements Serializable {
 	 */
 	public String getScmMavenUrl() {
 		return "scm:svn:" + getScmUrl();
+	}
+
+	public void setSourceEncoding(String sourceEncoding) {
+		_sourceEncoding = sourceEncoding;
+	}
+
+	public String getSourceEncoding() {
+		return _sourceEncoding;
 	}
 }

@@ -114,12 +114,14 @@ public class CreateProjectUtil {
 		project.setScmUrl(scmc.getScmUrl() + "/" + project.getName()
 				+ "/trunk/" + project.getName());
 
-		// Inject SCM, CIS, ITS & RMS configuration
+		// Inject SCM, CIS, ITS, RMS & UTF8 Encoding configuration
 		try {
 			MavenConfigureSCM.injectScm(pomXml, dc.getScm(), project);
 			MavenConfigureCiManagement.injectCIS(pomXml, dc.getCis(), project);
 			MavenConfigureIssueManagement.injectIssueManagement(pomXml, dc
 					.getIts(), project);
+			MavenConfigureSourceEncoding.injectSourceEncoding(pomXml,
+					project);
 			if (rms != null) {
 				MavenConfigureDistributionManagement.injectDistributionManager(
 						pomXml, dc.getRms());

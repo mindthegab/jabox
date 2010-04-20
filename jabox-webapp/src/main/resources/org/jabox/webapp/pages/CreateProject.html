@@ -19,6 +19,11 @@
     	  <td><div class="feedback" wicket:id="descriptionFeedback">Feedback Messages</div></td>
          </tr>
          <tr>
+	      <td><wicket:message key="project.source.encoding">Source Encoding</wicket:message>:</td>
+    	  <td class="formTD" wicket:message="title:project.source.encoding.tooltip">
+    	  		<input class="formInput" type="text" wicket:id="sourceEncoding" /></td>
+         </tr>
+         <tr>
           <td><wicket:message key="project.mavenArchetype">Maven Archetype</wicket:message>:</td>
           <td class="formTD" wicket:message="title:project.mavenArchetype.tooltip">
 		  		<select class="formInput" name="archetype" wicket:id="archetype"></select></td>
