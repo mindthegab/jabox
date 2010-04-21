@@ -22,6 +22,7 @@ package org.jabox.standalone;
 import java.util.List;
 
 import org.jabox.apis.embedded.EmbeddedServer;
+import org.jabox.environment.Environment;
 import org.jabox.utils.WebappManager;
 import org.mortbay.jetty.Connector;
 import org.mortbay.jetty.Server;
@@ -42,7 +43,17 @@ public class Start {
 	 */
 	public static void main(final String[] args) throws Exception {
 		System.out.println(getJaboxWebapp());
+		System.out.println("Jabox home directory: " + Environment.getBaseDir());
+		configureEnvironmentVariables();
 		startEmbeddedJetty(true);
+	}
+
+	private static void configureEnvironmentVariables() {
+		System
+				.setProperty("HUDSON_HOME", Environment.getBaseDir()
+						+ ".hudson/");
+		System.setProperty("artifactory.home", Environment.getBaseDir()
+				+ ".artifactory/");
 	}
 
 	private static String getJaboxWebapp() {

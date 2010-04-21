@@ -70,7 +70,6 @@ public class HudsonServer extends AbstractEmbeddedServer {
 	}
 
 	private static File getHudsonPluginDir() {
-		return new File(Environment.getBaseDirFile().getParentFile(),
-				".hudson/plugins");
+		return new File(Environment.getBaseDirFile(), ".hudson/plugins");
 	}
 }
