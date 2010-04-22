@@ -34,6 +34,7 @@ public class DownloadHelper {
 	 * @return
 	 */
 	public static File downloadFile(final String urlPath, final File outputFile) {
+		System.out.println("Downloading: " + urlPath);
 		InputStream is = null;
 		BufferedInputStream bin = null;
 		BufferedOutputStream bout = null;

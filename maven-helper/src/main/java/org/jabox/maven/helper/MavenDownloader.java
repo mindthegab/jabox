@@ -58,7 +58,8 @@ public class MavenDownloader {
 	 */
 	public static File downloadArtifact(final String groupId,
 			final String artifactId, final String version, final String type) {
-
+		System.out.println("Downloading: " + groupId + ":" + artifactId + ":"
+				+ version + ":" + type);
 		try {
 			return retrieveArtifact(groupId, artifactId, version, type);
 		} catch (ArtifactResolutionException e) {

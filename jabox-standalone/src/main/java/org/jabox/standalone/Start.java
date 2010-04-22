@@ -44,16 +44,8 @@ public class Start {
 	public static void main(final String[] args) throws Exception {
 		System.out.println(getJaboxWebapp());
 		System.out.println("Jabox home directory: " + Environment.getBaseDir());
-		configureEnvironmentVariables();
+		Environment.configureEnvironmentVariables();
 		startEmbeddedJetty(true);
-	}
-
-	private static void configureEnvironmentVariables() {
-		System
-				.setProperty("HUDSON_HOME", Environment.getBaseDir()
-						+ ".hudson/");
-		System.setProperty("artifactory.home", Environment.getBaseDir()
-				+ ".artifactory/");
 	}
 
 	private static String getJaboxWebapp() {

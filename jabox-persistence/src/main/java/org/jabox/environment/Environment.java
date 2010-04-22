@@ -23,6 +23,10 @@ import java.io.File;
 
 public class Environment {
 
+	private static final String HUDSON_ENV = "HUDSON_HOME";
+	private static final String HUDSON_PROPERTY = "HUDSON_HOME";
+	private static final String HUDSON_DIR = ".hudson";
+
 	public static String getBaseDir() {
 		return getHomeDir() + File.separatorChar + ".jabox"
 				+ File.separatorChar;
@@ -32,7 +36,32 @@ public class Environment {
 		return new File(getBaseDir());
 	}
 
+	public static String getHudsonHomeDir() {
+		String env = System.getenv(HUDSON_ENV);
+		String property = System.getProperty(HUDSON_PROPERTY);
+		if (env != null) {
+			return env;
+		} else if (property != null) {
+			return property;
+		} else {
+			return Environment.getBaseDir() + HUDSON_DIR;
+		}
+	}
+
 	private static String getHomeDir() {
 		return System.getProperty("user.home");
+	}
+
+	public static void configureEnvironmentVariables() {
+		configureBaseDirVariable(HUDSON_ENV, HUDSON_PROPERTY, HUDSON_DIR);
+		configureBaseDirVariable("ARTIFACTORY_HOME", "artifactory.home",
+				".artifactory/");
+	}
+
+	private static void configureBaseDirVariable(String env, String property,
+			String subdir) {
+		if (System.getenv(env) == null && System.getProperty(property) == null) {
+			System.setProperty(property, Environment.getBaseDir() + subdir);
+		}
 	}
 }
