@@ -53,13 +53,12 @@ public class Environment {
 	}
 
 	public static void configureEnvironmentVariables() {
-		configureBaseDirVariable(HUDSON_ENV, HUDSON_PROPERTY, HUDSON_DIR);
-		configureBaseDirVariable("ARTIFACTORY_HOME", "artifactory.home",
-				".artifactory/");
+		configBaseDir(HUDSON_ENV, HUDSON_PROPERTY, HUDSON_DIR);
+		configBaseDir("ARTIFACTORY_HOME", "artifactory.home", ".artifactory/");
+		configBaseDir("NEXUS_HOME", "plexus.nexus-work", ".nexus/");
 	}
 
-	private static void configureBaseDirVariable(String env, String property,
-			String subdir) {
+	private static void configBaseDir(String env, String property, String subdir) {
 		if (System.getenv(env) == null && System.getProperty(property) == null) {
 			System.setProperty(property, Environment.getBaseDir() + subdir);
 		}
