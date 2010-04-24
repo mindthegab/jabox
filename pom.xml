@@ -28,6 +28,7 @@
 		<module>jabox-standalone</module>
 		<module>mrm-artifactory</module>
 		<module>scm-beanstalk</module>
+		<module>mrm-scp</module>
 	</modules>
 	<!--
 		TODO <organization> <name>company name</name> <url>company url</url>
