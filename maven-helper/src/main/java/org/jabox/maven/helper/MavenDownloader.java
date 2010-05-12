@@ -46,7 +46,13 @@ public class MavenDownloader {
 			ArtifactRepositoryPolicy.CHECKSUM_POLICY_WARN);
 
 	private static ArtifactRepository ARTIFACT_REPOSITORY = new DefaultArtifactRepositoryFactory()
-			.createArtifactRepository("local", MAVEN_REPO,
+			.createArtifactRepository("remote", MAVEN_REPO,
+					new DefaultRepositoryLayout(), ARTIFACT_REPOSITORY_POLICY,
+					ARTIFACT_REPOSITORY_POLICY);;
+
+	private static ArtifactRepository LOCAL_ARTIFACT_REPOSITORY = new DefaultArtifactRepositoryFactory()
+			.createArtifactRepository("local", "file://"
+					+ System.getProperty("user.home") + "/.m2/repository/",
 					new DefaultRepositoryLayout(), ARTIFACT_REPOSITORY_POLICY,
 					ARTIFACT_REPOSITORY_POLICY);;
 
@@ -122,8 +128,10 @@ public class MavenDownloader {
 					.lookup(ArtifactResolver.ROLE);
 			List<ArtifactRepository> remoteRepositories = new ArrayList<ArtifactRepository>();
 			remoteRepositories.add(ARTIFACT_REPOSITORY);
+			ARTIFACT_REPOSITORY.getBasedir();
+			// XXX local Repo is wrong.
 			artifactResolver.resolve(artifact, remoteRepositories,
-					ARTIFACT_REPOSITORY);
+					LOCAL_ARTIFACT_REPOSITORY);
 			return artifact.getFile();
 		} catch (ComponentLookupException e) {
 			// TODO Auto-generated catch block
