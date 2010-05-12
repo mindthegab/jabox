@@ -44,6 +44,10 @@ public class RedmineRepositoryConfig extends DeployerConfig implements
 		return addRepositoryConfiguration;
 	}
 
+	public void setAddRepositoryConfiguration(boolean addRepositoryConfiguration) {
+		this.addRepositoryConfiguration = addRepositoryConfiguration;
+	}
+
 	public String getProjectUrl(Project project) {
 		StringBuffer sb = new StringBuffer();
 		sb.append(getServer().getUrl());
