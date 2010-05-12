@@ -44,7 +44,7 @@
 				<configuration>
 					<jnlp>
 						<mainClass>org.jabox.eclipse_startup.App</mainClass>
-						<inputTemplate>src/main/jnlp/template.vm</inputTemplate>
+						<inputTemplate>src/main/jnlp/resources/template.vm</inputTemplate>
 					</jnlp>
 					<verbose>true</verbose>
 				</configuration>
