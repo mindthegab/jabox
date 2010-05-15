@@ -120,8 +120,7 @@ public class CreateProjectUtil {
 			MavenConfigureCiManagement.injectCIS(pomXml, dc.getCis(), project);
 			MavenConfigureIssueManagement.injectIssueManagement(pomXml, dc
 					.getIts(), project);
-			MavenConfigureSourceEncoding.injectSourceEncoding(pomXml,
-					project);
+			MavenConfigureSourceEncoding.injectSourceEncoding(pomXml, project);
 			if (rms != null) {
 				MavenConfigureDistributionManagement.injectDistributionManager(
 						pomXml, dc.getRms());
@@ -158,11 +157,9 @@ public class CreateProjectUtil {
 					.getPassword());
 		}
 
-		CISConnector cis = (CISConnector) _itsManager.getConnectorInstance(dc
-				.getCis());
+		CISConnector cis = _cisManager.getConnectorInstance(dc.getCis());
 		if (cis != null) {
 			cis.addProject(project, dc.getCis());
 		}
 	}
-
 }
