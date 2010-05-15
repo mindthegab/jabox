@@ -70,14 +70,13 @@ public class JtracRepository implements ITSConnector<JtracRepositoryConfig>,
 		_url = url;
 	}
 
-	public boolean login(final String username, final String password,
-			final JtracRepositoryConfig config) throws MalformedURLException,
-			IOException, SAXException {
+	public boolean login(final JtracRepositoryConfig config)
+			throws MalformedURLException, IOException, SAXException {
 		WebRequest req = new GetMethodWebRequest(config.getServer().getUrl());
 		WebResponse resp = _wc.getResponse(req);
 		WebForm form = resp.getForms()[0]; // select the first form in the page
-		form.setParameter("j_username", username);
-		form.setParameter("j_password", password);
+		form.setParameter("j_username", config.getUsername());
+		form.setParameter("j_password", config.getPassword());
 		resp = form.submit();
 
 		// TODO check if not logged in.

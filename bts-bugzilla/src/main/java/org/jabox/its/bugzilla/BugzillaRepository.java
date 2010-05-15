@@ -64,14 +64,13 @@ public class BugzillaRepository implements
 		_wc = new WebConversation();
 	}
 
-	public boolean login(final String username, final String password,
-			final BugzillaRepositoryConfig config)
+	public boolean login(final BugzillaRepositoryConfig config)
 			throws MalformedURLException, IOException, SAXException {
 		WebRequest req = new GetMethodWebRequest(config.getServer().getUrl());
 		WebResponse resp = _wc.getResponse(req);
 		WebForm form = resp.getForms()[0]; // select the first form in the page
-		form.setParameter("Bugzilla_login", username);
-		form.setParameter("Bugzilla_password", password);
+		form.setParameter("Bugzilla_login", config.getUsername());
+		form.setParameter("Bugzilla_password", config.getPassword());
 		resp = form.submit();
 
 		// TODO check if not logged in.

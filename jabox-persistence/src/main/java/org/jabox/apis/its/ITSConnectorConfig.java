@@ -35,4 +35,8 @@ public interface ITSConnectorConfig extends ConnectorConfig {
 	 * @return The URL of the Issue Management for the specific Project.
 	 */
 	String getProjectUrl(Project project);
+	
+	String getUsername();
+
+	String getPassword();
 }

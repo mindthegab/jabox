@@ -20,6 +20,7 @@
 package org.jabox.its.redmine;
 
 import org.apache.wicket.markup.html.form.CheckBox;
+import org.apache.wicket.markup.html.form.PasswordTextField;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.CompoundPropertyModel;
@@ -32,7 +33,8 @@ public class RedmineRepositoryEditor extends Panel {
 	public RedmineRepositoryEditor(final String id, final IModel<Server> model) {
 		super(id, new CompoundPropertyModel<String>(model));
 		add(new TextField<String>("server.url"));
+		add(new TextField<String>("username").setRequired(true));
+		add(new PasswordTextField("password").setRequired(true));
 		add(new CheckBox("addRepositoryConfiguration"));
 	}
-
 }

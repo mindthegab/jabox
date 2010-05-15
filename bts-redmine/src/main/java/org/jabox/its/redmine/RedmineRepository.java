@@ -113,17 +113,16 @@ public class RedmineRepository implements
 		return true;
 	}
 
-	public boolean login(final String username, final String password,
-			final RedmineRepositoryConfig config) throws MalformedURLException,
-			IOException, SAXException {
+	public boolean login(final RedmineRepositoryConfig config)
+			throws MalformedURLException, IOException, SAXException {
 
 		WebRequest req = new GetMethodWebRequest(config.getServer().getUrl()
 				+ "/login");
 		WebResponse resp = _wc.getResponse(req);
 		WebForm form = resp.getForms()[1]; // select the second form in the
 		// page
-		form.setParameter("username", username);
-		form.setParameter("password", password);
+		form.setParameter("username", config.getUsername());
+		form.setParameter("password", config.getPassword());
 		resp = form.submit();
 
 		if (resp.getURL().getPath().endsWith("/my/page")) {

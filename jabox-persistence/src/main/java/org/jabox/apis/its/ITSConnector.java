@@ -29,8 +29,8 @@ import org.xml.sax.SAXException;
 
 public interface ITSConnector<T extends ITSConnectorConfig> extends Connector {
 
-	public boolean login(String username, String password, T config)
-			throws MalformedURLException, IOException, SAXException;
+	public boolean login(T config) throws MalformedURLException, IOException,
+			SAXException;
 
 	public boolean addProject(final Project project, T itsConnectorConfig)
 			throws IOException, SAXException;

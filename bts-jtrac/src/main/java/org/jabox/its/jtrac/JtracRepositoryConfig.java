@@ -43,4 +43,16 @@ public class JtracRepositoryConfig extends DeployerConfig implements
 	public String getSystem() {
 		return "Jtrac";
 	}
+
+	public String username;
+
+	public String password;
+
+	public String getUsername() {
+		return username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
 }

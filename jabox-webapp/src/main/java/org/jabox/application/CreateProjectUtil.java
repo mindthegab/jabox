@@ -148,7 +148,7 @@ public class CreateProjectUtil {
 			// its.login("", "");
 
 			// its.setUrl("http://localhost/redmine");
-			its.login("admin", "admin123", config);
+			its.login(config);
 			its.addProject(project, config);
 			its.addModule(project, config, project.getName(), "initial module",
 					"myemail@gmail.com");

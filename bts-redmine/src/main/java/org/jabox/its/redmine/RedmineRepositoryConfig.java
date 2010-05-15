@@ -63,4 +63,17 @@ public class RedmineRepositoryConfig extends DeployerConfig implements
 	public String getSystem() {
 		return "Redmine";
 	}
+
+	public String username;
+
+	public String password;
+
+
+	public String getUsername() {
+		return username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
 }
