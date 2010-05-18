@@ -19,6 +19,7 @@
  */
 package org.jabox.standalone;
 
+import java.io.File;
 import java.util.List;
 
 import org.jabox.apis.embedded.EmbeddedServer;
@@ -86,6 +87,10 @@ public class Start {
 				bb.setServer(server);
 				bb.setContextPath("/");
 				bb.setWar(getJaboxWebapp());
+				File tempDir = new File(Environment.getBaseDir(),
+						"server-jabox");
+				tempDir.mkdirs();
+				bb.setTempDirectory(tempDir);
 				server.addHandler(bb);
 			}
 
