@@ -121,6 +121,8 @@ public class CreateProjectUtil {
 			MavenConfigureIssueManagement.injectIssueManagement(pomXml, dc
 					.getIts(), project);
 			MavenConfigureSourceEncoding.injectSourceEncoding(pomXml, project);
+			MavenConfigureSignArtifacts.injectSignArtifact(pomXml, project);
+
 			if (rms != null) {
 				MavenConfigureDistributionManagement.injectDistributionManager(
 						pomXml, dc.getRms());
