@@ -38,7 +38,7 @@ public class Project extends BaseEntity implements Serializable {
 	private String _description;
 	private String _scmUrl;
 	private String _sourceEncoding = "UTF-8";
-	private boolean _signArtifacts = true;
+	private boolean _signArtifactReleases = false;
 
 	@Column(nullable = false, length = 1024)
 	private MavenArchetype _mavenArchetype;
@@ -108,11 +108,11 @@ public class Project extends BaseEntity implements Serializable {
 		return _sourceEncoding;
 	}
 
-	public void setSignArtifacts(boolean signArtifacts) {
-		_signArtifacts = signArtifacts;
+	public void setSignArtifactReleases(boolean signArtifactReleases) {
+		_signArtifactReleases = signArtifactReleases;
 	}
 
-	public boolean isSignArtifacts() {
-		return _signArtifacts;
+	public boolean isSignArtifactReleases() {
+		return _signArtifactReleases;
 	}
 }

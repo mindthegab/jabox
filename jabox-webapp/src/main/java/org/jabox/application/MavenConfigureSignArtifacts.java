@@ -56,7 +56,7 @@ public class MavenConfigureSignArtifacts {
 		FileReader fileReader = new FileReader(pomFile);
 		Model model = new MavenXpp3Reader().read(fileReader);
 
-		if (project.isSignArtifacts()) {
+		if (project.isSignArtifactReleases()) {
 			model.addProfile(createReleaseSignArtifactsProfile());
 		}
 

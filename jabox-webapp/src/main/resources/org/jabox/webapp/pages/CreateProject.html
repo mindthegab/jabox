@@ -28,6 +28,12 @@
           <td class="formTD" wicket:message="title:project.mavenArchetype.tooltip">
 		  		<select class="formInput" name="archetype" wicket:id="archetype"></select></td>
          </tr>
+         <tr class="deployer">
+			<td><label for="signArtifactReleases">Sign Artifact Releases: </label></td>
+			<td><input wicket:id="signArtifactReleases" type="checkbox"
+				title="Check this if you want to sign artifact releases. You need to prepare a key pair to be able to do this. See http://www.sonatype.com/people/2010/01/how-to-generate-pgp-signatures-with-maven/ for more information." />
+			</td>
+		 </tr>
          <tr>
           <td colspan="2" align="left">
            <input type="submit" class="button" value="submit" />

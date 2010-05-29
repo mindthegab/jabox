@@ -24,6 +24,7 @@ import java.util.List;
 
 import org.apache.wicket.authorization.strategies.role.annotations.AuthorizeInstantiation;
 import org.apache.wicket.feedback.ComponentFeedbackMessageFilter;
+import org.apache.wicket.markup.html.form.CheckBox;
 import org.apache.wicket.markup.html.form.ChoiceRenderer;
 import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.Form;
@@ -97,6 +98,7 @@ public class CreateProject extends MiddlePanel {
 						"mavenArchetype"), connectors,
 				new ChoiceRenderer<MavenArchetype>("toString", "toString"));
 		form.add(new TextField<Project>("sourceEncoding"));
+		form.add(new CheckBox("signArtifactReleases"));
 		form.add(ddc);
 	}
 
