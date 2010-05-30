@@ -25,7 +25,6 @@ import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
-import org.apache.wicket.validation.validator.UrlValidator;
 import org.jabox.model.Server;
 
 public class RedmineRepositoryEditor extends Panel {
@@ -33,9 +32,13 @@ public class RedmineRepositoryEditor extends Panel {
 
 	public RedmineRepositoryEditor(final String id, final IModel<Server> model) {
 		super(id, new CompoundPropertyModel<String>(model));
-		add(new TextField<String>("server.url").add(new UrlValidator()));
-		add(new TextField<String>("username").setRequired(true));
-		add(new PasswordTextField("password").setRequired(true));
+		TextField<String> username = new TextField<String>("username");
+		PasswordTextField password = new PasswordTextField("password");
+		TextField<String> url = new TextField<String>("server.url");
+
+		add(username.setRequired(true));
+		add(password.setRequired(true));
+		add(url.add(new RedmineLoginValidator(url, username, password)));
 		add(new CheckBox("addRepositoryConfiguration"));
 	}
 }

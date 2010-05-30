@@ -115,14 +115,20 @@ public class RedmineRepository implements
 
 	public boolean login(final RedmineRepositoryConfig config)
 			throws MalformedURLException, IOException, SAXException {
+		String url = config.getServer().getUrl();
 
-		WebRequest req = new GetMethodWebRequest(config.getServer().getUrl()
-				+ "/login");
+		return login(url, config.getUsername(), config.getPassword());
+	}
+
+	protected boolean login(final String url, final String username,
+			final String password) throws MalformedURLException, IOException,
+			SAXException {
+		WebRequest req = new GetMethodWebRequest(url + "/login");
 		WebResponse resp = _wc.getResponse(req);
 		WebForm form = resp.getForms()[1]; // select the second form in the
 		// page
-		form.setParameter("username", config.getUsername());
-		form.setParameter("password", config.getPassword());
+		form.setParameter("username", username);
+		form.setParameter("password", password);
 		resp = form.submit();
 
 		if (resp.getURL().getPath().endsWith("/my/page")) {
@@ -139,9 +145,11 @@ public class RedmineRepository implements
 		return new RedmineRepositoryEditor(id, model);
 	}
 
-	public void addRepository(Project project, RedmineRepositoryConfig config,
-			SCMConnectorConfig scmConfig, String username, String password)
-			throws MalformedURLException, IOException, SAXException {
+	public void addRepository(final Project project,
+			final RedmineRepositoryConfig config,
+			final SCMConnectorConfig scmConfig, final String username,
+			final String password) throws MalformedURLException, IOException,
+			SAXException {
 		// Check if Repository should be added
 		if (!config.isAddRepositoryConfiguration()) {
 			return;
