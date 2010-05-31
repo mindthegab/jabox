@@ -87,7 +87,7 @@ public class Start {
 				bb.setServer(server);
 				bb.setContextPath("/");
 				bb.setWar(getJaboxWebapp());
-				File tempDir = new File(Environment.getBaseDir(),
+				File tempDir = new File(Environment.getBaseDirFile(),
 						"server-jabox");
 				tempDir.mkdirs();
 				bb.setTempDirectory(tempDir);

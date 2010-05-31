@@ -57,7 +57,7 @@ public abstract class AbstractEmbeddedServer implements EmbeddedServer {
 		wac.setContextPath("/" + getServerName());
 		wac.setWar(getWarPath());
 		wac.setParentLoaderPriority(getParentLoaderPriority());
-		File tempDir = new File(Environment.getBaseDir(), "server-"
+		File tempDir = new File(Environment.getBaseDirFile(), "server-"
 				+ getServerName());
 		tempDir.mkdirs();
 		wac.setTempDirectory(tempDir);

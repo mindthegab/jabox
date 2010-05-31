@@ -42,7 +42,7 @@ public class NexusServer extends AbstractEmbeddedServer {
 
 	@Override
 	public String getWarPath() {
-		String baseDir = Environment.getBaseDir();
+		File baseDir = Environment.getBaseDirFile();
 
 		// Download the artifactory.war
 		File zipFile = new File(baseDir, "tmp/nexus.war");

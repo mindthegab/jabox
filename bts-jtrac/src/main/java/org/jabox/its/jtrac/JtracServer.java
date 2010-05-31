@@ -143,7 +143,7 @@ public class JtracServer extends AbstractEmbeddedServer {
 
 	@Override
 	public String getWarPath() {
-		String baseDir = Environment.getBaseDir();
+		File baseDir = Environment.getBaseDirFile();
 
 		File zipFile = new File(baseDir, "tmp/jtrac.zip");
 		if (!zipFile.exists()) {
