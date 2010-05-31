@@ -48,7 +48,7 @@ public class Environment {
 		}
 	}
 
-	private static String getHomeDir() {
+	protected static String getHomeDir() {
 		return System.getProperty("user.home");
 	}
 
@@ -58,7 +58,8 @@ public class Environment {
 		configBaseDir("NEXUS_HOME", "plexus.nexus-work", ".nexus/");
 	}
 
-	private static void configBaseDir(String env, String property, String subdir) {
+	private static void configBaseDir(final String env, final String property,
+			final String subdir) {
 		if (System.getenv(env) == null && System.getProperty(property) == null) {
 			System.setProperty(property, Environment.getBaseDir() + subdir);
 		}
