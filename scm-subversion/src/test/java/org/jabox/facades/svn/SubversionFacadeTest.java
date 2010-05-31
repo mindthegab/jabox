@@ -53,14 +53,9 @@ public abstract class SubversionFacadeTest extends TestCase {
 	}
 
 	public void test2() throws SVNException {
-
-		try {
-			String tgtPath = "c:///home/dimitris/svn/repos2";
-			SVNRepositoryFactory.createLocalRepository(new File(tgtPath), true,
-					false);
-		} catch (SVNException e) {
-			// handle exception
-		}
+		String tgtPath = "target/svnRepoTest/";
+		SVNRepositoryFactory.createLocalRepository(new File(tgtPath), true,
+				false);
 	}
 
 	public void testAddFiles() throws SVNException {
