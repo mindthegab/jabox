@@ -33,30 +33,34 @@ import org.jabox.apis.its.ITSConnectorConfig;
 import org.jabox.model.Project;
 
 /**
- * Helper class that injects the &lt;cis&gt; configuration to a pom file.
+ * Helper class that injects the &lt;issueManagement&gt; configuration to a pom
+ * file.
  */
 public class MavenConfigureIssueManagement {
 	public MavenConfigureIssueManagement() {
 	}
 
 	/**
-	 * Injects the &lt;cis&gt; configuration to the pom file.
+	 * Injects the &lt;issueManagement&gt; configuration to the pom file.
 	 * 
 	 * @param pomFile
-	 *            the pom file that will be injected with the cis configuration.
+	 *            the pom file that will be injected with the issueManagement
+	 *            configuration.
+	 * @param its
 	 * @param project
-	 * @param rms
 	 * @throws IOException
 	 * @throws XmlPullParserException
 	 */
 	public static void injectIssueManagement(final File pomFile,
-			final ITSConnectorConfig cis, Project project) throws IOException,
+			final ITSConnectorConfig its, Project project) throws IOException,
 			XmlPullParserException {
 		FileReader fileReader = new FileReader(pomFile);
 		Model model = new MavenXpp3Reader().read(fileReader);
 
-		IssueManagement issueManagement = getIssueManagement(cis, project);
-		model.setIssueManagement(issueManagement);
+		if (its != null) {
+			IssueManagement issueManagement = getIssueManagement(its, project);
+			model.setIssueManagement(issueManagement);
+		}
 
 		FileWriter fileWriter = new FileWriter(pomFile);
 		new MavenXpp3Writer().write(fileWriter, model);
