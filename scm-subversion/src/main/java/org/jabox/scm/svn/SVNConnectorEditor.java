@@ -31,7 +31,7 @@ public class SVNConnectorEditor extends Panel {
 
 	public SVNConnectorEditor(final String id, final IModel<Server> model) {
 		super(id, new CompoundPropertyModel<String>(model));
-		add(new TextField<String>("server.url"));
+		add(new TextField<String>("server.url").setRequired(true));
 		add(new TextField<String>("username").setRequired(true));
 		add(new PasswordTextField("password").setRequired(true));
 	}
