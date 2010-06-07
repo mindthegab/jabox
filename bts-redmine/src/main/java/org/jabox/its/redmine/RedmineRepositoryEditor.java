@@ -40,7 +40,8 @@ public class RedmineRepositoryEditor extends Panel {
 		add(username.setRequired(true));
 		add(password.setRequired(true));
 		add(url.add(new UrlValidator()).add(
-				new RedmineLoginValidator(url, username, password)));
+				new RedmineLoginValidator(url, username, password))
+				.setRequired(true));
 		add(new CheckBox("addRepositoryConfiguration"));
 	}
 }
