@@ -32,13 +32,9 @@ public class TemporalDirectory {
 	 * @throws IOException
 	 */
 	public static File createTempDir() throws IOException {
-		File dir = new File(Environment.getBaseDirFile(), "tmp");
+		File tmpDir = Environment.getTmpDirFile();
 
-		if (!dir.exists()) {
-			dir.mkdirs();
-		}
-
-		File tempDirectory = File.createTempFile("temp", "", dir);
+		File tempDirectory = File.createTempFile("temp", "", tmpDir);
 		tempDirectory.delete();
 		tempDirectory.mkdir();
 		return tempDirectory;

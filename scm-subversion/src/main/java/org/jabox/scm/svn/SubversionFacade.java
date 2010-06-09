@@ -20,8 +20,10 @@
 package org.jabox.scm.svn;
 
 import java.io.File;
+import java.io.IOException;
 
 import org.jabox.model.Project;
+import org.jabox.model.Server;
 import org.tmatesoft.svn.core.SVNDepth;
 import org.tmatesoft.svn.core.SVNException;
 import org.tmatesoft.svn.core.SVNPropertyValue;
@@ -30,6 +32,8 @@ import org.tmatesoft.svn.core.auth.ISVNAuthenticationManager;
 import org.tmatesoft.svn.core.internal.io.dav.DAVRepositoryFactory;
 import org.tmatesoft.svn.core.internal.io.fs.FSRepositoryFactory;
 import org.tmatesoft.svn.core.internal.io.svn.SVNRepositoryFactoryImpl;
+import org.tmatesoft.svn.core.io.SVNRepository;
+import org.tmatesoft.svn.core.io.SVNRepositoryFactory;
 import org.tmatesoft.svn.core.wc.ISVNPropertyHandler;
 import org.tmatesoft.svn.core.wc.SVNClientManager;
 import org.tmatesoft.svn.core.wc.SVNCommitClient;
@@ -49,6 +53,26 @@ public class SubversionFacade {
 		FSRepositoryFactory.setup();
 		SVNRepositoryFactoryImpl.setup();
 		DAVRepositoryFactory.setup();
+	}
+
+	public boolean validate(String url, String username, String password)
+			throws IOException {
+		SVNConnectorConfig svnc = new SVNConnectorConfig();
+		svnc.username = username;
+		svnc.password = password;
+		svnc.server = new Server();
+		svnc.server.setUrl(url);
+		try {
+			// Authenticate
+			ISVNAuthenticationManager authManager = new BasicAuthenticationManager(
+					svnc.getUsername(), svnc.getPassword());
+			SVNRepository repo = SVNRepositoryFactory.create(svnc.getSvnDir());
+			repo.setAuthenticationManager(authManager);
+			repo.testConnection();
+			return true;
+		} catch (SVNException e) {
+			return false;
+		}
 	}
 
 	/**

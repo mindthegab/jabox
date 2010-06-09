@@ -23,6 +23,8 @@ import java.io.File;
 
 import junit.framework.TestCase;
 
+import org.jabox.model.Server;
+import org.jabox.scm.svn.SVNConnectorConfig;
 import org.jabox.scm.svn.SubversionRepository;
 import org.tmatesoft.svn.core.SVNDepth;
 import org.tmatesoft.svn.core.SVNException;
@@ -39,6 +41,16 @@ public abstract class SubversionFacadeTest extends TestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 		_clientManager = SVNClientManager.newInstance();
+	}
+
+	public void testValidate() throws Exception {
+		SVNConnectorConfig svnc = new SVNConnectorConfig();
+		svnc.server = new Server();
+
+		// boolean validate = new SubversionFacade().validate(
+		// "url", "login",
+		// "password");
+		// assertTrue(validate);
 	}
 
 	public void test1() throws SVNException {

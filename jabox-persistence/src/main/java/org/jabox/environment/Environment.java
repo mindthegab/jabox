@@ -48,6 +48,16 @@ public class Environment {
 		}
 	}
 
+	public static File getTmpDirFile() {
+		File tmpDir = new File(getBaseDir(), "tmp");
+
+		if (!tmpDir.exists()) {
+			tmpDir.mkdirs();
+		}
+
+		return tmpDir;
+	}
+
 	protected static String getHomeDir() {
 		return System.getProperty("user.home");
 	}
