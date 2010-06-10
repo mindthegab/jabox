@@ -7,31 +7,34 @@
      <form wicket:id="form">
         <table>
          <tr>
-          <td><wicket:message key="project.name">Project Name</wicket:message>:</td>
-          <td class="formTD" wicket:message="title:project.name.tooltip">
-          		<input class="formInput" type="text" wicket:id="name" /></td>
+          <td><wicket:message key="name">Project Name</wicket:message>:</td>
+          <td class="formTD"><input class="formInput" type="text" wicket:id="name" />
+          <img src="../images/info.png" align="top" wicket:message="title:name.tooltip"/></td>
           <td><div class="feedback" wicket:id="nameFeedback">Feedback Messages</div></td>
          </tr>
          <tr>
-	      <td><wicket:message key="project.description">Project Description</wicket:message>:</td>
-    	  <td class="formTD" wicket:message="title:project.description.tooltip">
-    	  		<input class="formInput" type="text" wicket:id="description" /></td>
+	      <td><wicket:message key="description">Project Description</wicket:message>:</td>
+    	  <td class="formTD">
+    	  		<input class="formInput" type="text" wicket:id="description" />
+    	  		<img src="../images/info.png" align="top" wicket:message="title:description.tooltip"/></td>
     	  <td><div class="feedback" wicket:id="descriptionFeedback">Feedback Messages</div></td>
          </tr>
          <tr>
-	      <td><wicket:message key="project.source.encoding">Source Encoding</wicket:message>:</td>
-    	  <td class="formTD" wicket:message="title:project.source.encoding.tooltip">
-    	  		<input class="formInput" type="text" wicket:id="sourceEncoding" /></td>
+	      <td><wicket:message key="sourceEncoding">Source Encoding</wicket:message>:</td>
+    	  <td class="formTD">
+    	  		<input class="formInput" type="text" wicket:id="sourceEncoding" />
+    	  		<img src="../images/info.png" align="top" wicket:message="title:sourceEncoding.tooltip"/></td>
          </tr>
          <tr>
-          <td><wicket:message key="project.mavenArchetype">Maven Archetype</wicket:message>:</td>
-          <td class="formTD" wicket:message="title:project.mavenArchetype.tooltip">
-		  		<select class="formInput" name="archetype" wicket:id="archetype"></select></td>
+          <td><wicket:message key="archetype">Maven Archetype</wicket:message>:</td>
+          <td class="formTD">
+		  		<select class="formInput" name="archetype" wicket:id="archetype" />
+		  		<img src="../images/info.png" align="top" wicket:message="title:archetype.tooltip"/></td>
          </tr>
          <tr class="deployer">
-			<td><label for="signArtifactReleases">Sign Artifact Releases: </label></td>
-			<td><input wicket:id="signArtifactReleases" type="checkbox"
-				title="Check this if you want to sign artifact releases. You need to prepare a key pair to be able to do this. See http://www.sonatype.com/people/2010/01/how-to-generate-pgp-signatures-with-maven/ for more information." />
+			<td><label for="signArtifactReleases"><wicket:message key="signArtifactReleases">Sign Artifact Releases</wicket:message>: </label></td>
+			<td><input wicket:id="signArtifactReleases" type="checkbox" />
+			<img src="../images/info.png" align="top" wicket:message="title:signArtifactReleases.tooltip"/>
 			</td>
 		 </tr>
          <tr>
