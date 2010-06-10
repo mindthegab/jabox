@@ -32,10 +32,18 @@ public class BeanstalkConnectorEditor extends Panel {
 
 	public BeanstalkConnectorEditor(final String id, final IModel<Server> model) {
 		super(id, new CompoundPropertyModel<String>(model));
-		add(new TextField<String>("server.url", new BeanstalkAccountURLModel(
-				new PropertyModel<String>(model, "server.url"))));
-		add(new TextField<String>("username").setRequired(true));
-		add(new TextField<String>("projectName").setRequired(true));
-		add(new PasswordTextField("password").setRequired(true));
+		TextField<String> url = new TextField<String>("server.url",
+				new BeanstalkAccountURLModel(new PropertyModel<String>(model,
+						"server.url")));
+		TextField<String> username = new TextField<String>("username");
+		TextField<String> projectName = new TextField<String>("projectName");
+		PasswordTextField password = new PasswordTextField("password");
+
+		add(username.setRequired(true));
+		add(projectName.setRequired(true));
+		add(password.setRequired(true));
+		add(url.add(
+				new BeanstalkLoginValidator(url, username, projectName,
+						password)).setRequired(true));
 	}
 }
