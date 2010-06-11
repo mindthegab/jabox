@@ -5,7 +5,26 @@
 	<TITLE>Jabox Open Source A.L.M.</TITLE>
 	<STYLE>@import url(/style/wicket.css);</STYLE>
 	<script src="/style/jquery.tools.min.js"></script>
-	
+	<script type="text/javascript">
+    $(function() {
+     $("img[title]").tooltip({
+
+    		// place tooltip on the right edge
+    		position: "center right",
+
+    		// a little tweaking of the position
+    		offset: [-2, 10],
+
+    		// use the built-in fadeIn/fadeOut effect
+    		effect: "fade",
+
+    		// custom opacity setting
+    		opacity: 0.7
+
+    	});
+    });
+    </script>
+
 	<!--[if lt IE 7]>
 	<style>@import url(/style/ie.css);</style>
 	<![endif]-->
