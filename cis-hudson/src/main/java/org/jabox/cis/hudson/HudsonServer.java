@@ -21,6 +21,7 @@ package org.jabox.cis.hudson;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 
 import org.codehaus.plexus.util.FileUtils;
 import org.jabox.apis.embedded.AbstractEmbeddedServer;
@@ -49,6 +50,19 @@ public class HudsonServer extends AbstractEmbeddedServer {
 	public static void injectPlugins() {
 		injectPlugin("org.jvnet.hudson.plugins.m2release", "m2release", "0.3.4");
 		injectPlugin("org.jvnet.hudson.plugins", "redmine", "0.8");
+		injectConfiguration("hudson.tasks.Maven.xml");
+	}
+
+	private static void injectConfiguration(String resource) {
+		URL res = HudsonServer.class.getResource(resource);
+		File dest = new File(Environment.getHudsonHomeDir(), resource);
+		if (!dest.exists()) {
+			try {
+				FileUtils.copyURLToFile(res, dest);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 	private static void injectPlugin(String groupId, String artifactId,
