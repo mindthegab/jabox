@@ -91,8 +91,7 @@ public class HudsonConnector implements CISConnector {
 
 		post.setRequestHeader("Content-type", "text/xml; charset=UTF-8");
 
-		InputStream is = HudsonConnector.class
-				.getResourceAsStream("config.xml");
+		InputStream is = getConfigXMLStream(project);
 
 		String body = parseInputStream(is, project);
 		post.setRequestBody(body);
@@ -112,6 +111,21 @@ public class HudsonConnector implements CISConnector {
 				+ project.getName() + "/build");
 		client.executeMethod(triggerBuild);
 		return true;
+	}
+
+	/**
+	 * Returns the config.xml that should be used as template for the specific
+	 * project. This depends on the SCM implementation used.
+	 * 
+	 * @param project
+	 * @return
+	 */
+	private InputStream getConfigXMLStream(Project project) {
+		String configXML = "config.xml";
+		if (project.getScmUrl().startsWith("git://")) {
+			configXML = "config-git.xml";
+		}
+		return HudsonConnector.class.getResourceAsStream(configXML);
 	}
 
 	private String parseInputStream(final InputStream is, final Project project)
