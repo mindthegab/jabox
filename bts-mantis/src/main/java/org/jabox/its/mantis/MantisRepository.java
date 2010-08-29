@@ -46,7 +46,6 @@ public class MantisRepository implements ITSConnector<MantisRepositoryConfig>,
 	private static final long serialVersionUID = 8131183843391948936L;
 	public static final String ID = "plugin.its.mantis";
 
-	private String _url;
 	private final WebConversation _wc;
 
 	public String getName() {
@@ -66,17 +65,13 @@ public class MantisRepository implements ITSConnector<MantisRepositoryConfig>,
 		_wc = new WebConversation();
 	}
 
-	public void setUrl(final String url) {
-		_url = url;
-	}
-
 	public boolean login(final MantisRepositoryConfig config)
 			throws MalformedURLException, IOException, SAXException {
 		WebRequest req = new GetMethodWebRequest(config.getServer().getUrl());
 		WebResponse resp = _wc.getResponse(req);
 		WebForm form = resp.getForms()[0]; // select the first form in the page
-		form.setParameter("j_username", config.getUsername());
-		form.setParameter("j_password", config.getPassword());
+		form.setParameter("username", config.getUsername());
+		form.setParameter("password", config.getPassword());
 		resp = form.submit();
 
 		// TODO check if not logged in.
@@ -86,7 +81,8 @@ public class MantisRepository implements ITSConnector<MantisRepositoryConfig>,
 	public boolean addProject(final Project project,
 			final MantisRepositoryConfig config) throws IOException,
 			SAXException {
-		WebRequest req = new GetMethodWebRequest(_url
+		String url = config.getServer().getUrl();
+		WebRequest req = new GetMethodWebRequest(url
 				+ "/editproducts.cgi?action=add");
 		WebResponse resp = _wc.getResponse(req);
 		WebForm form = resp.getForms()[0];
