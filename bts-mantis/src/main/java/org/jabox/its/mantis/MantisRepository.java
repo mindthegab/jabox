@@ -46,7 +46,7 @@ public class MantisRepository implements ITSConnector<MantisRepositoryConfig>,
 	private static final long serialVersionUID = 8131183843391948936L;
 	public static final String ID = "plugin.its.mantis";
 
-	private final WebConversation _wc;
+	private WebConversation _wc;
 
 	public String getName() {
 		return "Mantis";
@@ -68,6 +68,7 @@ public class MantisRepository implements ITSConnector<MantisRepositoryConfig>,
 	public boolean login(final MantisRepositoryConfig config)
 			throws MalformedURLException, IOException, SAXException {
 		WebRequest req = new GetMethodWebRequest(config.getServer().getUrl());
+		_wc = new WebConversation();
 		WebResponse resp = _wc.getResponse(req);
 		WebForm form = resp.getForms()[0]; // select the first form in the page
 		form.setParameter("username", config.getUsername());
@@ -83,11 +84,11 @@ public class MantisRepository implements ITSConnector<MantisRepositoryConfig>,
 			SAXException {
 		String url = config.getServer().getUrl();
 		WebRequest req = new GetMethodWebRequest(url
-				+ "/editproducts.cgi?action=add");
+				+ "/manage_proj_create_page.php");
 		WebResponse resp = _wc.getResponse(req);
-		WebForm form = resp.getForms()[0];
+		WebForm form = resp.getForms()[2];
 
-		form.setParameter("product", project.getName());
+		form.setParameter("name", project.getName());
 		form.setParameter("description", project.getDescription());
 		form.submit();
 		return true;
@@ -97,30 +98,12 @@ public class MantisRepository implements ITSConnector<MantisRepositoryConfig>,
 			final MantisRepositoryConfig config, final String module,
 			final String description, final String initialOwner)
 			throws SAXException, IOException {
-		String url = config.getServer().getUrl();
-		WebRequest req = new GetMethodWebRequest(url
-				+ "/editcomponents.cgi?action=add&product=" + project.getName());
-		WebResponse resp = _wc.getResponse(req);
-		WebForm form = resp.getForms()[0];
-
-		form.setParameter("component", module);
-		form.setParameter("description", description);
-		form.setParameter("initialowner", initialOwner);
-		form.submit();
 		return true;
 	}
 
 	public boolean addVersion(final Project project,
 			final MantisRepositoryConfig config, final String version)
 			throws IOException, SAXException {
-		String url = config.getServer().getUrl();
-		WebRequest req = new GetMethodWebRequest(url
-				+ "/editversions.cgi?action=add&product=" + project.getName());
-		WebResponse resp = _wc.getResponse(req);
-		WebForm form = resp.getForms()[0];
-
-		form.setParameter("version", version);
-		form.submit();
 		return true;
 	}
 
