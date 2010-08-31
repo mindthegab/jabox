@@ -9,7 +9,7 @@ import org.apache.wicket.model.Model;
 import org.apache.wicket.util.tester.WicketTester;
 import org.apache.wicket.validation.Validatable;
 
-public class HudsonLoginValidatorTest extends TestCase {
+public abstract class HudsonLoginValidatorTest extends TestCase {
 
 	public void testOnValidateFails() {
 		new WicketTester();
