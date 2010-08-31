@@ -24,6 +24,8 @@ import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
+import org.apache.wicket.model.Model;
+import org.jabox.cis.hudson.HudsonLoginValidator;
 import org.jabox.model.Server;
 
 public class EHudsonConnectorEditor extends Panel {
@@ -31,8 +33,17 @@ public class EHudsonConnectorEditor extends Panel {
 
 	public EHudsonConnectorEditor(final String id, final IModel<Server> model) {
 		super(id, new CompoundPropertyModel<String>(model));
-		add(new TextField<String>("username").setRequired(true));
-		add(new PasswordTextField("password").setRequired(true));
-	}
+		TextField<String> username = new TextField<String>("username");
+		PasswordTextField password = new PasswordTextField("password");
 
+		add(username.setRequired(true));
+		add(password.setRequired(true));
+
+		// XXX This should be dynamic
+		TextField<String> url = new TextField<String>("url", new Model<String>(
+				"http://localhost:9090/hudson/"));
+
+		add(password.add(new HudsonLoginValidator(url, username, password))
+				.setRequired(true));
+	}
 }
