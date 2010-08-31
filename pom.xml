@@ -8,7 +8,7 @@
 	<version>0.0.9-SNAPSHOT</version>
 	<!-- TODO project name  -->
 	<name>Jabox</name>
-	<description />
+	<description/>
 
 	<modules>
 		<module>jabox-webapp</module>
@@ -29,7 +29,8 @@
 		<module>mrm-artifactory</module>
 		<module>scm-beanstalk</module>
 		<module>mrm-scp</module>
-	</modules>
+    <module>bts-mantis</module>
+  </modules>
 	<!--
 		TODO <organization> <name>company name</name> <url>company url</url>
 		</organization>
