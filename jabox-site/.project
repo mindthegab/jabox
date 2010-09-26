@@ -4,7 +4,7 @@
 	<comment></comment>
 	<projects>
 	</projects>
-	<buildSpec>
+	<buildSpec> 
 		<buildCommand>
 			<name>org.eclipse.wst.common.project.facet.core.builder</name>
 			<arguments>
