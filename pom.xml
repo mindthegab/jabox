@@ -6,7 +6,6 @@
 	<artifactId>jabox</artifactId>
 	<packaging>pom</packaging>
 	<version>0.0.9-SNAPSHOT</version>
-	<!-- TODO project name  -->
 	<name>Jabox</name>
 	<description/>
 
