@@ -22,10 +22,10 @@ package org.jabox.application;
 import java.io.File;
 import java.io.IOException;
 
+import org.apache.maven.MavenExecutionException;
 import org.apache.maven.artifact.InvalidRepositoryException;
 import org.apache.maven.cli.MavenCli;
-import org.apache.maven.reactor.MavenExecutionException;
-import org.codehaus.classworlds.ClassWorld;
+import org.codehaus.plexus.classworlds.ClassWorld;
 import org.jabox.model.MavenArchetype;
 import org.jabox.model.Project;
 
@@ -55,7 +55,7 @@ public class MavenCreateProject {
 				"-Dpackage=org.jabox", "-Duser.dir=" + baseDir,
 				"-DartifactId=" + project.getName(), "-DinteractiveMode=false" };
 		ClassWorld classWorld = new ClassWorld();
-		MavenCli.main(args, classWorld);
+		MavenCli.doMain(args, classWorld);
 
 		return baseDir + File.separatorChar + project.getName();
 	}

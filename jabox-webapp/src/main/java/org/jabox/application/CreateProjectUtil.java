@@ -22,8 +22,8 @@ package org.jabox.application;
 import java.io.File;
 import java.io.IOException;
 
+import org.apache.maven.MavenExecutionException;
 import org.apache.maven.artifact.InvalidRepositoryException;
-import org.apache.maven.reactor.MavenExecutionException;
 import org.apache.wicket.injection.web.InjectorHolder;
 import org.apache.wicket.persistence.provider.GeneralDao;
 import org.apache.wicket.spring.injection.annot.SpringBean;
@@ -88,10 +88,11 @@ public class CreateProjectUtil {
 	 * @throws SAXException
 	 * @throws SCMException
 	 * @throws IOException
+	 * @throws MavenExecutionException
 	 */
 	private void createProjectMethod(final Project project)
-			throws InvalidRepositoryException, MavenExecutionException,
-			SAXException, SCMException, IOException {
+			throws InvalidRepositoryException, SAXException, SCMException,
+			IOException, MavenExecutionException {
 		final DefaultConfiguration dc = generalDao.getDefaultConfiguration();
 
 		SCMConnectorConfig scmc = dc.getScm();

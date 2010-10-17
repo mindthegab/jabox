@@ -23,8 +23,8 @@ import java.io.IOException;
 
 import junit.framework.TestCase;
 
+import org.apache.maven.MavenExecutionException;
 import org.apache.maven.artifact.InvalidRepositoryException;
-import org.apache.maven.reactor.MavenExecutionException;
 import org.jabox.model.Project;
 
 public class MavenCreateProjectTest extends TestCase {
