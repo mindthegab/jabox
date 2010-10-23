@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.jabox</groupId>
@@ -28,30 +29,18 @@
 				</configuration>
 			</plugin>
 
-			<plugin>
-				<groupId>org.codehaus.mojo.webstart</groupId>
+			<!--
+				<plugin> <groupId>org.codehaus.mojo.webstart</groupId>
 				<artifactId>webstart-maven-plugin</artifactId>
-				<version>1.0-alpha-2</version>
-				<executions>
-					<execution>
-						<id />
-						<phase>package</phase>
-						<goals>
-							<goal>jnlp-inline</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<jnlp>
-						<mainClass>org.jabox.eclipse_startup.App</mainClass>
-						<inputTemplate>src/main/jnlp/resources/template.vm</inputTemplate>
-					</jnlp>
-					<verbose>true</verbose>
-				</configuration>
-			</plugin>
+				<version>1.0-alpha-2</version> <executions> <execution> <id />
+				<phase>package</phase> <goals> <goal>jnlp-inline</goal> </goals>
+				</execution> </executions> <configuration> <jnlp>
+				<mainClass>org.jabox.eclipse_startup.App</mainClass>
+				<inputTemplate>src/main/jnlp/resources/template.vm</inputTemplate>
+				</jnlp> <verbose>true</verbose> </configuration> </plugin>
+			-->
 		</plugins>
 	</build>
-
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
