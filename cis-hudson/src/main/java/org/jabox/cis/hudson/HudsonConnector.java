@@ -121,7 +121,7 @@ public class HudsonConnector implements CISConnector {
 	 * @return
 	 */
 	private InputStream getConfigXMLStream(Project project) {
-		String configXML = "config.xml";
+		String configXML = "freestyle-config.xml";
 		if (project.getScmUrl().startsWith("git://")) {
 			configXML = "config-git.xml";
 		}
