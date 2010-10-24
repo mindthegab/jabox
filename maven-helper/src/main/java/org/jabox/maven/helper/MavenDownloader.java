@@ -21,6 +21,7 @@ package org.jabox.maven.helper;
 
 import java.io.File;
 
+import org.jabox.environment.Environment;
 import org.jabox.maven.helper.aether.aether.Aether;
 import org.sonatype.aether.collection.DependencyCollectionException;
 import org.sonatype.aether.resolution.ArtifactResolutionException;
@@ -29,8 +30,9 @@ import org.sonatype.aether.transfer.ArtifactNotFoundException;
 public class MavenDownloader {
 
 	private static final String MAVEN_REPO = "http://repo1.maven.org/maven2/";
-	private static final String LOCAL_REPO = System.getProperty("user.home")
-			+ "/.m2/repository/";
+	private static final String LOCAL_REPO = Environment
+			.getCustomMavenHomeDir().getAbsolutePath()
+			+ "/repository/";
 
 	/**
 	 * @param groupId
@@ -61,11 +63,9 @@ public class MavenDownloader {
 
 	public static File getArtifactFile(final String groupId,
 			final String artifactId, final String version, final String type) {
-		String userHome = System.getProperty("user.home");
-		assert userHome != null;
-		StringBuffer sb = new StringBuffer(userHome);
-		sb.append(File.separator);
-		sb.append(".m2");
+		String m2Home = Environment.getCustomMavenHomeDir().getAbsolutePath();
+		assert m2Home != null;
+		StringBuffer sb = new StringBuffer(m2Home);
 		sb.append(File.separator);
 		sb.append("repository");
 		sb.append(File.separator);
