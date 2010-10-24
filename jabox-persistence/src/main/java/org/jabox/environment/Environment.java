@@ -23,17 +23,27 @@ import java.io.File;
 
 public class Environment {
 
+	private static final String JABOX_ENV = "JABOX_HOME";
+	private static final String JABOX_PROPERTY = "JABOX_HOME";
 	private static final String HUDSON_ENV = "HUDSON_HOME";
 	private static final String HUDSON_PROPERTY = "HUDSON_HOME";
 	private static final String HUDSON_DIR = ".hudson";
+	private static final String CUSTOM_MAVEN_DIR = ".m2";
 
 	public static String getBaseDir() {
-		return getHomeDir() + File.separatorChar + ".jabox"
-				+ File.separatorChar;
+		return getHomeDir();
 	}
 
 	public static File getBaseDirFile() {
 		return new File(getBaseDir());
+	}
+
+	public static File getCustomMavenHomeDir() {
+		File m2Dir = new File(getBaseDirFile(), CUSTOM_MAVEN_DIR);
+		if (!m2Dir.exists()) {
+			m2Dir.mkdirs();
+		}
+		return m2Dir;
 	}
 
 	public static String getHudsonHomeDir() {
@@ -49,7 +59,7 @@ public class Environment {
 	}
 
 	public static File getTmpDirFile() {
-		File tmpDir = new File(getBaseDir(), "tmp");
+		File tmpDir = new File(getBaseDirFile(), "tmp");
 
 		if (!tmpDir.exists()) {
 			tmpDir.mkdirs();
@@ -59,7 +69,15 @@ public class Environment {
 	}
 
 	protected static String getHomeDir() {
-		return System.getProperty("user.home");
+		String env = System.getenv(JABOX_ENV);
+		String property = System.getProperty(JABOX_PROPERTY);
+		if (env != null) {
+			return env;
+		} else if (property != null) {
+			return property;
+		}
+		return System.getProperty("user.home") + File.separatorChar + ".jabox"
+				+ File.separatorChar;
 	}
 
 	public static void configureEnvironmentVariables() {
