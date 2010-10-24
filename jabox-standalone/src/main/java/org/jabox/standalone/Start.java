@@ -24,6 +24,7 @@ import java.util.List;
 
 import org.jabox.apis.embedded.EmbeddedServer;
 import org.jabox.environment.Environment;
+import org.jabox.utils.MavenSettingsManager;
 import org.jabox.utils.WebappManager;
 import org.mortbay.jetty.Connector;
 import org.mortbay.jetty.Server;
@@ -68,6 +69,7 @@ public class Start {
 	 */
 	public static void startEmbeddedJetty(final boolean startJabox) {
 		Server server = new Server();
+		MavenSettingsManager.writeCustomSettings();
 		SocketConnector connector = new SocketConnector();
 		// Set some timeout options to make debugging easier.
 		connector.setMaxIdleTime(1000 * 60 * 60);
