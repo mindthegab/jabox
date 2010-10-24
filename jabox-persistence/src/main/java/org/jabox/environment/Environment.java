@@ -76,8 +76,10 @@ public class Environment {
 		} else if (property != null) {
 			return property;
 		}
-		return System.getProperty("user.home") + File.separatorChar + ".jabox"
-				+ File.separatorChar;
+		String homeDir = System.getProperty("user.home") + File.separatorChar
+				+ ".jabox" + File.separatorChar;
+		System.setProperty(JABOX_PROPERTY, homeDir);
+		return homeDir;
 	}
 
 	public static void configureEnvironmentVariables() {
