@@ -32,6 +32,7 @@ import org.apache.wicket.model.IModel;
 import org.apache.wicket.util.io.IOUtils;
 import org.jabox.apis.cis.CISConnector;
 import org.jabox.apis.cis.CISConnectorConfig;
+import org.jabox.environment.Environment;
 import org.jabox.model.DeployerConfig;
 import org.jabox.model.Project;
 import org.jabox.model.Server;
@@ -139,9 +140,14 @@ public class HudsonConnector implements CISConnector {
 		replace = replace.replace("${project.issueURL}",
 				"http://localhost/redmine/");
 		replace = replace.replace("${goals}",
-				"clean checkstyle:checkstyle findbugs:findbugs pmd:cpd deploy");
+				"clean checkstyle:checkstyle findbugs:findbugs pmd:cpd deploy -B"
+						+ passCustomSettingsXml());
 		replace = replace.replace("${project.name}", project.getName());
 		return replace;
+	}
+
+	private String passCustomSettingsXml() {
+		return " -s " + Environment.getCustomMavenHomeDir() + "/settings.xml";
 	}
 
 	public DeployerConfig newConfig() {
