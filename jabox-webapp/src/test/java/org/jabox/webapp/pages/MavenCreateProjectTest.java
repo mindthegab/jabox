@@ -25,6 +25,7 @@ import junit.framework.TestCase;
 
 import org.apache.maven.MavenExecutionException;
 import org.apache.maven.artifact.InvalidRepositoryException;
+import org.jabox.model.MavenArchetype;
 import org.jabox.model.Project;
 
 public class MavenCreateProjectTest extends TestCase {
@@ -43,7 +44,9 @@ public class MavenCreateProjectTest extends TestCase {
 		Project project = new Project();
 		project.setName("helloWorld");
 
-		// MavenCreateProject.createProjectWithMavenCore(project);
+		MavenArchetype ma = new MavenArchetype("org.apache.wicket",
+				"wicket-archetype-quickstart", "1.3.3");
+		project.setMavenArchetype(ma);
+		// MavenCreateProject.createProjectWithMavenCore(project, "C:/tmp/");
 	}
-
 }
