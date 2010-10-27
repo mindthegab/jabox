@@ -8,13 +8,13 @@ public class EnvironmentTest extends TestCase {
 
 	public void testGetHomeDir() throws Exception {
 		String homeDir = Environment.getHomeDir();
-		assertEquals(System.getProperty("user.home"), homeDir);
+		assertEquals(System.getProperty("user.home") + File.separator
+				+ ".jabox" + File.separator, homeDir);
 	}
 
 	public void testGetBaseDir() throws Exception {
 		String baseDir = Environment.getBaseDir();
-		assertEquals(Environment.getHomeDir() + File.separator + ".jabox"
-				+ File.separator, baseDir);
+		assertEquals(Environment.getHomeDir(), baseDir);
 	}
 
 	public void testGetBaseDirFile() throws Exception {
