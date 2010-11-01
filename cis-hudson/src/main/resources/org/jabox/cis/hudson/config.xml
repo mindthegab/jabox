@@ -55,6 +55,20 @@
 			<pluginName>[CHECKSTYLE] </pluginName>
 			<thresholdLimit>low</thresholdLimit>
 		</hudson.plugins.checkstyle.CheckStyleReporter>
+		<hudson.plugins.findbugs.FindBugsReporter>
+			<healthy />
+			<unHealthy />
+			<pluginName>[FINDBUGS] </pluginName>
+			<thresholdLimit>low</thresholdLimit>
+			<canRunOnFailed>false</canRunOnFailed>
+		</hudson.plugins.findbugs.FindBugsReporter>
+		<hudson.plugins.pmd.PmdReporter>
+			<healthy />
+			<unHealthy />
+			<pluginName>[PMD] </pluginName>
+			<thresholdLimit>low</thresholdLimit>
+			<canRunOnFailed>false</canRunOnFailed>
+		</hudson.plugins.pmd.PmdReporter>
 		<hudson.plugins.dry.DryReporter>
 			<threshold />
 			<failureThreshold />
@@ -74,6 +88,9 @@
 		<org.jvnet.hudson.plugins.m2release.M2ReleaseBuildWrapper>
 			<releaseGoals>-Dresume=false release:prepare release:perform
 			</releaseGoals>
+			<defaultVersioningMode>specify_version</defaultVersioningMode>
+			<selectCustomScmCommentPrefix>false</selectCustomScmCommentPrefix>
+			<selectAppendHudsonUsername>false</selectAppendHudsonUsername>
 		</org.jvnet.hudson.plugins.m2release.M2ReleaseBuildWrapper>
 	</buildWrappers>
 </maven2-moduleset>

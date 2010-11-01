@@ -122,7 +122,7 @@ public class HudsonConnector implements CISConnector {
 	 * @return
 	 */
 	private InputStream getConfigXMLStream(Project project) {
-		String configXML = "freestyle-config.xml";
+		String configXML = "config.xml";
 		if (project.getScmUrl().startsWith("git://")) {
 			configXML = "config-git.xml";
 		}
@@ -140,7 +140,7 @@ public class HudsonConnector implements CISConnector {
 		replace = replace.replace("${project.issueURL}",
 				"http://localhost/redmine/");
 		replace = replace.replace("${goals}",
-				"clean checkstyle:checkstyle pmd:pmd pmd:cpd deploy -B"
+				"clean findbugs:findbugs checkstyle:checkstyle pmd:pmd pmd:cpd deploy -B"
 						+ passCustomSettingsXml());
 		replace = replace.replace("${project.name}", project.getName());
 		return replace;
