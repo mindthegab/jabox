@@ -24,12 +24,12 @@ import junit.framework.TestCase;
 public class MavenDownloaderTest extends TestCase {
 
 	public void testDownloadArtifact() {
-		MavenDownloader.downloadArtifact("org.jvnet.hudson.main", "hudson-war",
-				"1.322", "war");
+		MavenDownloader.downloadArtifact("org.jvnet.hudson.plugins",
+				"analysis-core", "1.14", "hpi");
 	}
 
 	public void testGetArtifactFile() {
-		MavenDownloader.getArtifactFile("org.jvnet.hudson.main", "hudson-war",
-				"1.322", "war");
+		MavenDownloader.getArtifactFile("org.jvnet.hudson.plugins",
+				"analysis-core", "1.14", "hpi");
 	}
 }
