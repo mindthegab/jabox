@@ -20,40 +20,59 @@
 package org.jabox.maven.helper;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
+import org.apache.maven.artifact.Artifact;
+import org.apache.maven.artifact.factory.ArtifactFactory;
+import org.apache.maven.artifact.repository.ArtifactRepository;
+import org.apache.maven.artifact.repository.ArtifactRepositoryPolicy;
+import org.apache.maven.artifact.repository.DefaultArtifactRepositoryFactory;
+import org.apache.maven.artifact.repository.layout.DefaultRepositoryLayout;
+import org.apache.maven.artifact.resolver.ArtifactNotFoundException;
+import org.apache.maven.artifact.resolver.ArtifactResolutionException;
+import org.apache.maven.artifact.resolver.ArtifactResolver;
+import org.codehaus.classworlds.ClassWorld;
+import org.codehaus.plexus.PlexusContainerException;
+import org.codehaus.plexus.component.repository.exception.ComponentLookupException;
+import org.codehaus.plexus.embed.Embedder;
 import org.jabox.environment.Environment;
-import org.jabox.maven.helper.aether.aether.Aether;
-import org.sonatype.aether.collection.DependencyCollectionException;
-import org.sonatype.aether.resolution.ArtifactResolutionException;
-import org.sonatype.aether.transfer.ArtifactNotFoundException;
 
 public class MavenDownloader {
 
 	private static final String MAVEN_REPO = "http://repo1.maven.org/maven2/";
-	private static final String LOCAL_REPO = Environment
-			.getCustomMavenHomeDir().getAbsolutePath()
-			+ "/repository/";
+
+	private static ArtifactRepositoryPolicy ARTIFACT_REPOSITORY_POLICY = new ArtifactRepositoryPolicy(
+			true, ArtifactRepositoryPolicy.UPDATE_POLICY_NEVER,
+			ArtifactRepositoryPolicy.CHECKSUM_POLICY_WARN);
+
+	private static ArtifactRepository ARTIFACT_REPOSITORY = new DefaultArtifactRepositoryFactory()
+			.createArtifactRepository("remote", MAVEN_REPO,
+					new DefaultRepositoryLayout(), ARTIFACT_REPOSITORY_POLICY,
+					ARTIFACT_REPOSITORY_POLICY);;
+
+	private static ArtifactRepository LOCAL_ARTIFACT_REPOSITORY = new DefaultArtifactRepositoryFactory()
+			.createArtifactRepository("local", "file://"
+					+ System.getProperty("user.home") + "/.m2/repository/",
+					new DefaultRepositoryLayout(), ARTIFACT_REPOSITORY_POLICY,
+					ARTIFACT_REPOSITORY_POLICY);;
 
 	/**
 	 * @param groupId
 	 * @param artifactId
 	 * @param version
-	 * @param extension
+	 * @param type
 	 */
 	public static File downloadArtifact(final String groupId,
-			final String artifactId, final String version,
-			final String extension) {
+			final String artifactId, final String version, final String type) {
 		System.out.println("Downloading: " + groupId + ":" + artifactId + ":"
-				+ version + ":" + extension);
+				+ version + ":" + type);
 		try {
-			return retrieveArtifact(groupId, artifactId, version, extension);
+			return retrieveArtifact(groupId, artifactId, version, type);
 		} catch (ArtifactResolutionException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ArtifactNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (DependencyCollectionException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -66,6 +85,8 @@ public class MavenDownloader {
 		String m2Home = Environment.getCustomMavenHomeDir().getAbsolutePath();
 		assert m2Home != null;
 		StringBuffer sb = new StringBuffer(m2Home);
+		sb.append(File.separator);
+		sb.append(".m2");
 		sb.append(File.separator);
 		sb.append("repository");
 		sb.append(File.separator);
@@ -87,13 +108,36 @@ public class MavenDownloader {
 
 	private static File retrieveArtifact(final String groupId,
 			final String artifactId, final String version,
-			final String extension) throws ArtifactResolutionException,
-			ArtifactNotFoundException, DependencyCollectionException {
-		Aether aether = new Aether(MAVEN_REPO, LOCAL_REPO);
+			final String packaging) throws ArtifactResolutionException,
+			ArtifactNotFoundException {
+		try {
+			Embedder embedder = new Embedder();
+			ClassWorld classWorld = new ClassWorld();
 
-		File result = aether.resolveArtifact(groupId, artifactId, version,
-				extension);
+			try {
+				embedder.start(classWorld);
+			} catch (PlexusContainerException e) {
+				throw new RuntimeException(
+						"Unable to start the embedded plexus container", e);
+			}
 
-		return result;
+			Artifact artifact = ((ArtifactFactory) embedder
+					.lookup(ArtifactFactory.ROLE)).createBuildArtifact(groupId,
+					artifactId, version, packaging);
+
+			ArtifactResolver artifactResolver = (ArtifactResolver) embedder
+					.lookup(ArtifactResolver.ROLE);
+			List<ArtifactRepository> remoteRepositories = new ArrayList<ArtifactRepository>();
+			remoteRepositories.add(ARTIFACT_REPOSITORY);
+			ARTIFACT_REPOSITORY.getBasedir();
+			// XXX local Repo is wrong.
+			artifactResolver.resolve(artifact, remoteRepositories,
+					LOCAL_ARTIFACT_REPOSITORY);
+			return artifact.getFile();
+		} catch (ComponentLookupException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 }
