@@ -55,13 +55,14 @@
 			<artifactId>webstart-jnlp-servlet</artifactId>
 			<version>1.0-6.0-02_ea_b02</version>
 		</dependency>
-		<dependency>
+<!--	FIXME: This is not compiled in Maven 3.
+	<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>eclipse-startup</artifactId>
 			<version>${project.version}</version>
 			<type>zip</type>
 			<scope>provided</scope>
-		</dependency>
+		</dependency>  -->
 	</dependencies>
 	<build>
 		<plugins>
