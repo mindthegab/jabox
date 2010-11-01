@@ -48,8 +48,12 @@ public class HudsonServer extends AbstractEmbeddedServer {
 	}
 
 	public static void injectPlugins() {
-		injectPlugin("org.jvnet.hudson.plugins.m2release", "m2release", "0.3.4");
-		injectPlugin("org.jvnet.hudson.plugins", "redmine", "0.8");
+		injectPlugin("org.jvnet.hudson.plugins", "analysis-core", "1.14");
+		injectPlugin("org.jvnet.hudson.plugins", "analysis-collector", "1.8");
+		injectPlugin("org.jvnet.hudson.plugins", "pmd", "3.10");
+		injectPlugin("org.jvnet.hudson.plugins", "checkstyle", "3.10");
+		injectPlugin("org.jvnet.hudson.plugins.m2release", "m2release", "0.6.1");
+		injectPlugin("org.jvnet.hudson.plugins", "redmine", "0.9");
 		injectConfiguration("hudson.tasks.Maven.xml");
 	}
 
@@ -71,16 +75,15 @@ public class HudsonServer extends AbstractEmbeddedServer {
 				version, "hpi");
 		try {
 			FileUtils.copyFile(plugin, new File(getHudsonPluginDir(),
-					stripVersion(plugin)));
+					stripVersion(plugin.getName())));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
-	private static String stripVersion(final File plugin) {
-		String name = plugin.getName();
-		name = name.replaceAll("-.*", ".hpi");
-		return name;
+	protected static String stripVersion(String name) {
+		String replaceAll = name.replaceAll("-[^-]*.hpi", ".hpi");
+		return replaceAll;
 	}
 
 	private static File getHudsonPluginDir() {
