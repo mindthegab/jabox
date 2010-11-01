@@ -53,9 +53,9 @@ public class MavenDownloader {
 
 	private static ArtifactRepository LOCAL_ARTIFACT_REPOSITORY = new DefaultArtifactRepositoryFactory()
 			.createArtifactRepository("local", "file://"
-					+ System.getProperty("user.home") + "/.m2/repository/",
+					+ Environment.getCustomMavenHomeDir() + "/repository/",
 					new DefaultRepositoryLayout(), ARTIFACT_REPOSITORY_POLICY,
-					ARTIFACT_REPOSITORY_POLICY);;
+					ARTIFACT_REPOSITORY_POLICY);
 
 	/**
 	 * @param groupId
