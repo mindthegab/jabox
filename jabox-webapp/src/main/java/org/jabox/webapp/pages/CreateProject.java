@@ -104,13 +104,13 @@ public class CreateProject extends MiddlePanel {
 
 	private void fillArchetypes(final List<MavenArchetype> connectors) {
 		connectors.add(new MavenArchetype("org.apache.wicket",
-				"wicket-archetype-quickstart", "1.4.1"));
+				"wicket-archetype-quickstart", "1.4.12"));
 		connectors.add(new MavenArchetype("org.apache.maven.archetypes",
-				"maven-archetype-quickstart", "1.0"));
+				"maven-archetype-quickstart", "1.1"));
 		connectors.add(new MavenArchetype("org.apache.maven.archetypes",
-				"maven-archetype-site", "1.0"));
+				"maven-archetype-site", "1.1"));
 		connectors.add(new MavenArchetype("org.apache.maven.archetypes",
-				"maven-archetype-site-simple", "1.0"));
+				"maven-archetype-site-simple", "1.1"));
 		connectors.add(new MavenArchetype("org.apache.maven.archetypes",
 				"maven-archetype-webapp", "1.0"));
 	}
