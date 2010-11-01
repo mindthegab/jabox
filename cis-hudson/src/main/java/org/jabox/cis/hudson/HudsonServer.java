@@ -50,6 +50,7 @@ public class HudsonServer extends AbstractEmbeddedServer {
 	public static void injectPlugins() {
 		injectPlugin("org.jvnet.hudson.plugins", "analysis-core", "1.14");
 		injectPlugin("org.jvnet.hudson.plugins", "analysis-collector", "1.8");
+		injectPlugin("org.jvnet.hudson.plugins", "dry", "1.5");
 		injectPlugin("org.jvnet.hudson.plugins", "pmd", "3.10");
 		injectPlugin("org.jvnet.hudson.plugins", "checkstyle", "3.10");
 		injectPlugin("org.jvnet.hudson.plugins.m2release", "m2release", "0.6.1");
