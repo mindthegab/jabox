@@ -1,13 +1,13 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <project>
   <actions/>
-  <description></description>
+  <description />
   <keepDependencies>false</keepDependencies>
   <properties>
     <hudson.plugins.redmine.RedmineProjectProperty>
       <redmineWebsite>${project.issueURL}</redmineWebsite>
       <projectName>${project.name}</projectName>
-      <redmineVersion>false</redmineVersion>
+      <redmineVersion>true</redmineVersion>
     </hudson.plugins.redmine.RedmineProjectProperty>
   </properties>
   <scm class="hudson.scm.SubversionSCM">
@@ -19,6 +19,7 @@
     </locations>
     <useUpdate>true</useUpdate>
     <doRevert>false</doRevert>
+   	<browser class="hudson.plugins.redmine.RedmineRepositoryBrowser" />
     <excludedRegions></excludedRegions>
     <excludedUsers></excludedUsers>
     <excludedRevprop></excludedRevprop>
@@ -27,12 +28,16 @@
   <canRoam>true</canRoam>
   <disabled>false</disabled>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
-  <triggers class="vector"/>
+	<triggers class="vector">
+		<hudson.triggers.SCMTrigger>
+			<spec>* * * * *</spec>
+		</hudson.triggers.SCMTrigger>
+	</triggers>
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Maven>
       <targets>${goals}</targets>
-      <mavenName>Maven 2.2.1</mavenName>
+      <mavenName>Maven 3.0</mavenName>
       <usePrivateRepository>false</usePrivateRepository>
     </hudson.tasks.Maven>
   </builders>
