@@ -27,9 +27,4 @@ public class MavenDownloaderTest extends TestCase {
 		MavenDownloader.downloadArtifact("org.jvnet.hudson.plugins",
 				"analysis-core", "1.14", "hpi");
 	}
-
-	public void testGetArtifactFile() {
-		MavenDownloader.getArtifactFile("org.jvnet.hudson.plugins",
-				"analysis-core", "1.14", "hpi");
-	}
 }
