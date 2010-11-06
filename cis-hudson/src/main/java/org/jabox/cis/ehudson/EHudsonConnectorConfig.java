@@ -24,6 +24,7 @@ import javax.persistence.Entity;
 
 import org.jabox.cis.hudson.HudsonConnectorConfig;
 import org.jabox.model.Server;
+import org.jabox.utils.LocalHostName;
 
 @Entity
 @DiscriminatorValue(EHudsonConnector.ID)
@@ -47,8 +48,8 @@ public class EHudsonConnectorConfig extends HudsonConnectorConfig {
 	public void setServer(final Server server) {
 		super.setServer(server);
 		if (server != null) {
-			// XXX make url dynamic for remote connections.
-			server.setUrl("http://localhost:9090/hudson/");
+			server.setUrl("http://" + LocalHostName.getLocalHostname()
+					+ ":9090/hudson/");
 		}
 	}
 

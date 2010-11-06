@@ -25,6 +25,7 @@ import javax.persistence.Entity;
 import org.jabox.apis.rms.RMSConnectorConfig;
 import org.jabox.model.DeployerConfig;
 import org.jabox.model.Server;
+import org.jabox.utils.LocalHostName;
 
 @Entity
 @DiscriminatorValue(EArtifactoryConnector.ID)
@@ -45,7 +46,8 @@ public class EArtifactoryConnectorConfig extends DeployerConfig implements
 		super.setServer(server);
 		if (server != null) {
 			// XXX make url dynamic for remote connections.
-			server.setUrl("http://localhost:9090/artifactory/");
+			server.setUrl("http://" + LocalHostName.getLocalHostname()
+					+ ":9090/artifactory/");
 		}
 	}
 

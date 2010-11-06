@@ -27,6 +27,7 @@ import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 import org.jabox.cis.hudson.HudsonLoginValidator;
 import org.jabox.model.Server;
+import org.jabox.utils.LocalHostName;
 
 public class EHudsonConnectorEditor extends Panel {
 	private static final long serialVersionUID = -4821476804096973897L;
@@ -41,7 +42,7 @@ public class EHudsonConnectorEditor extends Panel {
 
 		// XXX This should be dynamic
 		TextField<String> url = new TextField<String>("url", new Model<String>(
-				"http://localhost:9090/hudson/"));
+				"http://" + LocalHostName.getLocalHostname() + ":9090/hudson/"));
 
 		add(password.add(new HudsonLoginValidator(url, username, password))
 				.setRequired(true));

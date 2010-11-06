@@ -8,13 +8,14 @@ import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.util.tester.WicketTester;
 import org.apache.wicket.validation.Validatable;
+import org.jabox.utils.LocalHostName;
 
 public abstract class HudsonLoginValidatorTest extends TestCase {
 
 	public void testOnValidateFails() {
 		new WicketTester();
 		TextField<String> url = new TextField<String>("url", new Model<String>(
-				"http://localhost:9090/hudson/"));
+				"http://" + LocalHostName.getLocalHostname() + ":9090/hudson/"));
 		TextField<String> username = new TextField<String>("admin",
 				new Model<String>("admin"));
 		PasswordTextField password = new PasswordTextField("admin",
@@ -29,7 +30,7 @@ public abstract class HudsonLoginValidatorTest extends TestCase {
 	public void testOnValidateSucceeds() {
 		new WicketTester();
 		TextField<String> url = new TextField<String>("url", new Model<String>(
-				"http://localhost:9090/hudson/"));
+				"http://" + LocalHostName.getLocalHostname() + ":9090/hudson/"));
 		TextField<String> username = new TextField<String>("admin",
 				new Model<String>("admin"));
 		PasswordTextField password = new PasswordTextField("admin",
