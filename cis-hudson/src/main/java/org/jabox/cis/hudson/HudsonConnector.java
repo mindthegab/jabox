@@ -147,7 +147,8 @@ public class HudsonConnector implements CISConnector {
 	}
 
 	private String passCustomSettingsXml() {
-		return " -s " + Environment.getCustomMavenHomeDir() + "/settings.xml";
+		return " -s \"" + Environment.getCustomMavenHomeDir()
+				+ "/settings.xml\"";
 	}
 
 	public DeployerConfig newConfig() {
