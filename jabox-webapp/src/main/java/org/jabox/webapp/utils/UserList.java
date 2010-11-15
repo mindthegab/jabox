@@ -28,6 +28,7 @@ import org.apache.wicket.persistence.provider.GeneralDao;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.jabox.model.User;
 import org.jabox.webapp.menubuttons.DeleteEntityButton;
+import org.jabox.webapp.menubuttons.EditEntityButton;
 import org.jabox.webapp.pages.ManageProjects;
 
 public class UserList extends PropertyListView<User> {
@@ -51,6 +52,8 @@ public class UserList extends PropertyListView<User> {
 		listItem.add(new Label("email", user.getEmail()));
 		listItem.add(new Label("firstName", user.getFirstName()));
 		listItem.add(new Label("lastName", user.getLastName()));
+		listItem.add(new EditEntityButton<User>("edit", listItem
+				.getModelObject()));
 		listItem.add(new DeleteEntityButton<User>("delete", listItem,
 				ManageProjects.class));
 	}

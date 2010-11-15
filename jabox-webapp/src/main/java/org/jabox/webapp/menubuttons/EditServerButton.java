@@ -24,16 +24,17 @@ import org.apache.wicket.markup.html.form.ImageButton;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
-import org.apache.wicket.persistence.domain.BaseEntity;
 import org.apache.wicket.persistence.domain.BaseEntityDetachableModel;
 import org.apache.wicket.persistence.provider.GeneralDao;
 import org.apache.wicket.spring.injection.annot.SpringBean;
-import org.jabox.model.User;
+import org.jabox.apis.Connector;
+import org.jabox.model.DeployersRegistry;
+import org.jabox.model.Server;
 import org.jabox.webapp.modifiers.TooltipModifier;
-import org.jabox.webapp.pages.EditUserPage;
-import org.jabox.webapp.pages.ManageUsers;
+import org.jabox.webapp.pages.EditServerPage;
+import org.jabox.webapp.pages.ManageServers;
 
-public final class EditEntityButton<T extends BaseEntity> extends ImageButton {
+public final class EditServerButton<T extends Server> extends ImageButton {
 
 	private static final TooltipModifier TOOLTIP_MODIFIER = new TooltipModifier(
 			"Edit Connector");
@@ -44,18 +45,21 @@ public final class EditEntityButton<T extends BaseEntity> extends ImageButton {
 	private static final long serialVersionUID = 1L;
 	private final T _item;
 
-	public EditEntityButton(final String id, final T item) {
+	public EditServerButton(final String id, final T item) {
 		super(id, EDIT_IMG);
 		_item = item;
 		add(TOOLTIP_MODIFIER);
 	}
 
-	public EditEntityButton(final String id, final ListItem<T> item) {
+	public EditServerButton(final String id, final ListItem<T> item) {
 		this(id, item.getModelObject());
 	}
 
 	@SpringBean(name = "GeneralDao")
 	protected GeneralDao _generalDao;
+
+	@SpringBean
+	private DeployersRegistry registry;
 
 	/**
 	 * Delete from persistent storage, commit transaction.
@@ -63,17 +67,21 @@ public final class EditEntityButton<T extends BaseEntity> extends ImageButton {
 	@Override
 	public void onSubmit() {
 		IModel<T> model = new BaseEntityDetachableModel<T>(_item);
-		setResponsePage(new EditUserPage(new CompoundPropertyModel<User>(model)) {
+
+		Connector connector = registry.getEntry(model.getObject()
+				.getDeployerConfig().pluginId);
+		setResponsePage(new EditServerPage(new CompoundPropertyModel<Server>(
+				model), connector.getClass()) {
 
 			@Override
 			protected void onCancel() {
-				setResponsePage(ManageUsers.class);
+				setResponsePage(ManageServers.class);
 			}
 
 			@Override
-			protected void onSave(final User user) {
-				_generalDao.persist(user);
-				setResponsePage(ManageUsers.class);
+			protected void onSave(final Server server) {
+				_generalDao.persist(server);
+				setResponsePage(ManageServers.class);
 			}
 		});
 	}

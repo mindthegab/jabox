@@ -4,20 +4,23 @@
 	<h2>Manage Users</h2>
 	<p />
 	<form wicket:id="deleteForm">
-	<table cellspacing="0" class="dataview">
+	
+	<table cellspacing="0" class="dataviewTable" width="90%">
 		<tr>
-			<th>Login</th>
-			<th>First Name</th>
-			<th>Last Name</th>
-			<th>Email</th>
-			<th>Delete</th>
+			<th class="dataviewTh" width="200px">Login</th>
+			<th class="dataviewTh" width="200px">First Name</th>
+			<th class="dataviewTh" width="40px">Last Name</th>
+			<th class="dataviewTh" width="40px">Email</th>
+			<th class="dataviewTh" width="40px">Edit</th>
+			<th class="dataviewTh" width="40px">Delete</th>
 		</tr>
 		<tr wicket:id="users">
-			<td><span wicket:id="login">login</span></td>
-			<td><span wicket:id="firstName">First Name</span></td>
-			<td><span wicket:id="lastName">Last Name</span></td>
-			<td><span wicket:id="email">Email</span></td>
-			<td><input type="image" wicket:id="delete"
+			<td class="dataviewTd"><span wicket:id="login">login</span></td>
+			<td class="dataviewTd"><span wicket:id="firstName">First Name</span></td>
+			<td class="dataviewTd"><span wicket:id="lastName">Last Name</span></td>
+			<td class="dataviewTd"><span wicket:id="email">Email</span></td>
+			<td class="dataviewTd"><input type="image" wicket:id="edit" /></td>
+			<td class="dataviewTd"><input type="image" wicket:id="delete"
 				title="Delete this task" src="delete.jpg"
 				onclick="return confirm('Are you sure you want to delete this task?');" />
 			</td>

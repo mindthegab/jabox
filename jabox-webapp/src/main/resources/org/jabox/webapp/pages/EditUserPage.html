@@ -1,33 +1,36 @@
 <html>
 <body>
 <wicket:extend>
-<h2>Edit User</h2>
-<p />
-<form wicket:id="form">
-	<tr class="deployer">
-		<td><label for="login"><wicket:message
-			key="login">login</wicket:message>: </label></td>
-		<td><input wicket:id="login" type="text" size="10" /></td>
-	</tr>
-	<tr class="deployer">
-		<td><label for="firstName"><wicket:message
-			key="firstName">firstName</wicket:message>: </label></td>
-		<td><input wicket:id="firstName" type="text" size="10" /></td>
-	</tr>
-	<tr class="deployer">
-		<td><label for="lastName"><wicket:message
-			key="lastName">lastName</wicket:message>: </label></td>
-		<td><input wicket:id="lastName" type="text" size="10" /></td>
-	</tr>
+	<h2>Edit User</h2>
+	<div class="feedback" wicket:id="feedback">feedbackmessages will
+	be put here</div>
 
-	<tr>
-			<td><input type="submit" class="button"
-				value="submit" /></td>
+	<form wicket:id="form">
+	
+	<table>
+		<tr class="deployer">
+			<td><label for="login"><wicket:message key="login">login</wicket:message>:
+			</label></td>
+			<td><input wicket:id="login" type="text" size="10" /></td>
+		</tr>
+		<tr class="deployer">
+			<td><label for="firstName"><wicket:message
+				key="firstName">firstName</wicket:message>: </label></td>
+			<td><input wicket:id="firstName" type="text" size="10" /></td>
+		</tr>
+		<tr class="deployer">
+			<td><label for="lastName"><wicket:message key="lastName">lastName</wicket:message>:
+			</label></td>
+			<td><input wicket:id="lastName" type="text" size="10" /></td>
+		</tr>
+
+		<tr>
+			<td><input type="submit" class="button" value="submit" /></td>
 			<td><input type="submit" class="button" value="cancel"
 				wicket:id="cancel" /></td>
-    </tr>
-</form>
-<div class="feedback" wicket:id="feedback">feedbackmessages will be put here</div>
+		</tr>
+	</table>
+	</form>
 </wicket:extend>
 </body>
 </html>
