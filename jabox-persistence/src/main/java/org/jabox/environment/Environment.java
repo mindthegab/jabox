@@ -72,9 +72,9 @@ public class Environment {
 		String env = System.getenv(JABOX_ENV);
 		String property = System.getProperty(JABOX_PROPERTY);
 		if (env != null) {
-			return env;
+			return env + File.separatorChar;
 		} else if (property != null) {
-			return property;
+			return property + File.separatorChar;
 		}
 		String homeDir = System.getProperty("user.home") + File.separatorChar
 				+ ".jabox" + File.separatorChar;
