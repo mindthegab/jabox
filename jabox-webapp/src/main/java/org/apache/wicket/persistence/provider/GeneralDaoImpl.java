@@ -62,6 +62,15 @@ public class GeneralDaoImpl implements GeneralDao, InitializingBean {
 		return (T) query.getSingleResult();
 	}
 
+	@SuppressWarnings("unchecked")
+	public <T extends IBaseEntity> T findEntityByQuery(final String fieldname,
+			final String value, final Class<T> clazz) {
+		Query query = entityManager.createQuery("SELECT e FROM "
+				+ clazz.getName() + " e WHERE e." + fieldname + "='" + value
+				+ "'");
+		return (T) query.getSingleResult();
+	}
+
 	public EntityManager getEntityManager() {
 		return entityManager;
 	}

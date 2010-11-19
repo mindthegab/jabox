@@ -60,4 +60,9 @@ public class GeneralDaoMock implements GeneralDao {
 
 	public <T extends IBaseEntity> void persist(final T object) {
 	}
+
+	public <T extends IBaseEntity> T findEntityByQuery(String fieldname,
+			String value, Class<T> clazz) {
+		return null;
+	}
 }

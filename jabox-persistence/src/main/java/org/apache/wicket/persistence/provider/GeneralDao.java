@@ -28,6 +28,9 @@ public interface GeneralDao {
 
 	<T extends IBaseEntity> T findEntity(Long id, Class<T> clazz);
 
+	public <T extends IBaseEntity> T findEntityByQuery(final String fieldname,
+			final String value, final Class<T> clazz);
+
 	<T extends IBaseEntity> List<T> getEntities(Class<T> clazz);
 
 	<T extends IBaseEntity> void persist(T object);
