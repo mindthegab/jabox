@@ -21,6 +21,7 @@ package org.jabox.webapp.pages;
 
 import org.apache.wicket.authorization.strategies.role.annotations.AuthorizeInstantiation;
 import org.apache.wicket.markup.html.form.Form;
+import org.apache.wicket.markup.html.form.PasswordTextField;
 import org.apache.wicket.markup.html.form.RequiredTextField;
 import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
@@ -61,6 +62,7 @@ public abstract class EditUserPage extends MiddlePanel {
 		form.add(new RequiredTextField<Project>("login"));
 		form.add(new RequiredTextField<Project>("firstName"));
 		form.add(new RequiredTextField<Project>("lastName"));
+		form.add(new PasswordTextField("password"));
 
 		form.add(new Link<Void>("cancel") {
 			private static final long serialVersionUID = -6975617962156076540L;

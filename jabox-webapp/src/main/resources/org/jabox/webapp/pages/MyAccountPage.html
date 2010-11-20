@@ -4,12 +4,12 @@
 	xmlns:wicket="http://wicket.sourceforge.net/" xml:lang="en" lang="en">
 <body>
 <wicket:extend>
-	<h2>Edit User</h2>
+	<h2>My Account</h2>
 	<div class="feedback" wicket:id="feedback">feedbackmessages will
 	be put here</div>
 
 	<form wicket:id="form">
-	
+
 	<table>
 		<tr class="deployer">
 			<td><label for="login"><wicket:message key="login">login</wicket:message>:
@@ -25,6 +25,11 @@
 			<td><label for="lastName"><wicket:message key="lastName">lastName</wicket:message>:
 			</label></td>
 			<td><input wicket:id="lastName" type="text" size="10" /></td>
+		</tr>
+		<tr class="deployer">
+			<td><label for="password"><wicket:message key="password">Password</wicket:message>:
+			</label></td>
+			<td><input wicket:id="password" type="password" size="10" /></td>
 		</tr>
 
 		<tr>

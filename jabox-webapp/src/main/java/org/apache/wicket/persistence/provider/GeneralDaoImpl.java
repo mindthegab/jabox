@@ -68,6 +68,9 @@ public class GeneralDaoImpl implements GeneralDao, InitializingBean {
 		Query query = entityManager.createQuery("SELECT e FROM "
 				+ clazz.getName() + " e WHERE e." + fieldname + "='" + value
 				+ "'");
+		if (query.getResultList().size() == 0) {
+			return null;
+		}
 		return (T) query.getSingleResult();
 	}
 

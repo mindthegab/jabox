@@ -22,6 +22,9 @@ package org.jabox.webapp.pages;
 import org.apache.wicket.Request;
 import org.apache.wicket.authentication.AuthenticatedWebSession;
 import org.apache.wicket.authorization.strategies.role.Roles;
+import org.apache.wicket.injection.web.InjectorHolder;
+import org.apache.wicket.persistence.provider.GeneralDao;
+import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.jabox.model.User;
 
 /**
@@ -30,7 +33,8 @@ import org.jabox.model.User;
 public class JaboxAuthenticatedWebSession extends AuthenticatedWebSession {
 	private static final long serialVersionUID = 1L;
 
-	private User _user;
+	@SpringBean(name = "GeneralDao")
+	protected GeneralDao _generalDao;
 
 	/**
 	 * Construct.
@@ -40,6 +44,7 @@ public class JaboxAuthenticatedWebSession extends AuthenticatedWebSession {
 	 */
 	public JaboxAuthenticatedWebSession(final Request request) {
 		super(request);
+		InjectorHolder.getInjector().inject(this);
 	}
 
 	/**
@@ -48,14 +53,21 @@ public class JaboxAuthenticatedWebSession extends AuthenticatedWebSession {
 	 */
 	@Override
 	public boolean authenticate(final String username, final String password) {
-		// Check username and password
-		boolean authenticated = username.equals("admin")
-				&& password.equals("admin");
-		if (authenticated) {
-			_user = new User();
-			_user.setLogin("admin");
+		User user = _generalDao.findEntityByQuery("_login", username,
+				User.class);
+
+		if (user == null) {
+			return false;
 		}
-		return authenticated;
+		if (password == null) {
+			return false;
+		}
+
+		if (password.equals(user.getPassword())) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	/**
@@ -68,13 +80,5 @@ public class JaboxAuthenticatedWebSession extends AuthenticatedWebSession {
 			return new Roles(Roles.ADMIN);
 		}
 		return null;
-	}
-
-	public void setUser(final User user) {
-		_user = user;
-	}
-
-	public User getUser() {
-		return _user;
 	}
 }

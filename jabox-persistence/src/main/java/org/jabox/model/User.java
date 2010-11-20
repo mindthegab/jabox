@@ -33,7 +33,7 @@ public class User extends BaseEntity implements Serializable {
 	private String _login;
 	private String _firstName;
 	private String _lastName;
-	private char[] _password;
+	private String _password;
 	private String _email;
 
 	public String getLogin() {
@@ -60,11 +60,11 @@ public class User extends BaseEntity implements Serializable {
 		_lastName = lastName;
 	}
 
-	public char[] getPassword() {
+	public String getPassword() {
 		return _password;
 	}
 
-	public void setPassword(final char[] password) {
+	public void setPassword(final String password) {
 		_password = password;
 	}
 
