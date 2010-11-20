@@ -25,6 +25,7 @@ import org.apache.wicket.protocol.http.pagestore.DiskPageStore;
 import org.apache.wicket.session.ISessionStore;
 import org.apache.wicket.spring.injection.annot.SpringComponentInjector;
 import org.apache.wicket.util.lang.PackageName;
+import org.jabox.applicationcontext.InitializeDatabase;
 import org.jabox.webapp.pages.HomePage;
 import org.jabox.webapp.pages.JaboxAuthenticatedWebApplication;
 import org.jabox.webapp.pages.ManageServers;
@@ -62,6 +63,7 @@ public class WicketApplication extends JaboxAuthenticatedWebApplication {
 	public void init() {
 		super.init();
 		springInjection();
+		new InitializeDatabase().init();
 	}
 
 	protected void springInjection() {

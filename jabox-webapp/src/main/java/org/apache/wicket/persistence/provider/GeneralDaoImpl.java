@@ -95,15 +95,11 @@ public class GeneralDaoImpl implements GeneralDao, InitializingBean {
 		List<DefaultConfiguration> configs = getEntities(DefaultConfiguration.class);
 
 		// If there is no configuration create one.
-		DefaultConfiguration config = null;
 		if (configs == null || configs.size() < 1) {
-			config = new DefaultConfiguration();
-			persist(config);
+			return null;
 		} else {
-			config = configs.get(0);
+			return configs.get(0);
 		}
-
-		return config;
 	}
 
 	@SuppressWarnings("unchecked")
