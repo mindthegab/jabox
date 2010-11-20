@@ -76,9 +76,9 @@ public class MyAccountPage extends MiddlePanel {
 	}
 
 	private IModel<User> getUser() {
-		// XXX login name should be dynamic
-		return new Model<User>(_generalDao.findEntityByQuery("_login", "admin",
-				User.class));
+		JaboxAuthenticatedWebSession session = (JaboxAuthenticatedWebSession) getSession();
+		Long userId = session.getUserId();
+		return new Model<User>(_generalDao.findEntity(userId, User.class));
 	}
 
 	protected void onSave(User user) {

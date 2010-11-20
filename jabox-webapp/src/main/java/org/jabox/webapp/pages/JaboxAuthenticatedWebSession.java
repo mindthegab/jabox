@@ -36,6 +36,8 @@ public class JaboxAuthenticatedWebSession extends AuthenticatedWebSession {
 	@SpringBean(name = "GeneralDao")
 	protected GeneralDao _generalDao;
 
+	private Long _userId;
+
 	/**
 	 * Construct.
 	 * 
@@ -53,21 +55,25 @@ public class JaboxAuthenticatedWebSession extends AuthenticatedWebSession {
 	 */
 	@Override
 	public boolean authenticate(final String username, final String password) {
+		if (username == null || password == null) {
+			return false;
+		}
+
 		User user = _generalDao.findEntityByQuery("_login", username,
 				User.class);
 
 		if (user == null) {
 			return false;
 		}
-		if (password == null) {
-			return false;
-		}
 
-		if (password.equals(user.getPassword())) {
+		if (username.equals(user.getLogin())
+				&& password.equals(user.getPassword())) {
+			_userId = user.getId();
 			return true;
 		} else {
 			return false;
 		}
+
 	}
 
 	/**
@@ -80,5 +86,12 @@ public class JaboxAuthenticatedWebSession extends AuthenticatedWebSession {
 			return new Roles(Roles.ADMIN);
 		}
 		return null;
+	}
+
+	/**
+	 * @return the id of the authenticated user.
+	 */
+	public Long getUserId() {
+		return _userId;
 	}
 }
