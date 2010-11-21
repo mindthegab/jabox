@@ -59,9 +59,9 @@ public class GITConnector implements SCMConnector<IGITConnectorConfig>,
 	public File createProjectDirectories(final Project project,
 			final IGITConnectorConfig config) throws SCMException {
 		IGITConnectorConfig svnc = config;
-		
+
 		GITFacade git = new GITFacade();
-		_tmpDir = new File(Environment.getBaseDir(), "gitRepo");
+		_tmpDir = GITRepository.getGitBaseDir();
 
 		git.checkoutBaseDir(_tmpDir, svnc);
 		// Create Project directory and its trunk/branches/tags
@@ -90,7 +90,7 @@ public class GITConnector implements SCMConnector<IGITConnectorConfig>,
 		assert _tmpDir != null && _tmpDir.exists();
 
 		GITFacade git = new GITFacade();
-		git.commitProject(project, _tmpDir, svnc);
+		git.commitProject(project, new File(_tmpDir, project.getName()), svnc);
 	}
 
 	public DeployerConfig newConfig() {
