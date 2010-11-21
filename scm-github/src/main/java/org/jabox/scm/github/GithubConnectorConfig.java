@@ -70,4 +70,12 @@ public class GithubConnectorConfig extends DeployerConfig implements
 	public String getProjectName() {
 		return projectName;
 	}
+
+	public String getProjectScmUrl(String projectName) {
+		return getScmUrl() + "/" + projectName + "/trunk/" + projectName;
+	}
+
+	public String getScmMavenPrefix() {
+		return "scm:git:";
+	}
 }

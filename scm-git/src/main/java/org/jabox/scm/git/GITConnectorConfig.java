@@ -53,4 +53,12 @@ public class GITConnectorConfig extends DeployerConfig implements
 	public String getScmUrl() {
 		return getServer().getUrl();
 	}
+
+	public String getProjectScmUrl(String projectName) {
+		return getScmUrl() + "/" + projectName + "/" + projectName;
+	}
+
+	public String getScmMavenPrefix() {
+		return "scm:git:";
+	}
 }

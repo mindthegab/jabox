@@ -74,4 +74,13 @@ public class ESVNConnectorConfig extends DeployerConfig implements
 		}
 		return null;
 	}
+
+	public String getProjectScmUrl(String projectName) {
+		return getScmUrl() + "/" + projectName + "/trunk/" + projectName;
+	}
+
+	@Override
+	public String getScmMavenPrefix() {
+		return "scm:svn:";
+	}
 }

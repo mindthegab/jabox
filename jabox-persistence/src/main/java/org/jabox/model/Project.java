@@ -42,6 +42,7 @@ public class Project extends BaseEntity implements Serializable {
 
 	@Column(nullable = false, length = 1024)
 	private MavenArchetype _mavenArchetype;
+	private String _scmMavenPrefix;
 
 	public MavenArchetype getMavenArchetype() {
 		return _mavenArchetype;
@@ -97,7 +98,7 @@ public class Project extends BaseEntity implements Serializable {
 	 * @return SCM url encoded for maven's pom.xml
 	 */
 	public String getScmMavenUrl() {
-		return "scm:svn:" + getScmUrl();
+		return getScmMavenPrefix() + getScmUrl();
 	}
 
 	public void setSourceEncoding(String sourceEncoding) {
@@ -114,5 +115,13 @@ public class Project extends BaseEntity implements Serializable {
 
 	public boolean isSignArtifactReleases() {
 		return _signArtifactReleases;
+	}
+
+	public void setScmMavenPrefix(final String scmMavenPrefix) {
+		_scmMavenPrefix = scmMavenPrefix;
+	}
+
+	public String getScmMavenPrefix() {
+		return _scmMavenPrefix;
 	}
 }

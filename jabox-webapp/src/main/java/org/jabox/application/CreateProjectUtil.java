@@ -111,8 +111,8 @@ public class CreateProjectUtil {
 		File pomXml = new File(trunkDir, project.getName() + "/pom.xml");
 
 		// Set ScmUrl
-		project.setScmUrl(scmc.getScmUrl() + "/" + project.getName()
-				+ "/trunk/" + project.getName());
+		project.setScmUrl(scmc.getProjectScmUrl(project.getName()));
+		project.setScmMavenPrefix(scmc.getScmMavenPrefix());
 
 		// Inject SCM, CIS, ITS, RMS & UTF8 Encoding configuration
 		try {

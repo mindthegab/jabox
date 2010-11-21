@@ -25,7 +25,11 @@ public interface SCMConnectorConfig extends ConnectorConfig {
 
 	String getScmUrl();
 
+	String getProjectScmUrl(String projectName);
+	
 	String getUsername();
 
 	String getPassword();
+
+	String getScmMavenPrefix();
 }
