@@ -25,7 +25,7 @@ public class GITFacadeTest extends TestCase {
 		GITFacade facade = new GITFacade();
 		Project project = new Project();
 		project.setName("test7");
-		File tmpDir = new File("C:/jabox44/gitRepo/test7/");
+		File tmpDir = new File("target/foo2");
 		File projectDir = new File(tmpDir, "foo");
 		projectDir.mkdirs();
 		IGITConnectorConfig svnc = new GITConnectorConfig();
