@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.jabox</groupId>
@@ -28,8 +29,10 @@
 		<module>mrm-artifactory</module>
 		<module>scm-beanstalk</module>
 		<module>mrm-scp</module>
-    <module>bts-mantis</module>
-  </modules>
+		<module>bts-mantis</module>
+		<module>scm-git</module>
+		<module>scm-github</module>
+	</modules>
 	<!--
 		TODO <organization> <name>company name</name> <url>company url</url>
 		</organization>

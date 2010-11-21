@@ -59,7 +59,7 @@ public class GITFacade {
 	 *            the path where to store the git base-dir.
 	 */
 	public void checkoutBaseDir(final File storePath,
-			final IGITConnectorConfig svnc) {
+			final IGITConnectorConfig gitc) {
 
 		GITRepository.initialize();
 		// _clientManager.createRepository(svnc.getSvnDir(), true);
@@ -77,6 +77,14 @@ public class GITFacade {
 
 	public void commitProject(final Project project, final File tmpDir,
 			final IGITConnectorConfig svnc) {
+		try {
+			Runtime.getRuntime().exec("git", new String[] { "init" }, tmpDir);
+			Runtime.getRuntime().exec("git", new String[] { "add", "." },
+					tmpDir);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		// // Add files (svn add)
 		// SVNWCClient wcClient = _clientManager.getWCClient();
 		// wcClient.doAdd(new File(tmpDir, project.getName()), false, false,

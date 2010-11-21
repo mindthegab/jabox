@@ -4,15 +4,12 @@
 	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<artifactId>jabox</artifactId>
 		<groupId>org.jabox</groupId>
-		<version>0.0.9-SNAPSHOT</version>
+		<artifactId>jabox</artifactId>
+		<version>0.0.11-SNAPSHOT</version>
 	</parent>
-	<groupId>org.jabox</groupId>
 	<artifactId>scm-github</artifactId>
-	<version>0.0.9-SNAPSHOT</version>
 	<name>scm-github</name>
-	<url>http://maven.apache.org</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>

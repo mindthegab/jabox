@@ -11,11 +11,11 @@ public class GITFacadeTest extends TestCase {
 	}
 
 	public void testCheckoutBaseDir() {
-		IGITConnectorConfig svnc = new GITConnectorConfig();
+		IGITConnectorConfig gitc = new GITConnectorConfig();
 
 		File storePath = new File("target/foo");
 		storePath.mkdirs();
-		new GITFacade().checkoutBaseDir(storePath, svnc);
+		new GITFacade().checkoutBaseDir(storePath, gitc);
 	}
 
 	public void testCommitProject() {

@@ -89,6 +89,16 @@
 		</dependency>
 		<dependency>
 			<groupId>org.jabox</groupId>
+			<artifactId>scm-git</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jabox</groupId>
+			<artifactId>scm-github</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jabox</groupId>
 			<artifactId>scm-beanstalk</artifactId>
 			<version>${project.version}</version>
 		</dependency>

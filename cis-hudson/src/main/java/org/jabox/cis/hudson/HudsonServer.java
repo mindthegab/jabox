@@ -55,6 +55,7 @@ public class HudsonServer extends AbstractEmbeddedServer {
 		injectPlugin("org.jvnet.hudson.plugins", "checkstyle", "3.10");
 		injectPlugin("org.jvnet.hudson.plugins.m2release", "m2release", "0.6.1");
 		injectPlugin("org.jvnet.hudson.plugins", "redmine", "0.9");
+		injectPlugin("org.jvnet.hudson.plugins", "git", "1.1.3");
 		injectConfiguration("hudson.tasks.Maven.xml");
 	}
 

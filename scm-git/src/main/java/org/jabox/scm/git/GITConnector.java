@@ -27,6 +27,7 @@ import org.apache.wicket.Component;
 import org.apache.wicket.model.IModel;
 import org.jabox.apis.scm.SCMConnector;
 import org.jabox.apis.scm.SCMException;
+import org.jabox.environment.Environment;
 import org.jabox.model.DeployerConfig;
 import org.jabox.model.Project;
 import org.jabox.model.Server;
@@ -58,19 +59,16 @@ public class GITConnector implements SCMConnector<IGITConnectorConfig>,
 	public File createProjectDirectories(final Project project,
 			final IGITConnectorConfig config) throws SCMException {
 		IGITConnectorConfig svnc = config;
-		try {
-			GITFacade svn = new GITFacade();
-			_tmpDir = TemporalDirectory.createTempDir();
+		
+		GITFacade git = new GITFacade();
+		_tmpDir = new File(Environment.getBaseDir(), "gitRepo");
 
-			svn.checkoutBaseDir(_tmpDir, svnc);
-			// Create Project directory and its trunk/branches/tags
-			// subdirectories
-			File trunkDir = createProjectDirectories(project, _tmpDir);
-			return trunkDir;
+		git.checkoutBaseDir(_tmpDir, svnc);
+		// Create Project directory and its trunk/branches/tags
+		// subdirectories
+		File trunkDir = createProjectDirectories(project, _tmpDir);
+		return trunkDir;
 
-		} catch (IOException e) {
-			throw new SCMException("Problem creating temporal directory.", e);
-		}
 	}
 
 	/**
@@ -82,22 +80,17 @@ public class GITConnector implements SCMConnector<IGITConnectorConfig>,
 	private static File createProjectDirectories(final Project project,
 			final File tmpDir) {
 		assert tmpDir.exists();
-
 		File projectDir = new File(tmpDir, project.getName());
-		projectDir.mkdir();
-		File trunkDir = new File(projectDir, "trunk");
-		trunkDir.mkdir();
-		new File(projectDir, "branches").mkdir();
-		new File(projectDir, "tags").mkdir();
-		return trunkDir;
+		projectDir.mkdirs();
+		return projectDir;
 	}
 
 	public void commitProject(final Project project,
 			final IGITConnectorConfig svnc) throws SCMException {
 		assert _tmpDir != null && _tmpDir.exists();
 
-		GITFacade svn = new GITFacade();
-		svn.commitProject(project, _tmpDir, svnc);
+		GITFacade git = new GITFacade();
+		git.commitProject(project, _tmpDir, svnc);
 	}
 
 	public DeployerConfig newConfig() {
