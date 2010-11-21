@@ -26,7 +26,7 @@
 				<string>url</string>
 				<string>${project.scmURL}</string>
 				<string>tagopt</string>
-				<string></string>
+				<string/>
 			</org.spearce.jgit.transport.RemoteConfig>
 		</remoteRepositories>
 
@@ -35,32 +35,33 @@
 				<name>**</name>
 			</hudson.plugins.git.BranchSpec>
 		</branches>
-		<localBranch></localBranch>
+		<localBranch/>
 		<mergeOptions />
+		<recursiveSubmodules>false</recursiveSubmodules>
 		<doGenerateSubmoduleConfigurations>false
 		</doGenerateSubmoduleConfigurations>
 
 		<authorOrCommitter>false</authorOrCommitter>
 		<clean>false</clean>
 		<wipeOutWorkspace>false</wipeOutWorkspace>
+	    <pruneBranches>false</pruneBranches>
 		<buildChooser class="hudson.plugins.git.util.DefaultBuildChooser" />
 		<gitTool>Default</gitTool>
 		<submoduleCfg class="list" />
-		<relativeTargetDir></relativeTargetDir>
-
-		<excludedRegions></excludedRegions>
-		<excludedUsers></excludedUsers>
+		<relativeTargetDir/>
+		<excludedRegions/>
+		<excludedUsers/>
 	</scm>
 	<canRoam>true</canRoam>
 
 	<disabled>false</disabled>
+	<blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
 	<triggers class="vector">
 		<hudson.triggers.SCMTrigger>
 			<spec>* * * * *</spec>
 		</hudson.triggers.SCMTrigger>
 	</triggers>
 	<concurrentBuild>false</concurrentBuild>
-	<blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
 	<rootModule>
 		<groupId>FILLED_BY_HUDSON</groupId>
 		<artifactId>FILLED_BY_HUDSON</artifactId>
@@ -70,7 +71,7 @@
 	<incrementalBuild>false</incrementalBuild>
 	<usePrivateRepository>false</usePrivateRepository>
 	<ignoreUpstremChanges>false</ignoreUpstremChanges>
-
+	<archivingDisabled>false</archivingDisabled>
 	<reporters>
 		<hudson.plugins.checkstyle.CheckStyleReporter>
 			<threshold />
@@ -99,8 +100,10 @@
 	</publishers>
 	<buildWrappers>
 		<org.jvnet.hudson.plugins.m2release.M2ReleaseBuildWrapper>
-			<releaseGoals>-Dresume=false release:prepare release:perform
-			</releaseGoals>
+	      <releaseGoals>-Dresume=false release:prepare release:perform</releaseGoals>
+    	  <defaultVersioningMode>auto</defaultVersioningMode>
+   		  <selectCustomScmCommentPrefix>false</selectCustomScmCommentPrefix>
+   		  <selectAppendHudsonUsername>false</selectAppendHudsonUsername>
 		</org.jvnet.hudson.plugins.m2release.M2ReleaseBuildWrapper>
 	</buildWrappers>
 </maven2-moduleset>

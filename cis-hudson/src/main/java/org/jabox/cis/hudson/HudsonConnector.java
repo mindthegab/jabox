@@ -123,7 +123,7 @@ public class HudsonConnector implements CISConnector {
 	 */
 	private InputStream getConfigXMLStream(Project project) {
 		String configXML = "config.xml";
-		if (project.getScmUrl().startsWith("git://")) {
+		if ("scm:git:".equals(project.getScmMavenPrefix())) {
 			configXML = "config-git.xml";
 		}
 		return HudsonConnector.class.getResourceAsStream(configXML);
