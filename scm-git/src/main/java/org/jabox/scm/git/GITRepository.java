@@ -19,11 +19,7 @@
  */
 package org.jabox.scm.git;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 
 import org.jabox.environment.Environment;
 
@@ -40,20 +36,7 @@ public class GITRepository {
 	public static void initialize() {
 		File tgtPath = getGitBaseDir();
 		tgtPath.mkdirs();
-		try {
-			Process p = Runtime.getRuntime().exec("git init", null, tgtPath);
-			InputStream istrm = p.getInputStream();
-			InputStreamReader istrmrdr = new InputStreamReader(istrm);
-			BufferedReader buffrdr = new BufferedReader(istrmrdr);
-
-			String data;
-			while ((data = buffrdr.readLine()) != null) {
-				System.out.println(data);
-			}
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		Executor.exec("git init", null, tgtPath);
 	}
 
 	public static File getGitBaseDir() {

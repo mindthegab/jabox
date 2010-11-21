@@ -21,6 +21,7 @@ package org.jabox.scm.git;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.concurrent.TimeoutException;
 
 import org.jabox.model.Project;
 
@@ -77,14 +78,32 @@ public class GITFacade {
 
 	public void commitProject(final Project project, final File tmpDir,
 			final IGITConnectorConfig svnc) {
+		File projectDir = new File(tmpDir, project.getName());
+		Executor.exec("git init", null, projectDir);
 		try {
-			Runtime.getRuntime().exec("git", new String[] { "init" }, tmpDir);
-			Runtime.getRuntime().exec("git", new String[] { "add", "." },
-					tmpDir);
+			Executor.exec("git  add .", null, projectDir, true, true, 1000);
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		} catch (TimeoutException e) {
+			// XXX This is blocked for some reason. Swallow the Timeout for the
+			// moment, needs further investigation.
+		}
+		try {
+			Executor.exec("git commit . -m \"initial commit\"", null,
+					projectDir, true, true, 1000);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (TimeoutException e) {
+			// XXX This is blocked for some reason. Swallow the Timeout for the
+			// moment, needs further investigation.
 		}
+
 		// // Add files (svn add)
 		// SVNWCClient wcClient = _clientManager.getWCClient();
 		// wcClient.doAdd(new File(tmpDir, project.getName()), false, false,
