@@ -20,18 +20,15 @@
 package org.jabox.scm.git;
 
 import java.io.File;
-import java.io.IOException;
 import java.io.Serializable;
 
 import org.apache.wicket.Component;
 import org.apache.wicket.model.IModel;
 import org.jabox.apis.scm.SCMConnector;
 import org.jabox.apis.scm.SCMException;
-import org.jabox.environment.Environment;
 import org.jabox.model.DeployerConfig;
 import org.jabox.model.Project;
 import org.jabox.model.Server;
-import org.jabox.utils.TemporalDirectory;
 import org.springframework.stereotype.Service;
 
 @Service
