@@ -35,7 +35,7 @@ import org.jabox.model.DefaultConfiguration;
 import org.jabox.model.Server;
 import org.jabox.webapp.menubuttons.DefaultEntityButton;
 import org.jabox.webapp.menubuttons.DeleteEntityButton;
-import org.jabox.webapp.menubuttons.EditEntityButton;
+import org.jabox.webapp.menubuttons.EditServerButton;
 import org.jabox.webapp.menubuttons.IconButton;
 import org.jabox.webapp.pages.CreateServerLink;
 import org.jabox.webapp.pages.ManageServers;
@@ -70,7 +70,7 @@ public class SCMConnectorList extends PropertyListView<ConnectorConfig> {
 		final AttributeModifier attributeModifier = new AttributeModifier(
 				"class", true, new EvenOddRow<ConnectorConfig>(item));
 		item.add(attributeModifier);
-		item.add(new EditEntityButton<Server>("edit", item.getModelObject()
+		item.add(new EditServerButton<Server>("edit", item.getModelObject()
 				.getServer()));
 		item.add(new DeleteEntityButton<Server>("delete", item.getModelObject()
 				.getServer(), ManageServers.class) {
