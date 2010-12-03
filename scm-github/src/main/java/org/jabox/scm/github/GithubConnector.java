@@ -26,7 +26,7 @@ import org.jabox.model.Server;
 import org.jabox.scm.git.GITConnector;
 import org.springframework.stereotype.Service;
 
-@Service
+//@Service
 public class GithubConnector extends GITConnector {
 	public static final String ID = "plugin.scm.github";
 

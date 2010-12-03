@@ -31,7 +31,7 @@ import org.jabox.model.Project;
 import org.jabox.model.Server;
 import org.springframework.stereotype.Service;
 
-@Service
+//@Service
 public class GITConnector implements SCMConnector<IGITConnectorConfig>,
 		Serializable {
 	public static final String ID = "plugin.scm.git";
