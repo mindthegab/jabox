@@ -22,17 +22,16 @@ package org.jabox.scm.egit;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
-import org.jabox.scm.git.GITConnector;
 import org.jabox.scm.git.GITConnectorConfig;
 import org.jabox.scm.git.GITRepository;
 
 @Entity
-@DiscriminatorValue(GITConnector.ID)
+@DiscriminatorValue(EGITConnector.ID)
 public class EGITConnectorConfig extends GITConnectorConfig {
 	private static final long serialVersionUID = 6542402958304063770L;
 
 	public EGITConnectorConfig() {
-		pluginId = GITConnector.ID;
+		pluginId = EGITConnector.ID;
 	}
 
 	public String getScmUrl() {
