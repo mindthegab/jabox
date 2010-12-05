@@ -24,7 +24,6 @@ import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
-import org.apache.wicket.model.PropertyModel;
 import org.jabox.model.Server;
 
 public class GithubConnectorEditor extends Panel {
@@ -32,18 +31,13 @@ public class GithubConnectorEditor extends Panel {
 
 	public GithubConnectorEditor(final String id, final IModel<Server> model) {
 		super(id, new CompoundPropertyModel<String>(model));
-		TextField<String> url = new TextField<String>("server.url",
-				new GithubAccountURLModel(new PropertyModel<String>(model,
-						"server.url")));
 		TextField<String> username = new TextField<String>("username");
-		TextField<String> projectName = new TextField<String>("projectName");
 		PasswordTextField password = new PasswordTextField("password");
 
 		add(username.setRequired(true));
-		add(projectName.setRequired(true));
 		add(password.setRequired(true));
-		add(url.add(
-				new GithubLoginValidator(url, username, projectName,
-						password)).setRequired(true));
+
+		add(username.add(new GithubLoginValidator(username, password))
+				.setRequired(true));
 	}
 }

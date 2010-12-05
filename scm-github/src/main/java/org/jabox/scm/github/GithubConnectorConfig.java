@@ -22,8 +22,8 @@ package org.jabox.scm.github;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
-import org.apache.wicket.model.IModel;
 import org.jabox.model.DeployerConfig;
+import org.jabox.model.Server;
 import org.jabox.scm.git.IGITConnectorConfig;
 
 @Entity
@@ -31,7 +31,7 @@ import org.jabox.scm.git.IGITConnectorConfig;
 public class GithubConnectorConfig extends DeployerConfig implements
 		IGITConnectorConfig {
 	private static final String GIT = "git://";
-	private static final String HTTP = "http://";
+	private static final String HTTPS = "https://";
 
 	private static final long serialVersionUID = -830757629457448866L;
 
@@ -47,8 +47,6 @@ public class GithubConnectorConfig extends DeployerConfig implements
 
 	public String password;
 
-	public String projectName;
-
 	public String getUsername() {
 		return username;
 	}
@@ -57,18 +55,17 @@ public class GithubConnectorConfig extends DeployerConfig implements
 		return password;
 	}
 
-	public String getAccountURL() {
-		IModel<String> baModel = new GithubAccountURLModel(getServer().getUrl());
-		return baModel.getObject();
+	@Override
+	public Server getServer() {
+		if (server != null) {
+			server.setUrl(HTTPS + GITHUB_COM + getUsername() + "/");
+		}
+		return server;
 	}
 
 	public String getScmUrl() {
-		String scmURL = GIT + GITHUB_COM + getAccountURL() + GIT_SUFFIX;
+		String scmURL = GIT + GITHUB_COM + getUsername() + "/";
 		return scmURL;
-	}
-
-	public String getProjectName() {
-		return projectName;
 	}
 
 	public String getProjectScmUrl(String projectName) {

@@ -2,10 +2,9 @@ package org.jabox.scm.git;
 
 import java.io.File;
 
-import org.jabox.environment.Environment;
-import org.jabox.model.Project;
-
 import junit.framework.TestCase;
+
+import org.jabox.model.Project;
 
 public class GITFacadeTest extends TestCase {
 

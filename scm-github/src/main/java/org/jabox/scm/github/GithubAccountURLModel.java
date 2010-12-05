@@ -28,8 +28,6 @@ import org.apache.wicket.model.Model;
  */
 public class GithubAccountURLModel implements IModel<String> {
 
-	private static final String BEANSTALKAPP_COM = ".beanstalkapp.com";
-
 	private final IModel<String> _serverContainingModel;
 
 	private static final long serialVersionUID = -7026688595250460986L;

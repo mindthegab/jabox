@@ -19,14 +19,20 @@
  */
 package org.jabox.scm.github;
 
+import java.io.File;
+
 import org.apache.wicket.Component;
 import org.apache.wicket.model.IModel;
+import org.jabox.apis.scm.SCMException;
 import org.jabox.model.DeployerConfig;
+import org.jabox.model.Project;
 import org.jabox.model.Server;
 import org.jabox.scm.git.GITConnector;
+import org.jabox.scm.git.GITRepository;
+import org.jabox.scm.git.IGITConnectorConfig;
 import org.springframework.stereotype.Service;
 
-//@Service
+@Service
 public class GithubConnector extends GITConnector {
 	public static final String ID = "plugin.scm.github";
 
@@ -55,5 +61,32 @@ public class GithubConnector extends GITConnector {
 	@Override
 	public Component newEditor(final String id, final IModel<Server> model) {
 		return new GithubConnectorEditor(id, model);
+	}
+
+	/**
+	 * Creates the Repository of the Project in GitHub and a local repository on
+	 * gitRepo/ directory.
+	 */
+	@Override
+	public File createProjectDirectories(final Project project,
+			final IGITConnectorConfig config) throws SCMException {
+		GitHubFacade.createRepowithApi(config.getUsername(), config
+				.getPassword(), project.getName());
+		return super.createProjectDirectories(project, config);
+	}
+
+	/**
+	 * Commits the code on the local Repository and pushes the commit to the
+	 * remote origin (GitHub).
+	 */
+	@Override
+	public void commitProject(final Project project,
+			final IGITConnectorConfig svnc) throws SCMException {
+		super.commitProject(project, svnc);
+		File dir = new File(GITRepository.getGitBaseDir(), project.getName());
+		dir = new File(dir, project.getName());
+		GitHubFacade
+				.remoteAddOrigin(svnc.getUsername(), project.getName(), dir);
+		GitHubFacade.pushOriginMaster(dir);
 	}
 }

@@ -1,12 +1,13 @@
 package org.jabox.scm.github;
 
+import junit.framework.Assert;
 import junit.framework.TestCase;
 
 public class GitHubFacadeTest extends TestCase {
 
 	public void testLogin() {
-		// boolean result = GitHubFacade.createRepowithApi("username", "token",
-		// "repositoryname");
-		// Assert.assertTrue(result);
+		Assert.assertFalse(GitHubFacade.validateLogin("user", "wrong"));
+		Assert.assertTrue(GitHubFacade.validateLogin("user", "correct"));
+
 	}
 }
