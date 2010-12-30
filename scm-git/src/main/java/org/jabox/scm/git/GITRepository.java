@@ -25,10 +25,6 @@ import org.jabox.environment.Environment;
 
 public class GITRepository {
 
-	public static boolean isInitialized() {
-		return getGitBaseDir().exists();
-	}
-
 	/**
 	 * It will initialize the local GIT repo. In case it already exists, it will
 	 * leave it as is.
