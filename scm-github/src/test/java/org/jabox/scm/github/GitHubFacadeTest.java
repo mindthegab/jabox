@@ -2,7 +2,7 @@ package org.jabox.scm.github;
 
 import junit.framework.TestCase;
 
-public class GitHubFacadeTest extends TestCase {
+public abstract class GitHubFacadeTest extends TestCase {
 
 	// public void testLogin() {
 	// Assert.assertFalse(GitHubFacade.validateLogin("user", "wrong"));
