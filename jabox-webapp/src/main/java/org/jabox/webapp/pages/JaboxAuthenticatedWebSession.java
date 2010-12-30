@@ -33,7 +33,7 @@ import org.jabox.model.User;
 public class JaboxAuthenticatedWebSession extends AuthenticatedWebSession {
 	private static final long serialVersionUID = 1L;
 
-	@SpringBean(name = "GeneralDao")
+	@SpringBean()
 	protected GeneralDao _generalDao;
 
 	private Long _userId;

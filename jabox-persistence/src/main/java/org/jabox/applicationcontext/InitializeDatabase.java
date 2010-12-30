@@ -7,7 +7,7 @@ import org.jabox.model.DefaultConfiguration;
 import org.jabox.model.User;
 
 public class InitializeDatabase {
-	@SpringBean(name = "GeneralDao")
+	@SpringBean()
 	protected GeneralDao _generalDao;
 
 	public InitializeDatabase() {
