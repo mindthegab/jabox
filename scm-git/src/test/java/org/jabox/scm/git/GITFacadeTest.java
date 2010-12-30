@@ -1,6 +1,7 @@
 package org.jabox.scm.git;
 
 import java.io.File;
+import java.io.IOException;
 
 import junit.framework.TestCase;
 
@@ -8,8 +9,9 @@ import org.jabox.model.Project;
 
 public class GITFacadeTest extends TestCase {
 
-	public void testValidate() {
-		fail("Not yet implemented");
+	public void testValidate() throws IOException {
+		// Should always return true
+		assertTrue(new GITFacade().validate("", "", ""));
 	}
 
 	public void testCheckoutBaseDir() {
