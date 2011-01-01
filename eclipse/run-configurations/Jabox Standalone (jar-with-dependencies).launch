@@ -22,5 +22,5 @@
 <stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="org.jabox.standalone.Start"/>
 <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="jabox-standalone"/>
 <stringAttribute key="org.eclipse.jdt.launching.SOURCE_PATH_PROVIDER" value="org.maven.ide.eclipse.launchconfig.sourcepathProvider"/>
-<stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-XX:MaxPermSize=128m -Xmx128m -DJABOX_HOME=C:\jabox44\"/>
+<stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-XX:MaxPermSize=256m -Xmx256m -DJABOX_HOME=j:\jabox44\"/>
 </launchConfiguration>
