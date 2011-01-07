@@ -22,6 +22,11 @@ package org.jabox.its.redmine;
 import java.io.IOException;
 import java.io.Serializable;
 import java.net.MalformedURLException;
+import java.util.List;
+
+import javax.servlet.http.Cookie;
+
+import net.sourceforge.jwebunit.junit.WebTester;
 
 import org.apache.wicket.Component;
 import org.apache.wicket.model.IModel;
@@ -33,12 +38,8 @@ import org.jabox.model.Server;
 import org.springframework.stereotype.Service;
 import org.xml.sax.SAXException;
 
-import com.meterware.httpunit.GetMethodWebRequest;
 import com.meterware.httpunit.PostMethodWebRequest;
 import com.meterware.httpunit.WebConversation;
-import com.meterware.httpunit.WebForm;
-import com.meterware.httpunit.WebRequest;
-import com.meterware.httpunit.WebResponse;
 
 @Service
 public class RedmineRepository implements
@@ -46,7 +47,9 @@ public class RedmineRepository implements
 	private static final long serialVersionUID = -692328636804684690L;
 	public static final String ID = "plugin.its.redmine";
 
-	private final WebConversation _wc;
+	private final WebConversation _wc = new WebConversation();
+
+	private final WebTester _wt = new WebTester();
 
 	public String getName() {
 		return "Redmine";
@@ -61,14 +64,6 @@ public class RedmineRepository implements
 		return getName();
 	}
 
-	/**
-	 * @param url
-	 *            Redmine URL.
-	 */
-	public RedmineRepository() {
-		_wc = new WebConversation();
-	}
-
 	public boolean addModule(final Project project,
 			final RedmineRepositoryConfig itsConnectorConfig,
 			final String module, final String description,
@@ -79,19 +74,13 @@ public class RedmineRepository implements
 	public boolean addProject(final Project project,
 			final RedmineRepositoryConfig config) throws IOException,
 			SAXException {
-		WebRequest req = new GetMethodWebRequest(config.getServer().getUrl()
-				+ "/projects/add");
-		WebResponse resp = _wc.getResponse(req);
-		WebForm form = resp.getForms()[1];
-		form.getParameterNames();
-		form.setParameter("project[name]", project.getName());
-		form.setParameter("project[description]", project.getDescription());
-		form.setParameter("project[identifier]", getRedmineId(project));
-		resp = form.submit();
-		if (resp.getURL().getPath().endsWith("/admin/projects")) {
-			return true;
-		}
-		return false;
+		_wt.gotoPage("/projects/new");
+		_wt.setWorkingForm(1);
+		_wt.setTextField("project[name]", project.getName());
+		_wt.setTextField("project[description]", project.getDescription());
+		_wt.setTextField("project[identifier]", getRedmineId(project));
+		_wt.submit();
+		return true;
 	}
 
 	private String getRedmineId(final Project project) {
@@ -101,40 +90,33 @@ public class RedmineRepository implements
 	public boolean addVersion(final Project project,
 			final RedmineRepositoryConfig config, final String version)
 			throws IOException, SAXException {
-
-		WebRequest req = new GetMethodWebRequest(config.getServer().getUrl()
-				+ "/projects/add_version/" + getRedmineId(project));
-
-		WebResponse resp = _wc.getResponse(req);
-		WebForm form = resp.getForms()[1];
-
-		form.setParameter("version[name]", version);
-		form.submit();
+		_wt.gotoPage("/projects/" + getRedmineId(project) + "/versions/new");
+		_wt.setWorkingForm(1);
+		_wt.setTextField("version[name]", version);
+		_wt.submit();
 		return true;
 	}
 
 	public boolean login(final RedmineRepositoryConfig config)
 			throws MalformedURLException, IOException, SAXException {
 		String url = config.getServer().getUrl();
-
 		return login(url, config.getUsername(), config.getPassword());
 	}
 
 	protected boolean login(final String url, final String username,
 			final String password) throws MalformedURLException, IOException,
 			SAXException {
-		WebRequest req = new GetMethodWebRequest(url + "/login");
-		WebResponse resp = _wc.getResponse(req);
-		WebForm form = resp.getForms()[1]; // select the second form in the
-		// page
-		form.setParameter("username", username);
-		form.setParameter("password", password);
-		resp = form.submit();
+		_wt.setBaseUrl(url);
+		_wt.beginAt("/login");
+		_wt.setTextField("username", username);
+		_wt.setTextField("password", password);
+		_wt.submit();
 
-		if (resp.getURL().getPath().endsWith("/my/page")) {
+		if (_wt.getDialog().getPageURL().toExternalForm().endsWith("/my/page")) {
 			return true;
+		} else {
+			return false;
 		}
-		return false;
 	}
 
 	public DeployerConfig newConfig() {
@@ -155,9 +137,16 @@ public class RedmineRepository implements
 			return;
 		}
 
+		List<Cookie> cookies = (List<Cookie>) _wt.getDialog().getCookies();
+		for (Cookie cookie : cookies) {
+			_wc.putCookie(cookie.getName(), cookie.getValue());
+		}
+
 		PostMethodWebRequest form = new PostMethodWebRequest(config.getServer()
 				.getUrl()
 				+ "/repositories/edit/" + project.getName());
+		form.setParameter("authenticity_token", getAuthenticityToken(_wt
+				.getPageSource()));
 		form.setParameter("repository_scm", "Subversion");
 		form.setParameter("repository[url]", scmConfig.getScmUrl());
 		form.setParameter("repository[login]", username);
@@ -165,4 +154,11 @@ public class RedmineRepository implements
 		form.setParameter("commit", "Create");
 		_wc.getResponse(form);
 	}
+
+	private String getAuthenticityToken(String body) {
+		String substr[] = body.split("hidden.* value..");
+		String token = substr[1].substring(0, substr[1].indexOf("\""));
+		return token;
+	}
+
 }
