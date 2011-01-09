@@ -5,8 +5,12 @@
 <head>
 	<!-- $PAGETITLE -->
 	<title>Jabox Open Source A.L.M.</title>
-	<style>@import url(/style/wicket.css);</style>
-	<script src="/style/jquery.tools.min.js"></script>
+    
+    <wicket:head>
+    	<link wicket:id="pageCSS" rel="Stylesheet" type="text/css" href="css/wicket.css"/>
+    </wicket:head>
+    
+	<script src="../style/jquery.tools.min.js"></script>
 	<script type="text/javascript">
     $(function() {
      $("img[title]").tooltip({
@@ -28,7 +32,7 @@
     </script>
 
 	<!--[if lt IE 7]>
-	<style>@import url(/style/ie.css);</style>
+	<style>@import url(../style/ie.css);</style>
 	<![endif]-->
 </head>
 <body>

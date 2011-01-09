@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see http://www.gnu.org/licenses/.
  */
-package org.jabox.webapp.menubuttons;
+package org.jabox.webapp.pages;
 
 import org.apache.wicket.ResourceReference;
 import org.apache.wicket.markup.html.form.ImageButton;
@@ -30,9 +30,8 @@ import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.jabox.apis.Connector;
 import org.jabox.model.DeployersRegistry;
 import org.jabox.model.Server;
+import org.jabox.webapp.menubuttons.EditEntityButton;
 import org.jabox.webapp.modifiers.TooltipModifier;
-import org.jabox.webapp.pages.EditServerPage;
-import org.jabox.webapp.pages.ManageServers;
 
 public final class EditServerButton<T extends Server> extends ImageButton {
 

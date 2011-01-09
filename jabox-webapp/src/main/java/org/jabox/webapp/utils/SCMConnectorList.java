@@ -35,9 +35,9 @@ import org.jabox.model.DefaultConfiguration;
 import org.jabox.model.Server;
 import org.jabox.webapp.menubuttons.DefaultEntityButton;
 import org.jabox.webapp.menubuttons.DeleteEntityButton;
-import org.jabox.webapp.menubuttons.EditServerButton;
 import org.jabox.webapp.menubuttons.IconButton;
 import org.jabox.webapp.pages.CreateServerLink;
+import org.jabox.webapp.pages.EditServerButton;
 import org.jabox.webapp.pages.ManageServers;
 
 public class SCMConnectorList extends PropertyListView<ConnectorConfig> {
