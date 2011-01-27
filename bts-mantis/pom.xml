@@ -4,11 +4,11 @@
 	<parent>
 		<artifactId>jabox</artifactId>
 		<groupId>org.jabox</groupId>
-		<version>0.0.12</version>
+		<version>0.0.13-SNAPSHOT</version>
 	</parent>
 	<groupId>org.jabox</groupId>
 	<artifactId>bts-mantis</artifactId>
-	<version>0.0.12</version>
+	<version>0.0.13-SNAPSHOT</version>
 	<name>bts-mantis</name>
 	<url>http://maven.apache.org</url>
 	<properties>
