@@ -26,6 +26,7 @@ import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.PropertyModel;
 import org.jabox.model.Server;
+import org.jabox.webapp.menubuttons.InfoImage;
 
 public class BeanstalkConnectorEditor extends Panel {
 	private static final long serialVersionUID = -4137475647749541936L;
@@ -39,6 +40,8 @@ public class BeanstalkConnectorEditor extends Panel {
 		TextField<String> projectName = new TextField<String>("projectName");
 		PasswordTextField password = new PasswordTextField("password");
 
+		add(new InfoImage("server.url.tooltip", ""));
+		add(new InfoImage("projectName.tooltip", ""));
 		add(username.setRequired(true));
 		add(projectName.setRequired(true));
 		add(password.setRequired(true));

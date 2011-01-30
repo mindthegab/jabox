@@ -7,12 +7,12 @@
 	<tr class="deployer">
 		<td><label for="server.url"><wicket:message key="server.url">Account URL</wicket:message>: </label></td>
 		<td><input wicket:id="server.url" type="text" size="10" /> .beanstalkapp.com
-		<img src="../images/info.png" align="bottom" wicket:message="title:server.url.tooltip" alt="info" /></td>
+		<img wicket:id="server.url.tooltip" align="bottom" wicket:message="title:server.url.tooltip" alt="info" /></td>
 	</tr>
 	<tr class="deployer">
 		<td><label for="projectName"><wicket:message key="projectName">Project Name</wicket:message>: </label></td>
 		<td><input wicket:id="projectName" type="text" size="10" />
-		<img src="../images/info.png" align="bottom" wicket:message="title:projectName.tooltip" alt="info" /></td>
+		<img wicket:id="projectName.tooltip" align="bottom" wicket:message="title:projectName.tooltip" alt="info" /></td>
 	</tr>
 	<tr class="deployer">
 		<td><label for="username"><wicket:message key="username">Username</wicket:message>: </label></td>

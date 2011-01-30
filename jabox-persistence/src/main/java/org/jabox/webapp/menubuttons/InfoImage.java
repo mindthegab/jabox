@@ -20,7 +20,7 @@
 package org.jabox.webapp.menubuttons;
 
 import org.apache.wicket.ResourceReference;
-import org.apache.wicket.markup.html.form.ImageButton;
+import org.apache.wicket.markup.html.image.Image;
 import org.jabox.webapp.modifiers.TooltipModifier;
 
 /**
@@ -28,14 +28,14 @@ import org.jabox.webapp.modifiers.TooltipModifier;
  * 
  * @author Dimitris Kapanidis
  */
-public final class InfoIcon extends ImageButton {
+public final class InfoImage extends Image {
 
 	private static final ResourceReference DEFAULT_IMG = new ResourceReference(
-			InfoIcon.class, "info.png");
+			InfoImage.class, "info.png");
 
 	private static final long serialVersionUID = 1L;
 
-	public InfoIcon(final String id, final String tooltip) {
+	public InfoImage(final String id, final String tooltip) {
 		super(id);
 		add(new TooltipModifier(tooltip));
 		setImageResourceReference(DEFAULT_IMG);
