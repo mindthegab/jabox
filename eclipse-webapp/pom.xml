@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.jabox</groupId>
@@ -55,14 +56,13 @@
 			<artifactId>webstart-jnlp-servlet</artifactId>
 			<version>1.0-6.0-02_ea_b02</version>
 		</dependency>
-<!--	FIXME: This is not compiled in Maven 3.
-	<dependency>
+		<!--
+			FIXME: This is not compiled in Maven 3. <dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>eclipse-startup</artifactId>
-			<version>${project.version}</version>
-			<type>zip</type>
-			<scope>provided</scope>
-		</dependency>  -->
+			<version>${project.version}</version> <type>zip</type>
+			<scope>provided</scope> </dependency>
+		-->
 	</dependencies>
 	<build>
 		<plugins>
@@ -93,16 +93,15 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
+				<version>2.1.1</version>
 				<configuration>
 					<overlays>
-<!-- 						<overlay>
-							<groupId>org.jabox</groupId>
-							<artifactId>eclipse-startup</artifactId>
-							<type>zip</type>
-							<targetPath>webstart</targetPath>
-							
-						</overlay>
- -->					</overlays>
+						<!--
+							<overlay> <groupId>org.jabox</groupId>
+							<artifactId>eclipse-startup</artifactId> <type>zip</type>
+							<targetPath>webstart</targetPath> </overlay>
+						-->
+					</overlays>
 				</configuration>
 			</plugin>
 		</plugins>
