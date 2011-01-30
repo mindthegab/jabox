@@ -40,6 +40,7 @@ import org.jabox.application.CreateProjectUtil;
 import org.jabox.model.MavenArchetype;
 import org.jabox.model.Project;
 import org.jabox.webapp.borders.MiddlePanel;
+import org.jabox.webapp.menubuttons.InfoImage;
 
 @AuthorizeInstantiation("ADMIN")
 public class CreateProject extends MiddlePanel {
@@ -100,6 +101,13 @@ public class CreateProject extends MiddlePanel {
 		form.add(new TextField<Project>("sourceEncoding"));
 		form.add(new CheckBox("signArtifactReleases"));
 		form.add(ddc);
+		
+		// Tooltips
+		form.add(new InfoImage("name.tooltip", ""));
+		form.add(new InfoImage("description.tooltip", ""));
+		form.add(new InfoImage("sourceEncoding.tooltip", ""));
+		form.add(new InfoImage("archetype.tooltip", ""));
+		form.add(new InfoImage("signArtifactReleases.tooltip", ""));
 	}
 
 	private void fillArchetypes(final List<MavenArchetype> connectors) {
