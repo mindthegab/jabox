@@ -23,13 +23,14 @@ import java.util.List;
 
 import org.apache.wicket.AttributeModifier;
 import org.apache.wicket.markup.html.basic.Label;
-import org.apache.wicket.markup.html.link.ExternalLink;
+import org.apache.wicket.markup.html.link.BookmarkablePageLink;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.PropertyListView;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.persistence.provider.GeneralDao;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.jabox.webapp.modifiers.TooltipModifier;
+import org.jabox.webapp.pages.BasePage;
 
 public class TabsList extends PropertyListView<Tab> {
 
@@ -55,7 +56,8 @@ public class TabsList extends PropertyListView<Tab> {
 		}
 		listItem.add(new TooltipModifier(tab.getTooltip()));
 
-		ExternalLink externalLink = new ExternalLink("url", tab.getUrl());
+		BookmarkablePageLink<BasePage> externalLink = new BookmarkablePageLink<BasePage>(
+				"url", tab.getPageClass());
 		externalLink.add(new Label("title", tab.getTitle()));
 
 		listItem.add(externalLink);

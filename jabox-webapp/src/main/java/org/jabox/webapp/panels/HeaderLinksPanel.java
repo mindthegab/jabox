@@ -29,6 +29,11 @@ import org.jabox.apis.Connector;
 import org.jabox.apis.ConnectorConfig;
 import org.jabox.apis.Manager;
 import org.jabox.model.DefaultConfiguration;
+import org.jabox.webapp.pages.CisPage;
+import org.jabox.webapp.pages.ItsPage;
+import org.jabox.webapp.pages.ManageServers;
+import org.jabox.webapp.pages.RmsPage;
+import org.jabox.webapp.pages.ScmPage;
 
 public class HeaderLinksPanel extends Panel {
 
@@ -49,26 +54,27 @@ public class HeaderLinksPanel extends Panel {
 		final DefaultConfiguration dc = _generalDao.getDefaultConfiguration();
 
 		List<Tab> tabs = new ArrayList<Tab>();
-		tabs.add(new Tab("A.L.M. (Jabox)", "/web/ManageServers",
-				selected == ALM));
+		tabs
+				.add(new Tab("A.L.M. (Jabox)", ManageServers.class,
+						selected == ALM));
 
 		if (dc.getScm() != null) {
-			tabs.add(new Tab(getTabName("S.C.M.", dc.getScm()), "/web/ScmPage",
+			tabs.add(new Tab(getTabName("S.C.M.", dc.getScm()), ScmPage.class,
 					dc.getScm().getServer().getUrl(), selected == SCM));
 		}
 
 		if (dc.getIts() != null) {
-			tabs.add(new Tab(getTabName("I.T.S.", dc.getIts()), "/web/ItsPage",
+			tabs.add(new Tab(getTabName("I.T.S.", dc.getIts()), ItsPage.class,
 					dc.getIts().getServer().getUrl(), selected == ITS));
 		}
 
 		if (dc.getCis() != null) {
-			tabs.add(new Tab(getTabName("C.I.S.", dc.getCis()), "/web/CisPage",
+			tabs.add(new Tab(getTabName("C.I.S.", dc.getCis()), CisPage.class,
 					dc.getCis().getServer().getUrl(), selected == CIS));
 		}
 
 		if (dc.getRms() != null) {
-			tabs.add(new Tab(getTabName("R.M.S.", dc.getRms()), "/web/RmsPage",
+			tabs.add(new Tab(getTabName("R.M.S.", dc.getRms()), RmsPage.class,
 					dc.getRms().getServer().getUrl(), selected == RMS));
 		}
 

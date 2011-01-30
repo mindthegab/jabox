@@ -21,40 +21,30 @@ package org.jabox.webapp.panels;
 
 import java.io.Serializable;
 
+import org.jabox.webapp.pages.BasePage;
+
 public class Tab implements Serializable {
 	private static final long serialVersionUID = 4781646077887785325L;
 
 	private String _title;
-	private String _url;
+	private Class<? extends BasePage> _pageClass;
 	private String _tooltip;
 
 	private boolean _selected;
 
-	public Tab(final String title, final String url) {
-		_title = title;
-		_url = url;
-	}
-
-	public Tab(final String title, final String url, final boolean selected) {
-		_title = title;
-		_url = url;
-		setSelected(selected);
-	}
-
-	public Tab(final String title, final String url, final String tooltip,
+	public Tab(final String title, final Class<? extends BasePage> pageClass,
 			final boolean selected) {
 		_title = title;
-		_url = url;
-		_tooltip = tooltip;
+		_pageClass = pageClass;
 		setSelected(selected);
 	}
 
-	public void setUrl(final String url) {
-		_url = url;
-	}
-
-	public String getUrl() {
-		return _url;
+	public Tab(final String title, final Class<? extends BasePage> pageClass,
+			final String tooltip, final boolean selected) {
+		_title = title;
+		_pageClass = pageClass;
+		_tooltip = tooltip;
+		setSelected(selected);
 	}
 
 	public void setTitle(final String title) {
@@ -79,5 +69,9 @@ public class Tab implements Serializable {
 
 	public String getTooltip() {
 		return _tooltip;
+	}
+
+	public Class<? extends BasePage> getPageClass() {
+		return _pageClass;
 	}
 }

@@ -20,13 +20,15 @@
 package org.jabox.webapp.panels;
 
 import org.jabox.apis.Connector;
+import org.jabox.webapp.pages.BasePage;
 
 public class PluginTab extends Tab {
 
 	private static final long serialVersionUID = 2961421967975301502L;
 
-	public PluginTab(final Connector ci, final String url, final boolean b) {
-		super(getTitle(ci), url, b);
+	public PluginTab(final Connector ci,
+			final Class<? extends BasePage> pageClass, final boolean b) {
+		super(getTitle(ci), pageClass, b);
 	}
 
 	private static String getTitle(final Connector ci) {
