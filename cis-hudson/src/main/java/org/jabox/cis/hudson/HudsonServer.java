@@ -24,23 +24,39 @@ import java.io.IOException;
 import java.net.URL;
 
 import org.codehaus.plexus.util.FileUtils;
-import org.jabox.apis.embedded.AbstractEmbeddedServer;
+import org.jabox.apis.embedded.EmbeddedServer;
 import org.jabox.environment.Environment;
 import org.jabox.maven.helper.MavenDownloader;
+import org.mortbay.jetty.Server;
 
-public class HudsonServer extends AbstractEmbeddedServer {
+public class HudsonServer implements EmbeddedServer {
+
+	@Override
+	public void addWebAppContext(Server server) {
+		injectPlugins();
+		String war = getWarPath();
+
+		String[] cmdarray = new String[] { "java", "-jar", war };
+		try {
+			Runtime.getRuntime().exec(cmdarray);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void startServer() {
+	}
 
 	private static final String GROUP_ID = "org.jvnet.hudson.main";
 	private static final String ARTIFACT_ID = "hudson-war";
-	private static final String VERSION = "1.391";
+	private static final String VERSION = "1.395";
 	private static final String TYPE = "war";
 
-	@Override
 	public String getServerName() {
 		return "hudson";
 	}
 
-	@Override
 	public String getWarPath() {
 		injectPlugins();
 		return MavenDownloader.downloadArtifact(GROUP_ID, ARTIFACT_ID, VERSION,
@@ -56,6 +72,8 @@ public class HudsonServer extends AbstractEmbeddedServer {
 		injectPlugin("org.jvnet.hudson.plugins.m2release", "m2release", "0.6.1");
 		injectPlugin("org.jvnet.hudson.plugins", "redmine", "0.9");
 		injectPlugin("org.jvnet.hudson.plugins", "git", "1.1.3");
+		injectPlugin("org.jvnet.hudson.plugins", "claim", "1.7");
+		injectPlugin("org.jvnet.hudson.plugins", "ci-game", "1.17");
 		injectConfiguration("hudson.tasks.Maven.xml");
 	}
 
@@ -91,4 +109,5 @@ public class HudsonServer extends AbstractEmbeddedServer {
 	private static File getHudsonPluginDir() {
 		return new File(Environment.getHudsonHomeDir(), "plugins");
 	}
+
 }

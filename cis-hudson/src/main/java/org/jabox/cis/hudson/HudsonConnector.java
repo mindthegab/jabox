@@ -140,7 +140,7 @@ public class HudsonConnector implements CISConnector {
 		replace = replace.replace("${project.issueURL}",
 				"http://localhost/redmine/");
 		replace = replace.replace("${goals}",
-				"clean findbugs:findbugs checkstyle:checkstyle pmd:pmd pmd:cpd deploy -B"
+				"clean checkstyle:checkstyle pmd:pmd pmd:cpd deploy -B"
 						+ passCustomSettingsXml());
 		replace = replace.replace("${project.name}", project.getName());
 		return replace;
