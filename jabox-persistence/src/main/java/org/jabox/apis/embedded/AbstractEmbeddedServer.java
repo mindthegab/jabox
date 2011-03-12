@@ -51,7 +51,7 @@ public abstract class AbstractEmbeddedServer implements EmbeddedServer {
 	 */
 	public abstract String getServerName();
 
-	public void addWebAppContext(final Server server) {
+	private void addWebAppContext(final Server server) {
 		WebAppContext wac = new WebAppContext();
 		wac.setServer(_server);
 		wac.setContextPath("/" + getServerName());
@@ -79,10 +79,6 @@ public abstract class AbstractEmbeddedServer implements EmbeddedServer {
 	public abstract String getWarPath();
 
 	public void startServer() {
-		// System.setProperty("HUDSON_HOME", "c://");
-		// Main.run(new String[]{"-DHUDSON_HOME=c:"});
-		// new Main().run(args);
-
 		_server = new Server();
 		SocketConnector connector = new SocketConnector();
 		// Set some timeout options to make debugging easier.

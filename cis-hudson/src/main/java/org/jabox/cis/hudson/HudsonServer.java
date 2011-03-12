@@ -27,22 +27,8 @@ import org.codehaus.plexus.util.FileUtils;
 import org.jabox.apis.embedded.EmbeddedServer;
 import org.jabox.environment.Environment;
 import org.jabox.maven.helper.MavenDownloader;
-import org.mortbay.jetty.Server;
 
 public class HudsonServer implements EmbeddedServer {
-
-	@Override
-	public void addWebAppContext(Server server) {
-		injectPlugins();
-		String war = getWarPath();
-
-		String[] cmdarray = new String[] { "java", "-jar", war };
-		try {
-			Runtime.getRuntime().exec(cmdarray);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
 
 	@Override
 	public void startServer() {
@@ -109,5 +95,4 @@ public class HudsonServer implements EmbeddedServer {
 	private static File getHudsonPluginDir() {
 		return new File(Environment.getHudsonHomeDir(), "plugins");
 	}
-
 }

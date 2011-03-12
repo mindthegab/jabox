@@ -25,7 +25,6 @@ import java.io.IOException;
 import org.apache.maven.MavenExecutionException;
 import org.apache.maven.artifact.InvalidRepositoryException;
 import org.apache.maven.cli.MavenCli;
-import org.codehaus.plexus.classworlds.ClassWorld;
 import org.jabox.model.MavenArchetype;
 import org.jabox.model.Project;
 

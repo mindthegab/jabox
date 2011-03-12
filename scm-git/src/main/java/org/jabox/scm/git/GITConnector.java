@@ -29,7 +29,6 @@ import org.jabox.apis.scm.SCMException;
 import org.jabox.model.DeployerConfig;
 import org.jabox.model.Project;
 import org.jabox.model.Server;
-import org.springframework.stereotype.Service;
 
 //@Service
 public class GITConnector implements SCMConnector<IGITConnectorConfig>,
