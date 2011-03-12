@@ -20,8 +20,19 @@
 package org.jabox.standalone;
 
 import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.List;
 
+import org.codehaus.cargo.container.ContainerType;
+import org.codehaus.cargo.container.InstalledLocalContainer;
+import org.codehaus.cargo.container.configuration.ConfigurationType;
+import org.codehaus.cargo.container.configuration.LocalConfiguration;
+import org.codehaus.cargo.container.deployable.WAR;
+import org.codehaus.cargo.container.installer.Installer;
+import org.codehaus.cargo.container.installer.ZipURLInstaller;
+import org.codehaus.cargo.generic.DefaultContainerFactory;
+import org.codehaus.cargo.generic.configuration.DefaultConfigurationFactory;
 import org.jabox.apis.embedded.EmbeddedServer;
 import org.jabox.environment.Environment;
 import org.jabox.utils.MavenSettingsManager;
@@ -36,7 +47,11 @@ public class Start {
 	private static final String PACKAGE = "/jabox-webapp/";
 
 	public Start() {
-		startEmbeddedJetty(false);
+		try {
+			startEmbeddedJetty(false);
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -63,11 +78,36 @@ public class Start {
 	 * @param startJabox
 	 *            If set to true the Jetty application is starting Jabox
 	 *            Application together with the embeddedServers.
+	 * @throws MalformedURLException
 	 * @throws InstantiationException
 	 * @throws IllegalAccessException
 	 * @throws ClassNotFoundException
 	 */
-	public static void startEmbeddedJetty(final boolean startJabox) {
+	public static void startEmbeddedJetty(final boolean startJabox)
+			throws MalformedURLException {
+		// (1) Optional step to install the container from a URL pointing to its
+		// distribution
+		Installer installer;
+		installer = new ZipURLInstaller(
+				new URL(
+						"http://archive.apache.org/dist/tomcat/tomcat-6/v6.0.32/bin/apache-tomcat-6.0.32.zip"),
+				new File(Environment.getBaseDir(), "cargo/installs")
+						.getAbsolutePath());
+		installer.install();
+
+		// (2) Create the Cargo Container instance wrapping our physical
+		// container
+		LocalConfiguration configuration = (LocalConfiguration) new DefaultConfigurationFactory()
+				.createConfiguration("tomcat6x", ContainerType.INSTALLED,
+						ConfigurationType.STANDALONE, new File(Environment
+								.getBaseDir(), "cargo/conf").getAbsolutePath());
+		InstalledLocalContainer container = (InstalledLocalContainer) new DefaultContainerFactory()
+				.createContainer("tomcat6x", ContainerType.INSTALLED,
+						configuration);
+		container.setHome(installer.getHome());
+		container.setOutput(new File(Environment.getBaseDir(),
+				"cargo/cargo.out").getAbsolutePath());
+
 		Server server = new Server();
 		MavenSettingsManager.writeCustomSettings();
 		SocketConnector connector = new SocketConnector();
@@ -79,7 +119,7 @@ public class Start {
 		try {
 			List<String> webapps = WebappManager.getWebapps();
 			for (String webapp : webapps) {
-				addEmbeddedServer(server, webapp);
+				addEmbeddedServer(configuration, webapp);
 			}
 
 			if (startJabox) {
@@ -100,13 +140,17 @@ public class Start {
 					.println(">>> STARTING EMBEDDED JETTY SERVER, PRESS ANY KEY TO STOP");
 			server.start();
 			BrowserStarter.openBrowser("http://localhost:9090/");
+
+			// (4) Start the container
+			container.start();
+			System.out.println(">>> Container started.");
+
 			if (startJabox) {
 				while (System.in.available() == 0) {
 					Thread.sleep(5000);
 				}
 				server.stop();
 				server.join();
-
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -118,7 +162,7 @@ public class Start {
 	 * Helper function to add an embedded Server using the className to the
 	 * running Jetty Server.
 	 * 
-	 * @param server
+	 * @param configuration
 	 *            The Jetty server.
 	 * @param className
 	 *            The className of the EmbeddedServer.
@@ -126,11 +170,12 @@ public class Start {
 	 * @throws IllegalAccessException
 	 * @throws ClassNotFoundException
 	 */
-	private static void addEmbeddedServer(final Server server,
-			final String className) throws InstantiationException,
-			IllegalAccessException, ClassNotFoundException {
+	private static void addEmbeddedServer(
+			final LocalConfiguration configuration, final String className)
+			throws InstantiationException, IllegalAccessException,
+			ClassNotFoundException {
 		EmbeddedServer es = (EmbeddedServer) Class.forName(className)
 				.newInstance();
-		es.addWebAppContext(server);
+		configuration.addDeployable(new WAR(es.getWarPath()));
 	}
 }

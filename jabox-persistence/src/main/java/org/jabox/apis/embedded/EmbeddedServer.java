@@ -26,4 +26,7 @@ public interface EmbeddedServer {
 	void startServer();
 
 	void addWebAppContext(Server server);
+
+	String getWarPath();
+
 }
