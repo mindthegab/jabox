@@ -282,6 +282,11 @@
 		</dependency>
 		<dependency>
 			<groupId>org.jabox</groupId>
+			<artifactId>sas-sonar</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jabox</groupId>
 			<artifactId>ide-eclipse</artifactId>
 			<version>${project.version}</version>
 		</dependency>
