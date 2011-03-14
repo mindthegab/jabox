@@ -73,8 +73,8 @@ public class SonarServer extends AbstractEmbeddedServer {
 			e.printStackTrace();
 		}
 		File sonarBaseDir = new File(baseDir, "sonar-2.6");
-		execBuildWar(sonarBaseDir);
-		return sonarBaseDir.getAbsolutePath();
+		File sonarWar = execBuildWar(sonarBaseDir);
+		return sonarWar.getAbsolutePath();
 	}
 
 	/**

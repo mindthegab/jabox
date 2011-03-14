@@ -83,7 +83,7 @@ public class WebappManager {
 		// list.add("org.jabox.mrm.nexus.NexusServer");
 		// list.add("org.jabox.ide.eclipse.EclipseJNLPServer");
 		list.add("org.jabox.mrm.artifactory.ArtifactoryServer");
-		// list.add("org.jabox.sas.sonar.SonarServer");
+		list.add("org.jabox.sas.sonar.SonarServer");
 		writeData(list, file);
 	}
 }
