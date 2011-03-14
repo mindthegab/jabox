@@ -143,6 +143,7 @@ public class Start {
 			BrowserStarter.openBrowser("http://localhost:9090/");
 
 			// (4) Start the container
+			container.setTimeout(1200000);
 			container.start();
 			System.out.println(">>> Container started.");
 
