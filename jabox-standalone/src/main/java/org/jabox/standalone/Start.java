@@ -107,6 +107,7 @@ public class Start {
 		container.setHome(installer.getHome());
 		container.setOutput(new File(Environment.getBaseDir(),
 				"cargo/cargo.out").getAbsolutePath());
+		container.setSystemProperties(System.getProperties());
 
 		Server server = new Server();
 		MavenSettingsManager.writeCustomSettings();
