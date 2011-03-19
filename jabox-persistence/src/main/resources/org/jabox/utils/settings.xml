@@ -10,13 +10,13 @@
 					</snapshots>
 					<id>central</id>
 					<name>libs-releases</name>
-					<url>http://localhost:9090/artifactory/libs-releases</url>
+					<url>http://localhost:8080/artifactory/libs-releases</url>
 				</repository>
 				<repository>
 					<snapshots />
 					<id>snapshots</id>
 					<name>libs-snapshots</name>
-					<url>http://localhost:9090/artifactory/libs-snapshots</url>
+					<url>http://localhost:8080/artifactory/libs-snapshots</url>
 				</repository>
 			</repositories>
 			<pluginRepositories>
@@ -26,13 +26,13 @@
 					</snapshots>
 					<id>central</id>
 					<name>plugins-releases</name>
-					<url>http://localhost:9090/artifactory/plugins-releases</url>
+					<url>http://localhost:8080/artifactory/plugins-releases</url>
 				</pluginRepository>
 				<pluginRepository>
 					<snapshots />
 					<id>snapshots</id>
 					<name>plugins-snapshots</name>
-					<url>http://localhost:9090/artifactory/plugins-snapshots</url>
+					<url>http://localhost:8080/artifactory/plugins-snapshots</url>
 				</pluginRepository>
 			</pluginRepositories>
 			<id>artifactory</id>
