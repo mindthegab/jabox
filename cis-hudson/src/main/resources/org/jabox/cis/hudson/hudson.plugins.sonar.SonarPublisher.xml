@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<hudson.plugins.sonar.SonarPublisher_-DescriptorImpl>
+  <installations>
+    <hudson.plugins.sonar.SonarInstallation>
+      <name>Sonar</name>
+      <disabled>false</disabled>
+      <serverUrl>http://localhost:8080/sonar/</serverUrl>
+      <serverPublicUrl></serverPublicUrl>
+      <mojoVersion></mojoVersion>
+      <databaseUrl></databaseUrl>
+      <databaseDriver></databaseDriver>
+      <databaseLogin></databaseLogin>
+      <databasePassword></databasePassword>
+      <additionalProperties></additionalProperties>
+      <triggers>
+        <scmBuilds>false</scmBuilds>
+        <timerBuilds>true</timerBuilds>
+        <userBuilds>true</userBuilds>
+        <snapshotDependencyBuilds>false</snapshotDependencyBuilds>
+        <skipIfBuildFails>false</skipIfBuildFails>
+      </triggers>
+    </hudson.plugins.sonar.SonarInstallation>
+  </installations>
+</hudson.plugins.sonar.SonarPublisher_-DescriptorImpl>

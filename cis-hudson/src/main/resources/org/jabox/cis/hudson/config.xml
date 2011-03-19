@@ -1,96 +1,109 @@
-<maven2-moduleset>
-	<actions />
-	<description />
-	<keepDependencies>false</keepDependencies>
-	<properties>
-		<hudson.plugins.redmine.RedmineProjectProperty>
+<maven2-moduleset> 
+  <actions/> 
+  <description></description> 
+  <keepDependencies>false</keepDependencies> 
+  <properties> 
+    <hudson.plugins.redmine.RedmineProjectProperty> 
 			<redmineWebsite>${project.issueURL}</redmineWebsite>
 			<projectName>${project.name}</projectName>
-			<redmineVersion>true</redmineVersion>
-		</hudson.plugins.redmine.RedmineProjectProperty>
-	</properties>
-	<scm class="hudson.scm.SubversionSCM">
-		<locations>
-			<hudson.scm.SubversionSCM_-ModuleLocation>
+      <redmineVersion>true</redmineVersion> 
+    </hudson.plugins.redmine.RedmineProjectProperty> 
+  </properties> 
+  <scm class="hudson.scm.SubversionSCM"> 
+    <locations> 
+      <hudson.scm.SubversionSCM_-ModuleLocation> 
 				<remote>${project.scmURL}</remote>
-				<local>.</local>
-			</hudson.scm.SubversionSCM_-ModuleLocation>
-		</locations>
-		<useUpdate>true</useUpdate>
-		<doRevert>false</doRevert>
-		<browser class="hudson.plugins.redmine.RedmineRepositoryBrowser" />
-		<excludedRegions></excludedRegions>
-		<excludedUsers></excludedUsers>
-		<excludedRevprop></excludedRevprop>
-		<excludedCommitMessages></excludedCommitMessages>
-	</scm>
-	<canRoam>true</canRoam>
-
-	<disabled>false</disabled>
-	<triggers class="vector">
-		<hudson.triggers.SCMTrigger>
-			<spec>* * * * *</spec>
-		</hudson.triggers.SCMTrigger>
-	</triggers>
-	<concurrentBuild>false</concurrentBuild>
-	<blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
-	<rootModule>
-		<groupId>FILLED_BY_HUDSON</groupId>
-		<artifactId>FILLED_BY_HUDSON</artifactId>
-	</rootModule>
+        <local>.</local> 
+      </hudson.scm.SubversionSCM_-ModuleLocation> 
+    </locations> 
+    <useUpdate>true</useUpdate> 
+    <doRevert>false</doRevert> 
+    <browser class="hudson.plugins.redmine.RedmineRepositoryBrowser"/> 
+    <excludedRegions></excludedRegions> 
+    <includedRegions></includedRegions> 
+    <excludedUsers></excludedUsers> 
+    <excludedRevprop></excludedRevprop> 
+    <excludedCommitMessages></excludedCommitMessages> 
+  </scm> 
+  <canRoam>true</canRoam> 
+  <disabled>false</disabled> 
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding> 
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding> 
+  <triggers class="vector"> 
+    <hudson.triggers.SCMTrigger> 
+      <spec>* * * * *</spec> 
+    </hudson.triggers.SCMTrigger> 
+  </triggers> 
+  <concurrentBuild>false</concurrentBuild> 
+  <rootModule> 
+    <groupId>FILLED_BY_HUDSON</groupId> 
+    <artifactId>FILLED_BY_HUDSON</artifactId> 
+  </rootModule> 
 	<goals>${goals}</goals>
-	<aggregatorStyleBuild>true</aggregatorStyleBuild>
-	<incrementalBuild>false</incrementalBuild>
-	<usePrivateRepository>false</usePrivateRepository>
-	<ignoreUpstremChanges>false</ignoreUpstremChanges>
-
-	<reporters>
-		<hudson.plugins.checkstyle.CheckStyleReporter>
-			<threshold />
-			<failureThreshold />
-			<newFailureThreshold />
-			<newThreshold />
-			<healthy />
-			<unHealthy />
-			<pluginName>[CHECKSTYLE] </pluginName>
-			<thresholdLimit>low</thresholdLimit>
-		</hudson.plugins.checkstyle.CheckStyleReporter>
-		<hudson.plugins.findbugs.FindBugsReporter>
-			<healthy />
-			<unHealthy />
-			<pluginName>[FINDBUGS] </pluginName>
-			<thresholdLimit>low</thresholdLimit>
-			<canRunOnFailed>false</canRunOnFailed>
-		</hudson.plugins.findbugs.FindBugsReporter>
-		<hudson.plugins.pmd.PmdReporter>
-			<healthy />
-			<unHealthy />
-			<pluginName>[PMD] </pluginName>
-			<thresholdLimit>low</thresholdLimit>
-			<canRunOnFailed>false</canRunOnFailed>
-		</hudson.plugins.pmd.PmdReporter>
-		<hudson.plugins.dry.DryReporter>
-			<threshold />
-			<failureThreshold />
-			<newFailureThreshold />
-			<newThreshold />
-			<healthy />
-			<unHealthy />
-			<pluginName>[DRY] </pluginName>
-			<thresholdLimit>low</thresholdLimit>
-		</hudson.plugins.dry.DryReporter>
-	</reporters>
-	<publishers>
-		<hudson.plugins.cigame.GamePublisher />
-		<hudson.plugins.claim.ClaimPublisher />
-	</publishers>
-	<buildWrappers>
-		<org.jvnet.hudson.plugins.m2release.M2ReleaseBuildWrapper>
-			<releaseGoals>-Dresume=false release:prepare release:perform
-			</releaseGoals>
-			<defaultVersioningMode>specify_version</defaultVersioningMode>
-			<selectCustomScmCommentPrefix>false</selectCustomScmCommentPrefix>
-			<selectAppendHudsonUsername>false</selectAppendHudsonUsername>
-		</org.jvnet.hudson.plugins.m2release.M2ReleaseBuildWrapper>
-	</buildWrappers>
+  <aggregatorStyleBuild>true</aggregatorStyleBuild> 
+  <incrementalBuild>false</incrementalBuild> 
+  <usePrivateRepository>false</usePrivateRepository> 
+  <ignoreUpstremChanges>false</ignoreUpstremChanges> 
+  <archivingDisabled>false</archivingDisabled> 
+  <resolveDependencies>false</resolveDependencies> 
+  <processPlugins>false</processPlugins> 
+  <mavenValidationLevel>0</mavenValidationLevel> 
+  <reporters> 
+    <hudson.plugins.checkstyle.CheckStyleReporter> 
+      <healthy></healthy> 
+      <unHealthy></unHealthy> 
+      <pluginName>[CHECKSTYLE] </pluginName> 
+      <thresholdLimit>low</thresholdLimit> 
+      <canRunOnFailed>false</canRunOnFailed> 
+    </hudson.plugins.checkstyle.CheckStyleReporter> 
+    <hudson.plugins.pmd.PmdReporter> 
+      <healthy></healthy> 
+      <unHealthy></unHealthy> 
+      <pluginName>[PMD] </pluginName> 
+      <thresholdLimit>low</thresholdLimit> 
+      <canRunOnFailed>false</canRunOnFailed> 
+    </hudson.plugins.pmd.PmdReporter> 
+    <hudson.plugins.findbugs.FindBugsReporter> 
+      <healthy></healthy> 
+      <unHealthy></unHealthy> 
+      <pluginName>[FINDBUGS] </pluginName> 
+      <thresholdLimit>low</thresholdLimit> 
+      <canRunOnFailed>false</canRunOnFailed> 
+    </hudson.plugins.findbugs.FindBugsReporter> 
+    <hudson.plugins.dry.DryReporter> 
+      <threshold></threshold> 
+      <thresholdEnabled>false</thresholdEnabled> 
+      <failureThreshold></failureThreshold> 
+      <newFailureThreshold></newFailureThreshold> 
+      <minimumAnnotations>0</minimumAnnotations> 
+      <newThreshold></newThreshold> 
+      <healthy></healthy> 
+      <unHealthy></unHealthy> 
+      <healthyAnnotations>0</healthyAnnotations> 
+      <unHealthyAnnotations>0</unHealthyAnnotations> 
+      <healthyReportEnabled>false</healthyReportEnabled> 
+      <height></height> 
+      <pluginName>[DRY] </pluginName> 
+      <thresholdLimit>low</thresholdLimit> 
+    </hudson.plugins.dry.DryReporter> 
+  </reporters> 
+  <publishers> 
+    <hudson.plugins.sonar.SonarPublisher> 
+      <configVersion>1</configVersion> 
+      <branch></branch> 
+      <language></language> 
+      <mavenOpts></mavenOpts> 
+      <jobAdditionalProperties></jobAdditionalProperties> 
+    </hudson.plugins.sonar.SonarPublisher> 
+    <hudson.plugins.cigame.GamePublisher/> 
+    <hudson.plugins.claim.ClaimPublisher/> 
+  </publishers> 
+  <buildWrappers> 
+    <org.jvnet.hudson.plugins.m2release.M2ReleaseBuildWrapper> 
+      <releaseGoals>-Dresume=false release:prepare release:perform</releaseGoals> 
+      <defaultVersioningMode>specify_version</defaultVersioningMode> 
+      <selectCustomScmCommentPrefix>false</selectCustomScmCommentPrefix> 
+      <selectAppendHudsonUsername>false</selectAppendHudsonUsername> 
+    </org.jvnet.hudson.plugins.m2release.M2ReleaseBuildWrapper> 
+  </buildWrappers> 
 </maven2-moduleset>

@@ -60,7 +60,9 @@ public class HudsonServer implements EmbeddedServer {
 		injectPlugin("org.jvnet.hudson.plugins", "git", "1.1.3");
 		injectPlugin("org.jvnet.hudson.plugins", "claim", "1.7");
 		injectPlugin("org.jvnet.hudson.plugins", "ci-game", "1.17");
+		injectPlugin("org.jvnet.hudson.plugins", "sonar", "1.6.1");
 		injectConfiguration("hudson.tasks.Maven.xml");
+		injectConfiguration("hudson.plugins.sonar.SonarPublisher.xml");
 	}
 
 	private static void injectConfiguration(String resource) {
