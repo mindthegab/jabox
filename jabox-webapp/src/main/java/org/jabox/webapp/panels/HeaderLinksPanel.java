@@ -30,6 +30,7 @@ import org.jabox.apis.ConnectorConfig;
 import org.jabox.apis.Manager;
 import org.jabox.model.DefaultConfiguration;
 import org.jabox.webapp.pages.CisPage;
+import org.jabox.webapp.pages.CqmPage;
 import org.jabox.webapp.pages.ItsPage;
 import org.jabox.webapp.pages.ManageServers;
 import org.jabox.webapp.pages.RmsPage;
@@ -42,6 +43,7 @@ public class HeaderLinksPanel extends Panel {
 	public static final int ITS = 2;
 	public static final int CIS = 3;
 	public static final int RMS = 4;
+	public static final int CQM = 5;
 
 	@SpringBean
 	protected GeneralDao _generalDao;
@@ -76,6 +78,11 @@ public class HeaderLinksPanel extends Panel {
 		if (dc.getRms() != null) {
 			tabs.add(new Tab(getTabName("R.M.S.", dc.getRms()), RmsPage.class,
 					dc.getRms().getServer().getUrl(), selected == RMS));
+		}
+
+		if (dc.getCqm() != null) {
+			tabs.add(new Tab(getTabName("C.Q.M.", dc.getCqm()), CqmPage.class,
+					dc.getCqm().getServer().getUrl(), selected == CQM));
 		}
 
 		add(new TabsList("tabs", tabs));

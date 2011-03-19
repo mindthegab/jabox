@@ -29,6 +29,7 @@ import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.persistence.domain.BaseEntity;
 import org.jabox.apis.ConnectorConfig;
 import org.jabox.apis.cis.CISConnectorConfig;
+import org.jabox.apis.cqm.CQMConnectorConfig;
 import org.jabox.apis.its.ITSConnectorConfig;
 import org.jabox.apis.rms.RMSConnectorConfig;
 import org.jabox.apis.scm.SCMConnectorConfig;
@@ -53,6 +54,9 @@ public class DefaultConfiguration extends BaseEntity implements Serializable {
 	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	private DeployerConfig _scm;
 
+	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	private DeployerConfig _cqm;
+
 	public String isDefault(final ConnectorConfig item) {
 		if (item == null) {
 			return FALSE;
@@ -66,6 +70,8 @@ public class DefaultConfiguration extends BaseEntity implements Serializable {
 		} else if (_rms != null && modelObjId.equals(_rms.getId())) {
 			return TRUE;
 		} else if (_scm != null && modelObjId.equals(_scm.getId())) {
+			return TRUE;
+		} else if (_cqm != null && modelObjId.equals(_cqm.getId())) {
 			return TRUE;
 		}
 
@@ -109,7 +115,14 @@ public class DefaultConfiguration extends BaseEntity implements Serializable {
 			} else {
 				_scm = (DeployerConfig) config;
 			}
+		} else if (CQMConnectorConfig.class.isAssignableFrom(config.getClass())) {
+			if (TRUE.equals(isDefault(config))) {
+				_cqm = null;
+			} else {
+				_cqm = (DeployerConfig) config;
+			}
 		}
+
 	}
 
 	public ITSConnectorConfig getIts() {
@@ -122,6 +135,10 @@ public class DefaultConfiguration extends BaseEntity implements Serializable {
 
 	public SCMConnectorConfig getScm() {
 		return (SCMConnectorConfig) _scm;
+	}
+
+	public CQMConnectorConfig getCqm() {
+		return (CQMConnectorConfig) _cqm;
 	}
 
 	public RMSConnectorConfig getRms() {
@@ -148,6 +165,8 @@ public class DefaultConfiguration extends BaseEntity implements Serializable {
 			return _rms;
 		} else if (SCMConnectorConfig.class.isAssignableFrom(config.getClass())) {
 			return _scm;
+		} else if (CQMConnectorConfig.class.isAssignableFrom(config.getClass())) {
+			return _cqm;
 		}
 
 		return null;

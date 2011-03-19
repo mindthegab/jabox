@@ -170,6 +170,46 @@
 		wicket:id="createRMSs" value="New Server" />
 	</table>
 	
+	<p />
+	<h3>Code Quality Management (C.Q.M.) <img wicket:id="cqmIcon" align="bottom" wicket:message="title:cqm.tooltip" alt="info" /></h3>
+	<hr />
+	<p/>
+	
+	<table cellspacing="0" class="dataviewTable" width="90%">
+		<tr>
+			<th class="dataviewTh" width="200px">Name</th>
+			<th class="dataviewTh" width="200px">URL</th>
+			<th class="dataviewTh" width="40px">Type</th>
+			<th class="dataviewTh" width="40px">Default</th>
+			<th class="dataviewTh" width="40px">Edit</th>
+			<th class="dataviewTh" width="40px">Delete</th>
+		</tr>
+		<tr wicket:id="CQMs">
+			<td class="dataviewTd"><span wicket:id="clazz">Class name.</span></td>
+			<td class="dataviewTd"><a href="#" wicket:id="server.url"></a></td>
+
+			<td class="dataviewTd">
+			<input type="image" wicket:id="connectorImage"/>
+			</td>
+
+			<td class="dataviewTd"><input type="image" wicket:id="default"
+				title="Default" src="default.png" /></td>
+			<td class="dataviewTd"><input type="image" wicket:id="edit" /></td>
+			<td class="dataviewTd"><input type="image" wicket:id="delete"
+				title="Delete this task" src="delete.jpg"
+				onclick="return confirm('Are you sure you want to delete this task?');" />
+			</td>
+		</tr>
+		<wicket:remove>
+			<tr>
+				<td class="dataviewTd">anotherProject</td>
+				<td class="dataviewTd">Description of anotherProject.</td>
+			</tr>
+		</wicket:remove>
+		<input type="submit" class="button"
+		wicket:id="createCQMs" value="New Server" />
+	</table>
+	
 	<p/>
 	</form>
 	

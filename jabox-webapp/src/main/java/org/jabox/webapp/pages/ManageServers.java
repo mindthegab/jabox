@@ -29,6 +29,8 @@ import org.jabox.apis.ConnectorConfig;
 import org.jabox.apis.Manager;
 import org.jabox.apis.cis.CISConnector;
 import org.jabox.apis.cis.CISConnectorConfig;
+import org.jabox.apis.cqm.CQMConnector;
+import org.jabox.apis.cqm.CQMConnectorConfig;
 import org.jabox.apis.its.ITSConnector;
 import org.jabox.apis.its.ITSConnectorConfig;
 import org.jabox.apis.rms.RMSConnector;
@@ -71,6 +73,10 @@ public class ManageServers extends MiddlePanel {
 		form.add(createList("ITSs", ITSConnectorConfig.class));
 		form.add(new CreateServerLink("createITSs", ITSConnector.class));
 		form.add(new InfoImage("itsIcon", ""));
+
+		form.add(createList("CQMs", CQMConnectorConfig.class));
+		form.add(new CreateServerLink("createCQMs", CQMConnector.class));
+		form.add(new InfoImage("cqmIcon", ""));
 
 		add(form);
 	}
