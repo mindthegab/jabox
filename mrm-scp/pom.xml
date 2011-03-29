@@ -4,7 +4,7 @@
 	<parent>
 		<artifactId>jabox</artifactId>
 		<groupId>org.jabox</groupId>
-		<version>0.0.14-SNAPSHOT</version>
+		<version>0.0.14</version>
 	</parent>
 	<artifactId>mrm-scp</artifactId>
 	<name>mrm-scp</name>
