@@ -28,6 +28,6 @@ public class WebappManagerTest extends TestCase {
 
 	public void testGetWebapps() throws IOException {
 		List<String> servers = WebappManager.getWebapps();
-		assertEquals("Servers size", 2, servers.size());
+		assertEquals("Servers size", 3, servers.size());
 	}
 }
