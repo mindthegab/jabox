@@ -22,6 +22,9 @@ package org.jabox.environment;
 import java.io.File;
 
 public class Environment {
+	// Used to identify the windows platform.
+	private static final String WIN_ID = "Windows";
+
 
 	private static final String JABOX_ENV = "JABOX_HOME";
 	private static final String JABOX_PROPERTY = "JABOX_HOME";
@@ -44,6 +47,21 @@ public class Environment {
 			m2Dir.mkdirs();
 		}
 		return m2Dir;
+	}
+
+	/**
+	 * Try to determine whether this application is running under Windows or
+	 * some other platform by examing the "os.name" property.
+	 * 
+	 * @return true if this application is running under a Windows OS
+	 */
+	public static boolean isWindowsPlatform() {
+		String os = System.getProperty("os.name");
+		if (os != null && os.startsWith(WIN_ID)) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	public static String getHudsonHomeDir() {
