@@ -81,7 +81,7 @@ public class SonarServer extends AbstractEmbeddedServer {
 	 * Executes the Build War script.
 	 */
 	private File execBuildWar(File sonarBaseDir) {
-		File script = new File(sonarBaseDir, "war/build-war.bat");
+		File script = getBuildSonarScript(sonarBaseDir);
 		try {
 			Process p = Runtime.getRuntime().exec(script.getAbsolutePath(),
 					null, new File(sonarBaseDir, "war"));
@@ -103,6 +103,13 @@ public class SonarServer extends AbstractEmbeddedServer {
 			e.printStackTrace();
 		}
 		return new File(sonarBaseDir, "war/sonar.war");
+	}
+
+	private File getBuildSonarScript(File sonarBaseDir) {
+		if (Environment.isWindowsPlatform()) {
+			return new File(sonarBaseDir, "war/build-war.bat");
+		}
+		return new File(sonarBaseDir, "war/build-war.sh");
 	}
 
 	public static void doUnzip(String inputZip, String destinationDirectory)
