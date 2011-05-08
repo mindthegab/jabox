@@ -23,7 +23,11 @@ import java.io.File;
 import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Properties;
+import java.util.Map.Entry;
 
 import javax.persistence.Entity;
 
@@ -76,7 +80,7 @@ public class Container extends BaseEntity implements Serializable {
 
 	public void start() {
 		Environment.configureEnvironmentVariables();
-		
+
 		// (1) Optional step to install the container from a URL pointing to its
 		// distribution
 		Installer installer;
@@ -104,7 +108,16 @@ public class Container extends BaseEntity implements Serializable {
 		container.setHome(installer.getHome());
 		container.setOutput(new File(Environment.getBaseDir(),
 				"cargo/cargo.out").getAbsolutePath());
-		container.setSystemProperties(System.getProperties());
+
+		// Pass the system properties to the container
+		Map<String, String> props = new HashMap<String, String>();
+		Properties properties = System.getProperties();
+		properties.entrySet();
+		for (Entry<Object, Object> entry : properties.entrySet()) {
+			entry.getKey();
+			props.put((String) entry.getKey(), (String) entry.getValue());
+		}
+		container.setSystemProperties(props);
 
 		MavenSettingsManager.writeCustomSettings();
 		try {
