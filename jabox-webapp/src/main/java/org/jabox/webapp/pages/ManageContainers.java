@@ -50,7 +50,6 @@ public class ManageContainers extends MiddlePanel {
 		Form<BaseEntity> form = new Form<BaseEntity>("deleteForm");
 		form.add(new ContainerList("containers", containers));
 		form.add(new CreateContainerLink("createContainer"));
-
 		add(form);
 	}
 }

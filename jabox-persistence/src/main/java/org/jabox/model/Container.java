@@ -19,11 +19,28 @@
  */
 package org.jabox.model;
 
+import java.io.File;
 import java.io.Serializable;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.List;
 
 import javax.persistence.Entity;
 
 import org.apache.wicket.persistence.domain.BaseEntity;
+import org.codehaus.cargo.container.ContainerType;
+import org.codehaus.cargo.container.InstalledLocalContainer;
+import org.codehaus.cargo.container.configuration.ConfigurationType;
+import org.codehaus.cargo.container.configuration.LocalConfiguration;
+import org.codehaus.cargo.container.deployable.WAR;
+import org.codehaus.cargo.container.installer.Installer;
+import org.codehaus.cargo.container.installer.ZipURLInstaller;
+import org.codehaus.cargo.generic.DefaultContainerFactory;
+import org.codehaus.cargo.generic.configuration.DefaultConfigurationFactory;
+import org.jabox.apis.embedded.EmbeddedServer;
+import org.jabox.environment.Environment;
+import org.jabox.utils.MavenSettingsManager;
+import org.jabox.utils.WebappManager;
 
 /**
  * A Project.
@@ -56,4 +73,92 @@ public class Container extends BaseEntity implements Serializable {
 	public String getPort() {
 		return _port;
 	}
+
+	public void start() {
+		Environment.configureEnvironmentVariables();
+		
+		// (1) Optional step to install the container from a URL pointing to its
+		// distribution
+		Installer installer;
+		try {
+			installer = new ZipURLInstaller(new URL(
+					"http://apache.rediris.es/tomcat/tomcat-6/v6.0.32/bin/"
+							+ getTomcatFilename()), new File(Environment
+					.getBaseDir(), "cargo/installs").getAbsolutePath());
+		} catch (MalformedURLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+			return;
+		}
+		installer.install();
+
+		// (2) Create the Cargo Container instance wrapping our physical
+		// container
+		LocalConfiguration configuration = (LocalConfiguration) new DefaultConfigurationFactory()
+				.createConfiguration("tomcat6x", ContainerType.INSTALLED,
+						ConfigurationType.STANDALONE, new File(Environment
+								.getBaseDir(), "cargo/conf").getAbsolutePath());
+		InstalledLocalContainer container = (InstalledLocalContainer) new DefaultContainerFactory()
+				.createContainer("tomcat6x", ContainerType.INSTALLED,
+						configuration);
+		container.setHome(installer.getHome());
+		container.setOutput(new File(Environment.getBaseDir(),
+				"cargo/cargo.out").getAbsolutePath());
+		container.setSystemProperties(System.getProperties());
+
+		MavenSettingsManager.writeCustomSettings();
+		try {
+			List<String> webapps = WebappManager.getWebapps();
+			for (String webapp : webapps) {
+				addEmbeddedServer(configuration, webapp);
+			}
+
+			System.out
+					.println(">>> STARTING EMBEDDED JETTY SERVER, PRESS ANY KEY TO STOP");
+
+			// (4) Start the container
+			container.setTimeout(1200000);
+			container.start();
+			System.out.println(">>> Container started.");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.exit(100);
+		}
+
+	}
+
+	/**
+	 * @return the filename of apache tomcat. Depends on the OS.
+	 */
+	private static String getTomcatFilename() {
+		if (Environment.isWindowsPlatform()) {
+			return "apache-tomcat-6.0.32.zip";
+		}
+		return "apache-tomcat-6.0.32.tar.gz";
+	}
+
+	/**
+	 * Helper function to add an embedded Server using the className to the
+	 * running Jetty Server.
+	 * 
+	 * @param configuration
+	 *            The Jetty server.
+	 * @param className
+	 *            The className of the EmbeddedServer.
+	 * @throws InstantiationException
+	 * @throws IllegalAccessException
+	 * @throws ClassNotFoundException
+	 */
+	private static void addEmbeddedServer(
+			final LocalConfiguration configuration, final String className)
+			throws InstantiationException, IllegalAccessException,
+			ClassNotFoundException {
+		EmbeddedServer es = (EmbeddedServer) Class.forName(className)
+				.newInstance();
+		WAR war = new WAR(es.getWarPath());
+		war.setContext(es.getServerName());
+		configuration.addDeployable(war);
+	}
+
 }

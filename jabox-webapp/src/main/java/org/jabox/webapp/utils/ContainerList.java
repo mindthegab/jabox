@@ -29,6 +29,7 @@ import org.apache.wicket.persistence.provider.GeneralDao;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.jabox.model.Container;
 import org.jabox.webapp.menubuttons.DeleteEntityButton;
+import org.jabox.webapp.menubuttons.StartContainerButton;
 import org.jabox.webapp.pages.ManageContainers;
 
 public class ContainerList extends PropertyListView<Container> {
@@ -50,6 +51,8 @@ public class ContainerList extends PropertyListView<Container> {
 		final AttributeModifier attributeModifier = new AttributeModifier(
 				"class", true, new EvenOddRow<Container>(listItem));
 		listItem.add(attributeModifier);
+		listItem.add(new StartContainerButton("start", listItem,
+				ManageContainers.class));
 		listItem.add(new DeleteEntityButton<Container>("delete", listItem,
 				ManageContainers.class));
 	}
