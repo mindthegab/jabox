@@ -290,6 +290,11 @@
 			<artifactId>ide-eclipse</artifactId>
 			<version>${project.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>dom4j</groupId>
+			<artifactId>dom4j</artifactId>
+			<version>1.4</version>
+		</dependency>
 	</dependencies>
 
 	<build>
