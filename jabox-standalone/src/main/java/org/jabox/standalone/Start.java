@@ -88,11 +88,10 @@ public class Start {
 		// (1) Optional step to install the container from a URL pointing to its
 		// distribution
 		Installer installer;
-		installer = new ZipURLInstaller(
-				new URL(
-						"http://archive.apache.org/dist/tomcat/tomcat-6/v6.0.32/bin/apache-tomcat-6.0.32.zip"),
-				new File(Environment.getBaseDir(), "cargo/installs")
-						.getAbsolutePath());
+		installer = new ZipURLInstaller(new URL(
+				"http://apache.rediris.es/tomcat/tomcat-6/v6.0.32/bin/"
+						+ getTomcatFilename()), new File(Environment
+				.getBaseDir(), "cargo/installs").getAbsolutePath());
 		installer.install();
 
 		// (2) Create the Cargo Container instance wrapping our physical
@@ -161,6 +160,16 @@ public class Start {
 	}
 
 	/**
+	 * @return the filename of apache tomcat. Depends on the OS.
+	 */
+	private static String getTomcatFilename() {
+		if (Environment.isWindowsPlatform()) {
+			return "apache-tomcat-6.0.32.zip";
+		}
+		return "apache-tomcat-6.0.32.tar.gz";
+	}
+
+	/**
 	 * Helper function to add an embedded Server using the className to the
 	 * running Jetty Server.
 	 * 
@@ -178,6 +187,8 @@ public class Start {
 			ClassNotFoundException {
 		EmbeddedServer es = (EmbeddedServer) Class.forName(className)
 				.newInstance();
-		configuration.addDeployable(new WAR(es.getWarPath()));
+		WAR war = new WAR(es.getWarPath());
+		war.setContext(es.getServerName());
+		configuration.addDeployable(war);
 	}
 }

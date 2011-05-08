@@ -44,12 +44,6 @@ public abstract class AbstractEmbeddedServer implements EmbeddedServer {
 		}
 	}
 
-	/**
-	 * 
-	 * @return The server Name that will be used as contextPath on the Servlet
-	 *         container.
-	 */
-	public abstract String getServerName();
 
 	private void addWebAppContext(final Server server) {
 		WebAppContext wac = new WebAppContext();

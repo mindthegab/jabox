@@ -47,7 +47,7 @@ import org.mortbay.jetty.webapp.WebAppContext;
  * 
  */
 public class SonarServer extends AbstractEmbeddedServer {
-	private static final String URL = "http://dist.sonar.codehaus.org/sonar-2.6.zip";
+	private static final String URL = "http://dist.sonar.codehaus.org/sonar-2.7.zip";
 
 	public static void main(final String[] args) throws Exception {
 		new SonarServer().startServerAndWait();
@@ -72,7 +72,7 @@ public class SonarServer extends AbstractEmbeddedServer {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		File sonarBaseDir = new File(baseDir, "sonar-2.6");
+		File sonarBaseDir = new File(baseDir, "sonar-2.7");
 		File sonarWar = execBuildWar(sonarBaseDir);
 		return sonarWar.getAbsolutePath();
 	}
@@ -109,7 +109,9 @@ public class SonarServer extends AbstractEmbeddedServer {
 		if (Environment.isWindowsPlatform()) {
 			return new File(sonarBaseDir, "war/build-war.bat");
 		}
-		return new File(sonarBaseDir, "war/build-war.sh");
+		File file = new File(sonarBaseDir, "war/build-war.sh");
+		file.setExecutable(true);
+		return file;
 	}
 
 	public static void doUnzip(String inputZip, String destinationDirectory)
