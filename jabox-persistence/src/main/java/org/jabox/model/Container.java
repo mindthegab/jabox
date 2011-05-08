@@ -39,6 +39,7 @@ import org.codehaus.cargo.container.configuration.LocalConfiguration;
 import org.codehaus.cargo.container.deployable.WAR;
 import org.codehaus.cargo.container.installer.Installer;
 import org.codehaus.cargo.container.installer.ZipURLInstaller;
+import org.codehaus.cargo.container.property.ServletPropertySet;
 import org.codehaus.cargo.generic.DefaultContainerFactory;
 import org.codehaus.cargo.generic.configuration.DefaultConfigurationFactory;
 import org.jabox.apis.embedded.EmbeddedServer;
@@ -108,6 +109,8 @@ public class Container extends BaseEntity implements Serializable {
 		container.setHome(installer.getHome());
 		container.setOutput(new File(Environment.getBaseDir(),
 				"cargo/cargo.out").getAbsolutePath());
+
+		configuration.setProperty(ServletPropertySet.PORT, getPort());
 
 		// Pass the system properties to the container
 		Map<String, String> props = new HashMap<String, String>();

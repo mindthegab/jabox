@@ -29,7 +29,7 @@ import org.jabox.model.Container;
 
 public final class StartContainerButton extends ImageButton {
 	private static final ResourceReference START_IMG = new ResourceReference(
-			StartContainerButton.class, "edit-delete.png");
+			StartContainerButton.class, "start.png");
 	private static final long serialVersionUID = 1L;
 	private final Container _item;
 	private Class<? extends Page> _responsePage;
