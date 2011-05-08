@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:wicket="http://wicket.sourceforge.net/" xml:lang="en" lang="en">
+<body>
+<wicket:extend>
+	<h2>Edit Container</h2>
+	<div class="feedback" wicket:id="feedback">feedbackmessages will
+	be put here</div>
+
+	<form wicket:id="form">
+	
+	<table>
+		<tr class="deployer">
+			<td><label for="name"><wicket:message key="name">name</wicket:message>:
+			</label></td>
+			<td><input wicket:id="name" type="text" size="10" /></td>
+		</tr>
+		<tr class="deployer">
+			<td><label for="port"><wicket:message
+				key="port">port</wicket:message>: </label></td>
+			<td><input wicket:id="port" type="text" size="10" /></td>
+		</tr>
+		<tr>
+			<td><input type="submit" class="button" value="submit" /></td>
+			<td><input type="submit" class="button" value="cancel"
+				wicket:id="cancel" /></td>
+		</tr>
+	</table>
+	</form>
+</wicket:extend>
+</body>
+</html>
