@@ -29,32 +29,32 @@ import org.jabox.utils.LocalHostName;
 @Entity
 @DiscriminatorValue(EHudsonConnector.ID)
 public class EHudsonConnectorConfig extends HudsonConnectorConfig {
-	private static final long serialVersionUID = -6696934779273872749L;
+    private static final long serialVersionUID = -6696934779273872749L;
 
-	public String username;
+    public String username;
 
-	public String password;
+    public String password;
 
-	public EHudsonConnectorConfig() {
-		pluginId = EHudsonConnector.ID;
-	}
+    public EHudsonConnectorConfig() {
+        pluginId = EHudsonConnector.ID;
+    }
 
-	@Override
-	public String getUsername() {
-		return username;
-	}
+    @Override
+    public String getUsername() {
+        return username;
+    }
 
-	@Override
-	public void setServer(final Server server) {
-		super.setServer(server);
-		if (server != null) {
-			server.setUrl("http://" + LocalHostName.getLocalHostname()
-					+ ":9090/hudson/");
-		}
-	}
+    @Override
+    public void setServer(final Server server) {
+        super.setServer(server);
+        if (server != null) {
+            server.setUrl("http://" + LocalHostName.getLocalHostname()
+                + ":8080/hudson/");
+        }
+    }
 
-	@Override
-	public String getPassword() {
-		return password;
-	}
+    @Override
+    public String getPassword() {
+        return password;
+    }
 }

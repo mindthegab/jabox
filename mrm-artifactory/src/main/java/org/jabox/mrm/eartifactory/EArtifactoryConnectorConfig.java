@@ -30,28 +30,28 @@ import org.jabox.utils.LocalHostName;
 @Entity
 @DiscriminatorValue(EArtifactoryConnector.ID)
 public class EArtifactoryConnectorConfig extends DeployerConfig implements
-		RMSConnectorConfig {
-	private static final long serialVersionUID = 6050853799588453919L;
+        RMSConnectorConfig {
+    private static final long serialVersionUID = 6050853799588453919L;
 
-	public EArtifactoryConnectorConfig() {
-		pluginId = EArtifactoryConnector.ID;
-	}
+    public EArtifactoryConnectorConfig() {
+        pluginId = EArtifactoryConnector.ID;
+    }
 
-	public String getReleaseRepositoryURL() {
-		return getServer().getUrl() + "libs-releases-local";
-	}
+    public String getReleaseRepositoryURL() {
+        return getServer().getUrl() + "libs-releases-local";
+    }
 
-	@Override
-	public void setServer(final Server server) {
-		super.setServer(server);
-		if (server != null) {
-			// XXX make url dynamic for remote connections.
-			server.setUrl("http://" + LocalHostName.getLocalHostname()
-					+ ":9090/artifactory/");
-		}
-	}
+    @Override
+    public void setServer(final Server server) {
+        super.setServer(server);
+        if (server != null) {
+            // XXX make url dynamic for remote connections.
+            server.setUrl("http://" + LocalHostName.getLocalHostname()
+                + ":8080/artifactory/");
+        }
+    }
 
-	public String getSnapshotsRepositoryURL() {
-		return getServer().getUrl() + "libs-snapshots-local";
-	}
+    public String getSnapshotsRepositoryURL() {
+        return getServer().getUrl() + "libs-snapshots-local";
+    }
 }
