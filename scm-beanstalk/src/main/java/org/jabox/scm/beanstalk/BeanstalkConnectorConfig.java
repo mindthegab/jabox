@@ -31,57 +31,59 @@ import org.tmatesoft.svn.core.SVNURL;
 @Entity
 @DiscriminatorValue(BeanstalkConnector.ID)
 public class BeanstalkConnectorConfig extends DeployerConfig implements
-		ISVNConnectorConfig {
-	private static final String SVN_BEANSTALKAPP_COM = ".svn.beanstalkapp.com/";
+        ISVNConnectorConfig {
+    private static final String SVN_BEANSTALKAPP_COM =
+        ".svn.beanstalkapp.com/";
 
-	private static final String HTTP = "http://";
+    private static final String HTTP = "https://";
 
-	private static final long serialVersionUID = -830757629457448866L;
+    private static final long serialVersionUID = -830757629457448866L;
 
-	public BeanstalkConnectorConfig() {
-		pluginId = BeanstalkConnector.ID;
-	}
+    public BeanstalkConnectorConfig() {
+        pluginId = BeanstalkConnector.ID;
+    }
 
-	public String username;
+    public String username;
 
-	public String password;
+    public String password;
 
-	public String projectName;
+    public String projectName;
 
-	public SVNURL getSvnDir() throws SVNException {
-		return SVNURL.parseURIEncoded(getScmUrl());
-	}
+    public SVNURL getSvnDir() throws SVNException {
+        return SVNURL.parseURIEncoded(getScmUrl());
+    }
 
-	public String getUsername() {
-		return username;
-	}
+    public String getUsername() {
+        return username;
+    }
 
-	public String getPassword() {
-		return password;
-	}
+    public String getPassword() {
+        return password;
+    }
 
-	public String getAccountURL() {
-		IModel<String> baModel = new BeanstalkAccountURLModel(getServer()
-				.getUrl());
-		return baModel.getObject();
-	}
+    public String getAccountURL() {
+        IModel<String> baModel =
+            new BeanstalkAccountURLModel(getServer().getUrl());
+        return baModel.getObject();
+    }
 
-	public String getScmUrl() {
-		String scmURL = HTTP + getAccountURL() + SVN_BEANSTALKAPP_COM
-				+ getProjectName();
-		return scmURL;
-	}
+    public String getScmUrl() {
+        String scmURL =
+            HTTP + getAccountURL() + SVN_BEANSTALKAPP_COM
+                + getProjectName();
+        return scmURL;
+    }
 
-	public String getProjectName() {
-		return projectName;
-	}
+    public String getProjectName() {
+        return projectName;
+    }
 
-	public String getProjectScmUrl(String projectName) {
-		return getScmUrl() + "/" + projectName + "/trunk/" + projectName;
-	}
+    public String getProjectScmUrl(final String projectName) {
+        return getScmUrl() + "/" + projectName + "/trunk/" + projectName;
+    }
 
-	@Override
-	public String getScmMavenPrefix() {
-		return "scm:svn:";
-	}
+    @Override
+    public String getScmMavenPrefix() {
+        return "scm:svn:";
+    }
 }
