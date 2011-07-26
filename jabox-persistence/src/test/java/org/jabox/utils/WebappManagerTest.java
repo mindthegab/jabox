@@ -24,7 +24,7 @@ import java.util.List;
 
 import junit.framework.TestCase;
 
-public class WebappManagerTest extends TestCase {
+public abstract class WebappManagerTest extends TestCase {
 
 	public void testGetWebapps() throws IOException {
 		List<String> servers = WebappManager.getWebapps();
