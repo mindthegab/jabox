@@ -38,8 +38,8 @@
 	-->
 	<scm>
 		<url>http://www.jabox.org/trunk/</url>
-		<connection>scm:svn:svn://67.23.47.178/trunk/</connection>
-		<developerConnection>scm:svn:svn://67.23.47.178/trunk/</developerConnection>
+		<connection>scm:git:git://github.com/jabox/jabox.git</connection>
+		<developerConnection>scm:git:git@github.com:jabox/jabox.git</developerConnection>
 	</scm>
 	<build>
 		<extensions>
