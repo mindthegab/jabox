@@ -39,7 +39,7 @@
 	<scm>
 		<url>git://github.com/jabox/jabox.git</url>
 		<connection>scm:git:git://github.com/jabox/jabox.git</connection>
-		<developerConnection>scm:git:git://github.com/jabox/jabox.git</developerConnection>
+	        <developerConnection>scm:git:git@github.com:jabox/jabox.git</developerConnection>
 	</scm>
 	<build>
 		<extensions>
