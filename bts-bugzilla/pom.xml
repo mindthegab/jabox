@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>org.jabox</groupId>
 		<artifactId>jabox</artifactId>
-		<version>0.0.15</version>
+		<version>0.0.16-SNAPSHOT</version>
 	</parent>
 	<artifactId>bts-bugzilla</artifactId>
 	<name>bts-bugzilla</name>
@@ -25,7 +25,7 @@
 		<dependency>
 			<groupId>org.jabox</groupId>
 			<artifactId>jabox-persistence</artifactId>
-			<version>0.0.15</version>
+			<version>0.0.16-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>

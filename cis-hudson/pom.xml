@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>org.jabox</groupId>
 		<artifactId>jabox</artifactId>
-		<version>0.0.15</version>
+		<version>0.0.16-SNAPSHOT</version>
 	</parent>
 	<artifactId>cis-hudson</artifactId>
 	<name>cis-hudson</name>
