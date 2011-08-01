@@ -29,10 +29,13 @@ import javax.persistence.Query;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.jabox.apis.Connector;
 import org.jabox.apis.IBaseEntity;
 import org.jabox.model.DefaultConfiguration;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.thoughtworks.xstream.XStream;
 
 @Transactional
 public class GeneralDaoImpl implements GeneralDao, InitializingBean {
@@ -79,6 +82,12 @@ public class GeneralDaoImpl implements GeneralDao, InitializingBean {
 	}
 
 	public <T extends IBaseEntity> void persist(final T object) {
+		
+		XStream xstream = new XStream();
+		xstream.alias("connector", Connector.class);
+		String xml = xstream.toXML(object);
+		System.out.println(xml);
+
 		// if (object.getId() == null)
 		entityManager.persist(object);
 		// else {
@@ -104,6 +113,7 @@ public class GeneralDaoImpl implements GeneralDao, InitializingBean {
 
 	@SuppressWarnings("unchecked")
 	public <T extends IBaseEntity> List<T> getEntities(final Class<T> clazz) {
+
 		Criteria criteria = getHibernateSession().createCriteria(clazz);
 		List<T> entities = criteria.list();
 

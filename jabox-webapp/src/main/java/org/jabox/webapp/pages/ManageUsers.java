@@ -25,6 +25,7 @@ import org.apache.wicket.authorization.strategies.role.annotations.AuthorizeInst
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.persistence.domain.BaseEntity;
 import org.apache.wicket.persistence.provider.GeneralDao;
+import org.apache.wicket.persistence.provider.UserXstreamDao;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.jabox.apis.Connector;
 import org.jabox.apis.Manager;
@@ -47,11 +48,10 @@ public class ManageUsers extends MiddlePanel {
 	protected Manager<Connector> _manager;
 
 	public ManageUsers() {
-		final List<User> users = _generalDao.getEntities(User.class);
+		final List<User> users = UserXstreamDao.getUsers();
 		Form<BaseEntity> form = new Form<BaseEntity>("deleteForm");
 		form.add(new UserList("users", users));
 		form.add(new CreateUserLink("createUser"));
-
 		add(form);
 	}
 }

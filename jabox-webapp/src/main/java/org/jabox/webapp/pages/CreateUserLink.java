@@ -23,6 +23,7 @@ import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.persistence.provider.GeneralDao;
+import org.apache.wicket.persistence.provider.UserXstreamDao;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.jabox.model.User;
 
@@ -46,7 +47,7 @@ public class CreateUserLink extends Link<Void> {
 			}
 
 			protected void onSave(final User user) {
-				_generalDao.persist(user);
+				UserXstreamDao.persist(user);
 				setResponsePage(ManageUsers.class);
 			}
 		});

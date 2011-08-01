@@ -2,6 +2,7 @@ package org.jabox.applicationcontext;
 
 import org.apache.wicket.injection.web.InjectorHolder;
 import org.apache.wicket.persistence.provider.GeneralDao;
+import org.apache.wicket.persistence.provider.UserXstreamDao;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.jabox.model.DefaultConfiguration;
 import org.jabox.model.User;
@@ -24,7 +25,7 @@ public class InitializeDatabase {
 			User user = new User();
 			user.setLogin("admin");
 			user.setPassword("admin");
-			_generalDao.persist(user);
+			UserXstreamDao.persist(user);
 		}
 	}
 }

@@ -113,4 +113,14 @@ public class Environment {
 			System.setProperty(property, Environment.getBaseDir() + subdir);
 		}
 	}
+
+	public static File getUsersDir() {
+		File usersDir = new File(getBaseDirFile(), "users");
+
+		if (!usersDir.exists()) {
+			usersDir.mkdirs();
+		}
+
+		return usersDir;
+	}
 }
