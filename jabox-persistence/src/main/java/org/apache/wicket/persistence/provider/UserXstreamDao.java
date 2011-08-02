@@ -15,9 +15,14 @@ import com.thoughtworks.xstream.XStream;
 
 public class UserXstreamDao {
 
-	public static void persist(User user) {
+	private static XStream getXStream() {
 		XStream xstream = new XStream();
 		xstream.alias("user", User.class);
+		return xstream;
+	}
+
+	public static void persist(User user) {
+		XStream xstream = getXStream();
 		String xml = xstream.toXML(user);
 		try {
 			File usersDir = Environment.getUsersDir();
@@ -32,16 +37,25 @@ public class UserXstreamDao {
 
 	public static List<User> getUsers() {
 		ArrayList<User> users = new ArrayList<User>();
-		XStream xstream = new XStream();
-		xstream.alias("user", User.class);
+		File usersDir = Environment.getUsersDir();
 
-		users.add(getUser("admin"));
+		String[] children = usersDir.list();
+		if (children == null) {
+			// Either dir does not exist or is not a directory
+		} else {
+			for (int i = 0; i < children.length; i++) {
+				// Get filename of file or directory
+				String filename = children[i];
+				String login = filename.replaceAll(".xml$", "");
+				users.add(getUser(login));
+			}
+		}
+
 		return users;
 	}
 
 	public static User getUser(String login) {
-		XStream xstream = new XStream();
-		xstream.alias("user", User.class);
+		XStream xstream = getXStream();
 
 		File usersDir = Environment.getUsersDir();
 		File file = new File(usersDir, login + ".xml");
@@ -56,4 +70,8 @@ public class UserXstreamDao {
 		return null;
 	}
 
+	public static void deleteUser(User user) {
+		File file = new File(Environment.getUsersDir(), user + ".xml");
+		file.delete();
+	}
 }

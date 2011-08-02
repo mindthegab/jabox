@@ -24,8 +24,10 @@ import org.apache.wicket.ResourceReference;
 import org.apache.wicket.markup.html.form.ImageButton;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.persistence.provider.GeneralDao;
+import org.apache.wicket.persistence.provider.UserXstreamDao;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.jabox.apis.IBaseEntity;
+import org.jabox.model.User;
 
 public class DeleteEntityButton<T extends IBaseEntity> extends ImageButton {
 	private static final ResourceReference DELETE_IMG = new ResourceReference(
@@ -54,6 +56,9 @@ public class DeleteEntityButton<T extends IBaseEntity> extends ImageButton {
 	 */
 	@Override
 	public void onSubmit() {
+		if (User.class.isInstance(_item)) {
+			UserXstreamDao.deleteUser((User) _item);
+		}
 		generalDao.deleteEntity(_item);
 		setResponsePage(_responsePage);
 	}
