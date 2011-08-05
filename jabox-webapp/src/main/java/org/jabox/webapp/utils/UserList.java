@@ -30,8 +30,12 @@ import org.jabox.model.User;
 import org.jabox.webapp.menubuttons.DeleteEntityButton;
 import org.jabox.webapp.menubuttons.EditEntityButton;
 import org.jabox.webapp.pages.ManageProjects;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class UserList extends PropertyListView<User> {
+	private static final Logger LOGGER = LoggerFactory
+          .getLogger(UserList.class);
 
 	/**
 	 * 
@@ -48,6 +52,8 @@ public class UserList extends PropertyListView<User> {
 	@Override
 	public void populateItem(final ListItem<User> listItem) {
 		final User user = listItem.getModelObject();
+		LOGGER.debug("Populate User: " + user.getLogin());
+
 		listItem.add(new Label("login", user.getLogin()));
 		listItem.add(new Label("email", user.getEmail()));
 		listItem.add(new Label("firstName", user.getFirstName()));

@@ -39,8 +39,13 @@ import org.jabox.webapp.menubuttons.IconButton;
 import org.jabox.webapp.pages.CreateServerLink;
 import org.jabox.webapp.pages.EditServerButton;
 import org.jabox.webapp.pages.ManageServers;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class SCMConnectorList extends PropertyListView<ConnectorConfig> {
+        private static final Logger LOGGER = LoggerFactory
+          .getLogger(SCMConnectorList.class);
+
 	private static final long serialVersionUID = -2877438240039632971L;
 
 	public SCMConnectorList(final String id,
@@ -58,6 +63,8 @@ public class SCMConnectorList extends PropertyListView<ConnectorConfig> {
 	@Override
 	public void populateItem(final ListItem<ConnectorConfig> item) {
 		final ConnectorConfig deployerConfig = item.getModelObject();
+                LOGGER.debug("Populate SCM Connector: " + deployerConfig.getServer().getName());
+                
 		item.add(new Label("clazz", deployerConfig.getServer().getName()));
 		item.add(new ExternalLink("server.url", deployerConfig.getServer()
 				.getUrl(), deployerConfig.getServer().getUrl()));
