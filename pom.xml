@@ -24,7 +24,6 @@
 		<module>eclipse-webapp</module>
 		<module>ide-eclipse</module>
 		<module>maven-helper</module>
-		<module>jabox-standalone</module>
 		<module>mrm-artifactory</module>
 		<module>scm-beanstalk</module>
 		<module>mrm-scp</module>
