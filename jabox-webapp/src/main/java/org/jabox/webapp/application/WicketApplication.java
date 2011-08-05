@@ -30,6 +30,9 @@ import org.jabox.webapp.pages.HomePage;
 import org.jabox.webapp.pages.JaboxAuthenticatedWebApplication;
 import org.jabox.webapp.pages.ManageServers;
 import org.springframework.stereotype.Component;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import java.util.Locale;
 
 /**
  * Application object for your web application. If you want to run this
@@ -39,6 +42,13 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class WicketApplication extends JaboxAuthenticatedWebApplication {
+
+    /**
+     * Application logger instance.
+     */
+    private static final Logger LOGGER = LoggerFactory
+        .getLogger(WicketApplication.class);
+
 	/**
 	 * Constructor
 	 */
@@ -75,6 +85,7 @@ public class WicketApplication extends JaboxAuthenticatedWebApplication {
 	 */
 	@Override
 	public Class<? extends WebPage> getHomePage() {
+        	LOGGER.debug("Locale: " + Locale.getDefault());
 		return ManageServers.class;
 	}
 
