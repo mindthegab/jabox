@@ -26,8 +26,13 @@ import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.persistence.provider.GeneralDao;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.jabox.model.Container;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public final class StartContainerButton extends ImageButton {
+	private static final Logger LOGGER = LoggerFactory
+		.getLogger(StartContainerButton.class);
+
 	private static final ResourceReference START_IMG = new ResourceReference(
 			StartContainerButton.class, "start.png");
 	private static final long serialVersionUID = 1L;
@@ -55,6 +60,7 @@ public final class StartContainerButton extends ImageButton {
 	 */
 	@Override
 	public void onSubmit() {
+                LOGGER.info("Starting container: " + _item.getName());
 		_item.start();
 		setResponsePage(_responsePage);
 	}
