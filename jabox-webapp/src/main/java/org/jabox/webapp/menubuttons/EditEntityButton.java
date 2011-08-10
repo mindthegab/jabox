@@ -32,8 +32,12 @@ import org.jabox.model.User;
 import org.jabox.webapp.modifiers.TooltipModifier;
 import org.jabox.webapp.pages.EditUserPage;
 import org.jabox.webapp.pages.ManageUsers;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public final class EditEntityButton<T extends BaseEntity> extends ImageButton {
+	private static final Logger LOGGER = LoggerFactory
+		.getLogger(EditEntityButton.class);
 
 	private static final TooltipModifier TOOLTIP_MODIFIER = new TooltipModifier(
 			"Edit Connector");
@@ -72,6 +76,7 @@ public final class EditEntityButton<T extends BaseEntity> extends ImageButton {
 
 			@Override
 			protected void onSave(final User user) {
+				LOGGER.info("Edited User: " + user.getLogin());
 				_generalDao.persist(user);
 				setResponsePage(ManageUsers.class);
 			}

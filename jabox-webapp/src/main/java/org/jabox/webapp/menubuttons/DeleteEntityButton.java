@@ -26,8 +26,13 @@ import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.persistence.provider.GeneralDao;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.jabox.apis.IBaseEntity;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class DeleteEntityButton<T extends IBaseEntity> extends ImageButton {
+	private static final Logger LOGGER = LoggerFactory
+		.getLogger(DeleteEntityButton.class);
+
 	private static final ResourceReference DELETE_IMG = new ResourceReference(
 			DeleteEntityButton.class, "edit-delete.png");
 	private static final long serialVersionUID = 1L;
@@ -54,6 +59,7 @@ public class DeleteEntityButton<T extends IBaseEntity> extends ImageButton {
 	 */
 	@Override
 	public void onSubmit() {
+		LOGGER.info("Deleting entity");
 		generalDao.deleteEntity(_item);
 		setResponsePage(_responsePage);
 	}
