@@ -32,6 +32,7 @@
 		<module>scm-git</module>
 		<module>scm-github</module>
 	</modules>
+
 	<!--
 		TODO <organization> <name>company name</name> <url>company url</url>
 		</organization>
