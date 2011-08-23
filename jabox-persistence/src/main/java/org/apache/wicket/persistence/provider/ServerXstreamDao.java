@@ -49,7 +49,12 @@ public class ServerXstreamDao {
 				// Get filename of file or directory
 				String filename = children[i];
 				String name = filename.replaceAll(".xml$", "");
-				servers.add(getServer(name));
+
+				ConnectorConfig server = getServer(name);
+				// Just add the Servers of the specific Class
+				if (clas.isAssignableFrom(server.getClass())) {
+					servers.add(server);
+				}
 			}
 		}
 
