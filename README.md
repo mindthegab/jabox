@@ -35,3 +35,4 @@ Sign-up to our [mailing list].
 [website]: http://www.jabox.org/
 [blog]: http://jabox.tumblr.com/
 [mailing list]: http://groups.google.com/group/users-jabox/topics
+[jaboxALM]: http://twitter.com/jaboxALM
