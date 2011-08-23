@@ -4,7 +4,7 @@ Copyright &copy; 2009-, Dimitris Kapanidis. Licensed under [GPL License].
 
 About
 -----
-Jabox ALM is an open source Application Lifecycle Management platform.
+Jabox ALM is an open source Application Lifecycle Management platform. It provides a full-blown Java Enterprise Development Factory using your favorite tools, in less than 5 minutes.
 
 It's purpose is to manage a seemless integration between Software Configuration Management ([SCM]), Issue Tracking System ([ITS]), Continuous Integration System ([CIS]), Repository Management System ([RMS]), Code Quality Management ([CQM]) and other tools in order to provide a complete Software Factory.
 
