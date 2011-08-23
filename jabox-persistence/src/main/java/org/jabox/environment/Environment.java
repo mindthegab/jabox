@@ -33,11 +33,15 @@ public class Environment {
 	private static final String CUSTOM_MAVEN_DIR = ".m2";
 
 	public static String getBaseDir() {
-		return getHomeDir();
+		return getBaseDirFile().getAbsolutePath();
 	}
 
 	public static File getBaseDirFile() {
-		return new File(getBaseDir());
+		File dir = new File(getHomeDir());
+		if (!dir.exists()) {
+			dir.mkdirs();
+		}
+		return dir;
 	}
 
 	public static File getCustomMavenHomeDir() {
