@@ -115,12 +115,27 @@ public class Environment {
 	}
 
 	public static File getUsersDir() {
-		File usersDir = new File(getBaseDirFile(), "users");
-
-		if (!usersDir.exists()) {
-			usersDir.mkdirs();
+		File dir = new File(getBaseDirFile(), "users");
+		if (!dir.exists()) {
+			dir.mkdirs();
 		}
-
-		return usersDir;
+		return dir;
 	}
+	
+	public static File getContainersDir() {
+		File dir = new File(getBaseDirFile(), "containers");
+		if (!dir.exists()) {
+			dir.mkdirs();
+		}
+		return dir;
+	}
+	
+	public static File getProjectsDir() {
+		File dir = new File(getBaseDirFile(), "projects");
+		if (!dir.exists()) {
+			dir.mkdirs();
+		}
+		return dir;
+	}
+
 }

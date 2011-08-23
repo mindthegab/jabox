@@ -23,10 +23,12 @@ import org.apache.wicket.Page;
 import org.apache.wicket.ResourceReference;
 import org.apache.wicket.markup.html.form.ImageButton;
 import org.apache.wicket.markup.html.list.ListItem;
+import org.apache.wicket.persistence.provider.ContainerXstreamDao;
 import org.apache.wicket.persistence.provider.GeneralDao;
 import org.apache.wicket.persistence.provider.UserXstreamDao;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.jabox.apis.IBaseEntity;
+import org.jabox.model.Container;
 import org.jabox.model.User;
 
 public class DeleteEntityButton<T extends IBaseEntity> extends ImageButton {
@@ -58,7 +60,10 @@ public class DeleteEntityButton<T extends IBaseEntity> extends ImageButton {
 	public void onSubmit() {
 		if (User.class.isInstance(_item)) {
 			UserXstreamDao.deleteUser((User) _item);
+		} else if (Container.class.isInstance(_item)) {
+			ContainerXstreamDao.deleteContainer((Container) _item);
 		}
+
 		generalDao.deleteEntity(_item);
 		setResponsePage(_responsePage);
 	}

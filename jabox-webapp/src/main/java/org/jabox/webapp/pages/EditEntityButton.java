@@ -26,9 +26,7 @@ import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.persistence.domain.BaseEntity;
-import org.apache.wicket.persistence.provider.GeneralDao;
 import org.apache.wicket.persistence.provider.UserXstreamDao;
-import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.jabox.model.User;
 import org.jabox.webapp.modifiers.TooltipModifier;
 
@@ -52,9 +50,6 @@ public final class EditEntityButton<T extends BaseEntity> extends ImageButton {
 	public EditEntityButton(final String id, final ListItem<T> item) {
 		this(id, item.getModelObject());
 	}
-
-	@SpringBean(name = "GeneralDao")
-	protected GeneralDao _generalDao;
 
 	/**
 	 * Delete from persistent storage, commit transaction.

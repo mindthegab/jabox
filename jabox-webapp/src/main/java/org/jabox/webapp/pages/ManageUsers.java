@@ -24,11 +24,7 @@ import java.util.List;
 import org.apache.wicket.authorization.strategies.role.annotations.AuthorizeInstantiation;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.persistence.domain.BaseEntity;
-import org.apache.wicket.persistence.provider.GeneralDao;
 import org.apache.wicket.persistence.provider.UserXstreamDao;
-import org.apache.wicket.spring.injection.annot.SpringBean;
-import org.jabox.apis.Connector;
-import org.jabox.apis.Manager;
 import org.jabox.model.User;
 import org.jabox.webapp.borders.MiddlePanel;
 import org.jabox.webapp.utils.UserList;
@@ -40,12 +36,6 @@ import org.jabox.webapp.utils.UserList;
 public class ManageUsers extends MiddlePanel {
 
 	private static final long serialVersionUID = 1L;
-
-	@SpringBean
-	protected GeneralDao _generalDao;
-
-	@SpringBean
-	protected Manager<Connector> _manager;
 
 	public ManageUsers() {
 		final List<User> users = UserXstreamDao.getUsers();

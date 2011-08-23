@@ -9,24 +9,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.jabox.environment.Environment;
+import org.jabox.model.Project;
 import org.jabox.model.User;
 
 import com.thoughtworks.xstream.XStream;
 
-public class UserXstreamDao {
+public class ProjectXstreamDao {
 
 	private static XStream getXStream() {
 		XStream xstream = new XStream();
-		xstream.alias("user", User.class);
+		xstream.alias("project", Project.class);
 		return xstream;
 	}
 
-	public static void persist(User user) {
+	public static void persist(Project project) {
 		XStream xstream = getXStream();
-		String xml = xstream.toXML(user);
+		String xml = xstream.toXML(project);
 		try {
-			File usersDir = Environment.getUsersDir();
-			File file = new File(usersDir, user.getLogin() + ".xml");
+			File projectsDir = Environment.getProjectsDir();
+			File file = new File(projectsDir, project.getName() + ".xml");
 			FileWriter writer = new FileWriter(file);
 			writer.write(xml);
 			writer.close();
@@ -35,43 +36,43 @@ public class UserXstreamDao {
 		}
 	}
 
-	public static List<User> getUsers() {
-		ArrayList<User> users = new ArrayList<User>();
-		File usersDir = Environment.getUsersDir();
+	public static List<Project> getProjects() {
+		ArrayList<Project> projects = new ArrayList<Project>();
+		File dir = Environment.getProjectsDir();
 
-		String[] children = usersDir.list();
+		String[] children = dir.list();
 		if (children == null) {
 			// Either dir does not exist or is not a directory
 		} else {
 			for (int i = 0; i < children.length; i++) {
 				// Get filename of file or directory
 				String filename = children[i];
-				String login = filename.replaceAll(".xml$", "");
-				users.add(getUser(login));
+				String name = filename.replaceAll(".xml$", "");
+				projects.add(getProject(name));
 			}
 		}
 
-		return users;
+		return projects;
 	}
 
-	public static User getUser(String login) {
+	public static Project getProject(String name) {
 		XStream xstream = getXStream();
 
-		File usersDir = Environment.getUsersDir();
-		File file = new File(usersDir, login + ".xml");
+		File dir = Environment.getProjectsDir();
+		File file = new File(dir, name + ".xml");
 
 		try {
 			FileInputStream is = new FileInputStream(file);
-			User user = (User) xstream.fromXML(is);
-			return user;
+			Project project = (Project) xstream.fromXML(is);
+			return project;
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
 
-	public static void deleteUser(User user) {
-		File file = new File(Environment.getUsersDir(), user.getLogin()
+	public static void deleteProject(Project project) {
+		File file = new File(Environment.getProjectsDir(), project.getName()
 				+ ".xml");
 		file.delete();
 	}
