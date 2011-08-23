@@ -19,6 +19,8 @@
  */
 package org.jabox.webapp.pages;
 
+import java.util.List;
+
 import org.apache.wicket.authorization.strategies.role.annotations.AuthorizeInstantiation;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.PasswordTextField;
@@ -29,6 +31,7 @@ import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.persistence.provider.GeneralDao;
+import org.apache.wicket.persistence.provider.UserXstreamDao;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.jabox.apis.Connector;
 import org.jabox.apis.Manager;
@@ -77,8 +80,8 @@ public class MyAccountPage extends MiddlePanel {
 
 	private IModel<User> getUser() {
 		JaboxAuthenticatedWebSession session = (JaboxAuthenticatedWebSession) getSession();
-		Long userId = session.getUserId();
-		return new Model<User>(_generalDao.findEntity(userId, User.class));
+		String username = session.getUsername();
+		return new Model<User>(UserXstreamDao.getUser(username));
 	}
 
 	protected void onSave(User user) {

@@ -37,7 +37,7 @@ public class JaboxAuthenticatedWebSession extends AuthenticatedWebSession {
 	@SpringBean()
 	protected GeneralDao _generalDao;
 
-	private Long _userId;
+	private String _username;
 
 	/**
 	 * Construct.
@@ -68,7 +68,7 @@ public class JaboxAuthenticatedWebSession extends AuthenticatedWebSession {
 
 		if (username.equals(user.getLogin())
 				&& password.equals(user.getPassword())) {
-			_userId = user.getId();
+			_username = user.getLogin();
 			return true;
 		} else {
 			return false;
@@ -89,9 +89,9 @@ public class JaboxAuthenticatedWebSession extends AuthenticatedWebSession {
 	}
 
 	/**
-	 * @return the id of the authenticated user.
+	 * @return the username of the authenticated user.
 	 */
-	public Long getUserId() {
-		return _userId;
+	public String getUsername() {
+		return _username;
 	}
 }

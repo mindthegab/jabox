@@ -24,13 +24,12 @@ import org.apache.wicket.markup.html.form.ImageButton;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
-import org.apache.wicket.persistence.domain.BaseEntityDetachableModel;
+import org.apache.wicket.model.Model;
 import org.apache.wicket.persistence.provider.GeneralDao;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.jabox.apis.Connector;
 import org.jabox.model.DeployersRegistry;
 import org.jabox.model.Server;
-import org.jabox.webapp.menubuttons.EditEntityButton;
 import org.jabox.webapp.modifiers.TooltipModifier;
 
 public final class EditServerButton<T extends Server> extends ImageButton {
@@ -65,7 +64,7 @@ public final class EditServerButton<T extends Server> extends ImageButton {
 	 */
 	@Override
 	public void onSubmit() {
-		IModel<T> model = new BaseEntityDetachableModel<T>(_item);
+		IModel<T> model = new Model<T>(_item);
 
 		Connector connector = registry.getEntry(model.getObject()
 				.getDeployerConfig().pluginId);
