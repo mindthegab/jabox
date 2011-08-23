@@ -6,7 +6,7 @@ About
 -----
 Jabox ALM is an open source Application Lifecycle Management platform.
 
-It's purpose is to manage a seemless integration between Software Configuration Management (SCM), Issue Tracking System (ITS), Continuous Integration System (CIS), Repository Management System (RMS), Code Quality Management (CQM) and other tools in order to provide a complete Software Factory.
+It's purpose is to manage a seemless integration between Software Configuration Management ([SCM]), Issue Tracking System ([ITS]), Continuous Integration System ([CIS]), Repository Management System ([RMS]), Code Quality Management ([CQM]) and other tools in order to provide a complete Software Factory.
 
 Its core is implementation agnostic and there are plugins that glue together each module, in order to provide better extensibility.
 
@@ -36,3 +36,8 @@ Sign-up to our [mailing list].
 [blog]: http://jabox.tumblr.com/
 [mailing list]: http://groups.google.com/group/users-jabox/topics
 [jaboxALM]: http://twitter.com/jaboxALM
+[SCM]: http://redmine.jabox.org/projects/jabox/wiki/Software_Configuration_Management
+[ITS]: http://redmine.jabox.org/projects/jabox/wiki/Issue_Tracking_System
+[CIS]: http://redmine.jabox.org/projects/jabox/wiki/Continuous_Integration_System
+[RMS]: http://redmine.jabox.org/projects/jabox/wiki/Repository_Management_System
+[CQM]: http://redmine.jabox.org/projects/jabox/wiki/Code_Quality_Management
