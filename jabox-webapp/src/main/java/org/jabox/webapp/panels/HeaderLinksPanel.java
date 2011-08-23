@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.wicket.markup.html.panel.Panel;
-import org.apache.wicket.persistence.provider.GeneralDao;
+import org.apache.wicket.persistence.provider.ConfigXstreamDao;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.jabox.apis.Connector;
 import org.jabox.apis.ConnectorConfig;
@@ -46,14 +46,11 @@ public class HeaderLinksPanel extends Panel {
 	public static final int CQM = 5;
 
 	@SpringBean
-	protected GeneralDao _generalDao;
-
-	@SpringBean
 	protected Manager<Connector> _manager;
 
 	public HeaderLinksPanel(final String id, final int selected) {
 		super(id);
-		final DefaultConfiguration dc = _generalDao.getDefaultConfiguration();
+		final DefaultConfiguration dc = ConfigXstreamDao.getConfig();
 
 		List<Tab> tabs = new ArrayList<Tab>();
 		tabs

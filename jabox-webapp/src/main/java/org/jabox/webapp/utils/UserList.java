@@ -24,8 +24,6 @@ import java.util.List;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.PropertyListView;
-import org.apache.wicket.persistence.provider.GeneralDao;
-import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.jabox.model.User;
 import org.jabox.webapp.menubuttons.DeleteEntityButton;
 import org.jabox.webapp.pages.EditEntityButton;
@@ -41,9 +39,6 @@ public class UserList extends PropertyListView<User> {
 	public UserList(final String id, final List<User> projects) {
 		super(id, projects);
 	}
-
-	@SpringBean(name = "GeneralDao")
-	protected GeneralDao generalDao;
 
 	@Override
 	public void populateItem(final ListItem<User> listItem) {

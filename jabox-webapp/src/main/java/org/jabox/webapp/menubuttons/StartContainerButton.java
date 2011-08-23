@@ -23,8 +23,6 @@ import org.apache.wicket.Page;
 import org.apache.wicket.ResourceReference;
 import org.apache.wicket.markup.html.form.ImageButton;
 import org.apache.wicket.markup.html.list.ListItem;
-import org.apache.wicket.persistence.provider.GeneralDao;
-import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.jabox.model.Container;
 
 public final class StartContainerButton extends ImageButton {
@@ -46,9 +44,6 @@ public final class StartContainerButton extends ImageButton {
 			final Class<? extends Page> responsePage) {
 		this(id, item.getModelObject(), responsePage);
 	}
-
-	@SpringBean(name = "GeneralDao")
-	protected GeneralDao generalDao;
 
 	/**
 	 * Delete from persistent storage, commit transaction.

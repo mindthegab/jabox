@@ -26,6 +26,7 @@ import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.link.ExternalLink;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.PropertyListView;
+import org.apache.wicket.persistence.provider.ConfigXstreamDao;
 import org.jabox.apis.ConnectorConfig;
 import org.jabox.model.DefaultConfiguration;
 import org.jabox.model.Server;
@@ -69,11 +70,11 @@ public class SCMConnectorList extends PropertyListView<ConnectorConfig> {
 			@Override
 			public void onSubmit() {
 				// If item is default, disable it first.
-				DefaultConfiguration dc = generalDao.getDefaultConfiguration();
+				DefaultConfiguration dc = ConfigXstreamDao.getConfig();
 				if (DefaultConfiguration.TRUE.equals(dc.isDefault(item
 						.getModelObject()))) {
 					dc.switchDefault(item.getModelObject());
-					generalDao.persist(dc);
+					ConfigXstreamDao.persist(dc);
 				}
 				super.onSubmit();
 			}

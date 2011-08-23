@@ -11,7 +11,6 @@ import java.util.List;
 import org.jabox.apis.ConnectorConfig;
 import org.jabox.environment.Environment;
 import org.jabox.model.Server;
-import org.jabox.model.User;
 
 import com.thoughtworks.xstream.XStream;
 
@@ -37,7 +36,8 @@ public class ServerXstreamDao {
 		}
 	}
 
-	public static List<ConnectorConfig> getServers(Class<? extends ConnectorConfig> clas) {
+	public static List<ConnectorConfig> getServers(
+			Class<? extends ConnectorConfig> clas) {
 		ArrayList<ConnectorConfig> servers = new ArrayList<ConnectorConfig>();
 		File dir = Environment.getServersDir();
 

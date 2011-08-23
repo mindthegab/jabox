@@ -22,16 +22,11 @@ package org.jabox.webapp.pages;
 import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
-import org.apache.wicket.persistence.provider.GeneralDao;
 import org.apache.wicket.persistence.provider.UserXstreamDao;
-import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.jabox.model.User;
 
 public class CreateUserLink extends Link<Void> {
 	private static final long serialVersionUID = -6076134805074401259L;
-
-	@SpringBean
-	protected GeneralDao _generalDao;
 
 	public CreateUserLink(final String id) {
 		super(id);

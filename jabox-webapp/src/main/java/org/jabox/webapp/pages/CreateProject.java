@@ -34,8 +34,7 @@ import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.PropertyModel;
-import org.apache.wicket.persistence.provider.GeneralDao;
-import org.apache.wicket.spring.injection.annot.SpringBean;
+import org.apache.wicket.persistence.provider.ProjectXstreamDao;
 import org.jabox.application.CreateProjectUtil;
 import org.jabox.model.MavenArchetype;
 import org.jabox.model.Project;
@@ -44,9 +43,6 @@ import org.jabox.webapp.menubuttons.InfoImage;
 
 @AuthorizeInstantiation("ADMIN")
 public class CreateProject extends MiddlePanel {
-
-	@SpringBean(name = "GeneralDao")
-	protected GeneralDao generalDao;
 
 	public CreateProject() {
 		final Project _project = new Project();
@@ -62,9 +58,9 @@ public class CreateProject extends MiddlePanel {
 			protected void onSubmit() {
 				// We need to persist twice because the id is necessary for the
 				// creation of the project.
-				generalDao.persist(_project);
+				ProjectXstreamDao.persist(_project);
 				new CreateProjectUtil().createProject(_project);
-				generalDao.persist(_project);
+				ProjectXstreamDao.persist(_project);
 				info("Project \"" + _project.getName() + "\" Created.");
 			}
 		};
@@ -101,7 +97,7 @@ public class CreateProject extends MiddlePanel {
 		form.add(new TextField<Project>("sourceEncoding"));
 		form.add(new CheckBox("signArtifactReleases"));
 		form.add(ddc);
-		
+
 		// Tooltips
 		form.add(new InfoImage("name.tooltip", ""));
 		form.add(new InfoImage("description.tooltip", ""));

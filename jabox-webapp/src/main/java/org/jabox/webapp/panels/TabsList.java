@@ -27,8 +27,6 @@ import org.apache.wicket.markup.html.link.BookmarkablePageLink;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.PropertyListView;
 import org.apache.wicket.model.Model;
-import org.apache.wicket.persistence.provider.GeneralDao;
-import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.jabox.webapp.modifiers.TooltipModifier;
 import org.jabox.webapp.pages.BasePage;
 
@@ -42,9 +40,6 @@ public class TabsList extends PropertyListView<Tab> {
 	public TabsList(final String id, final List<Tab> projects) {
 		super(id, projects);
 	}
-
-	@SpringBean
-	protected GeneralDao generalDao;
 
 	@Override
 	public void populateItem(final ListItem<Tab> listItem) {

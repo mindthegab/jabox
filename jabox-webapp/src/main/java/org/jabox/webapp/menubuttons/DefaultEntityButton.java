@@ -23,8 +23,7 @@ import org.apache.wicket.Page;
 import org.apache.wicket.ResourceReference;
 import org.apache.wicket.markup.html.form.ImageButton;
 import org.apache.wicket.markup.html.list.ListItem;
-import org.apache.wicket.persistence.provider.GeneralDao;
-import org.apache.wicket.spring.injection.annot.SpringBean;
+import org.apache.wicket.persistence.provider.ConfigXstreamDao;
 import org.jabox.apis.ConnectorConfig;
 import org.jabox.model.DefaultConfiguration;
 import org.jabox.webapp.modifiers.TooltipModifier;
@@ -57,7 +56,7 @@ public final class DefaultEntityButton<T extends ConnectorConfig> extends
 	}
 
 	private boolean isDefault(final ConnectorConfig item) {
-		DefaultConfiguration dc = _generalDao.getDefaultConfiguration();
+		DefaultConfiguration dc = ConfigXstreamDao.getConfig();
 		if (DefaultConfiguration.TRUE.equals(dc.isDefault(item))) {
 			return true;
 		}
@@ -69,16 +68,13 @@ public final class DefaultEntityButton<T extends ConnectorConfig> extends
 		this(id, item.getModelObject(), responsePage);
 	}
 
-	@SpringBean(name = "GeneralDao")
-	protected GeneralDao _generalDao;
-
 	/**
 	 * Delete from persistent storage, commit transaction.
 	 */
 	@Override
 	public void onSubmit() {
-		DefaultConfiguration dc = _generalDao.getDefaultConfiguration();
+		DefaultConfiguration dc = ConfigXstreamDao.getConfig();
 		dc.switchDefault(_item);
-		_generalDao.persist(dc);
+		ConfigXstreamDao.persist(dc);
 	}
 }

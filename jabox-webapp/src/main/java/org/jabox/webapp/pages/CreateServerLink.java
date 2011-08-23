@@ -22,9 +22,8 @@ package org.jabox.webapp.pages;
 import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
-import org.apache.wicket.persistence.provider.GeneralDao;
+import org.apache.wicket.persistence.provider.ConfigXstreamDao;
 import org.apache.wicket.persistence.provider.ServerXstreamDao;
-import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.jabox.apis.Connector;
 import org.jabox.model.DefaultConfiguration;
 import org.jabox.model.DeployerConfig;
@@ -32,9 +31,6 @@ import org.jabox.model.Server;
 
 public class CreateServerLink extends Link<Void> {
 	private static final long serialVersionUID = -6076134805074401259L;
-
-	@SpringBean
-	protected GeneralDao _generalDao;
 
 	private Class<? extends Connector> _class1;
 
@@ -62,15 +58,14 @@ public class CreateServerLink extends Link<Void> {
 			@Override
 			protected void onSave(final Server article) {
 				ServerXstreamDao.persist(article.getDeployerConfig());
-				 _generalDao.persist(article);
 
 				// If this is the first Service of the kind, set it as default
-				DefaultConfiguration dc = _generalDao.getDefaultConfiguration();
+				DefaultConfiguration dc = ConfigXstreamDao.getConfig();
 				DeployerConfig config = article.getDeployerConfig();
 				if (dc.getDefault(config) == null) {
 					dc.switchDefault(config);
 				}
-				_generalDao.persist(dc);
+				ConfigXstreamDao.persist(dc);
 
 				setResponsePage(ManageServers.class);
 			}

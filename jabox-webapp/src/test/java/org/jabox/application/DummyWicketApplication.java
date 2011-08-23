@@ -24,7 +24,6 @@ import org.apache.wicket.spring.injection.annot.test.AnnotApplicationContextMock
 import org.jabox.apis.Connector;
 import org.jabox.apis.Manager;
 import org.jabox.cis.hudson.HudsonConnector;
-import org.jabox.facades.GeneralDaoMock;
 import org.jabox.webapp.application.WicketApplication;
 
 public class DummyWicketApplication extends WicketApplication {
@@ -40,7 +39,6 @@ public class DummyWicketApplication extends WicketApplication {
 		manager._connectors = new Connector[] { new HudsonConnector() };
 
 		// Mock GeneralDao
-		mockContext.putBean(new GeneralDaoMock());
 		mockContext.putBean(manager);
 
 		// Inject to Spring

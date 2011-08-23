@@ -23,9 +23,7 @@ import org.apache.wicket.Request;
 import org.apache.wicket.authentication.AuthenticatedWebSession;
 import org.apache.wicket.authorization.strategies.role.Roles;
 import org.apache.wicket.injection.web.InjectorHolder;
-import org.apache.wicket.persistence.provider.GeneralDao;
 import org.apache.wicket.persistence.provider.UserXstreamDao;
-import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.jabox.model.User;
 
 /**
@@ -33,9 +31,6 @@ import org.jabox.model.User;
  */
 public class JaboxAuthenticatedWebSession extends AuthenticatedWebSession {
 	private static final long serialVersionUID = 1L;
-
-	@SpringBean()
-	protected GeneralDao _generalDao;
 
 	private String _username;
 

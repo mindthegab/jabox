@@ -23,8 +23,6 @@ import java.util.List;
 
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.PropertyListView;
-import org.apache.wicket.persistence.provider.GeneralDao;
-import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.jabox.apis.Connector;
 
 public class ConnectorList extends PropertyListView<Connector> {
@@ -37,9 +35,6 @@ public class ConnectorList extends PropertyListView<Connector> {
 	public ConnectorList(final String id, final List<Connector> projects) {
 		super(id, projects);
 	}
-
-	@SpringBean(name = "GeneralDao")
-	protected GeneralDao generalDao;
 
 	@Override
 	public void populateItem(final ListItem<Connector> listItem) {

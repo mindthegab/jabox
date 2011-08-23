@@ -10,7 +10,6 @@ import java.util.List;
 
 import org.jabox.environment.Environment;
 import org.jabox.model.Project;
-import org.jabox.model.User;
 
 import com.thoughtworks.xstream.XStream;
 

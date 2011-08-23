@@ -19,8 +19,6 @@
  */
 package org.jabox.webapp.pages;
 
-import java.util.List;
-
 import org.apache.wicket.authorization.strategies.role.annotations.AuthorizeInstantiation;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.PasswordTextField;
@@ -30,7 +28,6 @@ import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
-import org.apache.wicket.persistence.provider.GeneralDao;
 import org.apache.wicket.persistence.provider.UserXstreamDao;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.jabox.apis.Connector;
@@ -42,8 +39,6 @@ import org.jabox.webapp.utils.TransactionalForm;
 
 @AuthorizeInstantiation("ADMIN")
 public class MyAccountPage extends MiddlePanel {
-	@SpringBean(name = "GeneralDao")
-	protected GeneralDao _generalDao;
 
 	@SpringBean
 	protected Manager<Connector> _manager;
@@ -85,7 +80,7 @@ public class MyAccountPage extends MiddlePanel {
 	}
 
 	protected void onSave(User user) {
-		_generalDao.persist(user);
+		UserXstreamDao.persist(user);
 		setResponsePage(ManageUsers.class);
 	}
 

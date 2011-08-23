@@ -25,8 +25,6 @@ import org.apache.wicket.AttributeModifier;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.PropertyListView;
-import org.apache.wicket.persistence.provider.GeneralDao;
-import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.jabox.model.Container;
 import org.jabox.webapp.menubuttons.DeleteEntityButton;
 import org.jabox.webapp.menubuttons.StartContainerButton;
@@ -39,9 +37,6 @@ public class ContainerList extends PropertyListView<Container> {
 	public ContainerList(final String id, final List<Container> containers) {
 		super(id, containers);
 	}
-
-	@SpringBean(name = "GeneralDao")
-	protected GeneralDao generalDao;
 
 	@Override
 	public void populateItem(final ListItem<Container> listItem) {

@@ -25,7 +25,7 @@ import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
-import org.apache.wicket.persistence.provider.GeneralDao;
+import org.apache.wicket.persistence.provider.ServerXstreamDao;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.jabox.apis.Connector;
 import org.jabox.model.DeployersRegistry;
@@ -53,9 +53,6 @@ public final class EditServerButton<T extends Server> extends ImageButton {
 		this(id, item.getModelObject());
 	}
 
-	@SpringBean(name = "GeneralDao")
-	protected GeneralDao _generalDao;
-
 	@SpringBean
 	private DeployersRegistry registry;
 
@@ -78,7 +75,7 @@ public final class EditServerButton<T extends Server> extends ImageButton {
 
 			@Override
 			protected void onSave(final Server server) {
-				_generalDao.persist(server);
+				ServerXstreamDao.persist(server.getDeployerConfig());
 				setResponsePage(ManageServers.class);
 			}
 		});

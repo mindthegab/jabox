@@ -25,8 +25,6 @@ import org.apache.wicket.authorization.strategies.role.annotations.AuthorizeInst
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.persistence.domain.BaseEntity;
 import org.apache.wicket.persistence.provider.ContainerXstreamDao;
-import org.apache.wicket.persistence.provider.GeneralDao;
-import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.jabox.model.Container;
 import org.jabox.webapp.borders.MiddlePanel;
 import org.jabox.webapp.menubuttons.InfoImage;
