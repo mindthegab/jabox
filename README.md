@@ -1,6 +1,6 @@
 Jabox ALM
 ==========
-Copyright &copy; 2009-, Kapanidis Dimitris. Licensed under [GPL License].
+Copyright &copy; 2009-, Dimitris Kapanidis. Licensed under [GPL License].
 
 About
 -----
