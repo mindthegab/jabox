@@ -23,6 +23,7 @@ import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.persistence.provider.GeneralDao;
+import org.apache.wicket.persistence.provider.ServerXstreamDao;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.jabox.apis.Connector;
 import org.jabox.model.DefaultConfiguration;
@@ -60,7 +61,8 @@ public class CreateServerLink extends Link<Void> {
 
 			@Override
 			protected void onSave(final Server article) {
-				_generalDao.persist(article);
+				ServerXstreamDao.persist(article.getDeployerConfig());
+				 _generalDao.persist(article);
 
 				// If this is the first Service of the kind, set it as default
 				DefaultConfiguration dc = _generalDao.getDefaultConfiguration();

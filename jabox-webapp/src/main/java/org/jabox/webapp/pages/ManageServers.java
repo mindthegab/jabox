@@ -23,6 +23,7 @@ import org.apache.wicket.authorization.strategies.role.annotations.AuthorizeInst
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.persistence.domain.BaseEntity;
 import org.apache.wicket.persistence.provider.GeneralDao;
+import org.apache.wicket.persistence.provider.ServerXstreamDao;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.jabox.apis.Connector;
 import org.jabox.apis.ConnectorConfig;
@@ -48,12 +49,6 @@ import org.jabox.webapp.utils.SCMConnectorList;
 public class ManageServers extends MiddlePanel {
 
 	private static final long serialVersionUID = 1L;
-
-	@SpringBean
-	protected GeneralDao _generalDao;
-
-	@SpringBean
-	protected Manager<Connector> _manager;
 
 	public ManageServers() {
 		Form<BaseEntity> form = new Form<BaseEntity>("deleteForm");
@@ -83,6 +78,6 @@ public class ManageServers extends MiddlePanel {
 
 	private SCMConnectorList createList(final String key,
 			final Class<? extends ConnectorConfig> clas) {
-		return new SCMConnectorList(key, _generalDao.getEntities(clas));
+		return new SCMConnectorList(key, ServerXstreamDao.getServers(clas));
 	}
 }

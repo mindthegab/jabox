@@ -25,7 +25,6 @@ public class Environment {
 	// Used to identify the windows platform.
 	private static final String WIN_ID = "Windows";
 
-
 	private static final String JABOX_ENV = "JABOX_HOME";
 	private static final String JABOX_PROPERTY = "JABOX_HOME";
 	private static final String HUDSON_ENV = "HUDSON_HOME";
@@ -121,7 +120,7 @@ public class Environment {
 		}
 		return dir;
 	}
-	
+
 	public static File getContainersDir() {
 		File dir = new File(getBaseDirFile(), "containers");
 		if (!dir.exists()) {
@@ -129,9 +128,17 @@ public class Environment {
 		}
 		return dir;
 	}
-	
+
 	public static File getProjectsDir() {
 		File dir = new File(getBaseDirFile(), "projects");
+		if (!dir.exists()) {
+			dir.mkdirs();
+		}
+		return dir;
+	}
+
+	public static File getServersDir() {
+		File dir = new File(getBaseDirFile(), "servers");
 		if (!dir.exists()) {
 			dir.mkdirs();
 		}
