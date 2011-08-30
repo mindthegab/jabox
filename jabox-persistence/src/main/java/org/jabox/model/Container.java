@@ -55,28 +55,28 @@ import org.jabox.utils.WebappManager;
 @Entity
 public class Container extends BaseEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
-	private String _name;
-	private String _port;
-
+	private String name;
+	private String port;
+	
 	@Override
 	public String toString() {
-		return "Container: " + _name;
+		return "Container: " + name;
 	}
 
 	public void setName(final String name) {
-		_name = name;
+		this.name = name;
 	}
 
 	public String getName() {
-		return _name;
+		return name;
 	}
 
 	public void setPort(String _port) {
-		this._port = _port;
+		this.port = _port;
 	}
 
 	public String getPort() {
-		return _port;
+		return port;
 	}
 
 	public void start() {
@@ -87,7 +87,7 @@ public class Container extends BaseEntity implements Serializable {
 		Installer installer;
 		try {
 			installer = new ZipURLInstaller(new URL(
-					"http://apache.rediris.es/tomcat/tomcat-6/v6.0.32/bin/"
+					"http://archive.apache.org/dist/tomcat/tomcat-6/v6.0.32/bin/"
 							+ getTomcatFilename()), new File(Environment
 					.getBaseDir(), "cargo/installs").getAbsolutePath());
 		} catch (MalformedURLException e1) {
@@ -176,5 +176,4 @@ public class Container extends BaseEntity implements Serializable {
 		war.setContext(es.getServerName());
 		configuration.addDeployable(war);
 	}
-
 }

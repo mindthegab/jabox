@@ -23,11 +23,13 @@ import org.apache.wicket.Page;
 import org.apache.wicket.ResourceReference;
 import org.apache.wicket.markup.html.form.ImageButton;
 import org.apache.wicket.markup.html.list.ListItem;
-import org.apache.wicket.persistence.provider.GeneralDao;
-import org.apache.wicket.spring.injection.annot.SpringBean;
+import org.apache.wicket.persistence.provider.ContainerXstreamDao;
+import org.apache.wicket.persistence.provider.UserXstreamDao;
 import org.jabox.apis.IBaseEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.jabox.model.Container;
+import org.jabox.model.User;
 
 public class DeleteEntityButton<T extends IBaseEntity> extends ImageButton {
 	private static final Logger LOGGER = LoggerFactory
@@ -51,16 +53,18 @@ public class DeleteEntityButton<T extends IBaseEntity> extends ImageButton {
 		this(id, item.getModelObject(), responsePage);
 	}
 
-	@SpringBean(name = "GeneralDao")
-	protected GeneralDao generalDao;
-
 	/**
 	 * Delete from persistent storage, commit transaction.
 	 */
 	@Override
 	public void onSubmit() {
 		LOGGER.info("Deleting entity");
-		generalDao.deleteEntity(_item);
+		if (User.class.isInstance(_item)) {
+			UserXstreamDao.deleteUser((User) _item);
+		} else if (Container.class.isInstance(_item)) {
+			ContainerXstreamDao.deleteContainer((Container) _item);
+		}
+
 		setResponsePage(_responsePage);
 	}
 }

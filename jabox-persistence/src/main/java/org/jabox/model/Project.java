@@ -34,51 +34,51 @@ import org.apache.wicket.persistence.domain.BaseEntity;
 @Entity
 public class Project extends BaseEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
-	private String _name;
-	private String _description;
-	private String _scmUrl;
-	private String _sourceEncoding = "UTF-8";
-	private boolean _signArtifactReleases = false;
+	private String name;
+	private String description;
+	private String scmUrl;
+	private String sourceEncoding = "UTF-8";
+	private boolean signArtifactReleases = false;
 
 	@Column(nullable = false, length = 1024)
-	private MavenArchetype _mavenArchetype;
-	private String _scmMavenPrefix;
+	private MavenArchetype mavenArchetype;
+	private String scmMavenPrefix;
 
 	public MavenArchetype getMavenArchetype() {
-		return _mavenArchetype;
+		return mavenArchetype;
 	}
 
 	public void setMavenArchetype(final MavenArchetype mavenArchetype) {
-		_mavenArchetype = mavenArchetype;
+		this.mavenArchetype = mavenArchetype;
 	}
 
 	public void setName(final String name) {
-		_name = name;
+		this.name = name;
 	}
 
 	public String getName() {
-		return _name;
+		return name;
 	}
 
 	@Override
 	public String toString() {
-		return "Project: " + _name;
+		return name;
 	}
 
 	public void setDescription(final String description) {
-		_description = description;
+		this.description = description;
 	}
 
 	public String getDescription() {
-		return _description;
+		return description;
 	}
 
 	public void setScmUrl(final String scmUrl) {
-		_scmUrl = scmUrl;
+		this.scmUrl = scmUrl;
 	}
 
 	public String getScmUrl() {
-		return _scmUrl;
+		return scmUrl;
 	}
 
 	/**
@@ -102,26 +102,26 @@ public class Project extends BaseEntity implements Serializable {
 	}
 
 	public void setSourceEncoding(String sourceEncoding) {
-		_sourceEncoding = sourceEncoding;
+		this.sourceEncoding = sourceEncoding;
 	}
 
 	public String getSourceEncoding() {
-		return _sourceEncoding;
+		return sourceEncoding;
 	}
 
 	public void setSignArtifactReleases(boolean signArtifactReleases) {
-		_signArtifactReleases = signArtifactReleases;
+		this.signArtifactReleases = signArtifactReleases;
 	}
 
 	public boolean isSignArtifactReleases() {
-		return _signArtifactReleases;
+		return signArtifactReleases;
 	}
 
 	public void setScmMavenPrefix(final String scmMavenPrefix) {
-		_scmMavenPrefix = scmMavenPrefix;
+		this.scmMavenPrefix = scmMavenPrefix;
 	}
 
 	public String getScmMavenPrefix() {
-		return _scmMavenPrefix;
+		return scmMavenPrefix;
 	}
 }

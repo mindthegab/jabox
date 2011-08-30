@@ -17,17 +17,16 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see http://www.gnu.org/licenses/.
  */
-package org.jabox.webapp.menubuttons;
+package org.jabox.webapp.pages;
 
 import org.apache.wicket.ResourceReference;
 import org.apache.wicket.markup.html.form.ImageButton;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
+import org.apache.wicket.model.Model;
 import org.apache.wicket.persistence.domain.BaseEntity;
-import org.apache.wicket.persistence.domain.BaseEntityDetachableModel;
-import org.apache.wicket.persistence.provider.GeneralDao;
-import org.apache.wicket.spring.injection.annot.SpringBean;
+import org.apache.wicket.persistence.provider.UserXstreamDao;
 import org.jabox.model.User;
 import org.jabox.webapp.modifiers.TooltipModifier;
 import org.jabox.webapp.pages.EditUserPage;
@@ -58,15 +57,12 @@ public final class EditEntityButton<T extends BaseEntity> extends ImageButton {
 		this(id, item.getModelObject());
 	}
 
-	@SpringBean(name = "GeneralDao")
-	protected GeneralDao _generalDao;
-
 	/**
 	 * Delete from persistent storage, commit transaction.
 	 */
 	@Override
 	public void onSubmit() {
-		IModel<T> model = new BaseEntityDetachableModel<T>(_item);
+		IModel<T> model = new Model<T>(_item);
 		setResponsePage(new EditUserPage(new CompoundPropertyModel<User>(model)) {
 
 			@Override
@@ -77,7 +73,7 @@ public final class EditEntityButton<T extends BaseEntity> extends ImageButton {
 			@Override
 			protected void onSave(final User user) {
 				LOGGER.info("Edited User: " + user.getLogin());
-				_generalDao.persist(user);
+				UserXstreamDao.persist(user);
 				setResponsePage(ManageUsers.class);
 			}
 		});

@@ -62,16 +62,16 @@ public class DefaultConfiguration extends BaseEntity implements Serializable {
 			return FALSE;
 		}
 
-		Long modelObjId = item.getId();
-		if (_its != null && modelObjId.equals(_its.getId())) {
+		String name = item.getServer().getName();
+		if (_its != null && name.equals(_its.getId())) {
 			return TRUE;
-		} else if (_cis != null && modelObjId.equals(_cis.getId())) {
+		} else if (_cis != null && name.equals(_cis.getServer().getName())) {
 			return TRUE;
-		} else if (_rms != null && modelObjId.equals(_rms.getId())) {
+		} else if (_rms != null && name.equals(_rms.getServer().getName())) {
 			return TRUE;
-		} else if (_scm != null && modelObjId.equals(_scm.getId())) {
+		} else if (_scm != null && name.equals(_scm.getServer().getName())) {
 			return TRUE;
-		} else if (_cqm != null && modelObjId.equals(_cqm.getId())) {
+		} else if (_cqm != null && name.equals(_cqm.getServer().getName())) {
 			return TRUE;
 		}
 

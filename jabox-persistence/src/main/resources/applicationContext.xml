@@ -49,8 +49,6 @@
 	<bean id="txManager" class="org.springframework.orm.jpa.JpaTransactionManager">
 		<property name="entityManagerFactory" ref="entityManagerFactory" />
 	</bean>
-	<bean id="GeneralDao" class="org.apache.wicket.persistence.provider.GeneralDaoImpl">
-	</bean>
 
 	<bean id="db" class="org.jabox.embedded.h2.H2Server"></bean>
 </beans>

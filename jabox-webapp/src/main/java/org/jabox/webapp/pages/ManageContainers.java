@@ -24,8 +24,7 @@ import java.util.List;
 import org.apache.wicket.authorization.strategies.role.annotations.AuthorizeInstantiation;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.persistence.domain.BaseEntity;
-import org.apache.wicket.persistence.provider.GeneralDao;
-import org.apache.wicket.spring.injection.annot.SpringBean;
+import org.apache.wicket.persistence.provider.ContainerXstreamDao;
 import org.jabox.model.Container;
 import org.jabox.webapp.borders.MiddlePanel;
 import org.jabox.webapp.menubuttons.InfoImage;
@@ -39,12 +38,8 @@ public class ManageContainers extends MiddlePanel {
 
 	private static final long serialVersionUID = 1L;
 
-	@SpringBean(name = "GeneralDao")
-	protected GeneralDao generalDao;
-
 	public ManageContainers() {
-		final List<Container> containers = generalDao
-				.getEntities(Container.class);
+		final List<Container> containers = ContainerXstreamDao.getContainers();
 		add(new InfoImage("containerIcon", ""));
 
 		Form<BaseEntity> form = new Form<BaseEntity>("deleteForm");

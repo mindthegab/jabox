@@ -30,54 +30,54 @@ import org.apache.wicket.persistence.domain.BaseEntity;
 public class User extends BaseEntity implements Serializable {
 	private static final long serialVersionUID = 840333278259987092L;
 	@Column(nullable = false)
-	private String _login;
-	private String _firstName;
-	private String _lastName;
-	private String _password;
-	private String _email;
+	private String login;
+	private String firstName;
+	private String lastName;
+	private String password;
+	private String email;
 
 	public String getLogin() {
-		return _login;
+		return login;
 	}
 
 	public void setLogin(final String login) {
-		_login = login;
+		this.login = login;
 	}
 
 	public String getFirstName() {
-		return _firstName;
+		return firstName;
 	}
 
 	public void setFirstName(final String firstName) {
-		_firstName = firstName;
+		this.firstName = firstName;
 	}
 
 	public String getLastName() {
-		return _lastName;
+		return lastName;
 	}
 
 	public void setLastName(final String lastName) {
-		_lastName = lastName;
+		this.lastName = lastName;
 	}
 
 	public String getPassword() {
-		return _password;
+		return password;
 	}
 
 	public void setPassword(final String password) {
-		_password = password;
+		this.password = password;
 	}
 
 	public String getEmail() {
-		return _email;
+		return email;
 	}
 
 	public void setEmail(final String email) {
-		_email = email;
+		this.email = email;
 	}
 
 	@Override
 	public String toString() {
-		return _login;
+		return login;
 	}
 }

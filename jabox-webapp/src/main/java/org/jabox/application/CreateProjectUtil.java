@@ -25,7 +25,7 @@ import java.io.IOException;
 import org.apache.maven.MavenExecutionException;
 import org.apache.maven.artifact.InvalidRepositoryException;
 import org.apache.wicket.injection.web.InjectorHolder;
-import org.apache.wicket.persistence.provider.GeneralDao;
+import org.apache.wicket.persistence.provider.ConfigXstreamDao;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
 import org.jabox.apis.Manager;
@@ -42,8 +42,6 @@ import org.tmatesoft.svn.core.SVNException;
 import org.xml.sax.SAXException;
 
 public class CreateProjectUtil {
-	@SpringBean
-	protected GeneralDao generalDao;
 
 	@SpringBean
 	protected Manager<ITSConnector<ITSConnectorConfig>> _itsManager;
@@ -93,7 +91,7 @@ public class CreateProjectUtil {
 	private void createProjectMethod(final Project project)
 			throws InvalidRepositoryException, SAXException, SCMException,
 			IOException, MavenExecutionException {
-		final DefaultConfiguration dc = generalDao.getDefaultConfiguration();
+		final DefaultConfiguration dc = ConfigXstreamDao.getConfig();
 
 		SCMConnectorConfig scmc = dc.getScm();
 

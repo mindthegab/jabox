@@ -22,8 +22,7 @@ package org.jabox.webapp.pages;
 import org.apache.wicket.AttributeModifier;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.model.Model;
-import org.apache.wicket.persistence.provider.GeneralDao;
-import org.apache.wicket.spring.injection.annot.SpringBean;
+import org.apache.wicket.persistence.provider.ConfigXstreamDao;
 import org.jabox.model.DefaultConfiguration;
 import org.jabox.webapp.panels.HeaderLinksPanel;
 
@@ -33,11 +32,8 @@ import org.jabox.webapp.panels.HeaderLinksPanel;
  */
 public class RmsPage extends BasePage {
 
-	@SpringBean
-	protected GeneralDao _generalDao;
-
 	public RmsPage() {
-		final DefaultConfiguration dc = _generalDao.getDefaultConfiguration();
+		final DefaultConfiguration dc = ConfigXstreamDao.getConfig();
 		String url = dc.getRms().getServer().getUrl();
 		WebMarkupContainer wmc = new WebMarkupContainer("iframe");
 		wmc.add(new AttributeModifier("src", new Model<String>(url)));

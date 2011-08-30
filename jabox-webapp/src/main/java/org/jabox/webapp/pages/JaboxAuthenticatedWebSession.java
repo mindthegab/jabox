@@ -23,8 +23,7 @@ import org.apache.wicket.Request;
 import org.apache.wicket.authentication.AuthenticatedWebSession;
 import org.apache.wicket.authorization.strategies.role.Roles;
 import org.apache.wicket.injection.web.InjectorHolder;
-import org.apache.wicket.persistence.provider.GeneralDao;
-import org.apache.wicket.spring.injection.annot.SpringBean;
+import org.apache.wicket.persistence.provider.UserXstreamDao;
 import org.jabox.model.User;
 
 /**
@@ -33,10 +32,7 @@ import org.jabox.model.User;
 public class JaboxAuthenticatedWebSession extends AuthenticatedWebSession {
 	private static final long serialVersionUID = 1L;
 
-	@SpringBean()
-	protected GeneralDao _generalDao;
-
-	private Long _userId;
+	private String _username;
 
 	/**
 	 * Construct.
@@ -59,8 +55,7 @@ public class JaboxAuthenticatedWebSession extends AuthenticatedWebSession {
 			return false;
 		}
 
-		User user = _generalDao.findEntityByQuery("_login", username,
-				User.class);
+		User user = UserXstreamDao.getUser(username);
 
 		if (user == null) {
 			return false;
@@ -68,7 +63,7 @@ public class JaboxAuthenticatedWebSession extends AuthenticatedWebSession {
 
 		if (username.equals(user.getLogin())
 				&& password.equals(user.getPassword())) {
-			_userId = user.getId();
+			_username = user.getLogin();
 			return true;
 		} else {
 			return false;
@@ -89,9 +84,9 @@ public class JaboxAuthenticatedWebSession extends AuthenticatedWebSession {
 	}
 
 	/**
-	 * @return the id of the authenticated user.
+	 * @return the username of the authenticated user.
 	 */
-	public Long getUserId() {
-		return _userId;
+	public String getUsername() {
+		return _username;
 	}
 }

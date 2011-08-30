@@ -27,10 +27,6 @@ import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
-import org.apache.wicket.persistence.provider.GeneralDao;
-import org.apache.wicket.spring.injection.annot.SpringBean;
-import org.jabox.apis.Connector;
-import org.jabox.apis.Manager;
 import org.jabox.model.Project;
 import org.jabox.model.User;
 import org.jabox.webapp.borders.MiddlePanel;
@@ -38,12 +34,6 @@ import org.jabox.webapp.utils.TransactionalForm;
 
 @AuthorizeInstantiation("ADMIN")
 public abstract class EditUserPage extends MiddlePanel {
-
-	@SpringBean(name = "GeneralDao")
-	protected GeneralDao _generalDao;
-
-	@SpringBean
-	protected Manager<Connector> _manager;
 
 	public EditUserPage(final IModel<User> user) {
 		add(new FeedbackPanel("feedback"));

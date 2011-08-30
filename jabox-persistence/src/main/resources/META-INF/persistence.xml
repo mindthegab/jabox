@@ -14,23 +14,6 @@
 		-->
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		<!-- Add your class's here -->
-		<class>org.jabox.model.Project</class>
-		<class>org.jabox.its.bugzilla.BugzillaRepositoryConfig</class>
-		<class>org.jabox.its.jtrac.JtracRepositoryConfig</class>
-		<class>org.jabox.its.mantis.MantisRepositoryConfig</class>
-		<class>org.jabox.its.redmine.RedmineRepositoryConfig</class>
-		<class>org.jabox.cis.hudson.HudsonConnectorConfig</class>
-		<class>org.jabox.cis.ehudson.EHudsonConnectorConfig</class>
-		<class>org.jabox.mrm.artifactory.ArtifactoryConnectorConfig</class>
-		<class>org.jabox.mrm.eartifactory.EArtifactoryConnectorConfig</class>
-		<class>org.jabox.mrm.nexus.NexusConnectorConfig</class>
-		<class>org.jabox.mrm.scp.ScpConnectorConfig</class>
-		<class>org.jabox.scm.beanstalk.BeanstalkConnectorConfig</class>
-		<class>org.jabox.scm.git.GITConnectorConfig</class>
-		<class>org.jabox.scm.egit.EGITConnectorConfig</class>
-		<class>org.jabox.scm.github.GithubConnectorConfig</class>
-		<class>org.jabox.scm.svn.SVNConnectorConfig</class>
-		<class>org.jabox.scm.esvn.ESVNConnectorConfig</class>
 		
 		<properties>
 			<!-- Scan for annotated classes  -->
@@ -81,7 +64,7 @@
 
 			<property name="hibernate.connection.driver_class" value="org.h2.Driver" />
 			<property name="hibernate.connection.url"
-				value="jdbc:h2:${JABOX_HOME}/database/db;AUTO_SERVER=TRUE" />
+				value="jdbc:h2:~/.jabox/database/db;AUTO_SERVER=TRUE" />
 			<property name="hibernate.connection.username" value="sa" />
 			<property name="hibernate.hbm2ddl.auto" value="update" />
 			<property name="hibernate.connection.password" value="" />

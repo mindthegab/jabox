@@ -26,11 +26,8 @@ import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.link.ExternalLink;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.PropertyListView;
-import org.apache.wicket.persistence.provider.GeneralDao;
-import org.apache.wicket.spring.injection.annot.SpringBean;
-import org.jabox.apis.Connector;
+import org.apache.wicket.persistence.provider.ConfigXstreamDao;
 import org.jabox.apis.ConnectorConfig;
-import org.jabox.apis.Manager;
 import org.jabox.model.DefaultConfiguration;
 import org.jabox.model.Server;
 import org.jabox.webapp.menubuttons.DefaultEntityButton;
@@ -53,12 +50,6 @@ public class SCMConnectorList extends PropertyListView<ConnectorConfig> {
 		super(id, projects);
 		add(new CreateServerLink("create" + id));
 	}
-
-	@SpringBean(name = "GeneralDao")
-	protected GeneralDao generalDao;
-
-	@SpringBean
-	protected Manager<Connector> _manager;
 
 	@Override
 	public void populateItem(final ListItem<ConnectorConfig> item) {
@@ -86,11 +77,11 @@ public class SCMConnectorList extends PropertyListView<ConnectorConfig> {
 			@Override
 			public void onSubmit() {
 				// If item is default, disable it first.
-				DefaultConfiguration dc = generalDao.getDefaultConfiguration();
+				DefaultConfiguration dc = ConfigXstreamDao.getConfig();
 				if (DefaultConfiguration.TRUE.equals(dc.isDefault(item
 						.getModelObject()))) {
 					dc.switchDefault(item.getModelObject());
-					generalDao.persist(dc);
+					ConfigXstreamDao.persist(dc);
 				}
 				super.onSubmit();
 			}
