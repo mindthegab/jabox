@@ -31,6 +31,8 @@ import org.jabox.apis.scm.SCMConnectorConfig;
 import org.jabox.model.DeployerConfig;
 import org.jabox.model.Project;
 import org.jabox.model.Server;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.xml.sax.SAXException;
 
@@ -43,6 +45,9 @@ import com.meterware.httpunit.WebResponse;
 @Service
 public class MantisRepository implements ITSConnector<MantisRepositoryConfig>,
 		Serializable {
+	private static final Logger LOGGER = LoggerFactory
+	.getLogger(MantisRepository.class);
+
 	private static final long serialVersionUID = 8131183843391948936L;
 	public static final String ID = "plugin.its.mantis";
 
@@ -67,6 +72,8 @@ public class MantisRepository implements ITSConnector<MantisRepositoryConfig>,
 
 	public boolean login(final MantisRepositoryConfig config)
 			throws MalformedURLException, IOException, SAXException {
+		LOGGER.info("mantis Login: " + config.getUsername());
+
 		WebRequest req = new GetMethodWebRequest(config.getServer().getUrl());
 		_wc = new WebConversation();
 		WebResponse resp = _wc.getResponse(req);
@@ -82,6 +89,8 @@ public class MantisRepository implements ITSConnector<MantisRepositoryConfig>,
 	public boolean addProject(final Project project,
 			final MantisRepositoryConfig config) throws IOException,
 			SAXException {
+		LOGGER.info("mantis add Project: " + project.getName());
+
 		String url = config.getServer().getUrl();
 		WebRequest req = new GetMethodWebRequest(url
 				+ "/manage_proj_create_page.php");

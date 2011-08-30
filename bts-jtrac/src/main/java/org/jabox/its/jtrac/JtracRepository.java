@@ -31,6 +31,8 @@ import org.jabox.apis.scm.SCMConnectorConfig;
 import org.jabox.model.DeployerConfig;
 import org.jabox.model.Project;
 import org.jabox.model.Server;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.xml.sax.SAXException;
 
@@ -43,6 +45,9 @@ import com.meterware.httpunit.WebResponse;
 @Service
 public class JtracRepository implements ITSConnector<JtracRepositoryConfig>,
 		Serializable {
+	private static final Logger LOGGER = LoggerFactory
+	.getLogger(JtracRepository.class);
+
 	private static final long serialVersionUID = 8131183843391948936L;
 	public static final String ID = "plugin.its.jtrac";
 
@@ -72,6 +77,8 @@ public class JtracRepository implements ITSConnector<JtracRepositoryConfig>,
 
 	public boolean login(final JtracRepositoryConfig config)
 			throws MalformedURLException, IOException, SAXException {
+		LOGGER.info("jtrac Login: " + config.getUsername());
+
 		WebRequest req = new GetMethodWebRequest(config.getServer().getUrl());
 		WebResponse resp = _wc.getResponse(req);
 		WebForm form = resp.getForms()[0]; // select the first form in the page
@@ -86,6 +93,8 @@ public class JtracRepository implements ITSConnector<JtracRepositoryConfig>,
 	public boolean addProject(final Project project,
 			final JtracRepositoryConfig config) throws IOException,
 			SAXException {
+		LOGGER.info("jtrac add Project: " + project.getName());
+
 		WebRequest req = new GetMethodWebRequest(_url
 				+ "/editproducts.cgi?action=add");
 		WebResponse resp = _wc.getResponse(req);
@@ -101,6 +110,8 @@ public class JtracRepository implements ITSConnector<JtracRepositoryConfig>,
 			final JtracRepositoryConfig config, final String module,
 			final String description, final String initialOwner)
 			throws SAXException, IOException {
+		LOGGER.info("jtrac add Module: " + project.getName());
+
 		String url = config.getServer().getUrl();
 		WebRequest req = new GetMethodWebRequest(url
 				+ "/editcomponents.cgi?action=add&product=" + project.getName());
@@ -117,6 +128,8 @@ public class JtracRepository implements ITSConnector<JtracRepositoryConfig>,
 	public boolean addVersion(final Project project,
 			final JtracRepositoryConfig config, final String version)
 			throws IOException, SAXException {
+		LOGGER.info("jtrac add Version: " + version);
+
 		String url = config.getServer().getUrl();
 		WebRequest req = new GetMethodWebRequest(url
 				+ "/editversions.cgi?action=add&product=" + project.getName());

@@ -30,6 +30,8 @@ import org.jabox.apis.scm.SCMConnectorConfig;
 import org.jabox.model.DeployerConfig;
 import org.jabox.model.Project;
 import org.jabox.model.Server;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.xml.sax.SAXException;
 
@@ -42,6 +44,9 @@ import com.meterware.httpunit.WebResponse;
 @Service
 public class BugzillaRepository implements
 		ITSConnector<BugzillaRepositoryConfig>, Serializable {
+	private static final Logger LOGGER = LoggerFactory
+			.getLogger(BugzillaRepository.class);
+
 	private static final long serialVersionUID = 8131183843391948936L;
 	public static final String ID = "plugin.its.bugzilla";
 
@@ -66,6 +71,8 @@ public class BugzillaRepository implements
 
 	public boolean login(final BugzillaRepositoryConfig config)
 			throws MalformedURLException, IOException, SAXException {
+		LOGGER.info("Bugzilla Login: " + config.getUsername());
+
 		WebRequest req = new GetMethodWebRequest(config.getServer().getUrl());
 		WebResponse resp = _wc.getResponse(req);
 		WebForm form = resp.getForms()[0]; // select the first form in the page
@@ -80,6 +87,8 @@ public class BugzillaRepository implements
 	public boolean addProject(final Project project,
 			final BugzillaRepositoryConfig config) throws IOException,
 			SAXException {
+		LOGGER.info("Bugzilla add Project: " + project.getName());
+
 		String url = config.getServer().getUrl();
 		WebRequest req = new GetMethodWebRequest(url
 				+ "/editproducts.cgi?action=add");
@@ -96,6 +105,8 @@ public class BugzillaRepository implements
 			final BugzillaRepositoryConfig config, final String module,
 			final String description, final String initialOwner)
 			throws SAXException, IOException {
+		LOGGER.info("Bugzilla add Module: " + project.getName());
+
 		String url = config.getServer().getUrl();
 		WebRequest req = new GetMethodWebRequest(url
 				+ "/editcomponents.cgi?action=add&product=" + project.getName());
@@ -112,6 +123,8 @@ public class BugzillaRepository implements
 	public boolean addVersion(final Project project,
 			final BugzillaRepositoryConfig config, final String version)
 			throws IOException, SAXException {
+		LOGGER.info("Bugzilla add Version: " + version);
+
 		String url = config.getServer().getUrl();
 		WebRequest req = new GetMethodWebRequest(url
 				+ "/editversions.cgi?action=add&product=" + project.getName());

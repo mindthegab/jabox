@@ -37,9 +37,13 @@ import org.mortbay.jetty.Connector;
 import org.mortbay.jetty.Server;
 import org.mortbay.jetty.bio.SocketConnector;
 import org.mortbay.jetty.webapp.WebAppContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class JtracServer extends AbstractEmbeddedServer {
 	private static final String URL = "http://sourceforge.net/projects/j-trac/files/jtrac/2.0/jtrac-2.0.zip/download";
+	private static final Logger LOGGER = LoggerFactory
+			.getLogger(JtracServer.class);
 
 	public static void main(final String[] args) {
 		JtracServer jtracServer = new JtracServer();
@@ -66,11 +70,6 @@ public class JtracServer extends AbstractEmbeddedServer {
 		String absolutePath = jtracWar.getAbsolutePath();
 		bb.setWar(absolutePath);
 		bb.setParentLoaderPriority(true);
-		// START JMX SERVER
-		// MBeanServer mBeanServer = ManagementFactory.getPlatformMBeanServer();
-		// MBeanContainer mBeanContainer = new MBeanContainer(mBeanServer);
-		// server.getContainer().addEventListener(mBeanContainer);
-		// mBeanContainer.start();
 
 		server.addHandler(bb);
 		server.addHandler(bb);
@@ -111,11 +110,9 @@ public class JtracServer extends AbstractEmbeddedServer {
 			bout.flush();
 			return jtracWar;
 		} catch (ZipException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOGGER.error("Zip Exception thrown", e);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOGGER.error("IO Exception thrown", e);
 		}
 		return null;
 	}

@@ -35,6 +35,8 @@ import org.jabox.apis.scm.SCMConnectorConfig;
 import org.jabox.model.DeployerConfig;
 import org.jabox.model.Project;
 import org.jabox.model.Server;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.xml.sax.SAXException;
 
@@ -44,6 +46,9 @@ import com.meterware.httpunit.WebConversation;
 @Service
 public class RedmineRepository implements
 		ITSConnector<RedmineRepositoryConfig>, Serializable {
+	private static final Logger LOGGER = LoggerFactory
+			.getLogger(RedmineRepository.class);
+
 	private static final long serialVersionUID = -692328636804684690L;
 	public static final String ID = "plugin.its.redmine";
 
@@ -74,6 +79,8 @@ public class RedmineRepository implements
 	public boolean addProject(final Project project,
 			final RedmineRepositoryConfig config) throws IOException,
 			SAXException {
+		LOGGER.info("Redmine add Project: " + project.getName());
+
 		_wt.gotoPage("/projects/new");
 		_wt.setWorkingForm(1);
 		_wt.setTextField("project[name]", project.getName());
@@ -90,6 +97,8 @@ public class RedmineRepository implements
 	public boolean addVersion(final Project project,
 			final RedmineRepositoryConfig config, final String version)
 			throws IOException, SAXException {
+		LOGGER.info("Redmine add Version: " + version);
+
 		_wt.gotoPage("/projects/" + getRedmineId(project) + "/versions/new");
 		_wt.setWorkingForm(1);
 		_wt.setTextField("version[name]", version);
@@ -99,6 +108,8 @@ public class RedmineRepository implements
 
 	public boolean login(final RedmineRepositoryConfig config)
 			throws MalformedURLException, IOException, SAXException {
+		LOGGER.info("Redmine Login: " + config.getUsername());
+
 		String url = config.getServer().getUrl();
 		return login(url, config.getUsername(), config.getPassword());
 	}
@@ -132,6 +143,8 @@ public class RedmineRepository implements
 			final SCMConnectorConfig scmConfig, final String username,
 			final String password) throws MalformedURLException, IOException,
 			SAXException {
+		LOGGER.info("Redmine add Repository: " + scmConfig.getScmUrl());
+
 		// Check if Repository should be added
 		if (!config.isAddRepositoryConfiguration()) {
 			return;
@@ -160,5 +173,4 @@ public class RedmineRepository implements
 		String token = substr[1].substring(0, substr[1].indexOf("\""));
 		return token;
 	}
-
 }

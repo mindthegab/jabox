@@ -12,6 +12,7 @@ import org.xml.sax.SAXException;
 import com.meterware.httpunit.HttpNotFoundException;
 
 public class RedmineLoginValidator extends UrlValidator {
+
 	private static final long serialVersionUID = 2635593287132542621L;
 	private final TextField<String> _url;
 	private final TextField<String> _username;
