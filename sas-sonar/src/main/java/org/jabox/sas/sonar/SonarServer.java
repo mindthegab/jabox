@@ -37,10 +37,6 @@ import java.util.zip.ZipFile;
 import org.jabox.apis.embedded.AbstractEmbeddedServer;
 import org.jabox.environment.Environment;
 import org.jabox.utils.DownloadHelper;
-import org.mortbay.jetty.Connector;
-import org.mortbay.jetty.Server;
-import org.mortbay.jetty.bio.SocketConnector;
-import org.mortbay.jetty.webapp.WebAppContext;
 
 /**
  * Hello world!
@@ -82,6 +78,8 @@ public class SonarServer extends AbstractEmbeddedServer {
 	 */
 	private File execBuildWar(File sonarBaseDir) {
 		File script = getBuildSonarScript(sonarBaseDir);
+		new File (sonarBaseDir, "war/apache-ant-1.7.0/bin/ant").setExecutable(true);
+		new File (sonarBaseDir, "war/apache-ant-1.7.0/bin/ant.bat").setExecutable(true);
 		try {
 			Process p = Runtime.getRuntime().exec(script.getAbsolutePath(),
 					null, new File(sonarBaseDir, "war"));
@@ -174,6 +172,7 @@ public class SonarServer extends AbstractEmbeddedServer {
 			} catch (IOException ioe) {
 				ioe.printStackTrace();
 			}
+			destFile.setExecutable(true);
 
 			for (Iterator<String> iter = zipFiles.iterator(); iter.hasNext();) {
 				String zipName = iter.next();
