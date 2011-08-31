@@ -57,7 +57,7 @@ public class Container extends BaseEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private String name;
 	private String port;
-	
+
 	@Override
 	public String toString() {
 		return "Container: " + name;
@@ -129,8 +129,7 @@ public class Container extends BaseEntity implements Serializable {
 				addEmbeddedServer(configuration, webapp);
 			}
 
-			System.out
-					.println(">>> STARTING EMBEDDED JETTY SERVER, PRESS ANY KEY TO STOP");
+			System.out.println(">>> STARTING CARGO SERVER");
 
 			// (4) Start the container
 			container.setTimeout(1200000);
