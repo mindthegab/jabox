@@ -113,7 +113,8 @@ public class Environment {
 	private static void configBaseDir(final String env, final String property,
 			final String subdir) {
 		if (System.getenv(env) == null && System.getProperty(property) == null) {
-			System.setProperty(property, Environment.getBaseDir() + subdir);
+			System.setProperty(property, Environment.getBaseDir()
+					+ File.separator + subdir);
 		}
 	}
 
