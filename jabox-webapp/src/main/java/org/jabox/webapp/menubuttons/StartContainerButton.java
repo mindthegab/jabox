@@ -32,7 +32,7 @@ public final class StartContainerButton extends ImageButton {
 		.getLogger(StartContainerButton.class);
 
 	private static final ResourceReference START_IMG = new ResourceReference(
-			StartContainerButton.class, "start.png");
+			StartContainerButton.class, "play.png");
 	private static final long serialVersionUID = 1L;
 	private final Container _item;
 	private Class<? extends Page> _responsePage;
