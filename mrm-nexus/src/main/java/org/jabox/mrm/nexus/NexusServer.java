@@ -29,7 +29,7 @@ import org.jabox.utils.DownloadHelper;
  * 
  */
 public class NexusServer extends AbstractEmbeddedServer {
-	final String URL = "http://nexus.sonatype.org/downloads/nexus-webapp-1.6.0.war";
+	final String URL = "http://nexus.sonatype.org/downloads/nexus-webapp-1.9.2.2.war";
 
 	public static void main(final String[] args) throws Exception {
 		new NexusServer().startServerAndWait();
