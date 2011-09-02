@@ -70,8 +70,8 @@ public class ContainerXstreamDao {
 		return null;
 	}
 
-	public static void deleteContainer(Container name) {
-		File file = new File(Environment.getContainersDir(), name + ".xml");
+	public static void deleteContainer(Container container) {
+		File file = new File(Environment.getContainersDir(), container.getName() + ".xml");
 		file.delete();
 	}
 }

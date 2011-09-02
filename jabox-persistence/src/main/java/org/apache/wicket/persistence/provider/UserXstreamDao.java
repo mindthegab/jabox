@@ -10,10 +10,14 @@ import java.util.List;
 
 import org.jabox.environment.Environment;
 import org.jabox.model.User;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.thoughtworks.xstream.XStream;
 
 public class UserXstreamDao {
+	private static final Logger LOGGER = LoggerFactory
+			.getLogger(UserXstreamDao.class);
 
 	private static XStream getXStream() {
 		XStream xstream = new XStream();
@@ -74,5 +78,6 @@ public class UserXstreamDao {
 		File file = new File(Environment.getUsersDir(), user.getLogin()
 				+ ".xml");
 		file.delete();
+		LOGGER.info("User \"" + user.getLogin() + "\" deleted");
 	}
 }
