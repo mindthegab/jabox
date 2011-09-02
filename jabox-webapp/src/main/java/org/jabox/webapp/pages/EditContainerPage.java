@@ -47,6 +47,7 @@ public abstract class EditContainerPage extends MiddlePanel {
 
 		form.add(new RequiredTextField<Container>("name"));
 		form.add(new RequiredTextField<Container>("port"));
+		form.add(new RequiredTextField<Container>("jvmargs"));
 
 		form.add(new Link<Void>("cancel") {
 			private static final long serialVersionUID = -6975617962156076540L;

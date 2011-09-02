@@ -39,6 +39,7 @@ import org.codehaus.cargo.container.configuration.LocalConfiguration;
 import org.codehaus.cargo.container.deployable.WAR;
 import org.codehaus.cargo.container.installer.Installer;
 import org.codehaus.cargo.container.installer.ZipURLInstaller;
+import org.codehaus.cargo.container.property.GeneralPropertySet;
 import org.codehaus.cargo.container.property.ServletPropertySet;
 import org.codehaus.cargo.generic.DefaultContainerFactory;
 import org.codehaus.cargo.generic.configuration.DefaultConfigurationFactory;
@@ -46,6 +47,8 @@ import org.jabox.apis.embedded.EmbeddedServer;
 import org.jabox.environment.Environment;
 import org.jabox.utils.MavenSettingsManager;
 import org.jabox.utils.WebappManager;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * A Project.
@@ -54,9 +57,13 @@ import org.jabox.utils.WebappManager;
  */
 @Entity
 public class Container extends BaseEntity implements Serializable {
+	private static final Logger LOGGER = LoggerFactory
+			.getLogger(Container.class);
+
 	private static final long serialVersionUID = 1L;
 	private String name;
 	private String port;
+	private String jvmargs = "-Xms128m -Xmx512m -XX:PermSize=128m";
 
 	@Override
 	public String toString() {
@@ -71,15 +78,24 @@ public class Container extends BaseEntity implements Serializable {
 		return name;
 	}
 
-	public void setPort(String _port) {
-		this.port = _port;
+	public void setPort(String port) {
+		this.port = port;
 	}
 
 	public String getPort() {
 		return port;
 	}
 
+	public void setJvmargs(String jvmargs) {
+		this.jvmargs = jvmargs;
+	}
+
+	public String getJvmargs() {
+		return jvmargs;
+	}
+
 	public void start() {
+		LOGGER.info("Starting Servlet Container");
 		Environment.configureEnvironmentVariables();
 
 		// (1) Optional step to install the container from a URL pointing to its
@@ -118,9 +134,13 @@ public class Container extends BaseEntity implements Serializable {
 		properties.entrySet();
 		for (Entry<Object, Object> entry : properties.entrySet()) {
 			entry.getKey();
+			LOGGER.debug("Adding key: " + entry.getKey() + ":"
+					+ entry.getValue());
 			props.put((String) entry.getKey(), (String) entry.getValue());
 		}
 		container.setSystemProperties(props);
+		container.getConfiguration().setProperty(GeneralPropertySet.JVMARGS,
+				jvmargs);
 
 		MavenSettingsManager.writeCustomSettings();
 		try {
@@ -129,18 +149,15 @@ public class Container extends BaseEntity implements Serializable {
 				addEmbeddedServer(configuration, webapp);
 			}
 
-			System.out.println(">>> STARTING CARGO SERVER");
-
 			// (4) Start the container
 			container.setTimeout(1200000);
 			container.start();
-			System.out.println(">>> Container started.");
+			LOGGER.info("Servlet Container Started");
 
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.exit(100);
 		}
-
 	}
 
 	/**
@@ -175,4 +192,5 @@ public class Container extends BaseEntity implements Serializable {
 		war.setContext(es.getServerName());
 		configuration.addDeployable(war);
 	}
+
 }
