@@ -43,7 +43,7 @@ import org.jabox.utils.DownloadHelper;
  * 
  */
 public class SonarServer extends AbstractEmbeddedServer {
-	private static final String URL = "http://dist.sonar.codehaus.org/sonar-2.7.zip";
+	private static final String URL = "http://dist.sonar.codehaus.org/sonar-2.10.zip";
 
 	public static void main(final String[] args) throws Exception {
 		new SonarServer().startServerAndWait();
@@ -68,7 +68,7 @@ public class SonarServer extends AbstractEmbeddedServer {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		File sonarBaseDir = new File(baseDir, "sonar-2.7");
+		File sonarBaseDir = new File(baseDir, "sonar-2.10");
 		File sonarWar = execBuildWar(sonarBaseDir);
 		return sonarWar.getAbsolutePath();
 	}
