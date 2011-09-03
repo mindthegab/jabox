@@ -41,6 +41,7 @@ import org.codehaus.cargo.container.installer.Installer;
 import org.codehaus.cargo.container.installer.ZipURLInstaller;
 import org.codehaus.cargo.container.property.GeneralPropertySet;
 import org.codehaus.cargo.container.property.ServletPropertySet;
+import org.codehaus.cargo.container.tomcat.TomcatPropertySet;
 import org.codehaus.cargo.generic.DefaultContainerFactory;
 import org.codehaus.cargo.generic.configuration.DefaultConfigurationFactory;
 import org.jabox.apis.embedded.EmbeddedServer;
@@ -63,7 +64,9 @@ public class Container extends BaseEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private String name;
 	private String port;
-	private String jvmargs = "-Xms128m -Xmx512m -XX:PermSize=128m";
+	private String rmiPort;
+	private String ajpPort;
+	private String jvmArgs = "-Xms128m -Xmx512m -XX:PermSize=128m";
 
 	@Override
 	public String toString() {
@@ -87,11 +90,11 @@ public class Container extends BaseEntity implements Serializable {
 	}
 
 	public void setJvmargs(String jvmargs) {
-		this.jvmargs = jvmargs;
+		this.jvmArgs = jvmargs;
 	}
 
 	public String getJvmargs() {
-		return jvmargs;
+		return jvmArgs;
 	}
 
 	public void start() {
@@ -118,15 +121,20 @@ public class Container extends BaseEntity implements Serializable {
 		LocalConfiguration configuration = (LocalConfiguration) new DefaultConfigurationFactory()
 				.createConfiguration("tomcat6x", ContainerType.INSTALLED,
 						ConfigurationType.STANDALONE, new File(Environment
-								.getBaseDir(), "cargo/conf").getAbsolutePath());
+								.getBaseDir(), "cargo/" + getName())
+								.getAbsolutePath());
 		InstalledLocalContainer container = (InstalledLocalContainer) new DefaultContainerFactory()
 				.createContainer("tomcat6x", ContainerType.INSTALLED,
 						configuration);
 		container.setHome(installer.getHome());
-		container.setOutput(new File(Environment.getBaseDir(),
-				"cargo/cargo.out").getAbsolutePath());
+		container.setOutput(new File(Environment.getBaseDir(), "cargo/"
+				+ getName() + ".log").getAbsolutePath());
 
-		configuration.setProperty(ServletPropertySet.PORT, getPort());
+		configuration.setProperty(ServletPropertySet.PORT, port);
+		configuration.setProperty(GeneralPropertySet.JVMARGS, jvmArgs);
+		configuration.setProperty(TomcatPropertySet.AJP_PORT, ajpPort);
+		configuration.setProperty(GeneralPropertySet.RMI_PORT, rmiPort);
+		
 
 		// Pass the system properties to the container
 		Map<String, String> props = new HashMap<String, String>();
@@ -139,8 +147,6 @@ public class Container extends BaseEntity implements Serializable {
 			props.put((String) entry.getKey(), (String) entry.getValue());
 		}
 		container.setSystemProperties(props);
-		container.getConfiguration().setProperty(GeneralPropertySet.JVMARGS,
-				jvmargs);
 
 		MavenSettingsManager.writeCustomSettings();
 		try {
@@ -191,6 +197,14 @@ public class Container extends BaseEntity implements Serializable {
 		WAR war = new WAR(es.getWarPath());
 		war.setContext(es.getServerName());
 		configuration.addDeployable(war);
+	}
+
+	public void setAjpPort(String ajpPort) {
+		this.ajpPort = ajpPort;
+	}
+
+	public String getAjpPort() {
+		return ajpPort;
 	}
 
 }
