@@ -38,6 +38,48 @@ You can launch jabox directly from command line:
 
 or deploy the war to a Servlet Container such as Tomcat.
 
+Supported Modules
+=================
+
+Below you will find a list of modules that Jabox currently supports. Each of these components is isolated meaning that adding new modules is easy to do.
+
+Software Configuration Management ([SCM])
+---------------------------------------
+
+- Open Source:
+ - [Subversion](http://subversion.tigris.org/)
+ - [Git](http://git-scm.com/)
+- Online Services:
+ - [Github](https://github.com/)
+ - [Beanstalk](http://beanstalkapp.com/)
+
+Issue Tracking System ([ITS])
+---------------------------
+
+- Open Source:
+ - [Redmine](http://www.redmine.org/)
+ - [Bugzilla](http://www.bugzilla.org/)
+ - [Mantis](http://www.mantisbt.org/)
+ - [Jtrac](http://www.jtrac.info/)
+
+Continuous Integration System ([CIS])
+-------------------------------------
+
+- Open Source:
+ - [Jenkins](http://jenkins-ci.org/)
+
+Repository Management System ([RMS])
+------------------------------------
+
+- Open Source:
+ - [Artifactory](http://www.jfrog.com/products.php)
+ - [Nexus](http://nexus.sonatype.org/)
+
+Code Quality Management ([CQM])
+-------------------------------
+
+- Open Source: 
+ - [Sonar](http://www.sonarsource.org/)
 
 [GPL License]: https://github.com/jabox/jabox/raw/master/LICENSE.txt
 [Download page]: http://redmine.jabox.org/projects/jabox/wiki/Download
