@@ -7,14 +7,14 @@ import junit.framework.TestCase;
 public class EnvironmentTest extends TestCase {
 
 	public void testGetHomeDir() throws Exception {
-		String homeDir = Environment.getHomeDir();
+		String homeDir = Environment.getBaseDir();
 		assertEquals(System.getProperty("user.home") + File.separator
 				+ ".jabox" + File.separator, homeDir);
 	}
 
 	public void testGetBaseDir() throws Exception {
 		String baseDir = Environment.getBaseDir();
-		assertEquals(Environment.getHomeDir(), baseDir);
+		assertEquals(Environment.getBaseDir(), baseDir);
 	}
 
 	public void testGetBaseDirFile() throws Exception {

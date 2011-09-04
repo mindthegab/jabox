@@ -23,13 +23,12 @@ import java.io.File;
 import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Map.Entry;
-
-import javax.persistence.Entity;
 
 import org.apache.wicket.persistence.domain.BaseEntity;
 import org.codehaus.cargo.container.ContainerType;
@@ -47,7 +46,6 @@ import org.codehaus.cargo.generic.configuration.DefaultConfigurationFactory;
 import org.jabox.apis.embedded.EmbeddedServer;
 import org.jabox.environment.Environment;
 import org.jabox.utils.MavenSettingsManager;
-import org.jabox.utils.WebappManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -56,7 +54,6 @@ import org.slf4j.LoggerFactory;
  * 
  * @author dimitris
  */
-@Entity
 public class Container extends BaseEntity implements Serializable {
 	private static final Logger LOGGER = LoggerFactory
 			.getLogger(Container.class);
@@ -67,6 +64,12 @@ public class Container extends BaseEntity implements Serializable {
 	private String rmiPort;
 	private String ajpPort;
 	private String jvmArgs = "-Xms128m -Xmx512m -XX:PermSize=128m";
+	private static String[] DEFAULT_WEBAPPS = {
+			"org.jabox.cis.hudson.HudsonServer",
+			"org.jabox.mrm.artifactory.ArtifactoryServer",
+			"org.jabox.sas.sonar.SonarServer" };
+
+	private List<String> webapps = Arrays.asList(DEFAULT_WEBAPPS);
 
 	@Override
 	public String toString() {
@@ -107,8 +110,8 @@ public class Container extends BaseEntity implements Serializable {
 		try {
 			installer = new ZipURLInstaller(new URL(
 					"http://archive.apache.org/dist/tomcat/tomcat-6/v6.0.32/bin/"
-							+ getTomcatFilename()), new File(Environment
-					.getBaseDir(), "cargo/installs").getAbsolutePath());
+							+ getTomcatFilename()), Environment
+					.getDownloadsDir().getAbsolutePath());
 		} catch (MalformedURLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -134,7 +137,6 @@ public class Container extends BaseEntity implements Serializable {
 		configuration.setProperty(GeneralPropertySet.JVMARGS, jvmArgs);
 		configuration.setProperty(TomcatPropertySet.AJP_PORT, ajpPort);
 		configuration.setProperty(GeneralPropertySet.RMI_PORT, rmiPort);
-		
 
 		// Pass the system properties to the container
 		Map<String, String> props = new HashMap<String, String>();
@@ -150,7 +152,7 @@ public class Container extends BaseEntity implements Serializable {
 
 		MavenSettingsManager.writeCustomSettings();
 		try {
-			List<String> webapps = WebappManager.getWebapps();
+			List<String> webapps = getWebapps();
 			for (String webapp : webapps) {
 				addEmbeddedServer(configuration, webapp);
 			}
@@ -205,6 +207,14 @@ public class Container extends BaseEntity implements Serializable {
 
 	public String getAjpPort() {
 		return ajpPort;
+	}
+
+	public void setWebapps(List<String> webapps) {
+		this.webapps = webapps;
+	}
+
+	public List<String> getWebapps() {
+		return webapps;
 	}
 
 }

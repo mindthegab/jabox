@@ -43,10 +43,10 @@ public class ArtifactoryServer extends AbstractEmbeddedServer {
 
 	@Override
 	public String getWarPath() {
-		File baseDir = Environment.getBaseDirFile();
+		File downloadsDir = Environment.getDownloadsDir();
 
 		// Download the artifactory.war
-		File zipFile = new File(baseDir, "tmp/artifactory.war");
+		File zipFile = new File(downloadsDir, "artifactory.war");
 		if (!zipFile.exists()) {
 			DownloadHelper.downloadFile(URL, zipFile);
 		}

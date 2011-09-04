@@ -41,8 +41,9 @@ public class SubversionRepository {
 
 	public static File getSubversionBaseDir() {
 		StringBuffer sb = new StringBuffer();
-		sb.append(Environment.getBaseDir());
-		sb.append("svnRepo");
+		sb.append(Environment.getDataDir());
+		sb.append(File.separatorChar);
+		sb.append("subversion");
 		sb.append(File.separatorChar);
 		return new File(sb.toString());
 	}

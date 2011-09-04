@@ -32,24 +32,8 @@ public class Environment {
 	private static final String HUDSON_DIR = ".hudson";
 	private static final String CUSTOM_MAVEN_DIR = ".m2";
 
-	public static String getBaseDir() {
-		return getBaseDirFile().getAbsolutePath();
-	}
-
-	public static File getBaseDirFile() {
-		File dir = new File(getHomeDir());
-		if (!dir.exists()) {
-			dir.mkdirs();
-		}
-		return dir;
-	}
-
 	public static File getCustomMavenHomeDir() {
-		File m2Dir = new File(getBaseDirFile(), CUSTOM_MAVEN_DIR);
-		if (!m2Dir.exists()) {
-			m2Dir.mkdirs();
-		}
-		return m2Dir;
+		return createAndReturnDir(new File(getBaseDirFile(), CUSTOM_MAVEN_DIR));
 	}
 
 	/**
@@ -75,21 +59,11 @@ public class Environment {
 		} else if (property != null) {
 			return property;
 		} else {
-			return Environment.getBaseDir() + HUDSON_DIR;
+			return Environment.getDataDir() + HUDSON_DIR;
 		}
 	}
 
-	public static File getTmpDirFile() {
-		File tmpDir = new File(getBaseDirFile(), "tmp");
-
-		if (!tmpDir.exists()) {
-			tmpDir.mkdirs();
-		}
-
-		return tmpDir;
-	}
-
-	protected static String getHomeDir() {
+	private static String getHomeDir() {
 		String env = System.getenv(JABOX_ENV);
 		String property = System.getProperty(JABOX_PROPERTY);
 		if (env != null) {
@@ -113,41 +87,55 @@ public class Environment {
 	private static void configBaseDir(final String env, final String property,
 			final String subdir) {
 		if (System.getenv(env) == null && System.getProperty(property) == null) {
-			System.setProperty(property, Environment.getBaseDir()
+			System.setProperty(property, Environment.getDataDir()
 					+ File.separator + subdir);
 		}
 	}
 
+	public static String getBaseDir() {
+		return getBaseDirFile().getAbsolutePath() + File.separator;
+	}
+
+	public static File getBaseDirFile() {
+		return createAndReturnDir(new File(getHomeDir()));
+	}
+
 	public static File getUsersDir() {
-		File dir = new File(getBaseDirFile(), "users");
-		if (!dir.exists()) {
-			dir.mkdirs();
-		}
-		return dir;
+		return createAndReturnDir(new File(getConfigDir(), "users"));
 	}
 
 	public static File getContainersDir() {
-		File dir = new File(getBaseDirFile(), "containers");
-		if (!dir.exists()) {
-			dir.mkdirs();
-		}
-		return dir;
+		return createAndReturnDir(new File(getConfigDir(), "containers"));
 	}
 
 	public static File getProjectsDir() {
-		File dir = new File(getBaseDirFile(), "projects");
-		if (!dir.exists()) {
-			dir.mkdirs();
-		}
-		return dir;
+		return createAndReturnDir(new File(getConfigDir(), "projects"));
 	}
 
 	public static File getServersDir() {
-		File dir = new File(getBaseDirFile(), "servers");
+		return createAndReturnDir(new File(getConfigDir(), "servers"));
+	}
+
+	public static File getConfigDir() {
+		return createAndReturnDir(new File(getBaseDir(), "config"));
+	}
+
+	public static File getTmpDir() {
+		return createAndReturnDir(new File(getBaseDirFile(), "tmp"));
+	}
+
+	public static File getDownloadsDir() {
+		return createAndReturnDir(new File(getBaseDirFile(), "downloads"));
+	}
+	
+	public static File getDataDir() {
+		return createAndReturnDir(new File(getBaseDirFile(), "data"));
+	}
+
+	private static File createAndReturnDir(File dir) {
 		if (!dir.exists()) {
 			dir.mkdirs();
 		}
 		return dir;
 	}
-
 }

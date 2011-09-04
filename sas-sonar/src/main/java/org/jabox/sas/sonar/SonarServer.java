@@ -56,19 +56,23 @@ public class SonarServer extends AbstractEmbeddedServer {
 
 	@Override
 	public String getWarPath() {
-		File baseDir = Environment.getBaseDirFile();
+		File downloadsDir = Environment.getDownloadsDir();
 
 		// Download the sonar.zip
-		File zipFile = new File(baseDir, "tmp/sonar.zip");
+		File zipFile = new File(downloadsDir, "sonar.zip");
 		if (!zipFile.exists()) {
 			DownloadHelper.downloadFile(URL, zipFile);
 		}
-		try {
-			Unzip.unzip(zipFile.getAbsolutePath(), baseDir.getAbsolutePath());
-		} catch (IOException e) {
-			e.printStackTrace();
+		File sonarBaseDir = new File(downloadsDir, "sonar-2.10");
+
+		if (!sonarBaseDir.exists()) {
+			try {
+				Unzip.unzip(zipFile.getAbsolutePath(), downloadsDir
+						.getAbsolutePath());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
-		File sonarBaseDir = new File(baseDir, "sonar-2.10");
 		File sonarWar = execBuildWar(sonarBaseDir);
 		return sonarWar.getAbsolutePath();
 	}
@@ -77,9 +81,16 @@ public class SonarServer extends AbstractEmbeddedServer {
 	 * Executes the Build War script.
 	 */
 	private File execBuildWar(File sonarBaseDir) {
+		File sonarWar = new File(sonarBaseDir, "war/sonar.war");
+		if (sonarWar.exists()) {
+			return sonarWar;
+		}
+		
 		File script = getBuildSonarScript(sonarBaseDir);
-		new File (sonarBaseDir, "war/apache-ant-1.7.0/bin/ant").setExecutable(true);
-		new File (sonarBaseDir, "war/apache-ant-1.7.0/bin/ant.bat").setExecutable(true);
+		new File(sonarBaseDir, "war/apache-ant-1.7.0/bin/ant")
+				.setExecutable(true);
+		new File(sonarBaseDir, "war/apache-ant-1.7.0/bin/ant.bat")
+				.setExecutable(true);
 		try {
 			Process p = Runtime.getRuntime().exec(script.getAbsolutePath(),
 					null, new File(sonarBaseDir, "war"));
@@ -100,7 +111,8 @@ public class SonarServer extends AbstractEmbeddedServer {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		return new File(sonarBaseDir, "war/sonar.war");
+		
+		return sonarWar;
 	}
 
 	private File getBuildSonarScript(File sonarBaseDir) {

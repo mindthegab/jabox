@@ -42,16 +42,13 @@ public class NexusServer extends AbstractEmbeddedServer {
 
 	@Override
 	public String getWarPath() {
-		File baseDir = Environment.getBaseDirFile();
+		File downloadsDir = Environment.getDownloadsDir();
 
-		// Download the artifactory.war
-		File zipFile = new File(baseDir, "tmp/nexus.war");
+		// Download the nexus.war
+		File zipFile = new File(downloadsDir, "nexus.war");
 		if (!zipFile.exists()) {
 			DownloadHelper.downloadFile(URL, zipFile);
 		}
 		return zipFile.getAbsolutePath();
-
-		// return MavenDownloader.downloadArtifact("org.sonatype.nexus",
-		// "nexus-webapp", "1.3.6", "war").getAbsolutePath();
 	}
 }
