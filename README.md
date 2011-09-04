@@ -23,11 +23,21 @@ Source
 The source of Jabox ALM can be found on [GitHub]. Fork us!
 
 Website
-----------------
+-------
 All about Jabox ALM can be found on our [website].
 News can be found on our [blog].
 Follow us on Twitter @[jaboxALM].
 Sign-up to our [mailing list].
+
+Getting Started
+---------------
+
+You can launch jabox directly from command line:
+
+    java -jar jabox-webapp-*-jetty-console.war
+
+or deploy the war to a Servlet Container such as Tomcat.
+
 
 [GPL License]: https://github.com/jabox/jabox/raw/master/LICENSE.txt
 [Download page]: http://redmine.jabox.org/projects/jabox/wiki/Download
