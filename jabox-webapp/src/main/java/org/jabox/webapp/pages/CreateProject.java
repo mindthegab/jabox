@@ -41,8 +41,13 @@ import org.jabox.model.Project;
 import org.jabox.webapp.borders.MiddlePanel;
 import org.jabox.webapp.menubuttons.InfoImage;
 
+import com.google.inject.Inject;
+
 @AuthorizeInstantiation("ADMIN")
 public class CreateProject extends MiddlePanel {
+
+	@Inject
+	private CreateProjectUtil _createProjectUtil;
 
 	public CreateProject() {
 		final Project _project = new Project();
@@ -59,7 +64,7 @@ public class CreateProject extends MiddlePanel {
 				// We need to persist twice because the id is necessary for the
 				// creation of the project.
 				ProjectXstreamDao.persist(_project);
-				new CreateProjectUtil().createProject(_project);
+				_createProjectUtil.createProject(_project);
 				ProjectXstreamDao.persist(_project);
 				info("Project \"" + _project.getName() + "\" Created.");
 			}

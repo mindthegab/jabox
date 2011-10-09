@@ -19,6 +19,10 @@
  */
 package org.jabox.webapp.application;
 
+import java.util.Locale;
+import java.util.ServiceLoader;
+
+import org.apache.wicket.guice.GuiceComponentInjector;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.protocol.http.SecondLevelCacheSessionStore;
 import org.apache.wicket.protocol.http.pagestore.DiskPageStore;
@@ -26,13 +30,20 @@ import org.apache.wicket.session.ISessionStore;
 import org.apache.wicket.spring.injection.annot.SpringComponentInjector;
 import org.apache.wicket.util.lang.PackageName;
 import org.jabox.applicationcontext.InitializeDatabase;
+import org.jabox.its.bugzilla.BugzillaModule;
+import org.jabox.its.jtrac.JtracModule;
+import org.jabox.modules.JaboxWebappModule;
+import org.jabox.persistence.modules.JaboxPersistenceModule;
 import org.jabox.webapp.pages.HomePage;
 import org.jabox.webapp.pages.JaboxAuthenticatedWebApplication;
 import org.jabox.webapp.pages.ManageServers;
-import org.springframework.stereotype.Component;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import java.util.Locale;
+import org.springframework.stereotype.Component;
+
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+import com.google.inject.Module;
 
 /**
  * Application object for your web application. If you want to run this
@@ -43,11 +54,11 @@ import java.util.Locale;
 @Component
 public class WicketApplication extends JaboxAuthenticatedWebApplication {
 
-    /**
-     * Application logger instance.
-     */
-    private static final Logger LOGGER = LoggerFactory
-        .getLogger(WicketApplication.class);
+	/**
+	 * Application logger instance.
+	 */
+	private static final Logger LOGGER = LoggerFactory
+			.getLogger(WicketApplication.class);
 
 	/**
 	 * Constructor
@@ -73,7 +84,21 @@ public class WicketApplication extends JaboxAuthenticatedWebApplication {
 	public void init() {
 		super.init();
 		springInjection();
+		guiceInjection();
 		new InitializeDatabase().init();
+	}
+
+	private void guiceInjection() {
+		addComponentInstantiationListener(new GuiceComponentInjector(this,
+				getGuiceInjector()));
+		// new BugzillaModule(), new JaboxPersistenceModule(),
+		// new JaboxWebappModule(), new JtracModule()));
+	}
+
+	private Injector getGuiceInjector() {
+		ServiceLoader<com.google.inject.Module> modules = ServiceLoader
+				.load(com.google.inject.Module.class);
+		return Guice.createInjector(modules);
 	}
 
 	protected void springInjection() {
@@ -85,7 +110,7 @@ public class WicketApplication extends JaboxAuthenticatedWebApplication {
 	 */
 	@Override
 	public Class<? extends WebPage> getHomePage() {
-        	LOGGER.debug("Locale: " + Locale.getDefault());
+		LOGGER.debug("Locale: " + Locale.getDefault());
 		return ManageServers.class;
 	}
 

@@ -28,6 +28,7 @@ import org.apache.wicket.injection.web.InjectorHolder;
 import org.apache.wicket.persistence.provider.ConfigXstreamDao;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
+import org.jabox.apis.GuiceManager;
 import org.jabox.apis.Manager;
 import org.jabox.apis.cis.CISConnector;
 import org.jabox.apis.its.ITSConnector;
@@ -41,8 +42,13 @@ import org.jabox.model.Project;
 import org.tmatesoft.svn.core.SVNException;
 import org.xml.sax.SAXException;
 
+import com.google.inject.Inject;
+
 public class CreateProjectUtil {
 
+	@Inject
+	private GuiceManager _guiceManager;
+	
 	@SpringBean
 	protected Manager<ITSConnector<ITSConnectorConfig>> _itsManager;
 
@@ -91,6 +97,8 @@ public class CreateProjectUtil {
 	private void createProjectMethod(final Project project)
 			throws InvalidRepositoryException, SAXException, SCMException,
 			IOException, MavenExecutionException {
+		_guiceManager.getConnectors();
+		
 		final DefaultConfiguration dc = ConfigXstreamDao.getConfig();
 
 		SCMConnectorConfig scmc = dc.getScm();
