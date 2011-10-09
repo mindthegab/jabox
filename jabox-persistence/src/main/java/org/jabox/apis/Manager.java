@@ -20,41 +20,70 @@
 package org.jabox.apis;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.jabox.apis.cis.CISConnector;
+import org.jabox.apis.cis.CISConnectorConfig;
+import org.jabox.apis.cqm.CQMConnector;
+import org.jabox.apis.cqm.CQMConnectorConfig;
+import org.jabox.apis.its.ITSConnector;
+import org.jabox.apis.its.ITSConnectorConfig;
+import org.jabox.apis.rms.RMSConnector;
+import org.jabox.apis.rms.RMSConnectorConfig;
+import org.jabox.apis.scm.SCMConnector;
+import org.jabox.apis.scm.SCMConnectorConfig;
 
-@Component
-public class Manager<T extends Connector> {
-	@Autowired
-	public T[] _connectors;
+import com.google.inject.Inject;
 
-	public List<T> getConnectors(final Class<? extends T> claz) {
-		List<T> connectors = Arrays.asList(_connectors);
+public class Manager {
 
-		List<T> shoppingCart = new ArrayList<T>();
-		for (T connector : connectors) {
-			if (claz.isAssignableFrom(connector.getClass())) {
-				shoppingCart.add(connector);
-			}
+	private final Set<ITSConnector> _itsConnectors;
+	private final Set<CISConnector> _cisConnectors;
+	private final Set<SCMConnector> _scmConnectors;
+	private final Set<RMSConnector> _rmsConnectors;
+	private final Set<CQMConnector> _cqmConnectors;
+
+	public Manager() {
+		_itsConnectors = null;
+		_cisConnectors = null;
+		_scmConnectors = null;
+		_rmsConnectors = null;
+		_cqmConnectors = null;
+	}
+
+	@Inject
+	public Manager(Set<ITSConnector> its, Set<CISConnector> cis,
+			Set<SCMConnector> scm, Set<RMSConnector> rms, Set<CQMConnector> cqm) {
+		this._itsConnectors = its;
+		this._cisConnectors = cis;
+		this._scmConnectors = scm;
+		this._rmsConnectors = rms;
+		this._cqmConnectors = cqm;
+	}
+
+	public void printAll() {
+		for (ITSConnector<ITSConnectorConfig> connector : _itsConnectors) {
+			System.out.println("ITS: " + connector.getName());
 		}
-		return shoppingCart;
+		for (CISConnector connector : _cisConnectors) {
+			System.out.println("CIS: " + connector.getName());
+		}
 	}
 
-	public void setConnectors(final T[] connectors) {
-		_connectors = connectors;
-	}
-
-	public T getConnectorInstance(final ConnectorConfig connectorConfig) {
-		List<T> connectors = Arrays.asList(_connectors);
+	public Connector getConnectorInstance(final ConnectorConfig connectorConfig) {
+		List<Connector> connectors = new ArrayList<Connector>();
+		connectors.addAll(_itsConnectors);
+		connectors.addAll(_scmConnectors);
+		connectors.addAll(_rmsConnectors);
+		connectors.addAll(_cisConnectors);
+		connectors.addAll(_cqmConnectors);
 
 		if (connectorConfig == null) {
 			return null;
 		}
 
-		for (T connectorInstance : connectors) {
+		for (Connector connectorInstance : connectors) {
 			if (connectorConfig.getPluginId().equals(connectorInstance.getId())) {
 				return connectorInstance;
 			}
@@ -62,15 +91,58 @@ public class Manager<T extends Connector> {
 		return null;
 	}
 
-	public T getConnectorInstance(final String connectorName) {
-		List<T> connectors = Arrays.asList(_connectors);
+	public SCMConnector<SCMConnectorConfig> getScmConnectorInstance(
+			SCMConnectorConfig scmc) {
+		return null;
+	}
 
-		if (connectorName == null) {
+	public ITSConnector<ITSConnectorConfig> getItsConnectorInstance(
+			ITSConnectorConfig config) {
+		if (config == null) {
 			return null;
 		}
 
-		for (T connectorInstance : connectors) {
-			if (connectorName.equals(connectorInstance.getName())) {
+		for (ITSConnector connectorInstance : _itsConnectors) {
+			if (config.equals(connectorInstance.getName())) {
+				return connectorInstance;
+			}
+		}
+		return null;
+	}
+
+	public RMSConnector getRmsConnectorInstance(RMSConnectorConfig config) {
+		if (config == null) {
+			return null;
+		}
+
+		for (RMSConnector connectorInstance : _rmsConnectors) {
+			if (config.equals(connectorInstance.getName())) {
+				return connectorInstance;
+			}
+		}
+		return null;
+	}
+
+	public CISConnector getCisConnectorInstance(CISConnectorConfig config) {
+		if (config == null) {
+			return null;
+		}
+
+		for (CISConnector connectorInstance : _cisConnectors) {
+			if (config.equals(connectorInstance.getName())) {
+				return connectorInstance;
+			}
+		}
+		return null;
+	}
+
+	public CQMConnector getCqmConnectorInstance(CQMConnectorConfig config) {
+		if (config == null) {
+			return null;
+		}
+
+		for (CQMConnector connectorInstance : _cqmConnectors) {
+			if (config.equals(connectorInstance.getName())) {
 				return connectorInstance;
 			}
 		}

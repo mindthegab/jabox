@@ -35,8 +35,8 @@ public class DummyWicketApplication extends WicketApplication {
 		mockContext = new AnnotApplicationContextMock();
 
 		// Mock Manager
-		Manager<Connector> manager = new Manager<Connector>();
-		manager._connectors = new Connector[] { new HudsonConnector() };
+		Manager manager = new Manager();
+//		manager._connectors = new Connector[] { new HudsonConnector() };
 
 		// Mock GeneralDao
 		mockContext.putBean(manager);

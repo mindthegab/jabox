@@ -27,19 +27,19 @@ import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
-import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.jabox.apis.Connector;
 import org.jabox.apis.Manager;
-import org.jabox.apis.scm.SCMConnector;
 import org.jabox.model.Project;
 import org.jabox.model.Server;
 import org.jabox.webapp.borders.MiddlePanel;
 import org.jabox.webapp.utils.TransactionalForm;
 
+import com.google.inject.Inject;
+
 public abstract class EditServerPage extends MiddlePanel {
 
-	@SpringBean
-	protected Manager<Connector> _manager;
+	@Inject
+	protected Manager _manager;
 
 	public EditServerPage(final IModel<Server> server,
 			final Class<? extends Connector> connectorClass) {
@@ -68,10 +68,6 @@ public abstract class EditServerPage extends MiddlePanel {
 		// add(form);
 
 		form.add(new RequiredTextField<Project>("name"));
-
-		Class<? extends Connector> connector = SCMConnector.class;
-		List<Connector> connectors = _manager.getConnectors(connector);
-		System.out.println("connectors: " + ":" + connectors);
 
 		DeployerPluginSelector child = new DeployerPluginSelector(
 				"configuration", model, connectorClass);

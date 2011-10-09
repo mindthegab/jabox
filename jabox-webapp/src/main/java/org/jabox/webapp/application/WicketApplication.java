@@ -89,16 +89,8 @@ public class WicketApplication extends JaboxAuthenticatedWebApplication {
 	}
 
 	private void guiceInjection() {
-		addComponentInstantiationListener(new GuiceComponentInjector(this,
-				getGuiceInjector()));
-		// new BugzillaModule(), new JaboxPersistenceModule(),
-		// new JaboxWebappModule(), new JtracModule()));
-	}
-
-	private Injector getGuiceInjector() {
-		ServiceLoader<com.google.inject.Module> modules = ServiceLoader
-				.load(com.google.inject.Module.class);
-		return Guice.createInjector(modules);
+		Injector inj = Guice.createInjector(ServiceLoader.load(Module.class));
+		addComponentInstantiationListener(new GuiceComponentInjector(this, inj));
 	}
 
 	protected void springInjection() {

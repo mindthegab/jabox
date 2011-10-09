@@ -26,7 +26,6 @@ import org.apache.maven.MavenExecutionException;
 import org.apache.maven.artifact.InvalidRepositoryException;
 import org.apache.wicket.injection.web.InjectorHolder;
 import org.apache.wicket.persistence.provider.ConfigXstreamDao;
-import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
 import org.jabox.apis.GuiceManager;
 import org.jabox.apis.Manager;
@@ -48,18 +47,18 @@ public class CreateProjectUtil {
 
 	@Inject
 	private GuiceManager _guiceManager;
-	
-	@SpringBean
-	protected Manager<ITSConnector<ITSConnectorConfig>> _itsManager;
 
-	@SpringBean
-	protected Manager<SCMConnector<SCMConnectorConfig>> _scmManager;
+	@Inject
+	protected Manager _itsManager;
 
-	@SpringBean
-	protected Manager<CISConnector> _cisManager;
+	@Inject
+	protected Manager _scmManager;
 
-	@SpringBean
-	protected Manager<RMSConnector> _rmsManager;
+	@Inject
+	protected Manager _cisManager;
+
+	@Inject
+	protected Manager _rmsManager;
 
 	public CreateProjectUtil() {
 		InjectorHolder.getInjector().inject(this);
@@ -97,14 +96,13 @@ public class CreateProjectUtil {
 	private void createProjectMethod(final Project project)
 			throws InvalidRepositoryException, SAXException, SCMException,
 			IOException, MavenExecutionException {
-		_guiceManager.getConnectors();
-		
+		_itsManager.printAll();
 		final DefaultConfiguration dc = ConfigXstreamDao.getConfig();
 
 		SCMConnectorConfig scmc = dc.getScm();
 
 		SCMConnector<SCMConnectorConfig> scm = _scmManager
-				.getConnectorInstance(scmc);
+				.getScmConnectorInstance(scmc);
 
 		System.out.println("Using SCM: " + scm.toString());
 		File trunkDir = scm.createProjectDirectories(project, scmc);
@@ -113,7 +111,7 @@ public class CreateProjectUtil {
 		MavenCreateProject.createProjectWithMavenCore(project, trunkDir
 				.getAbsolutePath());
 
-		RMSConnector rms = _rmsManager.getConnectorInstance(dc.getRms());
+		RMSConnector rms = _rmsManager.getRmsConnectorInstance(dc.getRms());
 
 		File pomXml = new File(trunkDir, project.getName() + "/pom.xml");
 
@@ -149,7 +147,7 @@ public class CreateProjectUtil {
 		// Add Project in Issue Tracking System
 		ITSConnectorConfig config = dc.getIts();
 		ITSConnector<ITSConnectorConfig> its = _itsManager
-				.getConnectorInstance(config);
+				.getItsConnectorInstance(config);
 		if (its != null) {
 			// its
 			// .setUrl("http://localhost/cgi-bin/bugzilla/index.cgi?GoAheadAndLogIn=1");
@@ -166,7 +164,7 @@ public class CreateProjectUtil {
 					.getPassword());
 		}
 
-		CISConnector cis = _cisManager.getConnectorInstance(dc.getCis());
+		CISConnector cis = _cisManager.getCisConnectorInstance(dc.getCis());
 		if (cis != null) {
 			cis.addProject(project, dc.getCis());
 		}

@@ -24,7 +24,6 @@ import java.util.List;
 
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.persistence.provider.ConfigXstreamDao;
-import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.jabox.apis.Connector;
 import org.jabox.apis.ConnectorConfig;
 import org.jabox.apis.Manager;
@@ -36,6 +35,8 @@ import org.jabox.webapp.pages.ManageServers;
 import org.jabox.webapp.pages.RmsPage;
 import org.jabox.webapp.pages.ScmPage;
 
+import com.google.inject.Inject;
+
 public class HeaderLinksPanel extends Panel {
 
 	public static final int ALM = 0;
@@ -45,8 +46,8 @@ public class HeaderLinksPanel extends Panel {
 	public static final int RMS = 4;
 	public static final int CQM = 5;
 
-	@SpringBean
-	protected Manager<Connector> _manager;
+	@Inject
+	protected Manager _manager;
 
 	public HeaderLinksPanel(final String id, final int selected) {
 		super(id);
