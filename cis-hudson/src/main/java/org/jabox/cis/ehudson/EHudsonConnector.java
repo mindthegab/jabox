@@ -24,7 +24,6 @@ import org.apache.wicket.model.IModel;
 import org.jabox.cis.hudson.HudsonConnector;
 import org.jabox.model.DeployerConfig;
 import org.jabox.model.Server;
-import org.springframework.stereotype.Service;
 
 /**
  * TODO: Find a way to pass credentials to Hudson: by doing a post here:
@@ -34,7 +33,6 @@ import org.springframework.stereotype.Service;
  * @author Administrator
  * 
  */
-@Service
 public class EHudsonConnector extends HudsonConnector {
 	public static final String ID = "plugin.cis.ehudson";
 

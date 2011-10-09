@@ -32,7 +32,6 @@ import org.apache.wicket.persistence.provider.UserXstreamDao;
 import org.jabox.model.Project;
 import org.jabox.model.User;
 import org.jabox.webapp.borders.MiddlePanel;
-import org.jabox.webapp.utils.TransactionalForm;
 
 @AuthorizeInstantiation("ADMIN")
 public class MyAccountPage extends MiddlePanel {
@@ -40,7 +39,7 @@ public class MyAccountPage extends MiddlePanel {
 	public MyAccountPage() {
 		IModel<User> user = getUser();
 		add(new FeedbackPanel("feedback"));
-		Form<User> form = new TransactionalForm<User>("form",
+		Form<User> form = new Form<User>("form",
 				new CompoundPropertyModel<User>(user.getObject())) {
 			private static final long serialVersionUID = -8262391690702864764L;
 

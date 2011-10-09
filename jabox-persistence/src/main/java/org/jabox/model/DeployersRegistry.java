@@ -19,15 +19,34 @@
  */
 package org.jabox.model;
 
+import java.util.List;
+import java.util.Set;
+
 import org.jabox.apis.Connector;
-import org.springframework.stereotype.Service;
 
-@Service
-public class DeployersRegistry extends
-		IdentifiableBeanRegistry<Connector, String> {
+import com.google.inject.Inject;
 
-	public DeployersRegistry() {
-		super(Connector.class);
+public class DeployersRegistry {
+
+	private final Set<Connector> _connectors;
+
+	@Inject
+	public DeployersRegistry(Set<Connector> connectors) {
+		this._connectors = connectors;
 	}
 
+	public Connector getEntry(String pluginId) {
+		for (Connector connector : _connectors) {
+			if (connector.getId().equals(pluginId)) {
+				return connector;
+			}
+		}
+		return null;
+	}
+
+	public List<? extends String> getIds(
+			Class<? extends Connector> connectorClass) {
+		// XXX TODO
+		return null;
+	}
 }

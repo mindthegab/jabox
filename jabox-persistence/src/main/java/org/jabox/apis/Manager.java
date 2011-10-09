@@ -44,14 +44,6 @@ public class Manager {
 	private final Set<RMSConnector> _rmsConnectors;
 	private final Set<CQMConnector> _cqmConnectors;
 
-	public Manager() {
-		_itsConnectors = null;
-		_cisConnectors = null;
-		_scmConnectors = null;
-		_rmsConnectors = null;
-		_cqmConnectors = null;
-	}
-
 	@Inject
 	public Manager(Set<ITSConnector> its, Set<CISConnector> cis,
 			Set<SCMConnector> scm, Set<RMSConnector> rms, Set<CQMConnector> cqm) {
@@ -60,15 +52,6 @@ public class Manager {
 		this._scmConnectors = scm;
 		this._rmsConnectors = rms;
 		this._cqmConnectors = cqm;
-	}
-
-	public void printAll() {
-		for (ITSConnector<ITSConnectorConfig> connector : _itsConnectors) {
-			System.out.println("ITS: " + connector.getName());
-		}
-		for (CISConnector connector : _cisConnectors) {
-			System.out.println("CIS: " + connector.getName());
-		}
 	}
 
 	public Connector getConnectorInstance(final ConnectorConfig connectorConfig) {
@@ -92,7 +75,16 @@ public class Manager {
 	}
 
 	public SCMConnector<SCMConnectorConfig> getScmConnectorInstance(
-			SCMConnectorConfig scmc) {
+			SCMConnectorConfig config) {
+		if (config == null) {
+			return null;
+		}
+
+		for (SCMConnector connectorInstance : _scmConnectors) {
+			if (config.equals(connectorInstance.getName())) {
+				return connectorInstance;
+			}
+		}
 		return null;
 	}
 

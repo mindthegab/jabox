@@ -24,9 +24,7 @@ import org.apache.wicket.model.IModel;
 import org.jabox.model.DeployerConfig;
 import org.jabox.model.Server;
 import org.jabox.mrm.artifactory.ArtifactoryConnector;
-import org.springframework.stereotype.Service;
 
-@Service
 public class EArtifactoryConnector extends ArtifactoryConnector {
 	public static final String ID = "plugin.rms.eartifactory";
 

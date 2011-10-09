@@ -24,9 +24,7 @@ import org.apache.wicket.model.IModel;
 import org.jabox.model.DeployerConfig;
 import org.jabox.model.Server;
 import org.jabox.scm.git.GITConnector;
-import org.springframework.stereotype.Service;
 
-@Service
 public class EGITConnector extends GITConnector {
 	private static final long serialVersionUID = 2605311375240167074L;
 

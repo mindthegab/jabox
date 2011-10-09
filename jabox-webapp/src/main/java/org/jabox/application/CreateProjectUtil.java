@@ -24,10 +24,10 @@ import java.io.IOException;
 
 import org.apache.maven.MavenExecutionException;
 import org.apache.maven.artifact.InvalidRepositoryException;
+import org.apache.wicket.guice.GuiceInjectorHolder;
 import org.apache.wicket.injection.web.InjectorHolder;
 import org.apache.wicket.persistence.provider.ConfigXstreamDao;
 import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
-import org.jabox.apis.GuiceManager;
 import org.jabox.apis.Manager;
 import org.jabox.apis.cis.CISConnector;
 import org.jabox.apis.its.ITSConnector;
@@ -38,6 +38,7 @@ import org.jabox.apis.scm.SCMConnectorConfig;
 import org.jabox.apis.scm.SCMException;
 import org.jabox.model.DefaultConfiguration;
 import org.jabox.model.Project;
+import org.jabox.webapp.application.WicketApplication;
 import org.tmatesoft.svn.core.SVNException;
 import org.xml.sax.SAXException;
 
@@ -46,22 +47,13 @@ import com.google.inject.Inject;
 public class CreateProjectUtil {
 
 	@Inject
-	private GuiceManager _guiceManager;
-
-	@Inject
-	protected Manager _itsManager;
-
-	@Inject
-	protected Manager _scmManager;
-
-	@Inject
-	protected Manager _cisManager;
-
-	@Inject
-	protected Manager _rmsManager;
+	protected Manager _manager;
 
 	public CreateProjectUtil() {
-		InjectorHolder.getInjector().inject(this);
+		((GuiceInjectorHolder) ((WicketApplication) WicketApplication.get())
+				.getMetaData(GuiceInjectorHolder.INJECTOR_KEY)).getInjector()
+				.injectMembers(this);
+		// InjectorHolder.getInjector().inject(this);
 	}
 
 	public void createProject(final Project project) {
@@ -96,12 +88,11 @@ public class CreateProjectUtil {
 	private void createProjectMethod(final Project project)
 			throws InvalidRepositoryException, SAXException, SCMException,
 			IOException, MavenExecutionException {
-		_itsManager.printAll();
 		final DefaultConfiguration dc = ConfigXstreamDao.getConfig();
 
 		SCMConnectorConfig scmc = dc.getScm();
 
-		SCMConnector<SCMConnectorConfig> scm = _scmManager
+		SCMConnector<SCMConnectorConfig> scm = _manager
 				.getScmConnectorInstance(scmc);
 
 		System.out.println("Using SCM: " + scm.toString());
@@ -111,7 +102,7 @@ public class CreateProjectUtil {
 		MavenCreateProject.createProjectWithMavenCore(project, trunkDir
 				.getAbsolutePath());
 
-		RMSConnector rms = _rmsManager.getRmsConnectorInstance(dc.getRms());
+		RMSConnector rms = _manager.getRmsConnectorInstance(dc.getRms());
 
 		File pomXml = new File(trunkDir, project.getName() + "/pom.xml");
 
@@ -146,7 +137,7 @@ public class CreateProjectUtil {
 
 		// Add Project in Issue Tracking System
 		ITSConnectorConfig config = dc.getIts();
-		ITSConnector<ITSConnectorConfig> its = _itsManager
+		ITSConnector<ITSConnectorConfig> its = _manager
 				.getItsConnectorInstance(config);
 		if (its != null) {
 			// its
@@ -164,7 +155,7 @@ public class CreateProjectUtil {
 					.getPassword());
 		}
 
-		CISConnector cis = _cisManager.getCisConnectorInstance(dc.getCis());
+		CISConnector cis = _manager.getCisConnectorInstance(dc.getCis());
 		if (cis != null) {
 			cis.addProject(project, dc.getCis());
 		}

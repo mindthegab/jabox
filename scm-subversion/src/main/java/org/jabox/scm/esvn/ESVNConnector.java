@@ -24,9 +24,7 @@ import org.apache.wicket.model.IModel;
 import org.jabox.model.DeployerConfig;
 import org.jabox.model.Server;
 import org.jabox.scm.svn.SVNConnector;
-import org.springframework.stereotype.Service;
 
-@Service
 /**
  * Embedded Subversion Connector.
  * <p>

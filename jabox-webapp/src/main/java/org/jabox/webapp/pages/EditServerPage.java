@@ -19,8 +19,6 @@
  */
 package org.jabox.webapp.pages;
 
-import java.util.List;
-
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.RequiredTextField;
 import org.apache.wicket.markup.html.link.Link;
@@ -32,7 +30,6 @@ import org.jabox.apis.Manager;
 import org.jabox.model.Project;
 import org.jabox.model.Server;
 import org.jabox.webapp.borders.MiddlePanel;
-import org.jabox.webapp.utils.TransactionalForm;
 
 import com.google.inject.Inject;
 
@@ -44,7 +41,7 @@ public abstract class EditServerPage extends MiddlePanel {
 	public EditServerPage(final IModel<Server> server,
 			final Class<? extends Connector> connectorClass) {
 		add(new FeedbackPanel("feedback"));
-		Form<Server> form = new TransactionalForm<Server>("form",
+		Form<Server> form = new Form<Server>("form",
 				new CompoundPropertyModel<Server>(server.getObject())) {
 			private static final long serialVersionUID = -8262391690705860769L;
 

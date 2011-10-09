@@ -27,13 +27,12 @@ import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
 import org.jabox.model.Container;
 import org.jabox.webapp.borders.MiddlePanel;
-import org.jabox.webapp.utils.TransactionalForm;
 
 public abstract class EditContainerPage extends MiddlePanel {
 
 	public EditContainerPage(final IModel<Container> user) {
 		add(new FeedbackPanel("feedback"));
-		Form<Container> form = new TransactionalForm<Container>("form",
+		Form<Container> form = new Form<Container>("form",
 				new CompoundPropertyModel<Container>(user.getObject())) {
 			private static final long serialVersionUID = -8262391690702864764L;
 

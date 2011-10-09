@@ -24,9 +24,7 @@ import org.apache.wicket.model.IModel;
 import org.jabox.apis.rms.RMSConnector;
 import org.jabox.model.DeployerConfig;
 import org.jabox.model.Server;
-import org.springframework.stereotype.Service;
 
-@Service
 public class ScpConnector implements RMSConnector {
 	public static final String ID = "plugin.rms.scp";
 

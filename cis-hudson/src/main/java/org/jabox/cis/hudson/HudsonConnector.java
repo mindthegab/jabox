@@ -36,7 +36,6 @@ import org.jabox.environment.Environment;
 import org.jabox.model.DeployerConfig;
 import org.jabox.model.Project;
 import org.jabox.model.Server;
-import org.springframework.stereotype.Service;
 import org.xml.sax.SAXException;
 
 /**
@@ -47,7 +46,6 @@ import org.xml.sax.SAXException;
  * @author Administrator
  * 
  */
-@Service
 public class HudsonConnector implements CISConnector {
 	public static final String ID = "plugin.cis.hudson";
 

@@ -27,19 +27,13 @@ import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.protocol.http.SecondLevelCacheSessionStore;
 import org.apache.wicket.protocol.http.pagestore.DiskPageStore;
 import org.apache.wicket.session.ISessionStore;
-import org.apache.wicket.spring.injection.annot.SpringComponentInjector;
 import org.apache.wicket.util.lang.PackageName;
 import org.jabox.applicationcontext.InitializeDatabase;
-import org.jabox.its.bugzilla.BugzillaModule;
-import org.jabox.its.jtrac.JtracModule;
-import org.jabox.modules.JaboxWebappModule;
-import org.jabox.persistence.modules.JaboxPersistenceModule;
 import org.jabox.webapp.pages.HomePage;
 import org.jabox.webapp.pages.JaboxAuthenticatedWebApplication;
 import org.jabox.webapp.pages.ManageServers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -51,7 +45,6 @@ import com.google.inject.Module;
  * 
  * @see wicket.myproject.Start#main(String[])
  */
-@Component
 public class WicketApplication extends JaboxAuthenticatedWebApplication {
 
 	/**
@@ -83,7 +76,6 @@ public class WicketApplication extends JaboxAuthenticatedWebApplication {
 	@Override
 	public void init() {
 		super.init();
-		springInjection();
 		guiceInjection();
 		new InitializeDatabase().init();
 	}
@@ -91,10 +83,6 @@ public class WicketApplication extends JaboxAuthenticatedWebApplication {
 	private void guiceInjection() {
 		Injector inj = Guice.createInjector(ServiceLoader.load(Module.class));
 		addComponentInstantiationListener(new GuiceComponentInjector(this, inj));
-	}
-
-	protected void springInjection() {
-		addComponentInstantiationListener(new SpringComponentInjector(this));
 	}
 
 	/**

@@ -26,11 +26,12 @@ import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.persistence.provider.ServerXstreamDao;
-import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.jabox.apis.Connector;
 import org.jabox.model.DeployersRegistry;
 import org.jabox.model.Server;
 import org.jabox.webapp.modifiers.TooltipModifier;
+
+import com.google.inject.Inject;
 
 public final class EditServerButton<T extends Server> extends ImageButton {
 
@@ -53,7 +54,7 @@ public final class EditServerButton<T extends Server> extends ImageButton {
 		this(id, item.getModelObject());
 	}
 
-	@SpringBean
+	@Inject
 	private DeployersRegistry registry;
 
 	/**

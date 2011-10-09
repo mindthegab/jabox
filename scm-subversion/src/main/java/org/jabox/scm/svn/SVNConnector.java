@@ -31,10 +31,8 @@ import org.jabox.model.DeployerConfig;
 import org.jabox.model.Project;
 import org.jabox.model.Server;
 import org.jabox.utils.TemporalDirectory;
-import org.springframework.stereotype.Service;
 import org.tmatesoft.svn.core.SVNException;
 
-@Service
 public class SVNConnector implements SCMConnector<ISVNConnectorConfig>,
 		Serializable {
 	public static final String ID = "plugin.scm.svn";

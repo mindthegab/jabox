@@ -29,15 +29,17 @@ import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.LoadableDetachableModel;
 import org.apache.wicket.model.PropertyModel;
-import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.jabox.apis.Connector;
 import org.jabox.model.DeployerConfig;
 import org.jabox.model.DeployersRegistry;
 import org.jabox.model.Server;
 
+import com.google.inject.Inject;
+
 public class DeployerPluginSelector extends Panel {
 	private static final long serialVersionUID = -222526477140616108L;
-	@SpringBean
+
+	@Inject
 	private DeployersRegistry registry;
 
 	@SuppressWarnings("unchecked")
@@ -75,7 +77,7 @@ public class DeployerPluginSelector extends Panel {
 
 	private static abstract class PluginPicker<T> extends DropDownChoice<T> {
 		private static final long serialVersionUID = 1346317031364661388L;
-		@SpringBean
+		@Inject
 		private DeployersRegistry registry;
 
 		@SuppressWarnings("unchecked")

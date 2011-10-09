@@ -31,10 +31,8 @@ import org.jabox.apis.scm.SCMConnectorConfig;
 import org.jabox.model.DeployerConfig;
 import org.jabox.model.Project;
 import org.jabox.model.Server;
-import org.springframework.stereotype.Service;
 import org.xml.sax.SAXException;
 
-@Service
 public class SonarConnector implements CQMConnector<SonarConnectorConfig>,
 		Serializable {
 	private static final long serialVersionUID = 8131183843391948936L;

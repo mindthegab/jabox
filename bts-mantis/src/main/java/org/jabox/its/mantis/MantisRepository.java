@@ -33,7 +33,6 @@ import org.jabox.model.Project;
 import org.jabox.model.Server;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Service;
 import org.xml.sax.SAXException;
 
 import com.meterware.httpunit.GetMethodWebRequest;
@@ -42,7 +41,6 @@ import com.meterware.httpunit.WebForm;
 import com.meterware.httpunit.WebRequest;
 import com.meterware.httpunit.WebResponse;
 
-@Service
 public class MantisRepository implements ITSConnector<MantisRepositoryConfig>,
 		Serializable {
 	private static final Logger LOGGER = LoggerFactory

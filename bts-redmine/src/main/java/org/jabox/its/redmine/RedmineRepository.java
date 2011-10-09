@@ -37,13 +37,11 @@ import org.jabox.model.Project;
 import org.jabox.model.Server;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Service;
 import org.xml.sax.SAXException;
 
 import com.meterware.httpunit.PostMethodWebRequest;
 import com.meterware.httpunit.WebConversation;
 
-@Service
 public class RedmineRepository implements
 		ITSConnector<RedmineRepositoryConfig>, Serializable {
 	private static final Logger LOGGER = LoggerFactory
