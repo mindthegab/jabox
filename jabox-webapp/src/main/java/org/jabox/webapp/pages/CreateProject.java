@@ -38,13 +38,12 @@ import org.apache.wicket.persistence.provider.ProjectXstreamDao;
 import org.jabox.application.CreateProjectUtil;
 import org.jabox.model.MavenArchetype;
 import org.jabox.model.Project;
-import org.jabox.webapp.borders.MiddlePanel;
 import org.jabox.webapp.menubuttons.InfoImage;
 
 import com.google.inject.Inject;
 
 @AuthorizeInstantiation("ADMIN")
-public class CreateProject extends MiddlePanel {
+public class CreateProject extends BasePage {
 
 	@Inject
 	private CreateProjectUtil _createProjectUtil;

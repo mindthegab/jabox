@@ -21,25 +21,33 @@ package org.jabox.webapp.pages;
 
 import org.apache.wicket.Component;
 import org.apache.wicket.MarkupContainer;
-import org.apache.wicket.markup.MarkupStream;
+import org.apache.wicket.markup.html.IHeaderResponse;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.border.Border;
+import org.apache.wicket.request.resource.PackageResourceReference;
 import org.jabox.webapp.borders.MySiteBorder;
+import org.jabox.webapp.panels.HeaderLinksPanel;
 
 public abstract class BasePage extends WebPage {
+	private static final long serialVersionUID = 8165952253551263784L;
+
+	public void renderHead(IHeaderResponse response) {
+		response.renderCSSReference(new PackageResourceReference(
+				BasePage.class, "css/wicket.css"));
+	}
 
 	private Border border;
+	private HeaderLinksPanel headers;
 
 	public BasePage add(final Component child) {
-		// add(new StyleSheetReference("pageCSS", getClass(),
-		// "css/wicket.css"));
-
 		// Add children of the page to the page's border component
-//		if (border == null) {
+		if (border == null) {
 			// Create border and add it to the page
 			border = new MySiteBorder();
 			super.add(border);
-//		}
+			headers = new HeaderLinksPanel();
+//			border.add(headers);
+		}
 		border.add(child);
 		return this;
 	}
@@ -52,9 +60,4 @@ public abstract class BasePage extends WebPage {
 	public MarkupContainer replace(final Component child) {
 		return border.replace(child);
 	}
-
-	// public boolean autoAdd(Component component, MarkupStream markupStream) {
-	// return border.autoAdd(component, markupStream);
-	// }
-
 }

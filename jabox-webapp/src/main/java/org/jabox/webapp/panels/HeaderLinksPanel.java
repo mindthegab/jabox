@@ -35,16 +35,15 @@ public class HeaderLinksPanel extends Panel {
 	public static final int RMS = 4;
 	public static final int CQM = 5;
 
-	@Inject
-	protected Manager _manager;
+//	@Inject
+//	protected Manager _manager;
 
 	public HeaderLinksPanel() {
 		super("headerLinks");
 	}
 
-	@Inject
-	public HeaderLinksPanel(final String id, final int selected) {
-		super(id);
+//	public HeaderLinksPanel(final String id, final int selected) {
+//		super(id);
 //		final DefaultConfiguration dc = ConfigXstreamDao.getConfig();
 //
 //		List<Tab> tabs = new ArrayList<Tab>();
@@ -78,7 +77,7 @@ public class HeaderLinksPanel extends Panel {
 //		}
 //
 //		add(new TabsList("tabs", tabs));
-	}
+//	}
 
 	/**
 	 * 
@@ -88,10 +87,10 @@ public class HeaderLinksPanel extends Panel {
 	 *            The ConnectorConfig
 	 * @return
 	 */
-	private String getTabName(final String prefix, final ConnectorConfig cc) {
-		Connector ci = _manager.getConnectorInstance(cc);
-		return prefix + "(" + ci.getName() + ")";
-	}
+//	private String getTabName(final String prefix, final ConnectorConfig cc) {
+//		Connector ci = _manager.getConnectorInstance(cc);
+//		return prefix + "(" + ci.getName() + ")";
+//	}
 
-	private static final long serialVersionUID = 9038957597332426470L;
+//	private static final long serialVersionUID = 9038957597332426470L;
 }
