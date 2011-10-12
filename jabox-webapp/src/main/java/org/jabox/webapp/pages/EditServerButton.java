@@ -19,13 +19,14 @@
  */
 package org.jabox.webapp.pages;
 
-import org.apache.wicket.ResourceReference;
 import org.apache.wicket.markup.html.form.ImageButton;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.persistence.provider.ServerXstreamDao;
+import org.apache.wicket.request.resource.ResourceReference;
+import org.apache.wicket.request.resource.SharedResourceReference;
 import org.jabox.apis.Connector;
 import org.jabox.model.DeployersRegistry;
 import org.jabox.model.Server;
@@ -38,7 +39,7 @@ public final class EditServerButton<T extends Server> extends ImageButton {
 	private static final TooltipModifier TOOLTIP_MODIFIER = new TooltipModifier(
 			"Edit Connector");
 
-	private static final ResourceReference EDIT_IMG = new ResourceReference(
+	private static final ResourceReference EDIT_IMG = new SharedResourceReference(
 			EditEntityButton.class, "preferences-system.png");
 
 	private static final long serialVersionUID = 1L;

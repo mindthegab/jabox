@@ -29,7 +29,7 @@ public class EArtifactoryConnectorEditor extends Panel {
 
 	public EArtifactoryConnectorEditor(final String id,
 			final IModel<Server> model) {
-		super(id, new CompoundPropertyModel<String>(model));
+		super(id, new CompoundPropertyModel<Server>(model));
 	}
 
 }

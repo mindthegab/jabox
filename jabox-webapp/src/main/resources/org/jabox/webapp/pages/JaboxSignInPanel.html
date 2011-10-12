@@ -3,30 +3,33 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:wicket="http://wicket.sourceforge.net/" xml:lang="en" lang="en">
 <body>
-  <wicket:panel>
-    <div class="feedback" wicket:id="feedback"/>
-        <i>Username and password are both "admin"</i>
-    
-		<form wicket:id="signInForm">
-		<table>
+<wicket:panel>
+	<div class="feedback" wicket:id="feedback" />
+	<i>Username and password are both "admin"</i>
+
+	<form wicket:id="signInForm">
+	<table>
 		<tr>
-		<td><label for="mod_login_username">Username:</label></td>
-		<td><input name="username" id="mod_login_username" type="text" class="inputbox" alt="Username" wicket:id="username" value="foo@goo.moo" /></td>
+			<td><label for="mod_login_username">Username:</label></td>
+			<td><input name="username" id="mod_login_username" type="text"
+				class="inputbox" alt="Username" wicket:id="username"
+				value="foo@goo.moo" /></td>
 		</tr>
 		<tr>
-		<td><label for="mod_login_password">Password:</label></td>
-		<td><input id="mod_login_password" name="passwd" class="inputbox"  alt="Password" wicket:id="password" type="password" value="password" /></td>
+			<td><label for="mod_login_password">Password:</label></td>
+			<td><input id="mod_login_password" name="passwd"
+				class="inputbox" alt="Password" wicket:id="password" type="password"
+				value="password" /></td>
 		</tr>
-		</table> 
- 	<span wicket:id="rememberMeRow">
-	<input name="remember" id="mod_login_remember" class="checkbox" value="yes" alt="Remember Me" wicket:id="rememberMe" type="checkbox" />
-	</span> 
-	<label for="mod_login_remember" class="remember"> 
-		Remember Me	</label> 
-	
-	<p><input type="submit" name="Submit" class="button" value="Log in" /></p> 
+	</table>
+	<span wicket:id="rememberMeRow"> <input name="remember"
+		id="mod_login_remember" class="checkbox" value="yes" alt="Remember Me"
+		wicket:id="rememberMe" type="checkbox" /> </span> <label
+		for="mod_login_remember" class="remember"> Remember Me </label>
+
+	<p><input type="submit" name="Submit" class="button" value="Log in" /></p>
 	<p></p>
-		</form>
-  </wicket:panel>
+	</form>
+</wicket:panel>
 </body>
 </html>

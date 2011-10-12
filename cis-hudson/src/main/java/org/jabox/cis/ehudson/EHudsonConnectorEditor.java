@@ -33,7 +33,7 @@ public class EHudsonConnectorEditor extends Panel {
 	private static final long serialVersionUID = -4821476804096973897L;
 
 	public EHudsonConnectorEditor(final String id, final IModel<Server> model) {
-		super(id, new CompoundPropertyModel<String>(model));
+		super(id, new CompoundPropertyModel<Server>(model));
 		TextField<String> username = new TextField<String>("username");
 		PasswordTextField password = new PasswordTextField("password");
 

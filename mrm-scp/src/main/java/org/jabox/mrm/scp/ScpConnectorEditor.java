@@ -29,7 +29,7 @@ public class ScpConnectorEditor extends Panel {
 	private static final long serialVersionUID = 7851270123746015638L;
 
 	public ScpConnectorEditor(final String id, final IModel<Server> model) {
-		super(id, new CompoundPropertyModel<String>(model));
+		super(id, new CompoundPropertyModel<Server>(model));
 		add(new RequiredTextField<String>("server.url"));
 		add(new RequiredTextField<String>("absoluteReleaseRepositoryPath"));
 		add(new RequiredTextField<String>("absoluteSnapshotRepositoryPath"));

@@ -19,7 +19,7 @@
  */
 package org.jabox.webapp.pages;
 
-import org.apache.wicket.authentication.pages.SignOutPage;
+import org.apache.wicket.authroles.authentication.pages.SignOutPage;
 
 /**
  * 

@@ -30,7 +30,7 @@ public class NexusConnectorEditor extends Panel {
 	private static final long serialVersionUID = 7851270123746015638L;
 
 	public NexusConnectorEditor(final String id, final IModel<Server> model) {
-		super(id, new CompoundPropertyModel<String>(model));
+		super(id, new CompoundPropertyModel<Server>(model));
 		add(new TextField<String>("server.url").add(new UrlValidator()));
 	}
 

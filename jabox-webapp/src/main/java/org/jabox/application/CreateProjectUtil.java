@@ -25,7 +25,6 @@ import java.io.IOException;
 import org.apache.maven.MavenExecutionException;
 import org.apache.maven.artifact.InvalidRepositoryException;
 import org.apache.wicket.guice.GuiceInjectorHolder;
-import org.apache.wicket.injection.web.InjectorHolder;
 import org.apache.wicket.persistence.provider.ConfigXstreamDao;
 import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
 import org.jabox.apis.Manager;

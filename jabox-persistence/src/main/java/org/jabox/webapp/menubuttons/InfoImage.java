@@ -19,8 +19,9 @@
  */
 package org.jabox.webapp.menubuttons;
 
-import org.apache.wicket.ResourceReference;
 import org.apache.wicket.markup.html.image.Image;
+import org.apache.wicket.request.resource.ResourceReference;
+import org.apache.wicket.request.resource.SharedResourceReference;
 import org.jabox.webapp.modifiers.TooltipModifier;
 
 /**
@@ -30,7 +31,7 @@ import org.jabox.webapp.modifiers.TooltipModifier;
  */
 public final class InfoImage extends Image {
 
-	private static final ResourceReference DEFAULT_IMG = new ResourceReference(
+	private static final ResourceReference DEFAULT_IMG = new SharedResourceReference(
 			InfoImage.class, "info.png");
 
 	private static final long serialVersionUID = 1L;

@@ -20,7 +20,6 @@
 package org.jabox.webapp.pages;
 
 import org.apache.wicket.markup.html.WebPage;
-import org.apache.wicket.markup.html.resources.StyleSheetReference;
 
 public abstract class BasePage extends WebPage {
 	public BasePage() {

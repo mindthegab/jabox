@@ -7,7 +7,7 @@
 	<h2>Manage Users</h2>
 	<p />
 	<form wicket:id="deleteForm">
-	
+
 	<table cellspacing="0" class="dataviewTable" width="90%">
 		<tr>
 			<th class="dataviewTh" width="200px">Login</th>
@@ -19,8 +19,10 @@
 		</tr>
 		<tr wicket:id="users">
 			<td class="dataviewTd"><span wicket:id="login">login</span></td>
-			<td class="dataviewTd"><span wicket:id="firstName">First Name</span></td>
-			<td class="dataviewTd"><span wicket:id="lastName">Last Name</span></td>
+			<td class="dataviewTd"><span wicket:id="firstName">First
+			Name</span></td>
+			<td class="dataviewTd"><span wicket:id="lastName">Last
+			Name</span></td>
 			<td class="dataviewTd"><span wicket:id="email">Email</span></td>
 			<td class="dataviewTd"><input type="image" wicket:id="edit" /></td>
 			<td class="dataviewTd"><input type="image" wicket:id="delete"
@@ -34,7 +36,8 @@
 				<td>Description of anotherUser.</td>
 			</tr>
 		</wicket:remove>
-		<input type="submit" class="button" wicket:id="createUser" value="New User" />
+		<input type="submit" class="button" wicket:id="createUser"
+			value="New User" />
 	</table>
 	</form>
 </wicket:extend>

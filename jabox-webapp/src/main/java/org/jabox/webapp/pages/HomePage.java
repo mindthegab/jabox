@@ -19,7 +19,7 @@
  */
 package org.jabox.webapp.pages;
 
-import org.apache.wicket.PageParameters;
+import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.jabox.environment.Environment;
 import org.jabox.webapp.borders.MiddlePanel;
 

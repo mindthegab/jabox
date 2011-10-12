@@ -19,11 +19,11 @@
  */
 package org.jabox.webapp.pages;
 
-import org.apache.wicket.Request;
-import org.apache.wicket.authentication.AuthenticatedWebSession;
-import org.apache.wicket.authorization.strategies.role.Roles;
+import org.apache.wicket.authroles.authentication.AuthenticatedWebSession;
+import org.apache.wicket.authroles.authorization.strategies.role.Roles;
 import org.apache.wicket.guice.GuiceInjectorHolder;
 import org.apache.wicket.persistence.provider.UserXstreamDao;
+import org.apache.wicket.request.Request;
 import org.jabox.model.User;
 import org.jabox.webapp.application.WicketApplication;
 

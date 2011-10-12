@@ -32,7 +32,7 @@ public class BeanstalkConnectorEditor extends Panel {
 	private static final long serialVersionUID = -4137475647749541936L;
 
 	public BeanstalkConnectorEditor(final String id, final IModel<Server> model) {
-		super(id, new CompoundPropertyModel<String>(model));
+		super(id, new CompoundPropertyModel<Server>(model));
 		TextField<String> url = new TextField<String>("server.url",
 				new BeanstalkAccountURLModel(new PropertyModel<String>(model,
 						"server.url")));

@@ -19,7 +19,7 @@
  */
 package org.jabox.webapp.pages;
 
-import org.apache.wicket.authentication.panel.SignInPanel;
+import org.apache.wicket.authroles.authentication.panel.SignInPanel;
 
 public class JaboxSignInPanel extends SignInPanel {
 	private static final long serialVersionUID = 8225682921383556087L;

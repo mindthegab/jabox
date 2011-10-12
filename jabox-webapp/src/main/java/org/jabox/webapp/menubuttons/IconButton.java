@@ -19,8 +19,9 @@
  */
 package org.jabox.webapp.menubuttons;
 
-import org.apache.wicket.ResourceReference;
 import org.apache.wicket.markup.html.form.ImageButton;
+import org.apache.wicket.request.resource.ResourceReference;
+import org.apache.wicket.request.resource.SharedResourceReference;
 import org.jabox.apis.ConnectorConfig;
 
 /**
@@ -40,12 +41,12 @@ public final class IconButton extends ImageButton {
 
 	private static final long serialVersionUID = 1L;
 
-	private static final ResourceReference PLUGIN = new ResourceReference(
+	private static final ResourceReference PLUGIN = new SharedResourceReference(
 			IconButton.class, "plugin.png");
 
 	public IconButton(final String id, final ConnectorConfig item) {
-		super(id);
-		ResourceReference rr = new ResourceReference(item.getClass(), ICON_PNG);
+		super(id, PLUGIN);
+		ResourceReference rr = new SharedResourceReference(item.getClass(), ICON_PNG);
 
 		if (existImage(rr)) {
 			setImageResourceReference(rr);

@@ -7,14 +7,15 @@
 	<h2>Manage Servers</h2>
 	<p />
 
-	<form wicket:id="deleteForm">
-	<br />
+	<form wicket:id="deleteForm"><br />
 
-	<h3>Source Configuration Management (S.C.M.) <img wicket:id="scmIcon" align="bottom" wicket:message="title:scm.tooltip" alt="info" /></h3>
-	
+	<h3>Source Configuration Management (S.C.M.) <img
+		wicket:id="scmIcon" align="bottom" wicket:message="title:scm.tooltip"
+		alt="info" /></h3>
+
 	<hr />
-	<p/>
-	
+	<p />
+
 	<table cellspacing="0" class="dataviewTable" width="90%">
 		<tr>
 			<th class="dataviewTh" width="200px">Name</th>
@@ -25,12 +26,12 @@
 			<th class="dataviewTh" width="40px">Delete</th>
 		</tr>
 		<tr wicket:id="SCMs">
-			<td class="dataviewTd"><span wicket:id="clazz">Class name.</span></td>
+			<td class="dataviewTd"><span wicket:id="clazz">Class
+			name.</span></td>
 			<td class="dataviewTd"><a href="#" wicket:id="server.url"></a></td>
 
-			<td class="dataviewTd">
-			<input type="image" wicket:id="connectorImage"/>
-			</td>
+			<td class="dataviewTd"><input type="image"
+				wicket:id="connectorImage" /></td>
 			<td class="dataviewTd"><input type="image" wicket:id="default"
 				title="Default" src="default.png" /></td>
 			<td class="dataviewTd"><input type="image" wicket:id="edit" /></td>
@@ -45,15 +46,16 @@
 				<td class="dataviewTd">Description of anotherProject.</td>
 			</tr>
 		</wicket:remove>
-		<input type="submit" class="button"
-		wicket:id="createSCMs" value="New Server" />
+		<input type="submit" class="button" wicket:id="createSCMs"
+			value="New Server" />
 	</table>
 
 	<p />
-	<h3>Issue Tracking Systems (I.T.S.) <img wicket:id="itsIcon" align="bottom" wicket:message="title:its.tooltip" alt="info" /></h3>
+	<h3>Issue Tracking Systems (I.T.S.) <img wicket:id="itsIcon"
+		align="bottom" wicket:message="title:its.tooltip" alt="info" /></h3>
 	<hr />
-	<p/>
-	
+	<p />
+
 	<table cellspacing="0" class="dataviewTable" width="90%">
 		<tr>
 			<th class="dataviewTh" width="200px">Name</th>
@@ -64,13 +66,13 @@
 			<th class="dataviewTh" width="40px">Delete</th>
 		</tr>
 		<tr wicket:id="ITSs">
-			<td class="dataviewTd"><span wicket:id="clazz">Class name.</span></td>
+			<td class="dataviewTd"><span wicket:id="clazz">Class
+			name.</span></td>
 			<td class="dataviewTd"><a href="#" wicket:id="server.url"></a></td>
 
-			<td class="dataviewTd">
-			<input type="image" wicket:id="connectorImage"/>
-			</td>
-			
+			<td class="dataviewTd"><input type="image"
+				wicket:id="connectorImage" /></td>
+
 			<td class="dataviewTd"><input type="image" wicket:id="default"
 				title="Default" src="default.png" /></td>
 			<td class="dataviewTd"><input type="image" wicket:id="edit" /></td>
@@ -86,15 +88,17 @@
 				<td class="dataviewTd">Description of anotherProject.</td>
 			</tr>
 		</wicket:remove>
-		<input type="submit" class="button"
-		wicket:id="createITSs" value="New Server" />
+		<input type="submit" class="button" wicket:id="createITSs"
+			value="New Server" />
 	</table>
-	
+
 	<p />
-	<h3>Continuous Integration Systems (C.I.S.) <img wicket:id="cisIcon" align="bottom" wicket:message="title:cis.tooltip" alt="info" /></h3>
+	<h3>Continuous Integration Systems (C.I.S.) <img
+		wicket:id="cisIcon" align="bottom" wicket:message="title:cis.tooltip"
+		alt="info" /></h3>
 	<hr />
-	<p/>
-	
+	<p />
+
 	<table cellspacing="0" class="dataviewTable" width="90%">
 		<tr>
 			<th class="dataviewTh" width="200px">Name</th>
@@ -105,13 +109,13 @@
 			<th class="dataviewTh" width="40px">Delete</th>
 		</tr>
 		<tr wicket:id="CISs">
-			<td class="dataviewTd"><span wicket:id="clazz">Class name.</span></td>
+			<td class="dataviewTd"><span wicket:id="clazz">Class
+			name.</span></td>
 			<td class="dataviewTd"><a href="#" wicket:id="server.url"></a></td>
 
-			<td class="dataviewTd">
-			<input type="image" wicket:id="connectorImage"/>
-			</td>
-			
+			<td class="dataviewTd"><input type="image"
+				wicket:id="connectorImage" /></td>
+
 			<td class="dataviewTd"><input type="image" wicket:id="default"
 				title="Default" src="default.png" /></td>
 			<td class="dataviewTd"><input type="image" wicket:id="edit" /></td>
@@ -126,15 +130,17 @@
 				<td class="dataviewTd">Description of anotherProject.</td>
 			</tr>
 		</wicket:remove>
-		<input type="submit" class="button"
-		wicket:id="createCISs" value="New Server" />
+		<input type="submit" class="button" wicket:id="createCISs"
+			value="New Server" />
 	</table>
-	
+
 	<p />
-	<h3>Repository Management Systems (R.M.S.) <img wicket:id="rmsIcon" align="bottom" wicket:message="title:rms.tooltip" alt="info" /></h3>
+	<h3>Repository Management Systems (R.M.S.) <img
+		wicket:id="rmsIcon" align="bottom" wicket:message="title:rms.tooltip"
+		alt="info" /></h3>
 	<hr />
-	<p/>
-	
+	<p />
+
 	<table cellspacing="0" class="dataviewTable" width="90%">
 		<tr>
 			<th class="dataviewTh" width="200px">Name</th>
@@ -145,12 +151,12 @@
 			<th class="dataviewTh" width="40px">Delete</th>
 		</tr>
 		<tr wicket:id="RMSs">
-			<td class="dataviewTd"><span wicket:id="clazz">Class name.</span></td>
+			<td class="dataviewTd"><span wicket:id="clazz">Class
+			name.</span></td>
 			<td class="dataviewTd"><a href="#" wicket:id="server.url"></a></td>
 
-			<td class="dataviewTd">
-			<input type="image" wicket:id="connectorImage"/>
-			</td>
+			<td class="dataviewTd"><input type="image"
+				wicket:id="connectorImage" /></td>
 
 			<td class="dataviewTd"><input type="image" wicket:id="default"
 				title="Default" src="default.png" /></td>
@@ -166,15 +172,16 @@
 				<td class="dataviewTd">Description of anotherProject.</td>
 			</tr>
 		</wicket:remove>
-		<input type="submit" class="button"
-		wicket:id="createRMSs" value="New Server" />
+		<input type="submit" class="button" wicket:id="createRMSs"
+			value="New Server" />
 	</table>
-	
+
 	<p />
-	<h3>Code Quality Management (C.Q.M.) <img wicket:id="cqmIcon" align="bottom" wicket:message="title:cqm.tooltip" alt="info" /></h3>
+	<h3>Code Quality Management (C.Q.M.) <img wicket:id="cqmIcon"
+		align="bottom" wicket:message="title:cqm.tooltip" alt="info" /></h3>
 	<hr />
-	<p/>
-	
+	<p />
+
 	<table cellspacing="0" class="dataviewTable" width="90%">
 		<tr>
 			<th class="dataviewTh" width="200px">Name</th>
@@ -185,12 +192,12 @@
 			<th class="dataviewTh" width="40px">Delete</th>
 		</tr>
 		<tr wicket:id="CQMs">
-			<td class="dataviewTd"><span wicket:id="clazz">Class name.</span></td>
+			<td class="dataviewTd"><span wicket:id="clazz">Class
+			name.</span></td>
 			<td class="dataviewTd"><a href="#" wicket:id="server.url"></a></td>
 
-			<td class="dataviewTd">
-			<input type="image" wicket:id="connectorImage"/>
-			</td>
+			<td class="dataviewTd"><input type="image"
+				wicket:id="connectorImage" /></td>
 
 			<td class="dataviewTd"><input type="image" wicket:id="default"
 				title="Default" src="default.png" /></td>
@@ -206,13 +213,13 @@
 				<td class="dataviewTd">Description of anotherProject.</td>
 			</tr>
 		</wicket:remove>
-		<input type="submit" class="button"
-		wicket:id="createCQMs" value="New Server" />
+		<input type="submit" class="button" wicket:id="createCQMs"
+			value="New Server" />
 	</table>
-	
-	<p/>
+
+	<p />
 	</form>
-	
+
 </wicket:extend>
 </body>
 </html>

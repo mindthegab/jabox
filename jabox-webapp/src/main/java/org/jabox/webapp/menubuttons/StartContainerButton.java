@@ -20,9 +20,10 @@
 package org.jabox.webapp.menubuttons;
 
 import org.apache.wicket.Page;
-import org.apache.wicket.ResourceReference;
 import org.apache.wicket.markup.html.form.ImageButton;
 import org.apache.wicket.markup.html.list.ListItem;
+import org.apache.wicket.request.resource.ResourceReference;
+import org.apache.wicket.request.resource.SharedResourceReference;
 import org.jabox.model.Container;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,7 +32,7 @@ public final class StartContainerButton extends ImageButton {
 	private static final Logger LOGGER = LoggerFactory
 		.getLogger(StartContainerButton.class);
 
-	private static final ResourceReference START_IMG = new ResourceReference(
+	private static final ResourceReference START_IMG = new SharedResourceReference(
 			StartContainerButton.class, "play.png");
 	private static final long serialVersionUID = 1L;
 	private final Container _item;

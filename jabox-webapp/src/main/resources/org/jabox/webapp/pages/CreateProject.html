@@ -4,49 +4,58 @@
 	xmlns:wicket="http://wicket.sourceforge.net/" xml:lang="en" lang="en">
 <body>
 <wicket:extend>
-<h2><wicket:message key="page.header">Create Project</wicket:message></h2>
-     <div class="feedback" wicket:id="feedback">Feedback Messages</div>
+	<h2><wicket:message key="page.header">Create Project</wicket:message></h2>
+	<div class="feedback" wicket:id="feedback">Feedback Messages</div>
 
-     <form wicket:id="form">
-        <table>
-         <tr>
-          <td><wicket:message key="name">Project Name</wicket:message>:</td>
-          <td class="formTD"><input class="formInput" type="text" wicket:id="name" />
-          <img wicket:id="name.tooltip" align="top" wicket:message="title:name.tooltip"/></td>
-          <td><div class="feedback" wicket:id="nameFeedback">Feedback Messages</div></td>
-         </tr>
-         <tr>
-	      <td><wicket:message key="description">Project Description</wicket:message>:</td>
-    	  <td class="formTD">
-    	  		<input class="formInput" type="text" wicket:id="description" />
-    	  		<img wicket:id="description.tooltip" align="top" wicket:message="title:description.tooltip"/></td>
-    	  <td><div class="feedback" wicket:id="descriptionFeedback">Feedback Messages</div></td>
-         </tr>
-         <tr>
-	      <td><wicket:message key="sourceEncoding">Source Encoding</wicket:message>:</td>
-    	  <td class="formTD">
-    	  		<input class="formInput" type="text" wicket:id="sourceEncoding" />
-    	  		<img wicket:id="sourceEncoding.tooltip" align="top" wicket:message="title:sourceEncoding.tooltip"/></td>
-         </tr>
-         <tr>
-          <td><wicket:message key="archetype">Maven Archetype</wicket:message>:</td>
-          <td class="formTD">
-		  		<select class="formInput" name="archetype" wicket:id="archetype" />
-		  		<img wicket:id="archetype.tooltip" align="top" wicket:message="title:archetype.tooltip"/></td>
-         </tr>
-         <tr class="deployer">
-			<td><label for="signArtifactReleases"><wicket:message key="signArtifactReleases">Sign Artifact Releases</wicket:message>: </label></td>
-			<td><input wicket:id="signArtifactReleases" type="checkbox" />
-			<img wicket:id="signArtifactReleases.tooltip" align="top" wicket:message="title:signArtifactReleases.tooltip"/>
+	<form wicket:id="form">
+	<table>
+		<tr>
+			<td><wicket:message key="name">Project Name</wicket:message>:</td>
+			<td class="formTD"><input class="formInput" type="text"
+				wicket:id="name" /> <img wicket:id="name.tooltip" align="top"
+				wicket:message="title:name.tooltip" /></td>
+			<td>
+			<div class="feedback" wicket:id="nameFeedback">Feedback
+			Messages</div>
 			</td>
-		 </tr>
-         <tr>
-          <td colspan="2" align="left">
-           <input type="submit" class="button" value="submit" />
-          </td>
-         </tr>
-        </table>
-     </form>
+		</tr>
+		<tr>
+			<td><wicket:message key="description">Project Description</wicket:message>:</td>
+			<td class="formTD"><input class="formInput" type="text"
+				wicket:id="description" /> <img wicket:id="description.tooltip"
+				align="top" wicket:message="title:description.tooltip" /></td>
+			<td>
+			<div class="feedback" wicket:id="descriptionFeedback">Feedback
+			Messages</div>
+			</td>
+		</tr>
+		<tr>
+			<td><wicket:message key="sourceEncoding">Source Encoding</wicket:message>:</td>
+			<td class="formTD"><input class="formInput" type="text"
+				wicket:id="sourceEncoding" /> <img
+				wicket:id="sourceEncoding.tooltip" align="top"
+				wicket:message="title:sourceEncoding.tooltip" /></td>
+		</tr>
+		<tr>
+			<td><wicket:message key="archetype">Maven Archetype</wicket:message>:</td>
+			<td class="formTD"><select class="formInput" name="archetype"
+				wicket:id="archetype" /> <img wicket:id="archetype.tooltip"
+				align="top" wicket:message="title:archetype.tooltip" /></td>
+		</tr>
+		<tr class="deployer">
+			<td><label for="signArtifactReleases"><wicket:message
+				key="signArtifactReleases">Sign Artifact Releases</wicket:message>:
+			</label></td>
+			<td><input wicket:id="signArtifactReleases" type="checkbox" />
+			<img wicket:id="signArtifactReleases.tooltip" align="top"
+				wicket:message="title:signArtifactReleases.tooltip" /></td>
+		</tr>
+		<tr>
+			<td colspan="2" align="left"><input type="submit" class="button"
+				value="submit" /></td>
+		</tr>
+	</table>
+	</form>
 </wicket:extend>
 </body>
 </html>

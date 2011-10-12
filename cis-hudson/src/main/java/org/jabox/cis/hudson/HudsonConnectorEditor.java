@@ -31,7 +31,7 @@ public class HudsonConnectorEditor extends Panel {
 	private static final long serialVersionUID = -4821476804096973897L;
 
 	public HudsonConnectorEditor(final String id, final IModel<Server> model) {
-		super(id, new CompoundPropertyModel<String>(model));
+		super(id, new CompoundPropertyModel<Server>(model));
 		add(new TextField<String>("server.url").add(new UrlValidator()));
 		add(new TextField<String>("username").setRequired(true));
 		add(new PasswordTextField("password").setRequired(true));

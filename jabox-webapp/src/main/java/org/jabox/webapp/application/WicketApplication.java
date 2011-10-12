@@ -24,9 +24,8 @@ import java.util.ServiceLoader;
 
 import org.apache.wicket.guice.GuiceComponentInjector;
 import org.apache.wicket.markup.html.WebPage;
-import org.apache.wicket.protocol.http.SecondLevelCacheSessionStore;
-import org.apache.wicket.protocol.http.pagestore.DiskPageStore;
-import org.apache.wicket.session.ISessionStore;
+import org.apache.wicket.request.IRequestMapper;
+import org.apache.wicket.request.mapper.PackageMapper;
 import org.apache.wicket.util.lang.PackageName;
 import org.jabox.applicationcontext.InitializeDatabase;
 import org.jabox.webapp.pages.HomePage;
@@ -57,21 +56,23 @@ public class WicketApplication extends JaboxAuthenticatedWebApplication {
 	 * Constructor
 	 */
 	public WicketApplication() {
-		mount("web", PackageName.forClass(HomePage.class));
+		IRequestMapper mapper = new PackageMapper(PackageName
+				.forClass(HomePage.class));
+		// mount("web", PackageName.forClass(HomePage.class));
+		mount(mapper);
 	}
 
-	@Override
-	protected ISessionStore newSessionStore() {
-		return new SecondLevelCacheSessionStore(this, new DiskPageStore()) {
-
-			@Override
-			protected void onUnbind(final String sessionId) {
-				// this code is called when wicket call httpSession.invalidate()
-				System.out.println("Session unbinded");
-			}
-
-		};
-	}
+	// protected ISessionStore newSessionStore() {
+	// return new SecondLevelCacheSessionStore(this, new DiskPageStore()) {
+	//
+	// @Override
+	// protected void onUnbind(final String sessionId) {
+	// // this code is called when wicket call httpSession.invalidate()
+	// System.out.println("Session unbinded");
+	// }
+	//
+	// };
+	// }
 
 	@Override
 	public void init() {
@@ -82,7 +83,8 @@ public class WicketApplication extends JaboxAuthenticatedWebApplication {
 
 	private void guiceInjection() {
 		Injector inj = Guice.createInjector(ServiceLoader.load(Module.class));
-		addComponentInstantiationListener(new GuiceComponentInjector(this, inj));
+		GuiceComponentInjector listener = new GuiceComponentInjector(this, inj);
+		getComponentInstantiationListeners().add(listener);
 	}
 
 	/**

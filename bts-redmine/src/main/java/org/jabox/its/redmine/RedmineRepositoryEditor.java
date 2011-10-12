@@ -32,7 +32,7 @@ public class RedmineRepositoryEditor extends Panel {
 	private static final long serialVersionUID = 3000405193458816252L;
 
 	public RedmineRepositoryEditor(final String id, final IModel<Server> model) {
-		super(id, new CompoundPropertyModel<String>(model));
+		super(id, new CompoundPropertyModel<Server>(model));
 		TextField<String> username = new TextField<String>("username");
 		PasswordTextField password = new PasswordTextField("password");
 		TextField<String> url = new TextField<String>("server.url");

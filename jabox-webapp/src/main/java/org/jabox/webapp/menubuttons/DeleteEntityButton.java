@@ -20,22 +20,23 @@
 package org.jabox.webapp.menubuttons;
 
 import org.apache.wicket.Page;
-import org.apache.wicket.ResourceReference;
 import org.apache.wicket.markup.html.form.ImageButton;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.persistence.provider.ContainerXstreamDao;
 import org.apache.wicket.persistence.provider.UserXstreamDao;
+import org.apache.wicket.request.resource.ResourceReference;
+import org.apache.wicket.request.resource.SharedResourceReference;
 import org.jabox.apis.IBaseEntity;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.jabox.model.Container;
 import org.jabox.model.User;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class DeleteEntityButton<T extends IBaseEntity> extends ImageButton {
 	private static final Logger LOGGER = LoggerFactory
 		.getLogger(DeleteEntityButton.class);
 
-	private static final ResourceReference DELETE_IMG = new ResourceReference(
+	private static final ResourceReference DELETE_IMG = new SharedResourceReference(
 			DeleteEntityButton.class, "edit-delete.png");
 	private static final long serialVersionUID = 1L;
 	private final T _item;

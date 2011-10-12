@@ -28,6 +28,9 @@ import org.jabox.webapp.panels.HeaderLinksPanel;
 public class MiddlePanel extends BasePage {
 	private static final long serialVersionUID = -2139796431114958720L;
 
+	// @Inject
+	// Panel _headerLinksPanel;
+
 	/**
 	 * Constructor
 	 * 
@@ -35,6 +38,7 @@ public class MiddlePanel extends BasePage {
 	 *            component id
 	 */
 	public MiddlePanel() {
-//		add(new HeaderLinksPanel("headerLinks", 0));
+		add(new HeaderLinksPanel());
+		// add(_headerLinksPanel);
 	}
 };

@@ -21,7 +21,7 @@ package org.jabox.webapp.pages;
 
 import java.util.List;
 
-import org.apache.wicket.authorization.strategies.role.annotations.AuthorizeInstantiation;
+import org.apache.wicket.authroles.authorization.strategies.role.annotations.AuthorizeInstantiation;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.persistence.domain.BaseEntity;
 import org.apache.wicket.persistence.provider.UserXstreamDao;
