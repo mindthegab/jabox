@@ -26,14 +26,13 @@ import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.persistence.domain.BaseEntity;
 import org.apache.wicket.persistence.provider.UserXstreamDao;
 import org.jabox.model.User;
-import org.jabox.webapp.borders.MiddlePanel;
 import org.jabox.webapp.utils.UserList;
 
 /**
  * Homepage
  */
 @AuthorizeInstantiation("ADMIN")
-public class ManageUsers extends MiddlePanel {
+public class ManageUsers extends BasePage {
 
 	private static final long serialVersionUID = 1L;
 

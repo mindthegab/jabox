@@ -21,12 +21,11 @@ package org.jabox.webapp.pages;
 
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.jabox.environment.Environment;
-import org.jabox.webapp.borders.MiddlePanel;
 
 /**
  * Homepage
  */
-public class HomePage extends MiddlePanel {
+public class HomePage extends BasePage {
 
 	private static final long serialVersionUID = 1L;
 

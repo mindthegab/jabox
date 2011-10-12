@@ -93,7 +93,6 @@ public class WicketApplication extends JaboxAuthenticatedWebApplication {
 	@Override
 	public Class<? extends WebPage> getHomePage() {
 		LOGGER.debug("Locale: " + Locale.getDefault());
-		return ManageServers.class;
+		return HomePage.class;
 	}
-
 }
