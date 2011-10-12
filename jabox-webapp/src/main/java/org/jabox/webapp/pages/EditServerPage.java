@@ -29,11 +29,10 @@ import org.jabox.apis.Connector;
 import org.jabox.apis.Manager;
 import org.jabox.model.Project;
 import org.jabox.model.Server;
-import org.jabox.webapp.borders.MiddlePanel;
 
 import com.google.inject.Inject;
 
-public abstract class EditServerPage extends MiddlePanel {
+public abstract class EditServerPage extends BasePage {
 
 	@Inject
 	protected Manager _manager;

@@ -26,9 +26,8 @@ import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
 import org.jabox.model.Container;
-import org.jabox.webapp.borders.MiddlePanel;
 
-public abstract class EditContainerPage extends MiddlePanel {
+public abstract class EditContainerPage extends BasePage {
 
 	public EditContainerPage(final IModel<Container> user) {
 		add(new FeedbackPanel("feedback"));

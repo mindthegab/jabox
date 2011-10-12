@@ -29,10 +29,9 @@ import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
 import org.jabox.model.Project;
 import org.jabox.model.User;
-import org.jabox.webapp.borders.MiddlePanel;
 
 @AuthorizeInstantiation("ADMIN")
-public abstract class EditUserPage extends MiddlePanel {
+public abstract class EditUserPage extends BasePage {
 
 	public EditUserPage(final IModel<User> user) {
 		add(new FeedbackPanel("feedback"));

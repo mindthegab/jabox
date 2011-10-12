@@ -42,8 +42,8 @@ public class HeaderLinksPanel extends Panel {
 		super("headerLinks");
 	}
 
-//	public HeaderLinksPanel(final String id, final int selected) {
-//		super(id);
+	public HeaderLinksPanel(final String id, final int selected) {
+		super(id);
 //		final DefaultConfiguration dc = ConfigXstreamDao.getConfig();
 //
 //		List<Tab> tabs = new ArrayList<Tab>();
@@ -77,7 +77,7 @@ public class HeaderLinksPanel extends Panel {
 //		}
 //
 //		add(new TabsList("tabs", tabs));
-//	}
+	}
 
 	/**
 	 * 

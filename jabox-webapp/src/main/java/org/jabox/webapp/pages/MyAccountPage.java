@@ -31,10 +31,9 @@ import org.apache.wicket.model.Model;
 import org.apache.wicket.persistence.provider.UserXstreamDao;
 import org.jabox.model.Project;
 import org.jabox.model.User;
-import org.jabox.webapp.borders.MiddlePanel;
 
 @AuthorizeInstantiation("ADMIN")
-public class MyAccountPage extends MiddlePanel {
+public class MyAccountPage extends BasePage {
 
 	public MyAccountPage() {
 		IModel<User> user = getUser();
