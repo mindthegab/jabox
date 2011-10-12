@@ -45,8 +45,8 @@ public abstract class BasePage extends WebPage {
 			// Create border and add it to the page
 			border = new MySiteBorder();
 			super.add(border);
-			headers = new HeaderLinksPanel();
-//			add(headers);
+//			headers = new HeaderLinksPanel();
+//			border.getBodyContainer().add(headers);
 		}
 		border.add(child);
 		return this;
