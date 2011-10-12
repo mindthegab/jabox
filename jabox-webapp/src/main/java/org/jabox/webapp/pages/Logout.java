@@ -28,7 +28,7 @@ import org.apache.wicket.authroles.authentication.pages.SignOutPage;
  */
 public class Logout extends SignOutPage {
 	public Logout() {
-		setRedirect(true);
+//		setRedirect(true);
 		setResponsePage(HomePage.class);
 	}
 }

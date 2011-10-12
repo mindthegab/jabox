@@ -23,6 +23,6 @@ import org.apache.wicket.markup.html.WebPage;
 
 public abstract class BasePage extends WebPage {
 	public BasePage() {
-		add(new StyleSheetReference("pageCSS", getClass(), "css/wicket.css"));
+//		add(new StyleSheetReference("pageCSS", getClass(), "css/wicket.css"));
 	}
 }

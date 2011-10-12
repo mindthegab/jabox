@@ -37,6 +37,7 @@ public class HomePage extends MiddlePanel {
 	 *            Page parameters
 	 */
 	public HomePage(final PageParameters parameters) {
+		super();
 		System.out.println("user.home: " + Environment.getBaseDir());
 		add(new JaboxSignInPanel("signInPanel"));
 	}

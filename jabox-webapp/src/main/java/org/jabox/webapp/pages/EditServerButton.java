@@ -63,7 +63,7 @@ public final class EditServerButton<T extends Server> extends ImageButton {
 	 */
 	@Override
 	public void onSubmit() {
-		IModel<T> model = new Model<T>(_item);
+		IModel<Server> model = new Model<Server>(_item);
 
 		Connector connector = registry.getEntry(model.getObject()
 				.getDeployerConfig().pluginId);

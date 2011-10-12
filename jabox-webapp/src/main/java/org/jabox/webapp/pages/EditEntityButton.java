@@ -44,15 +44,15 @@ public final class EditEntityButton<T extends BaseEntity> extends ImageButton {
 			EditEntityButton.class, "preferences-system.png");
 
 	private static final long serialVersionUID = 1L;
-	private final T _item;
+	private final User _item;
 
-	public EditEntityButton(final String id, final T item) {
+	public EditEntityButton(final String id, final User item) {
 		super(id, EDIT_IMG);
 		_item = item;
 		add(TOOLTIP_MODIFIER);
 	}
 
-	public EditEntityButton(final String id, final ListItem<T> item) {
+	public EditEntityButton(final String id, final ListItem<User> item) {
 		this(id, item.getModelObject());
 	}
 
@@ -61,7 +61,7 @@ public final class EditEntityButton<T extends BaseEntity> extends ImageButton {
 	 */
 	@Override
 	public void onSubmit() {
-		IModel<T> model = new Model<T>(_item);
+		IModel<User> model = new Model<User>(_item);
 		setResponsePage(new EditUserPage(new CompoundPropertyModel<User>(model)) {
 
 			@Override
