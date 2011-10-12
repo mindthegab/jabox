@@ -35,6 +35,6 @@ public class MiddlePanel extends BasePage {
 	 *            component id
 	 */
 	public MiddlePanel() {
-		add(new HeaderLinksPanel("headerLinks", 0));
+//		add(new HeaderLinksPanel("headerLinks", 0));
 	}
 };
