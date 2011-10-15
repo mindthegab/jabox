@@ -28,6 +28,7 @@ import org.apache.wicket.markup.html.list.PropertyListView;
 import org.jabox.model.Container;
 import org.jabox.webapp.menubuttons.DeleteEntityButton;
 import org.jabox.webapp.menubuttons.StartContainerButton;
+import org.jabox.webapp.pages.EditEntityButton;
 import org.jabox.webapp.pages.ManageContainers;
 
 public class ContainerList extends PropertyListView<Container> {

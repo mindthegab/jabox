@@ -62,18 +62,6 @@ public class WicketApplication extends JaboxAuthenticatedWebApplication {
 		mount(mapper);
 	}
 
-	// protected ISessionStore newSessionStore() {
-	// return new SecondLevelCacheSessionStore(this, new DiskPageStore()) {
-	//
-	// @Override
-	// protected void onUnbind(final String sessionId) {
-	// // this code is called when wicket call httpSession.invalidate()
-	// System.out.println("Session unbinded");
-	// }
-	//
-	// };
-	// }
-
 	@Override
 	public void init() {
 		super.init();

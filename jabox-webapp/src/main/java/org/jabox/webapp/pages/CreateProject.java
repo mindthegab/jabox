@@ -35,7 +35,6 @@ import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.persistence.provider.ProjectXstreamDao;
-import org.jabox.apis.Manager;
 import org.jabox.application.ICreateProjectUtil;
 import org.jabox.model.MavenArchetype;
 import org.jabox.model.Project;

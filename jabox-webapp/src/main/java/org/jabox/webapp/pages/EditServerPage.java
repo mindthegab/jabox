@@ -26,16 +26,10 @@ import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
 import org.jabox.apis.Connector;
-import org.jabox.apis.IManager;
 import org.jabox.model.Project;
 import org.jabox.model.Server;
 
-import com.google.inject.Inject;
-
 public abstract class EditServerPage extends BasePage {
-
-	@Inject
-	protected IManager _manager;
 
 	public EditServerPage(final IModel<Server> server,
 			final Class<? extends Connector> connectorClass) {
