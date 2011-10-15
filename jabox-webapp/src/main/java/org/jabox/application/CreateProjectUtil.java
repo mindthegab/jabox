@@ -24,10 +24,9 @@ import java.io.IOException;
 
 import org.apache.maven.MavenExecutionException;
 import org.apache.maven.artifact.InvalidRepositoryException;
-import org.apache.wicket.guice.GuiceInjectorHolder;
 import org.apache.wicket.persistence.provider.ConfigXstreamDao;
 import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
-import org.jabox.apis.Manager;
+import org.jabox.apis.IManager;
 import org.jabox.apis.cis.CISConnector;
 import org.jabox.apis.its.ITSConnector;
 import org.jabox.apis.its.ITSConnectorConfig;
@@ -37,24 +36,26 @@ import org.jabox.apis.scm.SCMConnectorConfig;
 import org.jabox.apis.scm.SCMException;
 import org.jabox.model.DefaultConfiguration;
 import org.jabox.model.Project;
-import org.jabox.webapp.application.WicketApplication;
 import org.tmatesoft.svn.core.SVNException;
 import org.xml.sax.SAXException;
 
 import com.google.inject.Inject;
 
-public class CreateProjectUtil {
+public class CreateProjectUtil implements ICreateProjectUtil {
 
 	@Inject
-	protected Manager _manager;
+	protected IManager _manager;
 
 	public CreateProjectUtil() {
-		((GuiceInjectorHolder) ((WicketApplication) WicketApplication.get())
-				.getMetaData(GuiceInjectorHolder.INJECTOR_KEY)).getInjector()
-				.injectMembers(this);
-		// InjectorHolder.getInjector().inject(this);
+		// ((GuiceInjectorHolder) ((WicketApplication) WicketApplication.get())
+		// .getMetaData(GuiceInjectorHolder.INJECTOR_KEY)).getInjector()
+		// .injectMembers(this);
+		// // InjectorHolder.getInjector().inject(this);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.jabox.application.ICreateProjectUtil#createProject(org.jabox.model.Project)
+	 */
 	public void createProject(final Project project) {
 		try {
 			createProjectMethod(project);

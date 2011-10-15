@@ -26,7 +26,7 @@ import org.jabox.apis.Connector;
 
 import com.google.inject.Inject;
 
-public class DeployersRegistry {
+public class DeployersRegistry implements IDeployersRegistry {
 
 	private final Set<Connector> _connectors;
 
@@ -35,6 +35,9 @@ public class DeployersRegistry {
 		this._connectors = connectors;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.jabox.model.IDeployersRegistry#getEntry(java.lang.String)
+	 */
 	public Connector getEntry(String pluginId) {
 		for (Connector connector : _connectors) {
 			if (connector.getId().equals(pluginId)) {
@@ -44,6 +47,9 @@ public class DeployersRegistry {
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.jabox.model.IDeployersRegistry#getIds(java.lang.Class)
+	 */
 	public List<? extends String> getIds(
 			Class<? extends Connector> connectorClass) {
 		// XXX TODO

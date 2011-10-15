@@ -25,10 +25,14 @@ import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
+import org.jabox.apis.Manager;
 import org.jabox.model.Container;
+
+import com.google.inject.Inject;
 
 public abstract class EditContainerPage extends BasePage {
 
+	@Inject
 	public EditContainerPage(final IModel<Container> user) {
 		add(new FeedbackPanel("feedback"));
 		Form<Container> form = new Form<Container>("form",

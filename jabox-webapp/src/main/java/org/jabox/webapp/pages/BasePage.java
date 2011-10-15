@@ -25,8 +25,10 @@ import org.apache.wicket.markup.html.IHeaderResponse;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.border.Border;
 import org.apache.wicket.request.resource.PackageResourceReference;
+import org.jabox.apis.IManager;
 import org.jabox.webapp.borders.MySiteBorder;
-import org.jabox.webapp.panels.HeaderLinksPanel;
+
+import com.google.inject.Inject;
 
 public abstract class BasePage extends WebPage {
 	private static final long serialVersionUID = 8165952253551263784L;
@@ -37,16 +39,20 @@ public abstract class BasePage extends WebPage {
 	}
 
 	private Border border;
-	private HeaderLinksPanel headers;
+	@Inject
+	private IManager _manager;
 
+	public BasePage() {
+	}
+	
 	public BasePage add(final Component child) {
 		// Add children of the page to the page's border component
 		if (border == null) {
 			// Create border and add it to the page
-			border = new MySiteBorder();
+			border = new MySiteBorder(_manager);
 			super.add(border);
-//			headers = new HeaderLinksPanel();
-//			border.getBodyContainer().add(headers);
+			// headers = new HeaderLinksPanel();
+			// border.getBodyContainer().add(headers);
 		}
 		border.add(child);
 		return this;

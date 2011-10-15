@@ -36,7 +36,7 @@ import org.jabox.apis.scm.SCMConnectorConfig;
 
 import com.google.inject.Inject;
 
-public class Manager {
+public class Manager implements IManager {
 
 	private final Set<ITSConnector> _itsConnectors;
 	private final Set<CISConnector> _cisConnectors;
@@ -54,6 +54,9 @@ public class Manager {
 		this._cqmConnectors = cqm;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.jabox.apis.IManager#getConnectorInstance(org.jabox.apis.ConnectorConfig)
+	 */
 	public Connector getConnectorInstance(final ConnectorConfig connectorConfig) {
 		List<Connector> connectors = new ArrayList<Connector>();
 		connectors.addAll(_itsConnectors);
@@ -74,6 +77,9 @@ public class Manager {
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.jabox.apis.IManager#getScmConnectorInstance(org.jabox.apis.scm.SCMConnectorConfig)
+	 */
 	public SCMConnector<SCMConnectorConfig> getScmConnectorInstance(
 			SCMConnectorConfig config) {
 		if (config == null) {
@@ -88,6 +94,9 @@ public class Manager {
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.jabox.apis.IManager#getItsConnectorInstance(org.jabox.apis.its.ITSConnectorConfig)
+	 */
 	public ITSConnector<ITSConnectorConfig> getItsConnectorInstance(
 			ITSConnectorConfig config) {
 		if (config == null) {
@@ -102,6 +111,9 @@ public class Manager {
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.jabox.apis.IManager#getRmsConnectorInstance(org.jabox.apis.rms.RMSConnectorConfig)
+	 */
 	public RMSConnector getRmsConnectorInstance(RMSConnectorConfig config) {
 		if (config == null) {
 			return null;
@@ -115,6 +127,9 @@ public class Manager {
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.jabox.apis.IManager#getCisConnectorInstance(org.jabox.apis.cis.CISConnectorConfig)
+	 */
 	public CISConnector getCisConnectorInstance(CISConnectorConfig config) {
 		if (config == null) {
 			return null;
@@ -128,6 +143,9 @@ public class Manager {
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.jabox.apis.IManager#getCqmConnectorInstance(org.jabox.apis.cqm.CQMConnectorConfig)
+	 */
 	public CQMConnector getCqmConnectorInstance(CQMConnectorConfig config) {
 		if (config == null) {
 			return null;

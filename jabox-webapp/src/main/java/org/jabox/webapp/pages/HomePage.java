@@ -36,7 +36,6 @@ public class HomePage extends BasePage {
 	 *            Page parameters
 	 */
 	public HomePage(final PageParameters parameters) {
-		super();
 		System.out.println("user.home: " + Environment.getBaseDir());
 		add(new JaboxSignInPanel("signInPanel"));
 	}

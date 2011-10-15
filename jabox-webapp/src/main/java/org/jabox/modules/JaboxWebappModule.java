@@ -2,6 +2,8 @@ package org.jabox.modules;
 
 import org.apache.wicket.markup.html.border.Border;
 import org.apache.wicket.markup.html.panel.Panel;
+import org.jabox.application.CreateProjectUtil;
+import org.jabox.application.ICreateProjectUtil;
 import org.jabox.webapp.borders.MySiteBorder;
 import org.jabox.webapp.panels.HeaderLinksPanel;
 
@@ -13,5 +15,6 @@ public class JaboxWebappModule implements Module {
 	public void configure(Binder binder) {
 		binder.bind(Panel.class).to(HeaderLinksPanel.class);
 		binder.bind(Border.class).to(MySiteBorder.class);
+		binder.bind(ICreateProjectUtil.class).to(CreateProjectUtil.class);
 	}
 }
