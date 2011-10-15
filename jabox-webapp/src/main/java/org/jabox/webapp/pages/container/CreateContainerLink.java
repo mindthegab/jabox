@@ -17,31 +17,35 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see http://www.gnu.org/licenses/.
  */
-package org.jabox.webapp.pages;
+package org.jabox.webapp.pages.container;
 
-import org.apache.wicket.AttributeModifier;
-import org.apache.wicket.markup.html.WebMarkupContainer;
+import org.apache.wicket.markup.html.link.Link;
+import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
-import org.apache.wicket.persistence.provider.ConfigXstreamDao;
-import org.jabox.apis.Manager;
-import org.jabox.model.DefaultConfiguration;
-import org.jabox.webapp.panels.HeaderLinksPanel;
+import org.apache.wicket.persistence.provider.ContainerXstreamDao;
+import org.jabox.model.Container;
+import org.jabox.webapp.pages.user.ManageUsers;
 
-import com.google.inject.Inject;
+public class CreateContainerLink extends Link<Void> {
+	private static final long serialVersionUID = -6076134805074401259L;
 
-/**
- * {@link CqmPage} is showing the current C.Q.M. inside an <code>iframe</code>.
- * TopMenu is visible in order to navigate from one server to another easily.
- */
-public class CqmPage extends BasePage {
+	public CreateContainerLink(final String id) {
+		super(id);
+	}
 
-	public CqmPage() {
-		final DefaultConfiguration dc = ConfigXstreamDao.getConfig();
-		String url = dc.getCqm().getServer().getUrl();
-		WebMarkupContainer wmc = new WebMarkupContainer("iframe");
-		wmc.add(new AttributeModifier("src", new Model<String>(url)));
-		add(wmc);
+	@Override
+	public void onClick() {
+		IModel<Container> model = new Model<Container>(new Container());
+		setResponsePage(new EditContainerPage(model) {
 
-		add(new HeaderLinksPanel("headerLinks", HeaderLinksPanel.CQM));
+			protected void onCancel() {
+				setResponsePage(ManageUsers.class);
+			}
+
+			protected void onSave(final Container container) {
+				ContainerXstreamDao.persist(container);
+				setResponsePage(ManageContainers.class);
+			}
+		});
 	}
 }

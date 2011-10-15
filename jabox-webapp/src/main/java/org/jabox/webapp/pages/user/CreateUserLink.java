@@ -17,28 +17,34 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see http://www.gnu.org/licenses/.
  */
-package org.jabox.webapp.pages;
+package org.jabox.webapp.pages.user;
 
-import org.apache.wicket.AttributeModifier;
-import org.apache.wicket.markup.html.WebMarkupContainer;
+import org.apache.wicket.markup.html.link.Link;
+import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
-import org.apache.wicket.persistence.provider.ConfigXstreamDao;
-import org.jabox.model.DefaultConfiguration;
-import org.jabox.webapp.panels.HeaderLinksPanel;
+import org.apache.wicket.persistence.provider.UserXstreamDao;
+import org.jabox.model.User;
 
-/**
- * {@link RmsPage} is showing the current R.M.S. inside an <code>iframe</code>.
- * TopMenu is visible in order to navigate from one server to another easily.
- */
-public class RmsPage extends BasePage {
+public class CreateUserLink extends Link<Void> {
+	private static final long serialVersionUID = -6076134805074401259L;
 
-	public RmsPage() {
-		final DefaultConfiguration dc = ConfigXstreamDao.getConfig();
-		String url = dc.getRms().getServer().getUrl();
-		WebMarkupContainer wmc = new WebMarkupContainer("iframe");
-		wmc.add(new AttributeModifier("src", new Model<String>(url)));
-		add(wmc);
+	public CreateUserLink(final String id) {
+		super(id);
+	}
 
-		add(new HeaderLinksPanel("headerLinks", HeaderLinksPanel.RMS));
+	@Override
+	public void onClick() {
+		IModel<User> model = new Model<User>(new User());
+		setResponsePage(new EditUserPage(model) {
+
+			protected void onCancel() {
+				setResponsePage(ManageUsers.class);
+			}
+
+			protected void onSave(final User user) {
+				UserXstreamDao.persist(user);
+				setResponsePage(ManageUsers.class);
+			}
+		});
 	}
 }

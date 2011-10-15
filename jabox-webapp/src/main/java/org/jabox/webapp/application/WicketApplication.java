@@ -30,7 +30,7 @@ import org.apache.wicket.util.lang.PackageName;
 import org.jabox.applicationcontext.InitializeDatabase;
 import org.jabox.webapp.pages.HomePage;
 import org.jabox.webapp.pages.JaboxAuthenticatedWebApplication;
-import org.jabox.webapp.pages.ManageServers;
+import org.jabox.webapp.pages.user.ManageUsers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -59,7 +59,11 @@ public class WicketApplication extends JaboxAuthenticatedWebApplication {
 		IRequestMapper mapper = new PackageMapper(PackageName
 				.forClass(HomePage.class));
 		// mount("web", PackageName.forClass(HomePage.class));
+//		mountPackage("user", ManageUsers.class);
 		mount(mapper);
+
+		// mount(mapper2);
+		mountPage("/manageUsers", ManageUsers.class);
 	}
 
 	@Override

@@ -17,34 +17,29 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see http://www.gnu.org/licenses/.
  */
-package org.jabox.webapp.pages;
+package org.jabox.webapp.pages.tabs;
 
-import org.apache.wicket.markup.html.link.Link;
-import org.apache.wicket.model.IModel;
+import org.apache.wicket.AttributeModifier;
+import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.model.Model;
-import org.apache.wicket.persistence.provider.UserXstreamDao;
-import org.jabox.model.User;
+import org.apache.wicket.persistence.provider.ConfigXstreamDao;
+import org.jabox.model.DefaultConfiguration;
+import org.jabox.webapp.pages.BasePage;
+import org.jabox.webapp.panels.HeaderLinksPanel;
 
-public class CreateUserLink extends Link<Void> {
-	private static final long serialVersionUID = -6076134805074401259L;
+/**
+ * {@link ScmPage} is showing the current S.C.M. inside an <code>iframe</code>.
+ * TopMenu is visible in order to navigate from one server to another easily.
+ */
+public class ScmPage extends BasePage {
 
-	public CreateUserLink(final String id) {
-		super(id);
-	}
+	public ScmPage() {
+		final DefaultConfiguration dc = ConfigXstreamDao.getConfig();
+		String url = dc.getScm().getServer().getUrl();
+		WebMarkupContainer wmc = new WebMarkupContainer("iframe");
+		wmc.add(new AttributeModifier("src", new Model<String>(url)));
+		add(wmc);
 
-	@Override
-	public void onClick() {
-		IModel<User> model = new Model<User>(new User());
-		setResponsePage(new EditUserPage(model) {
-
-			protected void onCancel() {
-				setResponsePage(ManageUsers.class);
-			}
-
-			protected void onSave(final User user) {
-				UserXstreamDao.persist(user);
-				setResponsePage(ManageUsers.class);
-			}
-		});
+		add(new HeaderLinksPanel("headerLinks", HeaderLinksPanel.SCM));
 	}
 }

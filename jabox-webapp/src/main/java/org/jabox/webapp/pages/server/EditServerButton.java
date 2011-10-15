@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see http://www.gnu.org/licenses/.
  */
-package org.jabox.webapp.pages;
+package org.jabox.webapp.pages.server;
 
 import org.apache.wicket.markup.html.form.ImageButton;
 import org.apache.wicket.markup.html.list.ListItem;
@@ -31,6 +31,7 @@ import org.jabox.apis.Connector;
 import org.jabox.model.IDeployersRegistry;
 import org.jabox.model.Server;
 import org.jabox.webapp.modifiers.TooltipModifier;
+import org.jabox.webapp.pages.EditEntityButton;
 
 import com.google.inject.Inject;
 

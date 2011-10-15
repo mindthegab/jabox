@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see http://www.gnu.org/licenses/.
  */
-package org.jabox.webapp.pages;
+package org.jabox.webapp.pages.container;
 
 import java.util.List;
 
@@ -27,6 +27,7 @@ import org.apache.wicket.persistence.domain.BaseEntity;
 import org.apache.wicket.persistence.provider.ContainerXstreamDao;
 import org.jabox.model.Container;
 import org.jabox.webapp.menubuttons.InfoImage;
+import org.jabox.webapp.pages.BasePage;
 import org.jabox.webapp.utils.ContainerList;
 
 /**

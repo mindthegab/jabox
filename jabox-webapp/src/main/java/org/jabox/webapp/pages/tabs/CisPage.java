@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see http://www.gnu.org/licenses/.
  */
-package org.jabox.webapp.pages;
+package org.jabox.webapp.pages.tabs;
 
 import org.apache.wicket.AttributeModifier;
 import org.apache.wicket.markup.html.WebMarkupContainer;
@@ -25,6 +25,7 @@ import org.apache.wicket.model.Model;
 import org.apache.wicket.persistence.provider.ConfigXstreamDao;
 import org.jabox.apis.Manager;
 import org.jabox.model.DefaultConfiguration;
+import org.jabox.webapp.pages.BasePage;
 import org.jabox.webapp.panels.HeaderLinksPanel;
 
 import com.google.inject.Inject;

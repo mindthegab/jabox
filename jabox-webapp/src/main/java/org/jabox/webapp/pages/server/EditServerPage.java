@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see http://www.gnu.org/licenses/.
  */
-package org.jabox.webapp.pages;
+package org.jabox.webapp.pages.server;
 
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.RequiredTextField;
@@ -28,6 +28,8 @@ import org.apache.wicket.model.IModel;
 import org.jabox.apis.Connector;
 import org.jabox.model.Project;
 import org.jabox.model.Server;
+import org.jabox.webapp.pages.BasePage;
+import org.jabox.webapp.pages.DeployerPluginSelector;
 
 public abstract class EditServerPage extends BasePage {
 

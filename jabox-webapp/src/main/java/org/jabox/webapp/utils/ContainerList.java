@@ -29,7 +29,7 @@ import org.jabox.model.Container;
 import org.jabox.webapp.menubuttons.DeleteEntityButton;
 import org.jabox.webapp.menubuttons.StartContainerButton;
 import org.jabox.webapp.pages.EditEntityButton;
-import org.jabox.webapp.pages.ManageContainers;
+import org.jabox.webapp.pages.container.ManageContainers;
 
 public class ContainerList extends PropertyListView<Container> {
 

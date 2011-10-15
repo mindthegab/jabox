@@ -30,6 +30,8 @@ import org.apache.wicket.request.resource.ResourceReference;
 import org.apache.wicket.request.resource.SharedResourceReference;
 import org.jabox.model.User;
 import org.jabox.webapp.modifiers.TooltipModifier;
+import org.jabox.webapp.pages.user.EditUserPage;
+import org.jabox.webapp.pages.user.ManageUsers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

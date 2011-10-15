@@ -28,12 +28,12 @@ import org.jabox.apis.Connector;
 import org.jabox.apis.ConnectorConfig;
 import org.jabox.apis.IManager;
 import org.jabox.model.DefaultConfiguration;
-import org.jabox.webapp.pages.CisPage;
-import org.jabox.webapp.pages.CqmPage;
-import org.jabox.webapp.pages.ItsPage;
-import org.jabox.webapp.pages.ManageServers;
-import org.jabox.webapp.pages.RmsPage;
-import org.jabox.webapp.pages.ScmPage;
+import org.jabox.webapp.pages.server.ManageServers;
+import org.jabox.webapp.pages.tabs.CisPage;
+import org.jabox.webapp.pages.tabs.CqmPage;
+import org.jabox.webapp.pages.tabs.ItsPage;
+import org.jabox.webapp.pages.tabs.RmsPage;
+import org.jabox.webapp.pages.tabs.ScmPage;
 
 import com.google.inject.Inject;
 

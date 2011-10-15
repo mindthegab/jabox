@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see http://www.gnu.org/licenses/.
  */
-package org.jabox.webapp.pages;
+package org.jabox.webapp.pages.project;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +39,7 @@ import org.jabox.application.ICreateProjectUtil;
 import org.jabox.model.MavenArchetype;
 import org.jabox.model.Project;
 import org.jabox.webapp.menubuttons.InfoImage;
+import org.jabox.webapp.pages.BasePage;
 
 import com.google.inject.Inject;
 

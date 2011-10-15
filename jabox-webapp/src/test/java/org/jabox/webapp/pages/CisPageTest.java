@@ -23,6 +23,7 @@ import junit.framework.TestCase;
 
 import org.apache.wicket.util.tester.WicketTester;
 import org.jabox.application.DummyWicketApplication;
+import org.jabox.webapp.pages.tabs.CisPage;
 
 public class CisPageTest extends TestCase {
 

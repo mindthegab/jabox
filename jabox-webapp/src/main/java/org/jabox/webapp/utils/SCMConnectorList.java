@@ -33,9 +33,9 @@ import org.jabox.model.Server;
 import org.jabox.webapp.menubuttons.DefaultEntityButton;
 import org.jabox.webapp.menubuttons.DeleteEntityButton;
 import org.jabox.webapp.menubuttons.IconButton;
-import org.jabox.webapp.pages.CreateServerLink;
-import org.jabox.webapp.pages.EditServerButton;
-import org.jabox.webapp.pages.ManageServers;
+import org.jabox.webapp.pages.server.CreateServerLink;
+import org.jabox.webapp.pages.server.EditServerButton;
+import org.jabox.webapp.pages.server.ManageServers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

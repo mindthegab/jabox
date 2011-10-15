@@ -28,7 +28,7 @@ import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.PropertyListView;
 import org.jabox.model.Project;
 import org.jabox.webapp.menubuttons.DeleteEntityButton;
-import org.jabox.webapp.pages.ManageProjects;
+import org.jabox.webapp.pages.project.ManageProjects;
 
 public class ProjectList extends PropertyListView<Project> {
 	private static final long serialVersionUID = -2877438240039632971L;

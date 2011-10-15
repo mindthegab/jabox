@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see http://www.gnu.org/licenses/.
  */
-package org.jabox.webapp.pages;
+package org.jabox.webapp.pages.server;
 
 import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.model.IModel;

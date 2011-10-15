@@ -27,7 +27,7 @@ import org.apache.wicket.markup.html.list.PropertyListView;
 import org.jabox.model.User;
 import org.jabox.webapp.menubuttons.DeleteEntityButton;
 import org.jabox.webapp.pages.EditEntityButton;
-import org.jabox.webapp.pages.ManageProjects;
+import org.jabox.webapp.pages.project.ManageProjects;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

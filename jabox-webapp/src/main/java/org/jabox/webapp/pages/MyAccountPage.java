@@ -31,6 +31,7 @@ import org.apache.wicket.model.Model;
 import org.apache.wicket.persistence.provider.UserXstreamDao;
 import org.jabox.model.Project;
 import org.jabox.model.User;
+import org.jabox.webapp.pages.user.ManageUsers;
 
 @AuthorizeInstantiation("ADMIN")
 public class MyAccountPage extends BasePage {
