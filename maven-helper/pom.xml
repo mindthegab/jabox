@@ -10,8 +10,8 @@
 	<name>maven-helper</name>
 
 	<properties>
-		<aetherVersion>1.9</aetherVersion>
-		<mavenVersion>3.0.1</mavenVersion>
+		<aetherVersion>1.11</aetherVersion>
+		<mavenVersion>3.0.3</mavenVersion>
 		<wagonVersion>1.0-beta-7</wagonVersion>
 	</properties>
 
