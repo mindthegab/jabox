@@ -28,7 +28,7 @@ import org.apache.wicket.persistence.provider.ServerXstreamDao;
 import org.apache.wicket.request.resource.ResourceReference;
 import org.apache.wicket.request.resource.SharedResourceReference;
 import org.jabox.apis.Connector;
-import org.jabox.model.IDeployersRegistry;
+import org.jabox.apis.IManager;
 import org.jabox.model.Server;
 import org.jabox.webapp.modifiers.TooltipModifier;
 import org.jabox.webapp.pages.EditEntityButton;
@@ -57,7 +57,7 @@ public final class EditServerButton<T extends Server> extends ImageButton {
 	}
 
 	@Inject
-	private IDeployersRegistry registry;
+	private IManager _manager;
 
 	/**
 	 * Delete from persistent storage, commit transaction.
@@ -66,7 +66,7 @@ public final class EditServerButton<T extends Server> extends ImageButton {
 	public void onSubmit() {
 		IModel<Server> model = new Model<Server>(_item);
 
-		Connector connector = registry.getEntry(model.getObject()
+		Connector connector = _manager.getEntry(model.getObject()
 				.getDeployerConfig().pluginId);
 		setResponsePage(new EditServerPage(new CompoundPropertyModel<Server>(
 				model), connector.getClass()) {

@@ -30,8 +30,8 @@ import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.LoadableDetachableModel;
 import org.apache.wicket.model.PropertyModel;
 import org.jabox.apis.Connector;
+import org.jabox.apis.IManager;
 import org.jabox.model.DeployerConfig;
-import org.jabox.model.IDeployersRegistry;
 import org.jabox.model.Server;
 
 import com.google.inject.Inject;
@@ -40,7 +40,7 @@ public class DeployerPluginSelector extends Panel {
 	private static final long serialVersionUID = -222526477140616108L;
 
 	@Inject
-	private IDeployersRegistry registry;
+	private IManager _manager;
 
 	@SuppressWarnings("unchecked")
 	public DeployerPluginSelector(final String id,
@@ -51,7 +51,7 @@ public class DeployerPluginSelector extends Panel {
 		String pluginId = article.getObject().deployerConfig != null ? article
 				.getObject().deployerConfig.pluginId : "-1";
 		if (article.getObject().deployerConfig != null) {
-			Connector plugin = registry.getEntry(pluginId);
+			Connector plugin = _manager.getEntry(pluginId);
 			DeployerPluginSelector.this.replace(plugin.newEditor("editor",
 					new PropertyModel<Server>(article, "deployerConfig")));
 
@@ -63,7 +63,7 @@ public class DeployerPluginSelector extends Panel {
 
 			@Override
 			protected void onSelectionChanged(final Object pluginId) {
-				Connector plugin = registry.getEntry((String) pluginId);
+				Connector plugin = _manager.getEntry((String) pluginId);
 				Server configuration = article.getObject();
 				DeployerConfig newConfig = plugin.newConfig();
 				configuration.setDeployerConfig(newConfig);
@@ -77,8 +77,9 @@ public class DeployerPluginSelector extends Panel {
 
 	private static abstract class PluginPicker<T> extends DropDownChoice<T> {
 		private static final long serialVersionUID = 1346317031364661388L;
+
 		@Inject
-		private IDeployersRegistry registry;
+		private IManager _manager;
 
 		@SuppressWarnings("unchecked")
 		public PluginPicker(final String id, final IModel<T> model,
@@ -92,7 +93,7 @@ public class DeployerPluginSelector extends Panel {
 				@Override
 				protected List<? extends String> load() {
 					// XXX TESTING
-					return registry.getIds(connectorClass);
+					return _manager.getIds(connectorClass);
 				}
 			});
 
@@ -100,7 +101,7 @@ public class DeployerPluginSelector extends Panel {
 				private static final long serialVersionUID = 7954936699435378919L;
 
 				public Object getDisplayValue(final Object object) {
-					return registry.getEntry((String) object).getName();
+					return _manager.getEntry((String) object).getName();
 				}
 
 				public String getIdValue(final Object object, final int index) {

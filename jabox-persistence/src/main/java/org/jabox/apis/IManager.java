@@ -1,5 +1,7 @@
 package org.jabox.apis;
 
+import java.util.List;
+
 import org.jabox.apis.cis.CISConnector;
 import org.jabox.apis.cis.CISConnectorConfig;
 import org.jabox.apis.cqm.CQMConnector;
@@ -11,6 +13,9 @@ import org.jabox.apis.rms.RMSConnectorConfig;
 import org.jabox.apis.scm.SCMConnector;
 import org.jabox.apis.scm.SCMConnectorConfig;
 
+import com.google.inject.ImplementedBy;
+
+@ImplementedBy(Manager.class)
 public interface IManager {
 
 	public abstract Connector getConnectorInstance(
@@ -31,4 +36,8 @@ public interface IManager {
 	public abstract CQMConnector getCqmConnectorInstance(
 			CQMConnectorConfig config);
 
+	public abstract Connector getEntry(String pluginId);
+
+	public abstract List<? extends String> getIds(
+			Class<? extends Connector> connectorClass);
 }
