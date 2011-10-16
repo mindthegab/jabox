@@ -24,12 +24,21 @@ import java.util.ServiceLoader;
 
 import org.apache.wicket.guice.GuiceComponentInjector;
 import org.apache.wicket.markup.html.WebPage;
-import org.apache.wicket.request.IRequestMapper;
-import org.apache.wicket.request.mapper.PackageMapper;
-import org.apache.wicket.util.lang.PackageName;
+import org.h2.command.ddl.CreateConstant;
+import org.h2.command.ddl.CreateUser;
 import org.jabox.applicationcontext.InitializeDatabase;
 import org.jabox.webapp.pages.HomePage;
 import org.jabox.webapp.pages.JaboxAuthenticatedWebApplication;
+import org.jabox.webapp.pages.MyAccountPage;
+import org.jabox.webapp.pages.container.CreateContainerLink;
+import org.jabox.webapp.pages.container.EditContainerPage;
+import org.jabox.webapp.pages.container.ManageContainers;
+import org.jabox.webapp.pages.project.CreateProject;
+import org.jabox.webapp.pages.project.ManageProjects;
+import org.jabox.webapp.pages.server.EditServerPage;
+import org.jabox.webapp.pages.server.ManageServers;
+import org.jabox.webapp.pages.user.CreateUserLink;
+import org.jabox.webapp.pages.user.EditUserPage;
 import org.jabox.webapp.pages.user.ManageUsers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -52,23 +61,22 @@ public class WicketApplication extends JaboxAuthenticatedWebApplication {
 	private static final Logger LOGGER = LoggerFactory
 			.getLogger(WicketApplication.class);
 
-	/**
-	 * Constructor
-	 */
-	public WicketApplication() {
-		IRequestMapper mapper = new PackageMapper(PackageName
-				.forClass(HomePage.class));
-		// mount("web", PackageName.forClass(HomePage.class));
-//		mountPackage("user", ManageUsers.class);
-		mount(mapper);
-
-		// mount(mapper2);
-		mountPage("/manageUsers", ManageUsers.class);
-	}
-
 	@Override
 	public void init() {
 		super.init();
+		mountPage("/users/", ManageUsers.class);
+		mountPage("/users/me", MyAccountPage.class);
+		mountPage("/users/edit", EditUserPage.class);
+		
+		mountPage("/servers/", ManageServers.class);
+		mountPage("/servers/edit", EditServerPage.class);
+
+		mountPage("/projects/", ManageProjects.class);
+		mountPage("/projects/new", CreateProject.class);
+
+		mountPage("/containers/", ManageContainers.class);
+		mountPage("/containers/edit", EditContainerPage.class);
+
 		guiceInjection();
 		new InitializeDatabase().init();
 	}
