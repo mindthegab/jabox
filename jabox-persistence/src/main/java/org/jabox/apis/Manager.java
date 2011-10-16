@@ -78,7 +78,7 @@ public class Manager implements IManager {
 		}
 
 		for (SCMConnector connectorInstance : _scmConnectors) {
-			if (config.equals(connectorInstance.getName())) {
+			if (config.getPluginId().equals(connectorInstance.getId())) {
 				return connectorInstance;
 			}
 		}
@@ -98,7 +98,7 @@ public class Manager implements IManager {
 		}
 
 		for (ITSConnector connectorInstance : _itsConnectors) {
-			if (config.equals(connectorInstance.getName())) {
+			if (config.getPluginId().equals(connectorInstance.getId())) {
 				return connectorInstance;
 			}
 		}
@@ -117,7 +117,7 @@ public class Manager implements IManager {
 		}
 
 		for (RMSConnector connectorInstance : _rmsConnectors) {
-			if (config.equals(connectorInstance.getName())) {
+			if (config.getPluginId().equals(connectorInstance.getId())) {
 				return connectorInstance;
 			}
 		}
@@ -136,7 +136,7 @@ public class Manager implements IManager {
 		}
 
 		for (CISConnector connectorInstance : _cisConnectors) {
-			if (config.equals(connectorInstance.getName())) {
+			if (config.getPluginId().equals(connectorInstance.getId())) {
 				return connectorInstance;
 			}
 		}
@@ -155,7 +155,7 @@ public class Manager implements IManager {
 		}
 
 		for (CQMConnector connectorInstance : _cqmConnectors) {
-			if (config.equals(connectorInstance.getName())) {
+			if (config.getPluginId().equals(connectorInstance.getId())) {
 				return connectorInstance;
 			}
 		}
