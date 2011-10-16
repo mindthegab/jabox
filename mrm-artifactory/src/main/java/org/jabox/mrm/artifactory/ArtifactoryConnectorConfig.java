@@ -19,14 +19,9 @@
  */
 package org.jabox.mrm.artifactory;
 
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
-
 import org.jabox.apis.rms.RMSConnectorConfig;
 import org.jabox.model.DeployerConfig;
 
-@Entity
-@DiscriminatorValue(ArtifactoryConnector.ID)
 public class ArtifactoryConnectorConfig extends DeployerConfig implements
 		RMSConnectorConfig {
 	private static final long serialVersionUID = 6050853799588453919L;

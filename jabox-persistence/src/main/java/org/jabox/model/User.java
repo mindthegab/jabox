@@ -21,15 +21,10 @@ package org.jabox.model;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-
 import org.apache.wicket.persistence.domain.BaseEntity;
 
-@Entity
 public class User extends BaseEntity implements Serializable {
 	private static final long serialVersionUID = 840333278259987092L;
-	@Column(nullable = false)
 	private String login;
 	private String firstName;
 	private String lastName;

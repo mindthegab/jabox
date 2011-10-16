@@ -19,26 +19,15 @@
  */
 package org.apache.wicket.persistence.domain;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
-import javax.persistence.Version;
-
 import org.jabox.apis.IBaseEntity;
 
-@MappedSuperclass
 public abstract class BaseEntity implements IBaseEntity {
 	private static final long serialVersionUID = -102086082614997832L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	/**
 	 * The version number for optimistic locking.
 	 */
-	@Version
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer version;
 
 	public Long getId() {

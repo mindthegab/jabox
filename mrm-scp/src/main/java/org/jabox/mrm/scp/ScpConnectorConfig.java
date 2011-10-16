@@ -19,14 +19,9 @@
  */
 package org.jabox.mrm.scp;
 
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
-
 import org.jabox.apis.rms.RMSConnectorConfig;
 import org.jabox.model.DeployerConfig;
 
-@Entity
-@DiscriminatorValue(ScpConnector.ID)
 public class ScpConnectorConfig extends DeployerConfig implements
 		RMSConnectorConfig {
 	private static final long serialVersionUID = -891223857972401214L;

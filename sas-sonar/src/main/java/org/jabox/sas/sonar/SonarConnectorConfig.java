@@ -19,15 +19,10 @@
  */
 package org.jabox.sas.sonar;
 
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
-
 import org.jabox.apis.cqm.CQMConnectorConfig;
 import org.jabox.model.DeployerConfig;
 import org.jabox.model.Project;
 
-@Entity
-@DiscriminatorValue(SonarConnector.ID)
 public class SonarConnectorConfig extends DeployerConfig implements
 		CQMConnectorConfig {
 	private static final long serialVersionUID = -3304041364131581981L;

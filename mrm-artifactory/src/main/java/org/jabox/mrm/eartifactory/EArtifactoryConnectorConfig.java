@@ -19,16 +19,11 @@
  */
 package org.jabox.mrm.eartifactory;
 
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
-
 import org.jabox.apis.rms.RMSConnectorConfig;
 import org.jabox.model.DeployerConfig;
 import org.jabox.model.Server;
 import org.jabox.utils.LocalHostName;
 
-@Entity
-@DiscriminatorValue(EArtifactoryConnector.ID)
 public class EArtifactoryConnectorConfig extends DeployerConfig implements
         RMSConnectorConfig {
     private static final long serialVersionUID = 6050853799588453919L;

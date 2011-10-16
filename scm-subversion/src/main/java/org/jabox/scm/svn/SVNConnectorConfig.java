@@ -19,15 +19,10 @@
  */
 package org.jabox.scm.svn;
 
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
-
 import org.jabox.model.DeployerConfig;
 import org.tmatesoft.svn.core.SVNException;
 import org.tmatesoft.svn.core.SVNURL;
 
-@Entity
-@DiscriminatorValue(SVNConnector.ID)
 public class SVNConnectorConfig extends DeployerConfig implements
 		ISVNConnectorConfig {
 	private static final long serialVersionUID = 6542402958304063770L;

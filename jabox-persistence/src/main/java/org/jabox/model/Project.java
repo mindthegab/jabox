@@ -21,9 +21,6 @@ package org.jabox.model;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-
 import org.apache.wicket.persistence.domain.BaseEntity;
 
 /**
@@ -31,7 +28,6 @@ import org.apache.wicket.persistence.domain.BaseEntity;
  * 
  * @author dimitris
  */
-@Entity
 public class Project extends BaseEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private String name;
@@ -40,7 +36,6 @@ public class Project extends BaseEntity implements Serializable {
 	private String sourceEncoding = "UTF-8";
 	private boolean signArtifactReleases = false;
 
-	@Column(nullable = false, length = 1024)
 	private MavenArchetype mavenArchetype;
 	private String scmMavenPrefix;
 

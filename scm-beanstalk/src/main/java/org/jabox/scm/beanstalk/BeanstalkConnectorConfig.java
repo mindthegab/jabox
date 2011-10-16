@@ -19,17 +19,12 @@
  */
 package org.jabox.scm.beanstalk;
 
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
-
 import org.apache.wicket.model.IModel;
 import org.jabox.model.DeployerConfig;
 import org.jabox.scm.svn.ISVNConnectorConfig;
 import org.tmatesoft.svn.core.SVNException;
 import org.tmatesoft.svn.core.SVNURL;
 
-@Entity
-@DiscriminatorValue(BeanstalkConnector.ID)
 public class BeanstalkConnectorConfig extends DeployerConfig implements
         ISVNConnectorConfig {
     private static final String SVN_BEANSTALKAPP_COM =

@@ -19,13 +19,8 @@
  */
 package org.jabox.scm.git;
 
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
-
 import org.jabox.model.DeployerConfig;
 
-@Entity
-@DiscriminatorValue(GITConnector.ID)
 public class GITConnectorConfig extends DeployerConfig implements
 		IGITConnectorConfig {
 	private static final long serialVersionUID = 6542402958304063770L;

@@ -19,15 +19,10 @@
  */
 package org.jabox.cis.hudson;
 
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
-
 import org.jabox.apis.cis.CISConnectorConfig;
 import org.jabox.model.DeployerConfig;
 import org.jabox.model.Project;
 
-@Entity
-@DiscriminatorValue(HudsonConnector.ID)
 public class HudsonConnectorConfig extends DeployerConfig implements
 		CISConnectorConfig {
 	private static final String SLASH = "/";

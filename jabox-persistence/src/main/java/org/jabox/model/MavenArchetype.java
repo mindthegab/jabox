@@ -21,11 +21,8 @@ package org.jabox.model;
 
 import java.io.Serializable;
 
-import javax.persistence.Entity;
-
 import org.apache.wicket.persistence.domain.BaseEntity;
 
-@Entity
 public class MavenArchetype extends BaseEntity implements Serializable {
 	private static final long serialVersionUID = 1354396598525488609L;
 

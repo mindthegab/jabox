@@ -19,15 +19,10 @@
  */
 package org.jabox.cis.ehudson;
 
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
-
 import org.jabox.cis.hudson.HudsonConnectorConfig;
 import org.jabox.model.Server;
 import org.jabox.utils.LocalHostName;
 
-@Entity
-@DiscriminatorValue(EHudsonConnector.ID)
 public class EHudsonConnectorConfig extends HudsonConnectorConfig {
     private static final long serialVersionUID = -6696934779273872749L;
 

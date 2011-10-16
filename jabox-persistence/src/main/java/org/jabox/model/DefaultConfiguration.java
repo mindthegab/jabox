@@ -21,10 +21,6 @@ package org.jabox.model;
 
 import java.io.Serializable;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.persistence.domain.BaseEntity;
 import org.jabox.apis.ConnectorConfig;
@@ -34,7 +30,6 @@ import org.jabox.apis.its.ITSConnectorConfig;
 import org.jabox.apis.rms.RMSConnectorConfig;
 import org.jabox.apis.scm.SCMConnectorConfig;
 
-@Entity
 public class DefaultConfiguration extends BaseEntity implements Serializable {
 	public static final String TRUE = "true";
 
@@ -42,19 +37,14 @@ public class DefaultConfiguration extends BaseEntity implements Serializable {
 
 	private static final long serialVersionUID = 970298449487373906L;
 
-	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	private DeployerConfig _its;
 
-	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	private DeployerConfig _cis;
 
-	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	private DeployerConfig _rms;
 
-	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	private DeployerConfig _scm;
 
-	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	private DeployerConfig _cqm;
 
 	public String isDefault(final ConnectorConfig item) {

@@ -6,8 +6,6 @@ import org.jabox.apis.IManager;
 import org.jabox.apis.Manager;
 import org.jabox.application.CreateProjectUtil;
 import org.jabox.application.ICreateProjectUtil;
-import org.jabox.model.DeployersRegistry;
-import org.jabox.model.IDeployersRegistry;
 import org.jabox.webapp.borders.JaboxBorder;
 import org.jabox.webapp.panels.HeaderLinksPanel;
 
@@ -21,6 +19,5 @@ public class JaboxWebappModule implements Module {
 		binder.bind(Border.class).to(JaboxBorder.class);
 		binder.bind(ICreateProjectUtil.class).to(CreateProjectUtil.class);
 		binder.bind(IManager.class).to(Manager.class);
-		binder.bind(IDeployersRegistry.class).to(DeployersRegistry.class);
 	}
 }
